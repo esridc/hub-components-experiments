@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/radar.esm.js"></script>
+  <script nomodule src="/build/radar.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@esri/calcite-components@1.0.0-beta.18/dist/calcite/calcite.css">
+
+  <style>
+  header { grid-area: header; }
+  .item2 { grid-area: menu; }
+  .item3 { grid-area: main; }
+  .item4 { grid-area: right; }
+  .item5 { grid-area: footer; }
+
+  .container {
+    display: grid;
+    grid-template-areas:
+      'header header header header header header'
+      'menu main main main right right'
+      'menu footer footer footer footer footer';
+    grid-gap: 10px;
+    /* background-color: #2196F3; */
+    padding: 10px;
+  }
+
+  .container > div {
+    border: 1px solid #999;
+    min-height: 300px;
+    min-width: 400px;
+    /* background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px; */
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Hub Components</h1>
+    </header>
+    
+    <div class="item2">
+      <hub-content-card layout="vertical" content="4f5c78bfe89a4304aec3a6cfd492d0cd"></hub-content-card>
+      <hub-content-card layout="horizontal" content="4f5c78bfe89a4304aec3a6cfd492d0cd"></hub-content-card>
+    </div>
+    <div class="item3">
+      <hub-search></hub-search>
+    </div>  
+    <div class="item4">
+      <hub-radar map=true webmap="2e725f2d5b7640b28121af931048894c" address="4321 12th St NE">
+        <strong style="margin-left: 8px;" slot="before-input">Search your DC address</strong>
+        <!-- <em slot="before-results">Local information</em> -->
+        <em slot="after-results">Visit <a href="https://opendata.dc.gov">OpenData</a></em>
+      </hub-radar>
+    </div>
+    <div class="item5">
+      <hub-radar-map center="[-77, 38.9]" zoom="9"></hub-radar-map>
+      <hub-topic name="before" description="longer..."></hub-topic>
+    </div>
+
+</div>
+  
+</body>
+</html>

@@ -1,0 +1,102 @@
+:host {
+  display: block;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.hub-content-card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  margin: 10px;
+  border: 1px solid #EEE;
+  position: relative;
+}
+
+.hub-content-footer {
+  grid-area: footer;
+  padding: 0 0 10px 60px;
+} 
+/* Make the entire card clickable */
+/* a.hub-content-link {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.hub-content-card .hub-content-summary, .hub-content-card .hub-content-title, .hub-content-card .hub-content-metadata {
+  pointer-events: none; 
+  position: relative;
+  z-index: 10;
+}  */
+
+
+/* On mouse-over, add a deeper shadow */
+.hub-content-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.hub-content-title {
+  font: #101f28 !important;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.hub-content-url {
+  text-decoration: none;
+  color: black;
+}
+.hub-content-url:hover {
+  text-decoration: underline;
+}
+
+.hub-content-summary, .hub-content-type {
+  font-size: 0.9rem;
+  color: rgb(102, 102, 102);
+  /* margin: 0.5em 0 0 0; */
+}
+
+.layout-vertical.hub-content-card {
+  width: 250px;
+}
+/* .layout-vertical .content-container {
+  flex-direction: column;
+  width: 100%;  
+} */
+.layout-vertical .hub-content-image {
+  height: 150px;
+  flex: 0 0 auto;
+}
+.layout-vertical img.hub-content-image {
+  width: 100%;
+  object-fit: cover;
+}
+.hub-content-metadata {
+  margin: 0.5rem 0.8rem;
+}
+
+.layout-horizontal.hub-content-card {
+  display: flex;
+}
+.layout-horizontal .hub-content-image {
+  display: flex;
+  flex: 0 0 150px;
+}
+.layout-horizontal .hub-content-metadata {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+.hub-content-details {
+  color: #4c4c4c;
+  font-size: 0.8em;
+  box-shadow: 0 -1px #ccc;
+  padding: 15px 15px 0;
+  grid-template-columns: repeat(2,50%);
+  grid-gap: 2px 5px;
+  align-items: center;
+  flex: 1 auto;
+  display: grid;
+}
