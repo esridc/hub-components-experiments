@@ -43,6 +43,20 @@ export namespace Components {
     'name': string;
     'url': string;
   }
+  interface HubChat {
+    /**
+    * Chat bot name
+    */
+    'name': string;
+    /**
+    * Current (or default) open state of the chatbox
+    */
+    'open': boolean;
+    /**
+    * Default input placeholder
+    */
+    'placeholder': string;
+  }
   interface HubContentCard {
     'actionButton': any;
     'content': string;
@@ -177,6 +191,12 @@ declare global {
     new (): HTMLHubCardElement;
   };
 
+  interface HTMLHubChatElement extends Components.HubChat, HTMLStencilElement {}
+  var HTMLHubChatElement: {
+    prototype: HTMLHubChatElement;
+    new (): HTMLHubChatElement;
+  };
+
   interface HTMLHubContentCardElement extends Components.HubContentCard, HTMLStencilElement {}
   var HTMLHubContentCardElement: {
     prototype: HTMLHubContentCardElement;
@@ -227,6 +247,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'hub-button': HTMLHubButtonElement;
     'hub-card': HTMLHubCardElement;
+    'hub-chat': HTMLHubChatElement;
     'hub-content-card': HTMLHubContentCardElement;
     'hub-event': HTMLHubEventElement;
     'hub-follow-button': HTMLHubFollowButtonElement;
@@ -266,6 +287,24 @@ declare namespace LocalJSX {
     'layout'?: "horizontal" | "vertical";
     'name'?: string;
     'url'?: string;
+  }
+  interface HubChat {
+    /**
+    * Chat bot name
+    */
+    'name'?: string;
+    /**
+    * Emits the chat input
+    */
+    'onOnChatSubmitted'?: (event: CustomEvent<any>) => void;
+    /**
+    * Current (or default) open state of the chatbox
+    */
+    'open'?: boolean;
+    /**
+    * Default input placeholder
+    */
+    'placeholder'?: string;
   }
   interface HubContentCard {
     'actionButton'?: any;
@@ -397,6 +436,7 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'hub-button': HubButton;
     'hub-card': HubCard;
+    'hub-chat': HubChat;
     'hub-content-card': HubContentCard;
     'hub-event': HubEvent;
     'hub-follow-button': HubFollowButton;
@@ -416,6 +456,7 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'hub-button': LocalJSX.HubButton & JSXBase.HTMLAttributes<HTMLHubButtonElement>;
       'hub-card': LocalJSX.HubCard & JSXBase.HTMLAttributes<HTMLHubCardElement>;
+      'hub-chat': LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
       'hub-content-card': LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
       'hub-event': LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
       'hub-follow-button': LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
