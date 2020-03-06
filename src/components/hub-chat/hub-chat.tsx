@@ -1,5 +1,6 @@
 import { Component, Host, h, State, Prop, Watch, Element, Event, EventEmitter } from '@stencil/core';
 import { send24, speechBubbles32, x32} from "@esri/calcite-ui-icons";
+import { IHubChat, IHubMessage } from '../../utils/hub-types'
 
 @Component({
   tag: 'hub-chat',
@@ -9,6 +10,7 @@ import { send24, speechBubbles32, x32} from "@esri/calcite-ui-icons";
 export class HubChat {
 
   @Element() element: HTMLElement;
+  chatInputEl: HTMLInputElement; 
   chatBoxEl: HTMLDivElement; 
   chatCircleEl: HTMLDivElement; 
 
@@ -27,39 +29,83 @@ export class HubChat {
    */
   @Prop() placeholder:string = "Send a message...";
 
+  /**
+   * Set property to pass in messages. Can be used for default welcome message.
+   */
+  @Prop({ mutable: true, reflect: true }) incomingMessages:IHubChat;
+
   /** Emits the chat input */
-  @Event() onChatSubmitted: EventEmitter;
+  @Event({ 
+    eventName: 'onChatSubmitted',
+    composed: true,
+    cancelable: true,
+    bubbles: true
+  }) onChatSubmitted: EventEmitter;
 
   @State() chatInput:string; 
   @State() messageCount:number = 0;
   @State() messages:Array<any> = [];
-    
+  
+  componentWillLoad() {
+    this.incomingMessages.messages.map((message) => {
+      console.log("HubChat willLoad", message);
+      this.messageCount++;
+      this.messages.push(message);
+    })    
+  }
   componentDidRender() {
+    console.debug("HubChat: componentDidRender", [this.open, this.incomingMessages])
     this.toggleChatbox(this.open);
   }
 
   @Watch('open')
   openDidChange(newOpenState) {
-    console.debug("Hub Chat openDidChange", newOpenState)
+    console.log("Hub Chat openDidChange", newOpenState)
     this.toggleChatbox(newOpenState)
   }
+
+  @Watch('incomingMessages')
+  incomingMessagesDidChange( newMessages:IHubChat ) {
+    console.log("Hub Chat incomingMessagesDidChange", newMessages)
+    window.setTimeout(() => {
+      newMessages.messages.map((message) => {
+        this.messageCount++;
+        this.messages.push(message);
+      })
+    }, 1000);
+
+  }
+
   submitChat = (e) => {
     e.preventDefault();
+
+    console.debug("HubChat: submitChat", [this.chatInputEl.value])
     this.messageCount++;
-    this.messages.push({text: this.chatInput, user: 'self'});
-    
+    this.messages.push({text: this.chatInputEl.value, user: 'self', type: 'text'});
+
     this.onChatSubmitted.emit({
-      text: this.chatInput, 
-      user: 'self'
+      text: this.chatInputEl.value, 
+      user: 'self',
+      type: 'text'
     });
+    
+    // Clear out the user input
+    this.chatInputEl.value = "";
+        
   }
   
   onInput(e): string {
     e.preventDefault();
-    this.chatInput = e.target.value;
+    // use this.chatInputEl.value instead.
+    // this.chatInput = e.target.value;
     return 'true';
   }
 
+  sendAction = (action:IHubMessage) => {
+    console.log("HubChat sendAction", action);
+    this.messageCount++;
+    this.messages.push({text: action.text, user: "self", type: "text"});
+  }
 
   toggleChatbox = (boxState:boolean = null) => {
     console.debug("Hub Chat: toggleChatbox", boxState)
@@ -96,11 +142,11 @@ export class HubChat {
 
               {this.messages.map((message) =>           
                 //  add cm-msg- prefix below
-                <div id={"cm-msg-" + this.messageCount} class={"chat-msg " + message.user}>
+                <div id={"cm-msg-" + this.messageCount} class={`chat-msg ${message.user}`}>
                   <span class="msg-avatar">
                     <img src={`https://i.pravatar.cc/150?u=${message.user}@sonar`} />
                   </span>
-                  <div class="cm-msg-text">
+                  <div class={`cm-msg-body cm-msg-${message.type}`} onClick={() => this.sendAction(message)}>
                     {message.text}
                   </div>
                 </div>
@@ -109,7 +155,7 @@ export class HubChat {
             </div>
             <div class="chat-input">      
               <form onSubmit={(e) => this.submitChat(e)}>
-                <input type="text" id="chat-input" placeholder={this.placeholder} value={this.chatInput} onInput={e => this.onInput(e)}/>
+                <input type="text" id="chat-input" placeholder={this.placeholder} value={this.chatInput} onInput={e => this.onInput(e)} ref={(el: HTMLInputElement) => this.chatInputEl = el}/>
                 <button type="submit" class="chat-submit" id="chat-submit">
                   <svg width="32" height="32"><path d={send24}></path></svg>
                 </button>

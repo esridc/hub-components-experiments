@@ -197,7 +197,7 @@
   float:right;
   width:15%;
 }
-.cm-msg-text {
+.cm-msg-body {
   background:white;
   padding:10px 15px 10px 15px;  
   color:#666;
@@ -206,8 +206,14 @@
   margin-left:10px; 
   position:relative;
   margin-bottom:20px;
+}
+.cm-msg-text {  
   border-radius:30px;
 }
+.cm-msg-action {  
+  cursor: pointer;
+}
+
 .chat-msg {
   clear:both;    
 }

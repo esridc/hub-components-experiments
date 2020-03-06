@@ -5,7 +5,7 @@ export default function(stories, knobs) {
 
     stories.add('Hub Chat', () => {
         const open = knobs.boolean('open', true);
-        const name = knobs.text('name', 'Sonar');
+        const name = knobs.text('name', 'Hub Chat');
         const placeholder = knobs.text('placeholder', 'Send a message...');
 
         mainEl.innerHTML = `<hub-chat

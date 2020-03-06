@@ -8,6 +8,9 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  IHubChat,
+} from './utils/hub-types';
+import {
   IItem,
 } from '@esri/arcgis-rest-portal';
 import {
@@ -44,6 +47,10 @@ export namespace Components {
     'url': string;
   }
   interface HubChat {
+    /**
+    * Set property to pass in messages. Can be used for default welcome message.
+    */
+    'incomingMessages': IHubChat;
     /**
     * Chat bot name
     */
@@ -152,6 +159,9 @@ export namespace Components {
     'webmap': string;
   }
   interface HubSearch {}
+  interface HubSonarChat {
+    'welcomeMessages': IHubChat;
+  }
   interface HubSuggestInput {
     /**
     * Geographic extent limit for geocoding
@@ -239,6 +249,12 @@ declare global {
     new (): HTMLHubSearchElement;
   };
 
+  interface HTMLHubSonarChatElement extends Components.HubSonarChat, HTMLStencilElement {}
+  var HTMLHubSonarChatElement: {
+    prototype: HTMLHubSonarChatElement;
+    new (): HTMLHubSonarChatElement;
+  };
+
   interface HTMLHubSuggestInputElement extends Components.HubSuggestInput, HTMLStencilElement {}
   var HTMLHubSuggestInputElement: {
     prototype: HTMLHubSuggestInputElement;
@@ -255,6 +271,7 @@ declare global {
     'hub-map': HTMLHubMapElement;
     'hub-radar': HTMLHubRadarElement;
     'hub-search': HTMLHubSearchElement;
+    'hub-sonar-chat': HTMLHubSonarChatElement;
     'hub-suggest-input': HTMLHubSuggestInputElement;
   }
 }
@@ -289,6 +306,10 @@ declare namespace LocalJSX {
     'url'?: string;
   }
   interface HubChat {
+    /**
+    * Set property to pass in messages. Can be used for default welcome message.
+    */
+    'incomingMessages'?: IHubChat;
     /**
     * Chat bot name
     */
@@ -405,6 +426,9 @@ declare namespace LocalJSX {
     'webmap'?: string;
   }
   interface HubSearch {}
+  interface HubSonarChat {
+    'welcomeMessages'?: IHubChat;
+  }
   interface HubSuggestInput {
     /**
     * Geographic extent limit for geocoding
@@ -444,6 +468,7 @@ declare namespace LocalJSX {
     'hub-map': HubMap;
     'hub-radar': HubRadar;
     'hub-search': HubSearch;
+    'hub-sonar-chat': HubSonarChat;
     'hub-suggest-input': HubSuggestInput;
   }
 }
@@ -464,6 +489,7 @@ declare module "@stencil/core" {
       'hub-map': LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
       'hub-search': LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
+      'hub-sonar-chat': LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
       'hub-suggest-input': LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
     }
   }
