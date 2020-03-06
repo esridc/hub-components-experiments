@@ -8,35 +8,54 @@ import { IHubChat } from '../../utils/hub-types'
 })
 export class HubSonarChat {
 
+  @Prop() service:string = null;
+
   name:string = "Sonar";
   open:boolean = true;
   placeholder:string = "Ask a question...";
-  @Prop() welcomeMessages:IHubChat = {messages: [
+  @Prop() sendMessages:IHubChat = {messages: [
     {text: "Welcome to Sonar", type: "text", user: "user"}, 
-    {text: "Search for Datasets", type: "action", user: "user"},
+    {text: "Search for Datasets", type: "action", user: "user", route: "/index"},
   ]}
 
   @Listen("onChatSubmitted")
-  onChatSubmittedHandler(event: CustomEvent): string {
+  async onChatSubmittedHandler(event: CustomEvent): Promise<any> {
     console.debug("HubSonarChat: onChatSubmitted", event)
-    
-    this.welcomeMessages = {
-      messages: [{text: "Thanks for " + event.detail.text, type: "text", user: "user"}],
-      actions: [{text: "Search for Data"}]
+    let messages = undefined;
+
+    if(this.service) {
+
+      let path = event.detail.route ? event.detail.route : '/index'
+      let url = `${this.service}${path}`;
+      
+      console.debug("HubSonarChat: service", url)
+      
+      let response = await fetch( url );
+      messages = await response.json();
+
+      console.debug("HubSonarChat: response", messages)
+
+    } else {
+      messages = {
+        messages: [{text: "Thanks for " + event.detail.text, type: "text", user: "user"}],
+        actions: [{text: "Search for Data"}]
+      }
     }
-    return "true";
+    
+    this.sendMessages = messages;
+    return new Promise((_resolve, _reject) => {})
+    // return "true";
   }
 
 
   render() {
-    console.log("HubSonarChat render", this.welcomeMessages)
     return (
       <Host>
         <hub-chat
             open={this.open}
             name={this.name}
             placeholder={this.placeholder}
-            incomingMessages={this.welcomeMessages}
+            incomingMessages={this.sendMessages}
         ></hub-chat>
       </Host>
     );

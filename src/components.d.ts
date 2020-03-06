@@ -160,7 +160,8 @@ export namespace Components {
   }
   interface HubSearch {}
   interface HubSonarChat {
-    'welcomeMessages': IHubChat;
+    'sendMessages': IHubChat;
+    'service': string;
   }
   interface HubSuggestInput {
     /**
@@ -427,7 +428,8 @@ declare namespace LocalJSX {
   }
   interface HubSearch {}
   interface HubSonarChat {
-    'welcomeMessages'?: IHubChat;
+    'sendMessages'?: IHubChat;
+    'service'?: string;
   }
   interface HubSuggestInput {
     /**

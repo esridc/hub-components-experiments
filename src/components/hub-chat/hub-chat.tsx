@@ -54,19 +54,19 @@ export class HubChat {
     })    
   }
   componentDidRender() {
-    console.debug("HubChat: componentDidRender", [this.open, this.incomingMessages])
+    console.debug("HubChat componentDidRender", [this.open, this.incomingMessages])
     this.toggleChatbox(this.open);
   }
 
   @Watch('open')
   openDidChange(newOpenState) {
-    console.log("Hub Chat openDidChange", newOpenState)
+    console.log("HubChat openDidChange", newOpenState)
     this.toggleChatbox(newOpenState)
   }
 
   @Watch('incomingMessages')
-  incomingMessagesDidChange( newMessages:IHubChat ) {
-    console.log("Hub Chat incomingMessagesDidChange", newMessages)
+  receiveMessages( newMessages:IHubChat ) {
+    console.log("HubChat incomingMessagesDidChange", newMessages)
     window.setTimeout(() => {
       newMessages.messages.map((message) => {
         this.messageCount++;
@@ -76,38 +76,53 @@ export class HubChat {
 
   }
 
-  submitChat = (e) => {
-    e.preventDefault();
+  // Send a message 
+  sendMessage(message:IHubMessage) {
 
-    console.debug("HubChat: submitChat", [this.chatInputEl.value])
-    this.messageCount++;
-    this.messages.push({text: this.chatInputEl.value, user: 'self', type: 'text'});
-
-    this.onChatSubmitted.emit({
-      text: this.chatInputEl.value, 
+    // Always send as user and text
+    let convertMessage =  {
+      text: message.text, 
       user: 'self',
+      type: 'text',
+      route: message.route
+    }
+
+    this.messageCount++;
+    this.messages.push(convertMessage);
+    console.log("HubChat sendMessage", convertMessage);
+    
+    this.onChatSubmitted.emit( convertMessage );
+  }
+
+  submitChat(e) {
+    e.preventDefault();
+    console.debug("HubChat submitChat", [this.chatInputEl.value])
+
+    this.sendMessage({
+      text: this.chatInputEl.value, 
+      user: 'self', 
       type: 'text'
-    });
+    })
     
     // Clear out the user input
     this.chatInputEl.value = "";
         
   }
-  
+
+  // TODO: autosuggest like CLUI
   onInput(e): string {
     e.preventDefault();
-    // use this.chatInputEl.value instead.
-    // this.chatInput = e.target.value;
+  //   // use this.chatInputEl.value instead.
+  //   // this.chatInput = e.target.value;
     return 'true';
   }
 
-  sendAction = (action:IHubMessage) => {
+  sendAction(action:IHubMessage) {
     console.log("HubChat sendAction", action);
-    this.messageCount++;
-    this.messages.push({text: action.text, user: "self", type: "text"});
+    this.sendMessage(action)
   }
 
-  toggleChatbox = (boxState:boolean = null) => {
+  toggleChatbox(boxState:boolean = null) {
     console.debug("Hub Chat: toggleChatbox", boxState)
     if(boxState !== null) {
       this.open = boxState;
@@ -142,12 +157,12 @@ export class HubChat {
 
               {this.messages.map((message) =>           
                 //  add cm-msg- prefix below
-                <div id={"cm-msg-" + this.messageCount} class={`chat-msg ${message.user}`}>
+                <div id={"cm-msg-" + this.messageCount} class={`chat-msg ${message.user ? message.user : 'user'}`}>
                   <span class="msg-avatar">
-                    <img src={`https://i.pravatar.cc/150?u=${message.user}@sonar`} />
+                    <img src={`https://i.pravatar.cc/150?u=${message.user ? message.user : 'user'}@sonar`} />
                   </span>
-                  <div class={`cm-msg-body cm-msg-${message.type}`} onClick={() => this.sendAction(message)}>
-                    {message.text}
+                  <div innerHTML={message.text} class={`cm-msg-body cm-msg-${message.type}`} onClick={() => this.sendAction(message)}>
+                    
                   </div>
                 </div>
               )}       
