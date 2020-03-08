@@ -28,7 +28,8 @@ export class HubButton {
 
   async componentWillLoad(): Promise<void> {
     this.strings = await getLocaleComponentStrings(this.element);
-    this.text = this.strings.title;
+    // this.text = this.strings.title;
+    this.text = this.strings.t("hub-button.title");
   }
 
   @Listen('click') handleKeyDown() {

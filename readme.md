@@ -43,6 +43,10 @@ npx stencil g
 Please preface all component files with `hub-` and component modules with `Hub`
 for example `hub-map.tsx` annd `HubMap`
 
+### Localization
+
+For each component, add a `<component-name>.i18n.<locale>.json` file. This will be loaded when the component starts. If the file isn't available, then the component will fallback to english `en`.
+
 ### Storybook
 
 To view the components in an explorable player:

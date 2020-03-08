@@ -6,7 +6,7 @@ export default function(stories, knobs) {
     stories.add('Hub Button', () => {
       const text = knobs.text('text', "Click Me")
       const icon = knobs.text('icon', "")
-      mainEl.innerHTML = `<hub-button
+      mainEl.innerHTML = `<hub-button 
         text="${text}"
         icon="${icon}"
       ></hub-button>

@@ -1,3 +1,5 @@
+import Polyglot from 'node-polyglot'
+
 function getComponentClosestLanguage(element: HTMLElement): string {
     let closestElement = element.closest('[lang]') as HTMLElement;
     return closestElement ? closestElement.lang : 'en';
@@ -14,12 +16,18 @@ function fetchLocaleStringsForComponent(componentName: string, locale: string): 
 export async function getLocaleComponentStrings(element: HTMLElement): Promise<any> {
     let componentName = element.tagName.toLowerCase();
     let componentLanguage = getComponentClosestLanguage(element);
-    let strings;
+    
+    // https://airbnb.io/polyglot.js/
+    // Currently, the only thing that Polyglot uses this locale setting for is pluralization.
+    let polyglot = new Polyglot({locale: componentLanguage});
+    let strings = {};
     try {
-        strings = await fetchLocaleStringsForComponent(componentName, componentLanguage);
+        strings[componentName] = await fetchLocaleStringsForComponent(componentName, componentLanguage);
     } catch (e) {
         console.warn(`no locale for ${componentName} (${componentLanguage}) loading default locale en.`);
-        strings = await fetchLocaleStringsForComponent(componentName, 'en');
+        strings[componentName] = await fetchLocaleStringsForComponent(componentName, 'en');
     }
-    return strings;
+    console.log("getLocate", strings)
+    polyglot.extend( strings )
+    return polyglot;
 }
