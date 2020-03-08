@@ -21,7 +21,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "watch": "stencil build --docs --watch",
-    "storybook.run": "start-storybook --port 9001",
+    "storybook.run": "start-storybook --port 9001 -s ./www",
     "storybook": "npm-run-all --parallel watch storybook.run",
     "deploy-storybook": "storybook-to-ghpages"
   },

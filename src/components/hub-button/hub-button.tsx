@@ -1,4 +1,5 @@
-import { Component, Prop, Listen, h } from '@stencil/core';
+import { Component, Prop, Listen, Element, h } from '@stencil/core';
+import { getLocaleComponentStrings } from '../../utils/locale';
 
 @Component({
   tag: 'hub-button',
@@ -6,6 +7,10 @@ import { Component, Prop, Listen, h } from '@stencil/core';
 })
 
 export class HubButton {
+
+  @Element() element: HTMLElement;
+  strings: any;
+
   /**
    * Button text to display
    */
@@ -21,6 +26,11 @@ export class HubButton {
    */
   @Prop() action: Function = function() { return 'foo' };
 
+  async componentWillLoad(): Promise<void> {
+    this.strings = await getLocaleComponentStrings(this.element);
+    this.text = this.strings.title;
+  }
+
   @Listen('click') handleKeyDown() {
     this.action()
   }
@@ -29,6 +39,7 @@ export class HubButton {
     return <button class="hub-btn">
         {this.icon}
         {this.text}
+      
       </button>;
   }
 }

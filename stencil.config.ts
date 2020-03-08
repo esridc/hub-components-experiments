@@ -14,6 +14,10 @@ export const config: Config = {
       ]
     }
   },
+  copy: [{
+    src: "**/*.i18n.*.json",
+    dest: "i18n"
+  }],
   devServer: {
     root: "www"
   },  
