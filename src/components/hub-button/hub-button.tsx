@@ -1,4 +1,5 @@
 import { Component, Prop, Listen, h } from '@stencil/core';
+import '@esri/calcite-components';
 
 @Component({
   tag: 'hub-button',
@@ -26,9 +27,19 @@ export class HubButton {
   }
 
   render() {
-    return <button class="hub-btn">
-        {this.icon}
-        {this.text}
-      </button>;
+    // return <button class="hub-btn">
+    //     {this.icon}
+    //     {this.text}
+    //   </button>;
+
+    return <calcite-button 
+      appearance="solid" 
+      color="blue" 
+      scale="m" 
+      round={false}
+      floating={true} 
+      href="" >
+      {this.text} 
+    </calcite-button>
   }
 }

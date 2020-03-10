@@ -36,6 +36,9 @@ A rectangular card for showing content, optionally with an thumbnail image and l
 ```mermaid
 graph TD;
   hub-card --> hub-button
+  hub-button --> calcite-button
+  calcite-button --> calcite-loader
+  calcite-button --> calcite-icon
   hub-content-card --> hub-card
   hub-event --> hub-card
   hub-radar --> hub-card
