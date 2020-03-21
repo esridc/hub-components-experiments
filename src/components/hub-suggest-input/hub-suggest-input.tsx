@@ -56,7 +56,7 @@ export class HubSuggestInput {
       return [];
     }
     return this.suggestions.filter(
-      (term) => term.slice(0, searchTerm.length) === searchTerm && term !== searchTerm
+      (term) => term.slice(0, searchTerm.length).toLowerCase() === searchTerm.toLowerCase() && term !== searchTerm
     );
   };
 
