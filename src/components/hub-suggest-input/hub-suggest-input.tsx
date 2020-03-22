@@ -23,7 +23,7 @@ export class HubSuggestInput {
   @Prop() submit: string = "Start Search";
 
   /** Values that the auto-complete textbox should search for */
-  @Prop() suggestions: Array<string> = ['Apple', 'Avocado', 'Aardvark', 'Banana'];
+  @Prop() suggestions: Array<string> = ['Apple', 'Avocado', 'Aardvark', 'Banana', 'Coconut', 'Cucumber', 'Mango'];
 
   /** Emits the query of the input result */
   @Event() querySelect: EventEmitter;
