@@ -1,4 +1,5 @@
 import { Element, Listen, Component, Prop, State, Event, EventEmitter, h, Watch } from '@stencil/core';
+import Fuse from 'fuse.js'
 
 @Component({
   tag: 'hub-suggest-input',
@@ -33,8 +34,22 @@ export class HubSuggestInput {
   @State() suggestionArr: string[] = [];
   @State() selectedSuggestionIndex: number;
   
+  @State() fuseIndex;
+
   componentWillLoad() {
     this.inputQuery = this.query;
+    this.buildIndex(this.suggestions);
+  }
+
+  buildIndex(suggestions) {
+    var options = {
+      keys: [{
+        name: 'name',
+        weight: 0.9
+      }]
+    };
+    let db = suggestions.map((s) => {return {"name": s}})
+    this.fuseIndex = new Fuse(db, options)
   }
 
   @Watch('suggestions')
@@ -55,9 +70,10 @@ export class HubSuggestInput {
     if (searchTerm.length === 0) {
       return [];
     }
-    return this.suggestions.filter(
-      (term) => term.slice(0, searchTerm.length).toLowerCase() === searchTerm.toLowerCase() && term !== searchTerm
-    );
+    
+    let indexResults = this.fuseIndex.search(searchTerm);
+    
+    return indexResults.map((r) => {return r.item.name});
   };
 
   onInput(e): string {
