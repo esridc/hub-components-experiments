@@ -73,7 +73,7 @@ export class HubSuggestInput {
     
     let indexResults = this.fuseIndex.search(searchTerm);
     
-    return indexResults.map((r) => {return r.item.name});
+    return indexResults.map((r) => {return r.item.name}).slice(0,9);
   };
 
   onInput(e): string {

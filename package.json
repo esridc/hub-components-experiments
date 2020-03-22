@@ -1,6 +1,6 @@
 {
   "name": "@esri/radar",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "ArcGIS Hub components for local exploration",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
