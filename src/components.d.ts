@@ -140,6 +140,10 @@ export namespace Components {
     */
     'center': string;
     /**
+    * Option to show drawing tools
+    */
+    'drawing': boolean;
+    /**
     * Webmap Item configuration to load
     */
     'webmap': string;
@@ -407,6 +411,14 @@ declare namespace LocalJSX {
     * Center of the map, "[longitude, latitude]"
     */
     'center'?: string;
+    /**
+    * Option to show drawing tools
+    */
+    'drawing'?: boolean;
+    /**
+    * Sends event when drawing is complete
+    */
+    'onDrawingComplete'?: (event: CustomEvent<any>) => void;
     /**
     * Webmap Item configuration to load
     */

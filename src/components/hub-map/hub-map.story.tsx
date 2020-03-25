@@ -8,7 +8,8 @@ export default function(stories, knobs) {
     stories.add('Hub Map', () => {
       const zoom = knobs.number('zoom', 9);
       const center = knobs.text('center', '[-77, 38.9]');
-      mainEl.innerHTML = `<div style="height: 500px"><hub-map center="${center}" zoom="${zoom}"></hub-map></div>`
+      const drawing = knobs.boolean('drawing', false);
+      mainEl.innerHTML = `<div style="height: 500px"><hub-map drawing=${drawing} center="${center}" zoom="${zoom}"></hub-map></div>`
   
       return mainEl;
     }, { notes: readme });

@@ -1,4 +1,4 @@
-import { Component, State, Host, Prop, h, Element, Watch } from "@stencil/core";
+import { Component, State, Host, Prop, h, Element, Event, EventEmitter, Watch } from "@stencil/core";
 import { loadCss, loadModules } from "esri-loader";
 
 // TODO: why won't render() with shadow:true
@@ -25,7 +25,17 @@ export class HubMap {
    * Map zoom level: 1=world ... 20=street
    */
   @Prop({ mutable: true, reflect: true }) zoom: number = 4;
-  
+
+  /**
+   * Option to show drawing tools
+   */
+  @Prop({ mutable: true, reflect: true }) drawing: boolean = true;
+
+  /** 
+   * Sends event when drawing is complete
+   */
+  @Event() drawingComplete: EventEmitter;
+
   @State() mapCenter: [number, number] = [-107, 38.9];
   
   @Watch('center')
@@ -49,8 +59,10 @@ export class HubMap {
 
   componentWillLoad() {
     if(this.center) {
+      console.debug("HubMap componentWillLoad", this.center)
       this.mapCenter = JSON.parse(this.center)
     }
+
   }
 
   /**
@@ -83,8 +95,9 @@ export class HubMap {
           basemap: "streets"
         });
 
-        this.centerDidChangeHandler(this.center)
-        this.zoomDidChangeHandler(this.zoom)
+        // this.centerDidChangeHandler(this.center)
+        // this.zoomDidChangeHandler(this.zoom)
+
         // this.municipalitiesFeatureLayer = new FeatureLayer({
         //   url:
         //     "https://services.arcgis.com/Li1xnxaTwJ2lGrgz/arcgis/rest/services/Kommuner/FeatureServer/0"
@@ -107,6 +120,11 @@ export class HubMap {
    */
   componentDidLoad() {
     this.createEsriMapView()
+    if(this.drawing) {
+      this.addSketch();
+    }
+    
+
       // .then(() => this.zoomToUrlObjectId())
       // .then(() => this.addZoomOnClickAndUrlUpdate());
   }
@@ -117,7 +135,8 @@ export class HubMap {
   createEsriMapView() {
     return loadModules(["esri/WebMap", "esri/views/MapView"], this.esriMapOptions).then(
       ([WebMap, MapView]: [__esri.WebMapConstructor, __esri.MapViewConstructor]) => {
-        
+
+        console.debug("Hub Map createEsriMapView", [this.mapCenter, this.zoom])
         const mapDiv = this.hostElement.querySelector("div");
 
         let mapOptions: __esri.MapViewProperties = { container: mapDiv }
@@ -129,6 +148,8 @@ export class HubMap {
               id: this.webmap
             }
           });
+        } else {
+          mapOptions.map = this.esriMap;
         }
         
         if (this.mapCenter && this.zoom) {
@@ -186,6 +207,47 @@ export class HubMap {
     });
   }
 
+  addSketch() {
+    loadModules(
+      ["esri/widgets/Sketch", 
+      "esri/layers/GraphicsLayer"]
+    ).then(
+      ([Sketch, GraphicsLayer]: [
+        __esri.SketchConstructor,
+        __esri.GraphicsLayerConstructor
+      ]) => {
+        const notesLayer = new GraphicsLayer();
+
+        const sketch = new Sketch({
+          layer: notesLayer,
+          view: this.esriMapView,
+          availableCreateTools: ['point', 'polyline', 'polygon'],
+          creationMode: 'single',
+          defaultCreateOptions: {
+            mode: 'freehand'
+          },
+          defaultUpdateOptions: {
+            enableRotation: false,
+            enableScaling: false,
+            multipleSelectionEnabled: false,
+            toggleToolOnClick: false
+          }
+        });
+        this.esriMap.add(notesLayer);
+        this.esriMapView.ui.add(sketch, "top-right");
+
+        
+        sketch.on('create', event => {
+          try {
+          if (event.state === 'complete') { // || ['reshape-stop', 'move-stop'].includes(event.toolEventInfo.type)) {
+            console.debug("Sketch Complete", event.graphic)
+            this.drawingComplete.emit(event.graphic);
+
+          }
+        } catch(e) { debugger; }
+      })
+    })
+  }
   // addZoomOnClickAndUrlUpdate() {
   //   this.esriMapView.on("click", evt => {
   //     this.esriMapView

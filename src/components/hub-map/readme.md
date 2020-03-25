@@ -16,11 +16,19 @@
 
 ## Properties
 
-| Property | Attribute | Description                                | Type     | Default     |
-| -------- | --------- | ------------------------------------------ | -------- | ----------- |
-| `center` | `center`  | Center of the map, "[longitude, latitude]" | `string` | `undefined` |
-| `webmap` | `webmap`  | Webmap Item configuration to load          | `string` | `undefined` |
-| `zoom`   | `zoom`    | Map zoom level: 1=world ... 20=street      | `number` | `4`         |
+| Property  | Attribute | Description                                | Type      | Default     |
+| --------- | --------- | ------------------------------------------ | --------- | ----------- |
+| `center`  | `center`  | Center of the map, "[longitude, latitude]" | `string`  | `undefined` |
+| `drawing` | `drawing` | Option to show drawing tools               | `boolean` | `true`      |
+| `webmap`  | `webmap`  | Webmap Item configuration to load          | `string`  | `undefined` |
+| `zoom`    | `zoom`    | Map zoom level: 1=world ... 20=street      | `number`  | `4`         |
+
+
+## Events
+
+| Event             | Description                          | Type               |
+| ----------------- | ------------------------------------ | ------------------ |
+| `drawingComplete` | Sends event when drawing is complete | `CustomEvent<any>` |
 
 
 ## Dependencies
