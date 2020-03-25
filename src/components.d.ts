@@ -166,7 +166,16 @@ export namespace Components {
     'showmap': boolean;
     'webmap': string;
   }
-  interface HubSearch {}
+  interface HubSearch {
+    /**
+    * Hub site URL to scope for search
+    */
+    'site': string;
+    /**
+    * Hub site URL to scope for search
+    */
+    'sort': "name" | "modified";
+  }
   interface HubSonarChat {
     'sendMessages': IHubChat;
     'service': string;
@@ -454,7 +463,16 @@ declare namespace LocalJSX {
     'showmap'?: boolean;
     'webmap'?: string;
   }
-  interface HubSearch {}
+  interface HubSearch {
+    /**
+    * Hub site URL to scope for search
+    */
+    'site'?: string;
+    /**
+    * Hub site URL to scope for search
+    */
+    'sort'?: "name" | "modified";
+  }
   interface HubSonarChat {
     'sendMessages'?: IHubChat;
     'service'?: string;

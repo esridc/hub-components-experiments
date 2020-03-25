@@ -5,6 +5,14 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property | Attribute | Description                      | Type                   | Default  |
+| -------- | --------- | -------------------------------- | ---------------------- | -------- |
+| `site`   | `site`    | Hub site URL to scope for search | `string`               | `""`     |
+| `sort`   | `sort`    | Hub site URL to scope for search | `"modified" \| "name"` | `"name"` |
+
+
 ## Dependencies
 
 ### Depends on
