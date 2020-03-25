@@ -30,7 +30,6 @@ Simple button that can be used in other components.
 graph TD;
   hub-button --> calcite-button
   calcite-button --> calcite-loader
-  calcite-button --> calcite-icon
   hub-card --> hub-button
   hub-follow-button --> hub-button
   style hub-button fill:#f9f,stroke:#333,stroke-width:4px

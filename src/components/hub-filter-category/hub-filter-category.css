@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+label {
+  display: block;
+  margin: 4px 0;
+}

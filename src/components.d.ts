@@ -94,6 +94,10 @@ export namespace Components {
     */
     'session': string;
   }
+  interface HubFilterCategory {
+    'categories': Array<string>;
+    'name': string;
+  }
   interface HubFollowButton {
     /**
     * ClientID to identify the app launching auth
@@ -224,6 +228,12 @@ declare global {
     new (): HTMLHubEventElement;
   };
 
+  interface HTMLHubFilterCategoryElement extends Components.HubFilterCategory, HTMLStencilElement {}
+  var HTMLHubFilterCategoryElement: {
+    prototype: HTMLHubFilterCategoryElement;
+    new (): HTMLHubFilterCategoryElement;
+  };
+
   interface HTMLHubFollowButtonElement extends Components.HubFollowButton, HTMLStencilElement {}
   var HTMLHubFollowButtonElement: {
     prototype: HTMLHubFollowButtonElement;
@@ -271,6 +281,7 @@ declare global {
     'hub-chat': HTMLHubChatElement;
     'hub-content-card': HTMLHubContentCardElement;
     'hub-event': HTMLHubEventElement;
+    'hub-filter-category': HTMLHubFilterCategoryElement;
     'hub-follow-button': HTMLHubFollowButtonElement;
     'hub-input': HTMLHubInputElement;
     'hub-map': HTMLHubMapElement;
@@ -361,6 +372,11 @@ declare namespace LocalJSX {
     * Serialized authentication information.
     */
     'session'?: string;
+  }
+  interface HubFilterCategory {
+    'categories'?: Array<string>;
+    'name'?: string;
+    'onFilterChanged'?: (event: CustomEvent<any>) => void;
   }
   interface HubFollowButton {
     /**
@@ -477,6 +493,7 @@ declare namespace LocalJSX {
     'hub-chat': HubChat;
     'hub-content-card': HubContentCard;
     'hub-event': HubEvent;
+    'hub-filter-category': HubFilterCategory;
     'hub-follow-button': HubFollowButton;
     'hub-input': HubInput;
     'hub-map': HubMap;
@@ -498,6 +515,7 @@ declare module "@stencil/core" {
       'hub-chat': LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
       'hub-content-card': LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
       'hub-event': LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
+      'hub-filter-category': LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
       'hub-follow-button': LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
       'hub-input': LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
       'hub-map': LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;

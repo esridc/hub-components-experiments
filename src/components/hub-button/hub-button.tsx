@@ -34,7 +34,7 @@ export class HubButton {
 
     return <calcite-button 
       appearance="solid" 
-      color="blue" 
+      color="dark" 
       scale="m" 
       round={false}
       floating={true} 

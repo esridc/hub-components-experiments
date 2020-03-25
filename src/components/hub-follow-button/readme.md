@@ -30,7 +30,6 @@ graph TD;
   hub-follow-button --> hub-button
   hub-button --> calcite-button
   calcite-button --> calcite-loader
-  calcite-button --> calcite-icon
   style hub-follow-button fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
