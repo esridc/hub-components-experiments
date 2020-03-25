@@ -1,3 +1,36 @@
 :host {
   display: block;
 }
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  float: left;
+  width: 100%;
+}
+
+.content {
+  width: 94%;
+  margin: 0px auto;
+  padding: 30px;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;                /* NEW */
+}
+
+.categories_item a {
+  color: white;
+}
+
+.categories_item {
+  flex: 1 0 20%;                 /* NEW */
+  margin: 5px;                   /* NEW */
+}

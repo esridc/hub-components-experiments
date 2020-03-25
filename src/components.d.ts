@@ -170,6 +170,10 @@ export namespace Components {
     /**
     * Hub site URL to scope for search
     */
+    'layout': "horizontal" | "vertical";
+    /**
+    * Hub site URL to scope for search
+    */
     'site': string;
     /**
     * Hub site URL to scope for search
@@ -464,6 +468,10 @@ declare namespace LocalJSX {
     'webmap'?: string;
   }
   interface HubSearch {
+    /**
+    * Hub site URL to scope for search
+    */
+    'layout'?: "horizontal" | "vertical";
     /**
     * Hub site URL to scope for search
     */

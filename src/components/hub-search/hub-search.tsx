@@ -22,6 +22,11 @@ export class HubSearch {
   @Prop() sort:  "name" | "modified" = "name";
 
 
+  /**
+   * Hub site URL to scope for search
+   */
+  @Prop() layout:  "horizontal" | "vertical" = "horizontal";
+
   @State() queryInput: string;
   @State() suggestions: Array<string>;
   @State() results = [];
@@ -91,19 +96,17 @@ export class HubSearch {
   
   render() {
     let output = []
-    output.push(
-      <hub-suggest-input 
-        placeholder="Search for content"
-        suggestions={this.suggestions}
-      ></hub-suggest-input>
-    )
     this.results.map(result => {
-      output.push(<hub-content-card layout="horizontal" content={result['id']}></hub-content-card>)
+      output.push(<hub-content-card layout={this.layout} content={result['id']}></hub-content-card>)
     })
 
     return (
-      <Host>
+      <Host>     
         <slot></slot>
+        <hub-suggest-input 
+          placeholder="Search for content"
+          suggestions={this.suggestions}
+        ></hub-suggest-input>           
         {output}
       </Host>
     );
