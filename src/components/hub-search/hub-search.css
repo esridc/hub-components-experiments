@@ -1,36 +1,32 @@
 :host {
-  display: block;
-}
-*,
-*:after,
-*:before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  /* display: block; */
+  overflow-x: hidden;      
 }
 
-.container {
-  float: left;
-  width: 100%;
+.search-grid {
+  display: grid;
+  grid-template:
+    ".   search" auto
+    "filters results" auto /
+    10rem 3fr;
+  padding: 0 1rem 0 3rem;  
 }
 
-.content {
-  width: 94%;
-  margin: 0px auto;
-  padding: 30px;
+hub-suggest-input {
+  grid-area: search;
 }
-
-.categories {
+.filters {
+  grid-area: filters;
+  }
+.search-results {
+  grid-area: results;
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;                /* NEW */
+  flex-wrap: wrap;
 }
-
-.categories_item a {
-  color: white;
-}
-
-.categories_item {
-  flex: 1 0 20%;                 /* NEW */
-  margin: 5px;                   /* NEW */
+.search-results > .hub-content-card {
+    border: 1px solid #888;
+    padding: 1.5rem;
+    flex-basis: 100%;
+    margin: 10px;
+    flex-basis: calc(33.333% - 20px);      
 }

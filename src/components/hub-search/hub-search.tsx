@@ -67,18 +67,18 @@ export class HubSearch {
     const params:any = {
       q: query,
       sort: this.sort,
-      agg: { fields: "tags,collection,owner,source,hasApi,downloadable", size: 10 },
-      page: {
-        hub: {
-          start: 1,
-          size: 100
-        },
-        ago: {
-          start: 1,
-          size: 100
-        }
-      }
+      agg: { fields: "tags,collection,owner,source,hasApi,downloadable", size: 10 }
     }
+    params.page = {key: btoa(JSON.stringify({
+      hub: {
+        start: 1,
+        size: 100
+      },
+      ago: {
+        start: 1,
+        size: 100
+      }
+    }))}
     if(this.catalog) {
       console.debug("Hub Search groups", this.catalog.groups);
       params.groupIds = this.catalog.groups.join(",");
@@ -103,11 +103,21 @@ export class HubSearch {
     return (
       <Host>     
         <slot></slot>
+        <div class="search-grid">
         <hub-suggest-input 
           placeholder="Search for content"
           suggestions={this.suggestions}
-        ></hub-suggest-input>           
+        ></hub-suggest-input>
+        <div class="filters">
+          <hub-filter-category
+            name="Content Type"
+            categories={["Sites", "Datasets", "Maps"]}
+          ></hub-filter-category>
+        </div>          
+        <div class="search-results">
         {output}
+        </div>
+        </div>
       </Host>
     );
   }

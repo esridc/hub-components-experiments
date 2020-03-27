@@ -70,6 +70,24 @@ export namespace Components {
     'contentItem': IItem;
     'layout': "horizontal" | "vertical";
   }
+  interface HubContentTable {
+    /**
+    * Total number of results to return
+    */
+    'limit': number;
+    /**
+    * Default query for the search
+    */
+    'query': string;
+    /**
+    * Hub site URL to scope for search
+    */
+    'site': string;
+    /**
+    * Hub site URL to scope for search
+    */
+    'sort': "name" | "modified" | "-name" | "-modified";
+  }
   interface HubEvent {
     'attending': boolean;
     /**
@@ -235,6 +253,12 @@ declare global {
     new (): HTMLHubContentCardElement;
   };
 
+  interface HTMLHubContentTableElement extends Components.HubContentTable, HTMLStencilElement {}
+  var HTMLHubContentTableElement: {
+    prototype: HTMLHubContentTableElement;
+    new (): HTMLHubContentTableElement;
+  };
+
   interface HTMLHubEventElement extends Components.HubEvent, HTMLStencilElement {}
   var HTMLHubEventElement: {
     prototype: HTMLHubEventElement;
@@ -293,6 +317,7 @@ declare global {
     'hub-card': HTMLHubCardElement;
     'hub-chat': HTMLHubChatElement;
     'hub-content-card': HTMLHubContentCardElement;
+    'hub-content-table': HTMLHubContentTableElement;
     'hub-event': HTMLHubEventElement;
     'hub-filter-category': HTMLHubFilterCategoryElement;
     'hub-follow-button': HTMLHubFollowButtonElement;
@@ -361,6 +386,24 @@ declare namespace LocalJSX {
     'content'?: string;
     'contentItem'?: IItem;
     'layout'?: "horizontal" | "vertical";
+  }
+  interface HubContentTable {
+    /**
+    * Total number of results to return
+    */
+    'limit'?: number;
+    /**
+    * Default query for the search
+    */
+    'query'?: string;
+    /**
+    * Hub site URL to scope for search
+    */
+    'site'?: string;
+    /**
+    * Hub site URL to scope for search
+    */
+    'sort'?: "name" | "modified" | "-name" | "-modified";
   }
   interface HubEvent {
     'attending'?: boolean;
@@ -518,6 +561,7 @@ declare namespace LocalJSX {
     'hub-card': HubCard;
     'hub-chat': HubChat;
     'hub-content-card': HubContentCard;
+    'hub-content-table': HubContentTable;
     'hub-event': HubEvent;
     'hub-filter-category': HubFilterCategory;
     'hub-follow-button': HubFollowButton;
@@ -540,6 +584,7 @@ declare module "@stencil/core" {
       'hub-card': LocalJSX.HubCard & JSXBase.HTMLAttributes<HTMLHubCardElement>;
       'hub-chat': LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
       'hub-content-card': LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
+      'hub-content-table': LocalJSX.HubContentTable & JSXBase.HTMLAttributes<HTMLHubContentTableElement>;
       'hub-event': LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
       'hub-filter-category': LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
       'hub-follow-button': LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;

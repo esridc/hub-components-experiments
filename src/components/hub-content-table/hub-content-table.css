@@ -1,0 +1,34 @@
+:host {
+  display: block;
+}
+
+
+.result {
+  display: grid;
+  grid-template:
+    "name links type" auto/
+    50% 30% 20%;
+  padding: 1rem 1rem 1rem 3rem;  
+  border-bottom: 1px solid #DDD
+}
+
+.result-name { grid-area: name; }
+.result-links { grid-area: links; }
+.result-type { grid-area: type; }
+.result-formats {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.result-formats li {
+  display:inline;
+}
+.result-formats > li + li:before {
+  content: " | ";
+  color: #888;
+  
+}
+.result-header {
+  border-bottom: 2px solid #888;
+  font-weight: 500;
+}
