@@ -1,6 +1,6 @@
 {
   "name": "@esri/radar",
-  "version": "0.0.11",
+  "version": "0.1.12",
   "description": "ArcGIS Hub components for local exploration",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -23,6 +23,7 @@
     "watch": "stencil build --docs --watch",
     "storybook.run": "start-storybook --port 9001",
     "storybook": "npm-run-all --parallel watch storybook.run",
+    "publish": "npm publish --access public",
     "deploy-storybook": "storybook-to-ghpages"
   },
   "devDependencies": {
