@@ -37,7 +37,7 @@ using `slots`
 | `mapItemData` | `map-item-data` |             | `any`     | `undefined` |
 | `mapZoom`     | `map-zoom`      |             | `number`  | `undefined` |
 | `messages`    | `messages`      |             | `any`     | `undefined` |
-| `showmap`     | `showmap`       |             | `boolean` | `true`      |
+| `showmap`     | `showmap`       |             | `boolean` | `false`     |
 | `webmap`      | `webmap`        |             | `string`  | `undefined` |
 
 

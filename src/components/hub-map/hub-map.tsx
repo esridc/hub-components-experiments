@@ -29,7 +29,7 @@ export class HubMap {
   /**
    * Option to show drawing tools
    */
-  @Prop({ mutable: true, reflect: true }) drawing: boolean = true;
+  @Prop({ mutable: true, reflect: true }) drawing: boolean = false;
 
   /** 
    * Sends event when drawing is complete

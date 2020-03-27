@@ -17,7 +17,7 @@ export class HubRadar {
 
   @Prop({ mutable: true }) address: string;
   @Prop() webmap: string;
-  @Prop() showmap: boolean = true;
+  @Prop() showmap: boolean = false;
 
   @State() isLoading: boolean = false;
 
