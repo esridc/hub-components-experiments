@@ -72,8 +72,9 @@ export function queryMap(mapItemData: any, coordinates?: any) {
                 
                 // There may not have been any features from this layer
                 if(r['features'].length > 0) {
-                    r['description'] = r['features'][0].title
-                    r['description'] += `<br/><em>${r['features'][0].description}</em>`
+                    r['layer'] = r['title']
+                    r['title'] = r['features'][0].title
+                    r['description'] = `<em>${r['features'][0].description}</em>`
                 }
                 features.push(r)
             })

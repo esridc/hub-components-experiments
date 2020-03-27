@@ -7,12 +7,12 @@ export default function(stories, knobs) {
       const sort = knobs.select('sort', ["name", "modified", "-name", "-modified"], 'name');
       const site = knobs.text('site', "opendata.victoria.ca")
       const query = knobs.text('query', "*")
-      
+
       mainEl.innerHTML = `<hub-content-table 
         sort="${sort}"
         site="${site}"
         query="${query}"
-      ></hub-content-table >`
+      ></hub-content-table>`
   
       return mainEl;
     }, { notes: readme });

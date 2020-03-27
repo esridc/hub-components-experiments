@@ -48,12 +48,15 @@ export class HubSuggestInput {
         weight: 0.9
       }]
     };
+    console.debug("Suggest Input buildIndex", suggestions)
     let db = suggestions.map((s) => {return {"name": s}})
     this.fuseIndex = new Fuse(db, options)
   }
 
   @Watch('suggestions')
-  suggestionsDidChangeHandler( /* suggestions:Array<string> */ ) : void {
+  suggestionsDidChangeHandler( newSuggestions:Array<string> ) : void {
+    console.debug("Suggest Input suggestionsDidChangeHandler", newSuggestions)
+    this.buildIndex(newSuggestions);
     this.suggestionArr = this.findMatch(this.inputQuery);
     this.showSuggestions = true;
   }
@@ -70,8 +73,8 @@ export class HubSuggestInput {
     if (searchTerm.length === 0) {
       return [];
     }
-    
     let indexResults = this.fuseIndex.search(searchTerm);
+    console.log("findMatch", [indexResults])
     
     return indexResults.map((r) => {return r.item.name}).slice(0,9);
   };
