@@ -13,6 +13,14 @@
 }
 
 .result-name { grid-area: name; }
+.result-name a {
+  display: block;
+}
+.result-name em {
+  clear: both;
+  font-size: 0.8em;
+  font-color: #333;
+}
 .result-links { grid-area: links; }
 .result-type { grid-area: type; }
 .result-formats {

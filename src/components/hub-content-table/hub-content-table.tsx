@@ -106,7 +106,10 @@ export class HubContentTable {
     this.results.map(item => {
       output.push(
       <div class="result">
-        <span class="result-name"><a href={`https://${this.site}/datasets/${item.id}`}>{item.attributes.name}</a></span>
+        <span class="result-name">
+          <a href={`https://${this.site}/datasets/${item.id}`}>{item.attributes.name}</a>
+          <em>{item.attributes.searchDescription}</em>
+        </span>
         <span class="result-links">{this.renderItemLinks(item)}</span>
         <span class="result-type">{item.attributes.content}</span>
           
