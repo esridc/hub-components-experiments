@@ -18,6 +18,11 @@ import {
 } from '@esri/arcgis-rest-common-types';
 
 export namespace Components {
+  interface ArcgisNotebook {
+    'item': string;
+    'portal': string;
+    'view': "preview" | "edit";
+  }
   interface HubButton {
     /**
     * action to trigger when the button is clicked
@@ -229,6 +234,12 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLArcgisNotebookElement extends Components.ArcgisNotebook, HTMLStencilElement {}
+  var HTMLArcgisNotebookElement: {
+    prototype: HTMLArcgisNotebookElement;
+    new (): HTMLArcgisNotebookElement;
+  };
+
   interface HTMLHubButtonElement extends Components.HubButton, HTMLStencilElement {}
   var HTMLHubButtonElement: {
     prototype: HTMLHubButtonElement;
@@ -313,6 +324,7 @@ declare global {
     new (): HTMLHubSuggestInputElement;
   };
   interface HTMLElementTagNameMap {
+    'arcgis-notebook': HTMLArcgisNotebookElement;
     'hub-button': HTMLHubButtonElement;
     'hub-card': HTMLHubCardElement;
     'hub-chat': HTMLHubChatElement;
@@ -331,6 +343,11 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface ArcgisNotebook {
+    'item'?: string;
+    'portal'?: string;
+    'view'?: "preview" | "edit";
+  }
   interface HubButton {
     /**
     * action to trigger when the button is clicked
@@ -557,6 +574,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'arcgis-notebook': ArcgisNotebook;
     'hub-button': HubButton;
     'hub-card': HubCard;
     'hub-chat': HubChat;
@@ -580,6 +598,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'arcgis-notebook': LocalJSX.ArcgisNotebook & JSXBase.HTMLAttributes<HTMLArcgisNotebookElement>;
       'hub-button': LocalJSX.HubButton & JSXBase.HTMLAttributes<HTMLHubButtonElement>;
       'hub-card': LocalJSX.HubCard & JSXBase.HTMLAttributes<HTMLHubCardElement>;
       'hub-chat': LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
