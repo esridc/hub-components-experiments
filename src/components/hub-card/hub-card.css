@@ -80,6 +80,7 @@
 .layout-horizontal .hub-content-image {
   display: flex;
   flex: 0 0 150px;
+  max-height: 115px;
 }
 .layout-horizontal .hub-content-metadata {
   flex: 1 1 auto;
