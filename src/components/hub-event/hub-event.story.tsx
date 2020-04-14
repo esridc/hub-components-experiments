@@ -6,7 +6,7 @@ export default function(stories, knobs) {
 
     
     stories.add('Hub Event', () => {
-      const clientid = knobs.text('clientid', 'QVQNb3XfDzoboWS0');
+      const clientid = knobs.text('clientid', 'WXC842NRBVB6NZ2r');
       const eventtitle = knobs.text('Event Title', 'Maryland Ave NE Streetscape Project Groundbreaking');
       const orgurl = knobs.text('orgurl', 'https://cityx.maps.arcgis.com');
 

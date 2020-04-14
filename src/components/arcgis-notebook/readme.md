@@ -14,6 +14,21 @@
 | `view`   | `view`    |             | `"edit" \| "preview"` | `"preview"`                          |
 
 
+## Dependencies
+
+### Depends on
+
+- calcite-button
+
+### Graph
+```mermaid
+graph TD;
+  arcgis-notebook --> calcite-button
+  calcite-button --> calcite-loader
+  calcite-button --> calcite-icon
+  style arcgis-notebook fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

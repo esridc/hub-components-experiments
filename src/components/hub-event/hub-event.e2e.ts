@@ -13,7 +13,7 @@ describe('hub-event', () => {
     const page = await newE2EPage();
 
     await page.setContent(`<hub-event
-      clientid="QVQNb3XfDzoboWS0"
+      clientid="WXC842NRBVB6NZ2r"
       eventtitle="meeting of the badger platoon"
       orgurl="https://cityx.maps.arcgis.com">
     </hub-event>`);

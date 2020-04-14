@@ -6,12 +6,15 @@ export default function(stories, knobs) {
     stories.add('ArcGIS Notebook', () => {
       const item = knobs.text('item', "23bc9a4ea59d4bcea85b55b39ffcd866")
       const portal = knobs.text('portal', 'https://www.arcgis.com')
-      const view = knobs.select('view', ['preview', 'edit'], 'edit')
+      const view = knobs.select('view', ['preview', 'edit'], 'preview')
+      const name = knobs.text('name', 'Simple Notebook')
       mainEl.innerHTML = `<arcgis-notebook
         item="${item}"
         portal="${portal}"
         view="${view}"
-      ></arcgis-notebook>`
+      >
+      <h2 slot="title">${name}</h2>
+      </arcgis-notebook>`
   
       return mainEl;
     }, { notes: readme });

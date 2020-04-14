@@ -10,3 +10,11 @@ iframe {
   height: 100%;
 }
 
+.notebook-copy-button {
+  float: right;
+  margin: 10px 33px 0 0;
+}
+.notebook-title {
+  margin-left: 33px;
+  float: left;
+}

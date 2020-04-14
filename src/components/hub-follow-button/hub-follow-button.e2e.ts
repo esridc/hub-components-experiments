@@ -13,7 +13,7 @@ describe('hub-follow-button', () => {
     const page = await newE2EPage();
 
     await page.setContent(`<hub-follow-button
-      clientid="QVQNb3XfDzoboWS0"
+      clientid="WXC842NRBVB6NZ2r"
       initiativeid="dda4e76677604838bf5718eda40b1cc0"
       orgurl="https://cityx.maps.arcgis.com">
     </hub-follow-button>`);

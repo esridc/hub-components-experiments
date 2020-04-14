@@ -47,7 +47,15 @@ export class Notebook {
   render() {
     return (
       <Host>
-        <slot></slot>
+        <span  class="notebook-title">
+          <slot name="title"></slot>
+        </span>
+        <calcite-button 
+          class="notebook-copy-button"
+          appearance="solid"
+          color="dark">
+            Copy Notebook
+          </calcite-button>
         <iframe src="" id="notebook-iframe" ref={(el: HTMLIFrameElement) => this.iFrameEl = el}></iframe>
       </Host>
     );
