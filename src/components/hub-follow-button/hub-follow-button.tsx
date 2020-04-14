@@ -4,7 +4,7 @@ import { IUser } from '@esri/arcgis-rest-common-types';
 
 import { followInitiative, unfollowInitiative } from '@esri/hub-initiatives';
 
-import { readSessionFromCookie, writeSessionToCookie } from '../../utils/utils';
+import { authenticateUser } from '../../utils/utils';
 
 @Component({
   tag: 'hub-follow-button',
@@ -56,28 +56,29 @@ export class HubFollowButton {
   @Prop({ mutable: true }) following: boolean = false;
 
   /**
+   * Text to show in the string when not yet followed
+   */
+  @Prop() followtext: string = "Follow Our Initiative";
+  
+  /**
+   * Text to show in the string for user to unfollw
+   */
+  @Prop() unfollowtext: string = "Unfollow Our Initiative";
+
+  /**
    * Text to display on the button
    */
-  @State() callToActionText: string = "Follow Our Initiative";
+  @State() callToActionText: string = this.followtext;
 
   triggerFollow = ():Promise<any> => {
-    this.session = readSessionFromCookie();
-    if (!this.session) {
-      // register your own app to create a unique clientId
-      return UserSession.beginOAuth2({
-        clientId: this.clientid,
-        portal: `${this.orgurl}/sharing/rest`,
-        redirectUri: `${window.location}authenticate.html`
-      })
-        .then(session => {
-            writeSessionToCookie(session);
-            this.session = session.serialize();
-            return this.toggleFollow();
-        })
-      } else return this.toggleFollow();
+    return authenticateUser(this.clientid, this.orgurl).then(session => {
+      this.session = session;
+      return this.toggleFollow();
+    })
   }
 
   toggleFollow = ():Promise<{ success: boolean }> => {
+    console.log("toggleFollow", this.following)
     if (!this.following) {
       return followInitiative({
         initiativeId: this.initiativeid,
@@ -90,7 +91,7 @@ export class HubFollowButton {
         if (err === `user is already following this initiative.`)  return Promise.resolve();
       })
       .then(() => {
-        this.callToActionText = "Unfollow Our Initiative";
+        this.callToActionText = this.followtext;
         this.following = true;
         return { success: true }
       })
@@ -106,7 +107,7 @@ export class HubFollowButton {
         if (err === `user is not following this initiative.`) return Promise.resolve();
       })
       .then(() =>{
-        this.callToActionText = "Follow Our Initiative";
+        this.callToActionText = this.unfollowtext;
         this.following = false;
         return { success: true }
       })

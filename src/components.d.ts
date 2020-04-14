@@ -131,6 +131,10 @@ export namespace Components {
     */
     'following': boolean;
     /**
+    * Text to show in the string when not yet followed
+    */
+    'followtext': string;
+    /**
     * Follow icon
     */
     'icon': JSX.Element;
@@ -146,6 +150,10 @@ export namespace Components {
     * Serialized authentication information.
     */
     'session': string;
+    /**
+    * Text to show in the string for user to unfollw
+    */
+    'unfollowtext': string;
     /**
     * User metadata
     */
@@ -461,6 +469,10 @@ declare namespace LocalJSX {
     */
     'following'?: boolean;
     /**
+    * Text to show in the string when not yet followed
+    */
+    'followtext'?: string;
+    /**
     * Follow icon
     */
     'icon'?: JSX.Element;
@@ -476,6 +488,10 @@ declare namespace LocalJSX {
     * Serialized authentication information.
     */
     'session'?: string;
+    /**
+    * Text to show in the string for user to unfollw
+    */
+    'unfollowtext'?: string;
     /**
     * User metadata
     */

@@ -12,3 +12,27 @@ export const writeSessionToCookie = (session:UserSession):void => {
 
   document.cookie = `arcgis_hub_component_auth=${session.serialize()} ; expires=${date.toUTCString()} path=/`;
 }
+
+export const authenticateUser = (clientId, orgurl):Promise<string> => {
+  let session = readSessionFromCookie();
+  return new Promise((resolve, _reject) => {
+    if (!session) {
+      // register your own app to create a unique clientId
+      return UserSession.beginOAuth2({
+        clientId: clientId,
+        portal: `${orgurl}/sharing/rest`,
+        redirectUri: `${window.location}authenticate.html`
+      })
+      .then(userSession => {
+        alert("auth")
+          writeSessionToCookie(userSession);
+          session = userSession.serialize();
+          resolve(session);
+      }).catch(error => {
+        console.error("Hub Components auth error", error)
+      })
+    } else {
+      resolve(session);
+    }
+  });
+}
