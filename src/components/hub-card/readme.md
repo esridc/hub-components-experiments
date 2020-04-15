@@ -27,6 +27,7 @@ A rectangular card for showing content, optionally with an thumbnail image and l
  - [hub-content-card](../hub-content-card)
  - [hub-event](../hub-event)
  - [hub-radar](../hub-radar)
+ - [hub-search](../hub-search)
 
 ### Depends on
 
@@ -42,6 +43,7 @@ graph TD;
   hub-content-card --> hub-card
   hub-event --> hub-card
   hub-radar --> hub-card
+  hub-search --> hub-card
   style hub-card fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

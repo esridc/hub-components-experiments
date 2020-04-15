@@ -24,10 +24,6 @@ export namespace Components {
     */
     'clientid': string;
     'item': string;
-    /**
-    * url of the ArcGIS Online organization
-    */
-    'orgurl': string;
     'portal': string;
     /**
     * Serialized authentication information.
@@ -210,10 +206,12 @@ export namespace Components {
     'webmap': string;
   }
   interface HubSearch {
+    'clientid': string;
     /**
     * Hub site URL to scope for search
     */
     'layout': "horizontal" | "vertical";
+    'portal': string;
     /**
     * Hub site URL to scope for search
     */
@@ -369,10 +367,6 @@ declare namespace LocalJSX {
     */
     'clientid'?: string;
     'item'?: string;
-    /**
-    * url of the ArcGIS Online organization
-    */
-    'orgurl'?: string;
     'portal'?: string;
     /**
     * Serialized authentication information.
@@ -568,10 +562,12 @@ declare namespace LocalJSX {
     'webmap'?: string;
   }
   interface HubSearch {
+    'clientid'?: string;
     /**
     * Hub site URL to scope for search
     */
     'layout'?: "horizontal" | "vertical";
+    'portal'?: string;
     /**
     * Hub site URL to scope for search
     */

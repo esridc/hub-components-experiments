@@ -6,7 +6,7 @@ export default function(stories, knobs) {
 
     stories.add('Hub Search', () => {
       const sort = knobs.select('name', ['name', 'modified'], 'name');
-      const site = knobs.text('site', 'opendata.dc.gov');
+      const site = knobs.text('site', 'notebook-templates-dcdev.hub.arcgis.com'); //'opendata.dc.gov'
       const layout = knobs.select('layout', ['horizontal', 'vertical'], 'vertical');
   
       mainEl.innerHTML = `<hub-search layout=${layout} site=${site} sort="${sort}"></hub-search>`

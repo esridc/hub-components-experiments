@@ -11,7 +11,6 @@
 | ---------- | ---------- | ------------------------------------------- | --------------------- | ------------------------------------ |
 | `clientid` | `clientid` | ClientID to identify the app launching auth | `string`              | `"WXC842NRBVB6NZ2r"`                 |
 | `item`     | `item`     |                                             | `string`              | `"23bc9a4ea59d4bcea85b55b39ffcd866"` |
-| `orgurl`   | `orgurl`   | url of the ArcGIS Online organization       | `string`              | `"https://www.arcgis.com"`           |
 | `portal`   | `portal`   |                                             | `string`              | `"https://www.arcgis.com"`           |
 | `session`  | `session`  | Serialized authentication information.      | `string`              | `undefined`                          |
 | `view`     | `view`     |                                             | `"edit" \| "preview"` | `"preview"`                          |

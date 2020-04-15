@@ -45,7 +45,8 @@ export class HubCard {
     let details = null;
     
     if(this.image) {
-      if(this.item) {
+      // TODO: improve testing for image URL
+      if(this.item || this.image.match(/^http/) === null) {
         thumbnail = <img class="hub-content-image" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} alt="Thumbnail Image" />
       } else {
         thumbnail = <img class="hub-content-image" src={this.image} alt="Thumbnail Image" />
@@ -85,7 +86,7 @@ export class HubCard {
             {output}
             {details}
           </div>
-          {(this.buttonText && this.buttonAction) ? 
+          {(this.buttonText) ? 
               <div class="hub-content-footer">
                 <hub-button
                   text={this.buttonText}

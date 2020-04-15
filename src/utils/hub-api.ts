@@ -87,6 +87,9 @@ export class HubContent implements IHubResource {
     };
     
     create(itemParams, authentication):Promise<any> {
+        delete itemParams.id;
+        delete itemParams.owner;
+        delete itemParams.orgId;
         return createItem({
             item: itemParams,
             authentication

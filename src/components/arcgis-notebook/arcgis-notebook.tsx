@@ -19,11 +19,6 @@ export class Notebook {
   @Prop() clientid: string = "WXC842NRBVB6NZ2r";
 
   /**
-   * url of the ArcGIS Online organization
-   */
-  @Prop() orgurl: string = "https://www.arcgis.com";  
-
-  /**
    * Serialized authentication information.
    */
   @Prop({ mutable: true }) session: string;
@@ -75,8 +70,7 @@ export class Notebook {
   }
     
   onCopy(_e) {
-    console.log("onCopy", this.orgurl)
-    return authenticateUser(this.clientid, this.orgurl).then(session => {
+    return authenticateUser(this.clientid, this.portal).then(session => {
       this.session = session;
       return this.copyNotebook();
     })
