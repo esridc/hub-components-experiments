@@ -6,7 +6,7 @@ import { Component, Host, h, Prop, State } from '@stencil/core';
   shadow: true
 })
 export class Notebook {
-  @Prop() item = "23bc9a4ea59d4bcea85b55b39ffcd866";
+  @Prop() item = "9cd1f9bdc6794e63ae450087b3b67e05";
   @Prop() portal = "https://www.arcgis.com";
   @Prop() view:"preview" | "edit" = "preview";
 
@@ -29,7 +29,9 @@ export class Notebook {
   getPreview() {
     const resourceName = "notebook_preview.json";
     const previewUrl = `${this.portal}/sharing/rest/content/items/${this.item}/resources/${resourceName}`;
-    
+
+    console.log("Notebook getPreview", previewUrl)
+
     fetch(previewUrl).then((response) => {
         response.json().then(json => {
           

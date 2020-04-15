@@ -9,7 +9,7 @@
 
 | Property | Attribute | Description | Type                  | Default                              |
 | -------- | --------- | ----------- | --------------------- | ------------------------------------ |
-| `item`   | `item`    |             | `string`              | `"23bc9a4ea59d4bcea85b55b39ffcd866"` |
+| `item`   | `item`    |             | `string`              | `"9cd1f9bdc6794e63ae450087b3b67e05"` |
 | `portal` | `portal`  |             | `string`              | `"https://www.arcgis.com"`           |
 | `view`   | `view`    |             | `"edit" \| "preview"` | `"preview"`                          |
 

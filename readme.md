@@ -6,7 +6,7 @@ Web components for embedding Hub into websites and custom applications.
 
 ### Script tag
 
-Add `<script src='https://unpkg.com/@esri/radar@0.0.5/dist/radar.js'></script>` in the head of your index.html
+Add `<script src='https://unpkg.com/@esri/radar@0.1.15/dist/radar.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### React App
