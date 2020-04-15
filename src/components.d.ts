@@ -19,8 +19,20 @@ import {
 
 export namespace Components {
   interface ArcgisNotebook {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid': string;
     'item': string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl': string;
     'portal': string;
+    /**
+    * Serialized authentication information.
+    */
+    'session': string;
     'view': "preview" | "edit";
   }
   interface HubButton {
@@ -352,8 +364,20 @@ declare global {
 
 declare namespace LocalJSX {
   interface ArcgisNotebook {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid'?: string;
     'item'?: string;
+    /**
+    * url of the ArcGIS Online organization
+    */
+    'orgurl'?: string;
     'portal'?: string;
+    /**
+    * Serialized authentication information.
+    */
+    'session'?: string;
     'view'?: "preview" | "edit";
   }
   interface HubButton {

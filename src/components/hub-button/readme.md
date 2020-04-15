@@ -18,6 +18,7 @@ Simple button that can be used in other components.
 
 ### Used by
 
+ - [arcgis-notebook](../arcgis-notebook)
  - [hub-card](../hub-card)
  - [hub-follow-button](../hub-follow-button)
 
@@ -31,6 +32,7 @@ graph TD;
   hub-button --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  arcgis-notebook --> hub-button
   hub-card --> hub-button
   hub-follow-button --> hub-button
   style hub-button fill:#f9f,stroke:#333,stroke-width:4px
