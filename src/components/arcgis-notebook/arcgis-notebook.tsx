@@ -41,10 +41,11 @@ export class Notebook {
       this.getPreview();
     }
 
-    let hub = new HubAPI.HubResource;
+    let hub = HubAPI.HubService.create('hub');
     hub.get(this.item).then((item) => {
       console.log("Notebook", item)
       this.notebook = item;
+      //@ts-ignore
       this.titleEl.innerText = item.title;
     });
   }
@@ -73,7 +74,8 @@ export class Notebook {
     
   }
     
-  onCopy(e) {
+  onCopy(_e) {
+    console.log("onCopy", this.orgurl)
     return authenticateUser(this.clientid, this.orgurl).then(session => {
       this.session = session;
       return this.copyNotebook();
@@ -81,7 +83,7 @@ export class Notebook {
   }  
   copyNotebook() {
     console.log("onCopy starting", this.notebook)
-    let hub = new HubAPI.HubResource;
+    let hub = HubAPI.HubService.create('hub');
 
     hub.create(
       this.notebook, 
@@ -94,12 +96,12 @@ export class Notebook {
   render() {
     return (
       <Host>
+        <h3 id="notebook-title" ref={(el: HTMLElement) => this.titleEl = el}></h3>
         <span  class="notebook-title">
-          <slot name="title" id="notebook-title" ref={(el: HTMLElement) => this.titleEl = el}></slot>
+          <slot name="title"></slot>
         </span>
         <hub-button 
           class="notebook-copy-button"
-          appearance="solid"
           color="dark"
           text="Copy Notebook"
           action={this.onCopy}>
