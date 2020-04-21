@@ -23,7 +23,11 @@
   font-size: 20px;
 }
 .ss-value {
-  font-size: 72px;
+  /*
+    TODO: probably need to define this variable in :host as per
+    https://stenciljs.com/docs/styling#ie-support
+  */
+  font-size: var(--ss-font-size, 72px);
 }
 .ss-source-choice {
   padding-left: 0px;

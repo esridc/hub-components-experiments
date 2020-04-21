@@ -67,10 +67,8 @@ export class Statistic {
   render() {
 
     const valueStyle = {
+      // TODO: use a CSS variable for this like we did w/ --ss-font-size
       color: this.color,
-      // TODO: how to handle font-size, {{summary-stat-card}} sets this based on width
-      // CSS variable? prop?
-      fontSize: '72px'
     }
 
     // format the value
