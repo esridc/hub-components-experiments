@@ -225,6 +225,18 @@ export namespace Components {
     'sendMessages': IHubChat;
     'service': string;
   }
+  interface HubStatistic {
+    'align': string;
+    'color': string;
+    'currencyCode': string;
+    'decimalPlaces': number;
+    'formatNumberGroupings': boolean;
+    'title': string;
+    'titleAlign': string;
+    'trailingLabel': string;
+    'trailingTextAlign': string;
+    'value': any;
+  }
   interface HubSuggestInput {
     /**
     * Geographic extent limit for geocoding
@@ -336,6 +348,12 @@ declare global {
     new (): HTMLHubSonarChatElement;
   };
 
+  interface HTMLHubStatisticElement extends Components.HubStatistic, HTMLStencilElement {}
+  var HTMLHubStatisticElement: {
+    prototype: HTMLHubStatisticElement;
+    new (): HTMLHubStatisticElement;
+  };
+
   interface HTMLHubSuggestInputElement extends Components.HubSuggestInput, HTMLStencilElement {}
   var HTMLHubSuggestInputElement: {
     prototype: HTMLHubSuggestInputElement;
@@ -356,6 +374,7 @@ declare global {
     'hub-radar': HTMLHubRadarElement;
     'hub-search': HTMLHubSearchElement;
     'hub-sonar-chat': HTMLHubSonarChatElement;
+    'hub-statistic': HTMLHubStatisticElement;
     'hub-suggest-input': HTMLHubSuggestInputElement;
   }
 }
@@ -581,6 +600,18 @@ declare namespace LocalJSX {
     'sendMessages'?: IHubChat;
     'service'?: string;
   }
+  interface HubStatistic {
+    'align'?: string;
+    'color'?: string;
+    'currencyCode'?: string;
+    'decimalPlaces'?: number;
+    'formatNumberGroupings'?: boolean;
+    'title'?: string;
+    'titleAlign'?: string;
+    'trailingLabel'?: string;
+    'trailingTextAlign'?: string;
+    'value'?: any;
+  }
   interface HubSuggestInput {
     /**
     * Geographic extent limit for geocoding
@@ -624,6 +655,7 @@ declare namespace LocalJSX {
     'hub-radar': HubRadar;
     'hub-search': HubSearch;
     'hub-sonar-chat': HubSonarChat;
+    'hub-statistic': HubStatistic;
     'hub-suggest-input': HubSuggestInput;
   }
 }
@@ -648,6 +680,7 @@ declare module "@stencil/core" {
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
       'hub-search': LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
       'hub-sonar-chat': LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
+      'hub-statistic': LocalJSX.HubStatistic & JSXBase.HTMLAttributes<HTMLHubStatisticElement>;
       'hub-suggest-input': LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
     }
   }

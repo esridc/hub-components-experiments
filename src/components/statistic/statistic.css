@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+/* TODO: replace ss- prefix w/ hub-statistic- */
+/*border: 1px solid rgba(128, 128, 128, 0.35);*/
+.ss-title-spacer {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+.ss-title-row {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* TODO: CSS vairables for font-size-small, font-size-extra-large, font-size-h1 */
+.ss-detail {
+  font-size: 12px;
+}
+.ss-title {
+  font-size: 20px;
+}
+.ss-value {
+  font-size: 72px;
+}
+.ss-source-choice {
+  padding-left: 0px;
+}
+
+.ss-trail-container {
+  margin-bottom: 10px;
+}
+
+.ss-trail-label {
+  font-size: 36px;
+  vertical-align: text-bottom;
+  opacity: 0.75;
+}
