@@ -1,0 +1,79 @@
+:host {
+  display: block;
+  box-sizing: border-box;
+  font-family: "Avenir Next W01", "Avenir Next W00", "Avenir Next", "Avenir", "Helvetica Neue", sans-serif;
+}
+
+
+#drop-area {
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 50px 0px;
+    margin: 0px;
+
+    align-items: baseline;
+    padding-left: 50vh;
+      
+    border: 2px dashed lightgray;
+    border-radius: 4px;
+    overflow: scroll;
+    background-color: #DDD;
+
+    p {
+      margin: 0px;
+      color: #333;
+    }
+    &.highlight {
+      border-color: brown;
+      background: transparentize($color: brown, $amount: 0.9)
+    }
+    #fileElem {
+      display: none;
+    }
+  }
+  .retry {
+    color: white;
+    background-color: #007ac2;
+    font-size: 15px;
+    height: 30px;
+    margin-top: 20px;
+    padding: 8px 18px 0px 18px;
+    cursor: pointer;
+    &:hover {
+      background-color: #0069b1;
+    }
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #drop-area {
+    #gallery {
+      grid-template-columns: calc(50% - 1.5ch) calc(50% - 1.5ch);
+    }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  #drop-area {
+    #gallery {
+      grid-template-columns: calc(33.33% - 2ch) calc(33.33% - 2ch) calc(33.33% - 2ch);
+    }
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  #drop-area {
+    #gallery {
+      grid-template-columns: calc(25% - 2.28ch) calc(25% - 2.28ch) calc(25% - 2.28ch) calc(25% - 2.28ch);
+    }
+  }
+}

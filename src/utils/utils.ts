@@ -21,7 +21,7 @@ export const authenticateUser = (clientId, orgurl):Promise<string> => {
       return UserSession.beginOAuth2({
         clientId: clientId,
         portal: `${orgurl}/sharing/rest`,
-        redirectUri: `${window.location}authenticate.html`
+        redirectUri: `${window.location.origin}/authenticate.html`
       })
       .then(userSession => {
         alert("auth")

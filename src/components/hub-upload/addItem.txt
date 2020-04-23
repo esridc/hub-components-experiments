@@ -1,0 +1,70 @@
+Request URL: https://www.arcgis.com/sharing/rest/content/users/aturner/addItem
+Request Method: POST
+Status Code: 200 
+
+Referrer Policy: no-referrer-when-downgrade
+:authority: www.arcgis.com
+:method: POST
+:path: /sharing/rest/content/users/aturner/addItem
+:scheme: https
+accept: */*
+accept-encoding: gzip, deflate, br
+accept-language: en-US,en;q=0.9,es;q=0.8,he;q=0.7
+cache-control: no-cache
+content-length: 99560
+content-type: multipart/form-data; boundary=----WebKitFormBoundaryMmhFiPDClwvxio9L
+origin: http://localui.arcgis.com:9001
+pragma: no-cache
+referer: http://localui.arcgis.com:9001/iframe.html?id=hub-components--hubupload&viewMode=story
+sec-fetch-dest: empty
+sec-fetch-mode: cors
+sec-fetch-site: cross-site
+user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36
+
+Form data
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="f"
+
+json
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="title"
+
+Item_77250
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="type"
+
+Image
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="tags"
+
+dev,api
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="typeKeywords"
+
+Data,Image,png
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="file"; filename="Sharing.png"
+Content-Type: image/png
+
+
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="async"
+
+true
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="multipart"
+
+true
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="filename"
+
+Sharing.png
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="overwrite"
+
+false
+------WebKitFormBoundaryMmhFiPDClwvxio9L
+Content-Disposition: form-data; name="token"
+
+{token removed}
+------WebKitFormBoundaryMmhFiPDClwvxio9L--

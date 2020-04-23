@@ -31,6 +31,9 @@ export namespace Components {
     'session': string;
     'view': "preview" | "edit";
   }
+  interface DropArea {
+    'allowedTypes': Array<string>;
+  }
   interface HubButton {
     /**
     * action to trigger when the button is clicked
@@ -195,6 +198,18 @@ export namespace Components {
     */
     'zoom': number;
   }
+  interface HubMetadataEditor {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid': string;
+    'item': string;
+    'itemTitle': string;
+    'portal': string;
+    'session': string;
+    'summary': string;
+    'tags': Array<string>;
+  }
   interface HubRadar {
     'address': string;
     'mapCenter': string;
@@ -247,6 +262,24 @@ export namespace Components {
     */
     'suggestions': Array<string>;
   }
+  interface HubUpload {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid': string;
+    'portal': string;
+    'session': string;
+  }
+  interface HubUploadFile {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid': string;
+    'file': File;
+    'itemType': string;
+    'portal': string;
+    'session': string;
+  }
 }
 
 declare global {
@@ -256,6 +289,12 @@ declare global {
   var HTMLArcgisNotebookElement: {
     prototype: HTMLArcgisNotebookElement;
     new (): HTMLArcgisNotebookElement;
+  };
+
+  interface HTMLDropAreaElement extends Components.DropArea, HTMLStencilElement {}
+  var HTMLDropAreaElement: {
+    prototype: HTMLDropAreaElement;
+    new (): HTMLDropAreaElement;
   };
 
   interface HTMLHubButtonElement extends Components.HubButton, HTMLStencilElement {}
@@ -318,6 +357,12 @@ declare global {
     new (): HTMLHubMapElement;
   };
 
+  interface HTMLHubMetadataEditorElement extends Components.HubMetadataEditor, HTMLStencilElement {}
+  var HTMLHubMetadataEditorElement: {
+    prototype: HTMLHubMetadataEditorElement;
+    new (): HTMLHubMetadataEditorElement;
+  };
+
   interface HTMLHubRadarElement extends Components.HubRadar, HTMLStencilElement {}
   var HTMLHubRadarElement: {
     prototype: HTMLHubRadarElement;
@@ -341,8 +386,21 @@ declare global {
     prototype: HTMLHubSuggestInputElement;
     new (): HTMLHubSuggestInputElement;
   };
+
+  interface HTMLHubUploadElement extends Components.HubUpload, HTMLStencilElement {}
+  var HTMLHubUploadElement: {
+    prototype: HTMLHubUploadElement;
+    new (): HTMLHubUploadElement;
+  };
+
+  interface HTMLHubUploadFileElement extends Components.HubUploadFile, HTMLStencilElement {}
+  var HTMLHubUploadFileElement: {
+    prototype: HTMLHubUploadFileElement;
+    new (): HTMLHubUploadFileElement;
+  };
   interface HTMLElementTagNameMap {
     'arcgis-notebook': HTMLArcgisNotebookElement;
+    'drop-area': HTMLDropAreaElement;
     'hub-button': HTMLHubButtonElement;
     'hub-card': HTMLHubCardElement;
     'hub-chat': HTMLHubChatElement;
@@ -353,10 +411,13 @@ declare global {
     'hub-follow-button': HTMLHubFollowButtonElement;
     'hub-input': HTMLHubInputElement;
     'hub-map': HTMLHubMapElement;
+    'hub-metadata-editor': HTMLHubMetadataEditorElement;
     'hub-radar': HTMLHubRadarElement;
     'hub-search': HTMLHubSearchElement;
     'hub-sonar-chat': HTMLHubSonarChatElement;
     'hub-suggest-input': HTMLHubSuggestInputElement;
+    'hub-upload': HTMLHubUploadElement;
+    'hub-upload-file': HTMLHubUploadFileElement;
   }
 }
 
@@ -373,6 +434,13 @@ declare namespace LocalJSX {
     */
     'session'?: string;
     'view'?: "preview" | "edit";
+  }
+  interface DropArea {
+    'allowedTypes'?: Array<string>;
+    /**
+    * Emits the chat input
+    */
+    'onOnFilesSubmitted'?: (event: CustomEvent<any>) => void;
   }
   interface HubButton {
     /**
@@ -551,6 +619,18 @@ declare namespace LocalJSX {
     */
     'zoom'?: number;
   }
+  interface HubMetadataEditor {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid'?: string;
+    'item'?: string;
+    'itemTitle'?: string;
+    'portal'?: string;
+    'session'?: string;
+    'summary'?: string;
+    'tags'?: Array<string>;
+  }
   interface HubRadar {
     'address'?: string;
     'mapCenter'?: string;
@@ -608,9 +688,29 @@ declare namespace LocalJSX {
     */
     'suggestions'?: Array<string>;
   }
+  interface HubUpload {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid'?: string;
+    'onOnUploadCompleted'?: (event: CustomEvent<Blob>) => void;
+    'portal'?: string;
+    'session'?: string;
+  }
+  interface HubUploadFile {
+    /**
+    * ClientID to identify the app launching auth
+    */
+    'clientid'?: string;
+    'file'?: File;
+    'itemType'?: string;
+    'portal'?: string;
+    'session'?: string;
+  }
 
   interface IntrinsicElements {
     'arcgis-notebook': ArcgisNotebook;
+    'drop-area': DropArea;
     'hub-button': HubButton;
     'hub-card': HubCard;
     'hub-chat': HubChat;
@@ -621,10 +721,13 @@ declare namespace LocalJSX {
     'hub-follow-button': HubFollowButton;
     'hub-input': HubInput;
     'hub-map': HubMap;
+    'hub-metadata-editor': HubMetadataEditor;
     'hub-radar': HubRadar;
     'hub-search': HubSearch;
     'hub-sonar-chat': HubSonarChat;
     'hub-suggest-input': HubSuggestInput;
+    'hub-upload': HubUpload;
+    'hub-upload-file': HubUploadFile;
   }
 }
 
@@ -635,6 +738,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'arcgis-notebook': LocalJSX.ArcgisNotebook & JSXBase.HTMLAttributes<HTMLArcgisNotebookElement>;
+      'drop-area': LocalJSX.DropArea & JSXBase.HTMLAttributes<HTMLDropAreaElement>;
       'hub-button': LocalJSX.HubButton & JSXBase.HTMLAttributes<HTMLHubButtonElement>;
       'hub-card': LocalJSX.HubCard & JSXBase.HTMLAttributes<HTMLHubCardElement>;
       'hub-chat': LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
@@ -645,10 +749,13 @@ declare module "@stencil/core" {
       'hub-follow-button': LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
       'hub-input': LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
       'hub-map': LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
+      'hub-metadata-editor': LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
       'hub-radar': LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
       'hub-search': LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
       'hub-sonar-chat': LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
       'hub-suggest-input': LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
+      'hub-upload': LocalJSX.HubUpload & JSXBase.HTMLAttributes<HTMLHubUploadElement>;
+      'hub-upload-file': LocalJSX.HubUploadFile & JSXBase.HTMLAttributes<HTMLHubUploadFileElement>;
     }
   }
 }

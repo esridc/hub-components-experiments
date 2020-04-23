@@ -45,7 +45,5 @@ export function getSiteCatalog(domain:string):Promise<any> {
         getSiteItem(domain).then(([_siteItem, siteItemData]) => {
             resolve(siteItemData.catalog);
         }).catch(reject)
-    });
-
-    
+    })
 }

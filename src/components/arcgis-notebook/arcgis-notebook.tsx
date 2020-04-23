@@ -10,13 +10,13 @@ import { UserSession } from '@esri/arcgis-rest-auth';
 })
 export class Notebook {
   @Prop() item = "9cd1f9bdc6794e63ae450087b3b67e05";
-  @Prop() portal = "https://www.arcgis.com";
   @Prop() view:"preview" | "edit" = "preview";
 
   /**
    * ClientID to identify the app launching auth
    */
   @Prop() clientid: string = "WXC842NRBVB6NZ2r";
+  @Prop() portal = "https://www.arcgis.com";
 
   /**
    * Serialized authentication information.
@@ -58,6 +58,15 @@ export class Notebook {
     fetch(previewUrl).then((response) => {
         response.json().then(json => {
           
+          // remove CSS border
+          const idx = json.html.indexOf("<body>") + 6;
+
+          json.html =
+            json.html.slice(0, idx) +
+            "<style>#notebook-container { box-shadow: none; -webkit-box-shadow: none; padding: 0; }</style>" +
+            json.html.slice(idx);
+
+          // Write the HTML into the body of the iFrame
           const doc = this.iFrameEl.contentWindow.document;
           doc.open();
           doc.write(json.html);

@@ -1,7 +1,11 @@
 import { Config } from '@stencil/core';
 import '@esri/calcite-components';
-
+import { sass } from '@stencil/sass';
+ 
 export const config: Config = {
+  plugins: [
+    sass()
+  ],
   commonjs: {
     namedExports: {
       "node_modules/esri-loader/dist/umd/esri-loader.js": [
