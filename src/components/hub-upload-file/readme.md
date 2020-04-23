@@ -24,14 +24,17 @@
 
 ### Depends on
 
+- calcite-notice
 - [hub-metadata-editor](../hub-metadata-editor)
 - calcite-loader
 
 ### Graph
 ```mermaid
 graph TD;
+  hub-upload-file --> calcite-notice
   hub-upload-file --> hub-metadata-editor
   hub-upload-file --> calcite-loader
+  calcite-notice --> calcite-icon
   hub-upload --> hub-upload-file
   style hub-upload-file fill:#f9f,stroke:#333,stroke-width:4px
 ```

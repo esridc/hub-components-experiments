@@ -55,8 +55,10 @@ typeKeywords: showUnmatchedAddresses,Data,Service,Feature Service,ArcGIS Server,
 graph TD;
   hub-upload --> hub-upload-file
   hub-upload --> drop-area
+  hub-upload-file --> calcite-notice
   hub-upload-file --> hub-metadata-editor
   hub-upload-file --> calcite-loader
+  calcite-notice --> calcite-icon
   style hub-upload fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

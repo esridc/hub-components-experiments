@@ -59,7 +59,19 @@ export class HubUploadFile {
         })
           
       })
-    })  
+    }).catch((error) => {
+      console.error("uploadItem error", error);
+      this.showError(error.message);
+    })
+  }
+
+  private showError(message) {
+    this.editors = [<calcite-notice color="red" width="full" scale="s" active={true}>
+      <div slot="notice-title">Upload Error: {this.file.name}</div>
+    <div slot="notice-message">
+    {message}
+    </div>
+    </calcite-notice>]
   }
   private checkStatus(id) {
     const authentication = UserSession.deserialize(this.session);
@@ -68,10 +80,12 @@ export class HubUploadFile {
       authentication
     }).then((response) => {
       console.log("Check Status", response);
-      if(response.status == "partial") {
-        setTimeout(() => {this.checkStatus(id)}, 1000);
-      } else {
+      if(response.status == "completed") {
         this.editItem(id);
+      } else {
+//         response.status == "partial" || response.status == "processing") {
+        setTimeout(() => {this.checkStatus(id)}, 1000);
+
       }
     })
   }

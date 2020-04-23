@@ -56,7 +56,6 @@ export class HubMetadataEditor {
       },
       authentication
     })
-    console.log("Save to AGO!")
   }
   render() {
     return (

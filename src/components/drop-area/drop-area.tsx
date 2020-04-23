@@ -39,6 +39,7 @@ export class DropArea {
     });
 
     this.dropArea.addEventListener('drop', this.handleDrop, false)
+
   }
   handleDrop = (e) => {
     var dt = e.dataTransfer
@@ -65,7 +66,7 @@ export class DropArea {
         <p>
           Supported types: Spreadsheet CSV, Excel, Shapefile, GeoJSON, ArcGIS GeoService, PDF, Word DOC, Images
         </p>
-        <input type="file" id="fileElem" multiple accept={this.allowedTypes.join(",")} />
+        <input type="file" id="fileElem" multiple accept={this.allowedTypes.join(",")} onChange={(event: any) => this.handleFiles(event.target.files)}/>
         <label class="button retry" htmlFor="fileElem">Browse</label>
       </form>
     </div>
