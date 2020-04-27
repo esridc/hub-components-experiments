@@ -21,7 +21,7 @@ export class HubUploadFile {
   @State() editors:Array<any> = [];
 
   componentDidLoad() {
-    const authentication = UserSession.deserialize(this.session); 
+    const authentication = UserSession.deserialize(this.session);
     this.uploadItem(authentication);
   }
 

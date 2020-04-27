@@ -3,7 +3,7 @@ import '@esri/calcite-components';
 
 @Component({
   tag: 'hub-button',
-  styleUrl: 'hub-button.css'
+  styleUrl: 'hub-button.scss'
 })
 
 export class HubButton {
@@ -34,7 +34,7 @@ export class HubButton {
 
     return <calcite-button 
       appearance="solid" 
-      color="dark" 
+      color="blue" 
       scale="m" 
       round={false}
       floating={true} 

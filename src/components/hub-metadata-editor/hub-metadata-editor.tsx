@@ -73,14 +73,15 @@ export class HubMetadataEditor {
                 <input type="text" ref={(el: HTMLInputElement) => this.titleEl = el} id="title" name="title" class="metadata-required" value={this.itemTitle} />
                 <br />
 
-                <label class="metadata-required">Tags</label>
-                <input type="text" ref={(el: HTMLInputElement) => this.tagsEl = el} id="tags" name="tags" class="metadata-required" value={this.tags.join(',')} />
-                <br />
-
                 <label class="metadata-required">Summary</label>
                 <textarea ref={(el: HTMLTextAreaElement) => this.summaryEl = el} id="summary" name="summary">
                   {this.summary}
                 </textarea>
+
+
+                <label class="metadata-required">Tags</label>
+                <input type="text" ref={(el: HTMLInputElement) => this.tagsEl = el} id="tags" name="tags" class="metadata-required" value={this.tags.join(',')} />
+                <br />                
             </div>
         </section>
         <button type="submit" class="chat-submit" id="chat-submit">

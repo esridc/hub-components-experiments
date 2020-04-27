@@ -1,11 +1,14 @@
 import { Config } from '@stencil/core';
-import '@esri/calcite-components';
 import { sass } from '@stencil/sass';
+import '@esri/calcite-components';
  
 export const config: Config = {
   plugins: [
-    sass()
+    sass({
+      injectGlobalPaths: ["src/global/includes.scss"],
+    }),
   ],
+  globalStyle: 'src/global/global.scss',
   commonjs: {
     namedExports: {
       "node_modules/esri-loader/dist/umd/esri-loader.js": [
