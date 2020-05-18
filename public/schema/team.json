@@ -1,41 +1,35 @@
+
 {
-    "id": "arcgis.json#",
+    "id": "team.json#",
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "About Content",
-    "description": "Information about the content.",
+    "title": "Team Info",
+    "description": "What's this team about?",
     "type": "object",
-    "example": "../examples/arcgis.json",
+    "example": "../examples/team.json",
     "translation": {
         "ISO 19115-2": ["MD_DataIdentification"],
         "FGDC CSDGM": ["idinfo"]
     },
-    "required": ["title", "tags", "summary", "description"],
+    "required": ["title", "tags", "description"],
     "additionalProperties": true,
     "properties": {
       "title": {
         "type": "string",
-        "description": "Name of the content itme",
+        "description": "Name of the team",
         "translation": {
-            "arcgis": ["item.title"]
-        }
-      },
-      "snippet": {
-        "type": "string",
-        "description": "A short description of the content. Max of 300 characters.",
-        "translation": {
-            "arcgis": ["item.snippet"]
+            "arcgis": ["group.title"]
         }
       },
       "description": {
         "type": "string",
-        "description": "Full description",
+        "description": "What does this team hope to accomplish?",
         "translation": {
-            "arcgis": ["item.description"]
+            "arcgis": ["group.description"]
         }
       },
       "tags": {
         "type": "array",
-        "description": "Provides content tags.",
+        "description": "Provide group tags.",
         "translation": {
           "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
           "FGDC CSDGM": ["idinfo > keywords"]

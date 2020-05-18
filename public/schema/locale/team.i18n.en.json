@@ -1,0 +1,15 @@
+{
+    "metadata": {
+        "team": {
+            "title": "Team Info",
+            "description": "What's this team about?",
+            "properties": {
+                "title": {
+                    "title": "Team Name (en)",
+                    "description": "How do you describe this team (en).",
+                    "tags": "Team tags (en)"
+                }    
+            }
+        }
+    }
+}
