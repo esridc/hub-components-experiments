@@ -1,5 +1,6 @@
-import { Component, Host, h, Prop, State } from '@stencil/core';
+import { Component, Element, Host, h, Prop, State } from '@stencil/core';
 import * as Metadata from '../../utils/metadata-utils'
+import * as Locale from '../../utils/locale'
 
 @Component({
   tag: 'metadata-form',
@@ -8,18 +9,35 @@ import * as Metadata from '../../utils/metadata-utils'
 })
 export class MetadataForm {
 
-  @Prop() specUrl:string = "/schema/contact.json"
+  @Element() element: HTMLElement;
+
+  @Prop() spec:string = "arcgis";
+  @Prop() locale:string = "en";
 
   @State() sections: Array<any> = [];
+  @State() strings: any; 
+  @State() title: string;
+  @State() description: string;
 
-  componentDidLoad() {
-    console.log('Component has been rendered');
-    this.loadSpecification();
+  async componentWillLoad() {
+    this.sections = await this.loadSpecification();
+    this.locale = this.locale || Locale.getComponentClosestLanguage(this.element);
+
+    this.title = this.sections['title'];
+    this.description = this.sections['description'];
+
+    // TODO: send input translation down to components
+    Locale.getMetadataLocaleStrings(this.spec, this.locale).then((result) => {
+      this.strings = result;
+      this.title = this.strings.t(`${this.spec}.metadata.${this.spec}.title`)
+      this.description = this.strings.t(`${this.spec}.metadata.${this.spec}.description`)
+    })
+
   }
 
   private async loadSpecification() {
-    this.sections = await Metadata.getMetadataSpec(this.specUrl);
-    console.log("metadata-form: sections", this.sections)
+    const file = `/schema/${this.spec}.json`
+    return await Metadata.getMetadataSpec(file);
   }
 
   render() {
@@ -27,8 +45,8 @@ export class MetadataForm {
       <Host>
         <slot></slot>
         <metadata-section-view
-          title={this.sections['title']}
-          description={this.sections['description']}
+          title={this.title}
+          description={this.description}
           inputs={this.sections['properties']}
         ></metadata-section-view>
       </Host>

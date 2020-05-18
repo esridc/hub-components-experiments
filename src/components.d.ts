@@ -280,7 +280,8 @@ export namespace Components {
         "value": string;
     }
     interface MetadataForm {
-        "specUrl": string;
+        "locale": string;
+        "spec": string;
     }
     interface MetadataSectionHelp {
         "description": string;
@@ -752,7 +753,8 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface MetadataForm {
-        "specUrl"?: string;
+        "locale"?: string;
+        "spec"?: string;
     }
     interface MetadataSectionHelp {
         "description"?: string;

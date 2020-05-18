@@ -63,6 +63,7 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^9.0.1",
     "@esri/arcgis-rest-auth": "^2.13.1",
     "@esri/arcgis-rest-common-types": "^1.19.2",
     "@esri/arcgis-rest-feature-layer": "^2.13.1",
@@ -72,8 +73,7 @@
     "@esri/arcgis-rest-types": "^2.13.1",
     "@esri/calcite-components": "^1.0.0-beta.25",
     "@esri/calcite-ui-icons": "^2.7.1",
-    "@esri/hub-common": "file:../sandbox/hub3/hub.js/packages/common",
-    "@esri/hub-datasets": "file:../sandbox/hub3/hub.js/packages/datasets",
+    "@esri/hub-common": "^3.9.3",
     "@esri/hub-events": "^3.9.3",
     "@esri/hub-initiatives": "^3.9.3",
     "@esri/hub-search": "^3.9.3",
@@ -82,6 +82,7 @@
     "@types/node": "^13.13.6",
     "esri-loader": "^2.14.0",
     "fuse.js": "^5.2.3",
-    "lodash-es": "^4.17.15"
+    "lodash-es": "^4.17.15",
+    "node-polyglot": "^2.4.0"
   }
 }

@@ -7,9 +7,10 @@
 
 ## Properties
 
-| Property  | Attribute  | Description | Type     | Default                                                                               |
-| --------- | ---------- | ----------- | -------- | ------------------------------------------------------------------------------------- |
-| `specUrl` | `spec-url` |             | `string` | `"https://raw.githubusercontent.com/adiwg/mdJson-schemas/master/schema/contact.json"` |
+| Property | Attribute | Description | Type     | Default    |
+| -------- | --------- | ----------- | -------- | ---------- |
+| `locale` | `locale`  |             | `string` | `"en"`     |
+| `spec`   | `spec`    |             | `string` | `"arcgis"` |
 
 
 ## Dependencies

@@ -1,0 +1,50 @@
+{
+    "id": "arcgis.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "About Content",
+    "description": "Information about the content.",
+    "type": "object",
+    "example": "../examples/arcgis.json",
+    "translation": {
+        "ISO 19115-2": ["MD_DataIdentification"],
+        "FGDC CSDGM": ["idinfo"]
+    },
+    "required": ["title", "tags", "summary", "description"],
+    "additionalProperties": true,
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Name of the content itme",
+        "translation": {
+            "arcgis": ["item.title"]
+        }
+      },
+      "summary": {
+        "type": "string",
+        "description": "A short description of the content. Max of 300 characters.",
+        "translation": {
+            "arcgis": ["item.snippet"]
+        }
+      },
+      "description": {
+        "type": "string",
+        "description": "Full description",
+        "translation": {
+            "arcgis": ["item.description"]
+        }
+      },
+      "tags": {
+        "type": "array",
+        "description": "Provides content tags.",
+        "translation": {
+          "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
+          "FGDC CSDGM": ["idinfo > keywords"]
+        },
+        "uniqueItems": true,
+        "items": {
+            "type": "string"
+        }
+      }
+    }
+  }
+  
