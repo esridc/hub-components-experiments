@@ -7,13 +7,19 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default    |
-| -------- | --------- | ----------- | -------- | ---------- |
-| `locale` | `locale`  |             | `string` | `"en"`     |
-| `spec`   | `spec`    |             | `string` | `"arcgis"` |
+| Property   | Attribute  | Description | Type     | Default    |
+| ---------- | ---------- | ----------- | -------- | ---------- |
+| `locale`   | `locale`   |             | `string` | `"en"`     |
+| `resource` | `resource` |             | `any`    | `null`     |
+| `spec`     | `spec`     |             | `string` | `"arcgis"` |
 
 
 ## Dependencies
+
+### Used by
+
+ - [hub-metadata-editor](../hub-metadata-editor)
+ - [hub-profile-editor](../hub-profile-editor)
 
 ### Depends on
 
@@ -31,6 +37,8 @@ graph TD;
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon
   calcite-input-message --> calcite-icon
+  hub-metadata-editor --> metadata-form
+  hub-profile-editor --> metadata-form
   style metadata-form fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

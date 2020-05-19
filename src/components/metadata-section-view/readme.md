@@ -11,6 +11,7 @@
 | ------------- | ------------- | ----------- | -------- | ------- |
 | `description` | `description` |             | `string` | `""`    |
 | `inputs`      | --            |             | `any[]`  | `[]`    |
+| `resource`    | `resource`    |             | `any`    | `{}`    |
 | `title`       | `title`       |             | `string` | `""`    |
 
 

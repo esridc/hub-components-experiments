@@ -13,6 +13,7 @@ export class MetadataForm {
 
   @Prop() spec:string = "arcgis";
   @Prop() locale:string = "en";
+  @Prop({ mutable: true }) resource:any = null;
 
   @State() sections: Array<any> = [];
   @State() strings: any; 
@@ -32,7 +33,6 @@ export class MetadataForm {
       this.title = this.strings.t(`${this.spec}.metadata.${this.spec}.title`)
       this.description = this.strings.t(`${this.spec}.metadata.${this.spec}.description`)
     })
-
   }
 
   private async loadSpecification() {
@@ -41,6 +41,7 @@ export class MetadataForm {
   }
 
   render() {
+    console.log("MetadataForm: render", this.resource)
     return (
       <Host>
         <slot></slot>
@@ -48,9 +49,9 @@ export class MetadataForm {
           title={this.title}
           description={this.description}
           inputs={this.sections['properties']}
+          resource={this.resource}
         ></metadata-section-view>
       </Host>
     );
   }
-
 }

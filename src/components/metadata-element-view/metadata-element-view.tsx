@@ -30,6 +30,7 @@ export class MetadataElementView {
           <calcite-input 
             // ref={(el: HTMLInputElement) => this.metadataEl = el} 
             id={this.id} 
+            // name={this.id}
             class={ this.requiredStatus()} value={this.value}
           ></calcite-input>
           <calcite-input-message active>{this.description}</calcite-input-message>

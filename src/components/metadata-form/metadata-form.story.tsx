@@ -6,6 +6,7 @@ export default function(stories, knobs) {
 
     stories.add('Hub Metadata Form', () => {
         const spec = knobs.select('spec', ["arcgis", 
+                                            "team", "user", 
                                             "additionalDocumentation", 
                                             "attribute", 
                                             "citation", 

@@ -201,6 +201,15 @@ export namespace Components {
         "summary": string;
         "tags": Array<string>;
     }
+    interface HubProfileEditor {
+        /**
+          * ClientID to identify the app launching auth
+         */
+        "clientid": string;
+        "portal": string;
+        "session": string;
+        "username": string;
+    }
     interface HubRadar {
         "address": string;
         "mapCenter": string;
@@ -281,6 +290,7 @@ export namespace Components {
     }
     interface MetadataForm {
         "locale": string;
+        "resource": any;
         "spec": string;
     }
     interface MetadataSectionHelp {
@@ -290,6 +300,7 @@ export namespace Components {
     interface MetadataSectionView {
         "description": string;
         "inputs": Array<any>;
+        "resource": any;
         "title": string;
     }
 }
@@ -372,6 +383,12 @@ declare global {
         prototype: HTMLHubMetadataEditorElement;
         new (): HTMLHubMetadataEditorElement;
     };
+    interface HTMLHubProfileEditorElement extends Components.HubProfileEditor, HTMLStencilElement {
+    }
+    var HTMLHubProfileEditorElement: {
+        prototype: HTMLHubProfileEditorElement;
+        new (): HTMLHubProfileEditorElement;
+    };
     interface HTMLHubRadarElement extends Components.HubRadar, HTMLStencilElement {
     }
     var HTMLHubRadarElement: {
@@ -446,6 +463,7 @@ declare global {
         "hub-input": HTMLHubInputElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
+        "hub-profile-editor": HTMLHubProfileEditorElement;
         "hub-radar": HTMLHubRadarElement;
         "hub-search": HTMLHubSearchElement;
         "hub-sonar-chat": HTMLHubSonarChatElement;
@@ -668,6 +686,15 @@ declare namespace LocalJSX {
         "summary"?: string;
         "tags"?: Array<string>;
     }
+    interface HubProfileEditor {
+        /**
+          * ClientID to identify the app launching auth
+         */
+        "clientid"?: string;
+        "portal"?: string;
+        "session"?: string;
+        "username"?: string;
+    }
     interface HubRadar {
         "address"?: string;
         "mapCenter"?: string;
@@ -754,6 +781,7 @@ declare namespace LocalJSX {
     }
     interface MetadataForm {
         "locale"?: string;
+        "resource"?: any;
         "spec"?: string;
     }
     interface MetadataSectionHelp {
@@ -763,6 +791,7 @@ declare namespace LocalJSX {
     interface MetadataSectionView {
         "description"?: string;
         "inputs"?: Array<any>;
+        "resource"?: any;
         "title"?: string;
     }
     interface IntrinsicElements {
@@ -779,6 +808,7 @@ declare namespace LocalJSX {
         "hub-input": HubInput;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
+        "hub-profile-editor": HubProfileEditor;
         "hub-radar": HubRadar;
         "hub-search": HubSearch;
         "hub-sonar-chat": HubSonarChat;
@@ -808,6 +838,7 @@ declare module "@stencil/core" {
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
+            "hub-profile-editor": LocalJSX.HubProfileEditor & JSXBase.HTMLAttributes<HTMLHubProfileEditorElement>;
             "hub-radar": LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
             "hub-search": LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
             "hub-sonar-chat": LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
