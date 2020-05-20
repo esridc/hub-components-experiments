@@ -9,7 +9,7 @@
 
 | Property | Attribute | Description | Type     | Default            |
 | -------- | --------- | ----------- | -------- | ------------------ |
-| `config` | `config`  |             | `string` | `'UA-47337822-17'` |
+| `google` | `google`  |             | `string` | `'UA-47337822-17'` |
 
 
 ----------------------------------------------

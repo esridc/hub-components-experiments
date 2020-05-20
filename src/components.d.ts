@@ -263,7 +263,7 @@ export namespace Components {
         "suggestions": Array<string>;
     }
     interface HubTelemetry {
-        "config": string;
+        "google": string;
     }
     interface HubUpload {
         /**
@@ -763,7 +763,7 @@ declare namespace LocalJSX {
         "suggestions"?: Array<string>;
     }
     interface HubTelemetry {
-        "config"?: string;
+        "google"?: string;
     }
     interface HubUpload {
         /**
