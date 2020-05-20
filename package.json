@@ -78,6 +78,7 @@
     "@esri/hub-initiatives": "^3.9.3",
     "@esri/hub-search": "^3.9.3",
     "@esri/hub-sites": "^3.9.3",
+    "@esri/telemetry": "^1.5.1",
     "@types/arcgis-js-api": "^4.15.0",
     "@types/node": "^13.13.6",
     "esri-loader": "^2.14.0",

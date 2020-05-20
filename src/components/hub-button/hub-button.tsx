@@ -1,5 +1,6 @@
 import { Component, Prop, Listen, h } from '@stencil/core';
 import '@esri/calcite-components';
+import { sendTelemetry } from '../../utils/telemetry-utils';
 
 @Component({
   tag: 'hub-button',
@@ -23,6 +24,15 @@ export class HubButton {
   @Prop() action: Function = function() { return 'foo' };
 
   @Listen('click') handleKeyDown() {
+    console.log("hub-button click")
+
+    // send Telemetry to <hub-telemetry>
+    sendTelemetry({
+        category: 'hub-component',
+        action: 'hub-button:click', 
+        label: this.text
+    });
+    
     this.action()
   }
 

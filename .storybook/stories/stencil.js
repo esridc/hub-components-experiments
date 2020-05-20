@@ -21,7 +21,7 @@ function getComponentFromExports(_module) {
 	const key = Object.keys(_module).find(exportKey => {
 		const _export = _module[exportKey];
 		// does it quack like a stencil class component?
-		console.log('getComponentFromExports', [exportKey, _export.prototype, _export.is, _export.encapsulation, _export, _module])
+		// console.log('getComponentFromExports', [exportKey, _export.prototype, _export.is, _export.encapsulation, _export, _module])
 		if (_export.prototype && _export.is /*&& _export.encapsulation*/) {
 			return true;
 		}

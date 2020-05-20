@@ -23,6 +23,7 @@ export const config: Config = {
   },
   devServer: {
     root: "www"
+    
   },  
   namespace: 'radar',
   outputTargets: [
@@ -35,6 +36,9 @@ export const config: Config = {
     },
     {
       type: 'www',
+      copy: [
+        { src: '../node_modules/@esri/telemetry/dist', dest: '../public/scripts' }
+      ],
       serviceWorker: null // disable service workers
     }
   ]

@@ -262,6 +262,9 @@ export namespace Components {
          */
         "suggestions": Array<string>;
     }
+    interface HubTelemetry {
+        "config": string;
+    }
     interface HubUpload {
         /**
           * ClientID to identify the app launching auth
@@ -413,6 +416,12 @@ declare global {
         prototype: HTMLHubSuggestInputElement;
         new (): HTMLHubSuggestInputElement;
     };
+    interface HTMLHubTelemetryElement extends Components.HubTelemetry, HTMLStencilElement {
+    }
+    var HTMLHubTelemetryElement: {
+        prototype: HTMLHubTelemetryElement;
+        new (): HTMLHubTelemetryElement;
+    };
     interface HTMLHubUploadElement extends Components.HubUpload, HTMLStencilElement {
     }
     var HTMLHubUploadElement: {
@@ -468,6 +477,7 @@ declare global {
         "hub-search": HTMLHubSearchElement;
         "hub-sonar-chat": HTMLHubSonarChatElement;
         "hub-suggest-input": HTMLHubSuggestInputElement;
+        "hub-telemetry": HTMLHubTelemetryElement;
         "hub-upload": HTMLHubUploadElement;
         "hub-upload-file": HTMLHubUploadFileElement;
         "metadata-element-view": HTMLMetadataElementViewElement;
@@ -752,6 +762,9 @@ declare namespace LocalJSX {
          */
         "suggestions"?: Array<string>;
     }
+    interface HubTelemetry {
+        "config"?: string;
+    }
     interface HubUpload {
         /**
           * ClientID to identify the app launching auth
@@ -813,6 +826,7 @@ declare namespace LocalJSX {
         "hub-search": HubSearch;
         "hub-sonar-chat": HubSonarChat;
         "hub-suggest-input": HubSuggestInput;
+        "hub-telemetry": HubTelemetry;
         "hub-upload": HubUpload;
         "hub-upload-file": HubUploadFile;
         "metadata-element-view": MetadataElementView;
@@ -843,6 +857,7 @@ declare module "@stencil/core" {
             "hub-search": LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
             "hub-sonar-chat": LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
             "hub-suggest-input": LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
+            "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;
             "hub-upload": LocalJSX.HubUpload & JSXBase.HTMLAttributes<HTMLHubUploadElement>;
             "hub-upload-file": LocalJSX.HubUploadFile & JSXBase.HTMLAttributes<HTMLHubUploadFileElement>;
             "metadata-element-view": LocalJSX.MetadataElementView & JSXBase.HTMLAttributes<HTMLMetadataElementViewElement>;

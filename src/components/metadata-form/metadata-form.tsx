@@ -1,6 +1,7 @@
 import { Component, Element, Host, h, Prop, State } from '@stencil/core';
 import * as Metadata from '../../utils/metadata-utils'
 import * as Locale from '../../utils/locale'
+import { sendTelemetry } from '../../utils/telemetry-utils'
 
 @Component({
   tag: 'metadata-form',
@@ -33,6 +34,12 @@ export class MetadataForm {
       this.title = this.strings.t(`${this.spec}.metadata.${this.spec}.title`)
       this.description = this.strings.t(`${this.spec}.metadata.${this.spec}.description`)
     })
+
+    sendTelemetry({
+      category: 'hub-component',
+      action: 'hub-metadata-form:loaded', 
+      label: this.spec
+    });
   }
 
   private async loadSpecification() {
