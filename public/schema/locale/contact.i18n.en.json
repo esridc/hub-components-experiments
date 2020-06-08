@@ -1,0 +1,12 @@
+{
+    "metadata": {
+        "contact": {
+            "title": "Contact Information (En)",
+            "description": "Let's describe who maintains this content! (En)",
+            "contactId": {
+                "title": "Contact Name",
+                "description": "Full name of the person who maintains this content."
+            }
+        }
+    }
+}

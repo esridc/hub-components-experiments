@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop} from '@stencil/core';
+import { Component, Host, h, Prop, State} from '@stencil/core';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import * as Portal from "@esri/arcgis-rest-portal";
 import { readSessionFromCookie } from '../../utils/utils';
@@ -20,7 +20,9 @@ export class HubMetadataEditor {
    */
   @Prop() clientid: string = "WXC842NRBVB6NZ2r";
   @Prop() portal = "https://www.arcgis.com";
-  @Prop({ mutable: true }) session: string;
+  @Prop({ mutable: true }) session: string = null;
+
+  @State() resource: any = null;
 
   titleEl: HTMLInputElement; 
   tagsEl: HTMLInputElement; 
@@ -30,6 +32,8 @@ export class HubMetadataEditor {
     this.session = readSessionFromCookie()
     this.getItem(this.item).then((response) => {
       console.log("HubMetadata componentDidLoad", response)
+      this.resource = response; // For sending into the metadata form
+
       this.itemTitle = response.title;
       this.tags = response.tags;
       this.summary = response.snippet;
@@ -40,12 +44,14 @@ export class HubMetadataEditor {
     console.log("HubMetadata getItem", [itemId, this.session])
     const authentication = UserSession.deserialize(this.session);
     return Portal.getItem(itemId, { authentication })
+    // return Portal.getItem(itemId)
   }
 
   onSave(e) {
     e.preventDefault()
     e.stopPropagation()
 
+    console.log("Save form", this.resource);
     const authentication = UserSession.deserialize(this.session);
     Portal.updateItem({
       item: {
@@ -60,37 +66,43 @@ export class HubMetadataEditor {
   render() {
     return (
       <Host>
-        <form onSubmit={(e) => this.onSave(e)}> 
-        <section class="metadata-section">
-            <div class="metadata-section-help">
-                <h3>Basic Info</h3>
-                <p>This information is used in search results, gallery cards and on the details views.</p>
-                <p>Setting category and update frequency helps others identify, filter, and sort by relevance.</p>
-                <p><a href={`${this.portal}/home/item.html?id=${this.item}`}>View in Online</a></p>
-            </div>
-            <div class="metadata-section-input">
-                <label class="metadata-required">Title</label>
-                <input type="text" ref={(el: HTMLInputElement) => this.titleEl = el} id="title" name="title" class="metadata-required" value={this.itemTitle} />
-                <br />
-
-                <label class="metadata-required">Summary</label>
-                <textarea ref={(el: HTMLTextAreaElement) => this.summaryEl = el} id="summary" name="summary">
-                  {this.summary}
-                </textarea>
-
-
-                <label class="metadata-required">Tags</label>
-                <input type="text" ref={(el: HTMLInputElement) => this.tagsEl = el} id="tags" name="tags" class="metadata-required" value={this.tags.join(',')} />
-                <br />                
-            </div>
-        </section>
-        <button type="submit" class="chat-submit" id="chat-submit">
-            Save
-        </button>
-
-        </form>
+        <form onSubmit={(e) => this.onSave(e)}>
+          <metadata-form
+            spec="arcgis"
+            resource={this.resource}
+          ></metadata-form>
+          <button type="submit" class="chat-submit" id="chat-submit">
+              Save
+          </button>
+        </form>  
       </Host>
+       
     );
   }
-
 }
+
+// TODO: remove this explicit form
+ 
+//         <section class="metadata-section">
+//             <div class="metadata-section-help">
+//                 <h3>Basic Info</h3>
+//                 <p>This information is used in search results, gallery cards and on the details views.</p>
+//                 <p>Setting category and update frequency helps others identify, filter, and sort by relevance.</p>
+//                 <p><a href={`${this.portal}/home/item.html?id=${this.item}`}>View in Online</a></p>
+//             </div>
+//             <div class="metadata-section-input">
+//                 <label class="metadata-required">Title</label>
+//                 <input type="text" ref={(el: HTMLInputElement) => this.titleEl = el} id="title" name="title" class="metadata-required" value={this.itemTitle} />
+//                 <br />
+
+//                 <label class="metadata-required">Summary</label>
+//                 <textarea ref={(el: HTMLTextAreaElement) => this.summaryEl = el} id="summary" name="summary">
+//                   {this.summary}
+//                 </textarea>
+
+
+//                 <label class="metadata-required">Tags</label>
+//                 <input type="text" ref={(el: HTMLInputElement) => this.tagsEl = el} id="tags" name="tags" class="metadata-required" value={this.tags.join(',')} />
+//                 <br />                
+//             </div>
+//         </section>

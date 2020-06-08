@@ -59,6 +59,16 @@ graph TD;
   hub-upload-file --> hub-metadata-editor
   hub-upload-file --> calcite-loader
   calcite-notice --> calcite-icon
+  hub-metadata-editor --> metadata-form
+  metadata-form --> metadata-section-view
+  metadata-section-view --> metadata-section-help
+  metadata-section-view --> metadata-element-view
+  metadata-element-view --> calcite-label
+  metadata-element-view --> calcite-input
+  metadata-element-view --> calcite-input-message
+  calcite-input --> calcite-progress
+  calcite-input --> calcite-icon
+  calcite-input-message --> calcite-icon
   style hub-upload fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

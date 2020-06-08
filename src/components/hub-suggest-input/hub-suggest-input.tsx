@@ -1,5 +1,6 @@
 import { Element, Listen, Component, Prop, State, Event, EventEmitter, h, Watch } from '@stencil/core';
 import Fuse from 'fuse.js'
+import { sendTelemetry } from '../../utils/telemetry-utils';
 
 @Component({
   tag: 'hub-suggest-input',
@@ -39,6 +40,11 @@ export class HubSuggestInput {
   componentWillLoad() {
     this.inputQuery = this.query;
     this.buildIndex(this.suggestions);
+    sendTelemetry({
+      category: 'hub-component',
+      action: 'hub-suggest-input:loaded', 
+      label: this.submit
+    });        
   }
 
   buildIndex(suggestions) {
@@ -67,6 +73,17 @@ export class HubSuggestInput {
       this.showSuggestions = false;
       this.selectedSuggestionIndex = undefined;
     }
+
+    sendTelemetry({
+      category: 'hub-component',
+      action: 'hub-suggest-input:click', 
+      label: this.submit
+    });    
+    sendTelemetry({
+      category: 'hub-component',
+      action: 'hub-suggest-input:query', 
+      label: this.query
+    });        
   }
 
   findMatch = (searchTerm: string): string[] => {

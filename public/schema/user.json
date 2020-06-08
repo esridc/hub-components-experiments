@@ -1,0 +1,63 @@
+
+{
+    "id": "user.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "User Info",
+    "description": "Hub Member Profile",
+    "type": "object",
+    "example": "../examples/user.json",
+    "translation": {
+        "ISO 19115-2": ["MD_DataIdentification"],
+        "FGDC CSDGM": ["idinfo"]
+    },
+    "required": ["firstName", "lastName", "tags", "description", "languages"],
+    "additionalProperties": true,
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "How would you like to be called?",
+        "translation": {
+            "arcgis": ["user.firstName"]
+        }
+      },
+      "lastName": {
+        "type": "string",
+        "description": "What is your lastname?",
+        "translation": {
+            "arcgis": ["user.lastName"]
+        }
+      },      
+      "description": {
+        "type": "string",
+        "description": "Why do you love your city?",
+        "translation": {
+            "arcgis": ["user.description"]
+        }
+      },
+      "languages": {
+        "type": "array",
+        "description": "What languages do you speak fluently?",
+        "translation": {
+          "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
+          "FGDC CSDGM": ["idinfo > keywords"]
+        },
+        "uniqueItems": true,
+        "items": {
+            "type": "string"
+        }
+      },
+      "tags": {
+        "type": "array",
+        "description": "What skills do you have?",
+        "translation": {
+          "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
+          "FGDC CSDGM": ["idinfo > keywords"]
+        },
+        "uniqueItems": true,
+        "items": {
+            "type": "string"
+        }
+      }
+    }
+  }
+  

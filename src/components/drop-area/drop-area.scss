@@ -30,8 +30,8 @@
       color: #333;
     }
     &.highlight {
-      border-color: brown;
-      background: transparentize($color: brown, $amount: 0.9)
+      border: 2px solid green;
+      background: transparentize($color: green, $amount: 0.9)
     }
     #fileElem {
       display: none;

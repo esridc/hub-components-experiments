@@ -53,7 +53,7 @@ export class HubSearch {
     this.results = [];
     this.fetchResults(this.queryInput).then(r => {
       r.json().then((results) => {
-        console.log("Hub Search results", results.data)
+        // console.log("Hub Search results", results.data)
         this.results = results.data;
       });
     })
@@ -126,7 +126,7 @@ export class HubSearch {
   render() {
     let output = []
     this.results.map(result => {
-      console.log("Search result", result.attributes)
+      // console.log("Search result", result.attributes)
       output.push(
         <hub-card 
           contenttype={result.attributes.type}

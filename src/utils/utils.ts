@@ -24,7 +24,6 @@ export const authenticateUser = (clientId, orgurl):Promise<string> => {
         redirectUri: `${window.location.origin}/authenticate.html`
       })
       .then(userSession => {
-        alert("auth")
           writeSessionToCookie(userSession);
           session = userSession.serialize();
           resolve(session);
