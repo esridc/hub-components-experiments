@@ -6,7 +6,7 @@ export default function(stories, _knobs) {
 
     stories.add('Hub Telemetry', () => { 
 
-        mainEl.innerHTML = `<hub-telemetry></hub-telemetry>`
+        mainEl.innerHTML = `<hub-telemetry google="r3f"></hub-telemetry>`
                 
         return mainEl;
     }, { notes: readme });

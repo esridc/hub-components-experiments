@@ -42,15 +42,16 @@ export class HubMetadataEditor {
 
   private getItem(itemId) {
     console.log("HubMetadata getItem", [itemId, this.session])
-    // const authentication = UserSession.deserialize(this.session);
-    // return Portal.getItem(itemId, { authentication })
-    return Portal.getItem(itemId)
+    const authentication = UserSession.deserialize(this.session);
+    return Portal.getItem(itemId, { authentication })
+    // return Portal.getItem(itemId)
   }
 
   onSave(e) {
     e.preventDefault()
     e.stopPropagation()
 
+    console.log("Save form", this.resource);
     const authentication = UserSession.deserialize(this.session);
     Portal.updateItem({
       item: {
