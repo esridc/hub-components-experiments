@@ -22,6 +22,9 @@ export namespace Components {
         "session": string;
         "view": "preview" | "edit";
     }
+    interface ArcgisSurvey {
+        "item": string;
+    }
     interface DropArea {
         "allowedTypes": Array<string>;
     }
@@ -314,6 +317,12 @@ declare global {
         prototype: HTMLArcgisNotebookElement;
         new (): HTMLArcgisNotebookElement;
     };
+    interface HTMLArcgisSurveyElement extends Components.ArcgisSurvey, HTMLStencilElement {
+    }
+    var HTMLArcgisSurveyElement: {
+        prototype: HTMLArcgisSurveyElement;
+        new (): HTMLArcgisSurveyElement;
+    };
     interface HTMLDropAreaElement extends Components.DropArea, HTMLStencilElement {
     }
     var HTMLDropAreaElement: {
@@ -460,6 +469,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "arcgis-notebook": HTMLArcgisNotebookElement;
+        "arcgis-survey": HTMLArcgisSurveyElement;
         "drop-area": HTMLDropAreaElement;
         "hub-button": HTMLHubButtonElement;
         "hub-card": HTMLHubCardElement;
@@ -499,6 +509,9 @@ declare namespace LocalJSX {
          */
         "session"?: string;
         "view"?: "preview" | "edit";
+    }
+    interface ArcgisSurvey {
+        "item"?: string;
     }
     interface DropArea {
         "allowedTypes"?: Array<string>;
@@ -809,6 +822,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "arcgis-notebook": ArcgisNotebook;
+        "arcgis-survey": ArcgisSurvey;
         "drop-area": DropArea;
         "hub-button": HubButton;
         "hub-card": HubCard;
@@ -840,6 +854,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "arcgis-notebook": LocalJSX.ArcgisNotebook & JSXBase.HTMLAttributes<HTMLArcgisNotebookElement>;
+            "arcgis-survey": LocalJSX.ArcgisSurvey & JSXBase.HTMLAttributes<HTMLArcgisSurveyElement>;
             "drop-area": LocalJSX.DropArea & JSXBase.HTMLAttributes<HTMLDropAreaElement>;
             "hub-button": LocalJSX.HubButton & JSXBase.HTMLAttributes<HTMLHubButtonElement>;
             "hub-card": LocalJSX.HubCard & JSXBase.HTMLAttributes<HTMLHubCardElement>;
