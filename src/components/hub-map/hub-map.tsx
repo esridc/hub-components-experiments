@@ -10,7 +10,8 @@ import { loadCss, loadModules } from "esri-loader";
 export class HubMap {
 
   @Element() hostElement: HTMLElement;
-  
+  fullScreenButton: HTMLElement;
+
   /**
    * Webmap Item configuration to load
    */
@@ -62,7 +63,6 @@ export class HubMap {
       console.debug("HubMap componentWillLoad", this.center)
       this.mapCenter = JSON.parse(this.center)
     }
-
   }
 
   /**
@@ -123,8 +123,6 @@ export class HubMap {
     if(this.drawing) {
       this.addSketch();
     }
-    
-
       // .then(() => this.zoomToUrlObjectId())
       // .then(() => this.addZoomOnClickAndUrlUpdate());
   }
@@ -268,10 +266,16 @@ export class HubMap {
   //   });
   // }
 
+  // TODO: Determine if this should be a component <hub-fullscreen ...>
+  requestFullScreen() {
+    this.hostElement.requestFullscreen();
+  }
+
   render() {
     return (
       <Host>
         <div class="hub-map"></div>
+        <calcite-button onClick={() => this.requestFullScreen() } ref={(el: HTMLElement) => this.fullScreenButton = el}>Full Screen</calcite-button>
       </Host>
     )
   }

@@ -37,9 +37,16 @@
 
  - [hub-radar](../hub-radar)
 
+### Depends on
+
+- calcite-button
+
 ### Graph
 ```mermaid
 graph TD;
+  hub-map --> calcite-button
+  calcite-button --> calcite-loader
+  calcite-button --> calcite-icon
   hub-radar --> hub-map
   style hub-map fill:#f9f,stroke:#333,stroke-width:4px
 ```
