@@ -1,5 +1,6 @@
 import { Component, Host, h, State, Listen, Prop } from '@stencil/core';
-import * as Hub from '../../utils/hub-utils';
+import * as Hub from '../../utils/hub-search';
+import * as Site from '../../utils/hub-site';
 // import * as HubAPI from '../../utils/hub-api';
 // import { authenticateUser } from '../../utils/utils';
 import { UserSession } from '@esri/arcgis-rest-auth';
@@ -84,7 +85,7 @@ export class HubSearch {
     return 'true';
   }  
 
-  updateGallery(query: string): void {
+  async updateGallery(query: string) {
     let searchParams:any = {q: query};
     if(this.catalog) {
       console.debug("Hub Search groups", this.catalog.groups);
@@ -92,16 +93,15 @@ export class HubSearch {
     } else {
       searchParams.groups = this.groups.split(",");
     }    
-    Hub.search(searchParams, {isPortal: true, hubApiUrl: "", authentication: new UserSession({})}).then((results) => {
-        console.log("Hub Search results", results)
-        this.results = results.results;
-      })
+    let results = await Hub.search(searchParams, {isPortal: false, hubApiUrl: "", authentication: new UserSession({})})
+    console.log("Hub Search results", results)
+    this.results = results;
   }
   
   
   componentWillLoad() {
     if(this.site) {
-      Hub.getSiteCatalog(this.site).then((catalog) => {
+      Site.getSiteCatalog(this.site).then((catalog) => {
         this.catalog = catalog;
         this.updateGallery('*');
 
@@ -134,10 +134,9 @@ export class HubSearch {
           class="hub-content-card"
           contenttype={result.type}
           url={result.url}
-          image={result.thumbnail} 
+          image={result.thumbnailUrl} 
           name={this.truncateString(result.title, 60)} 
           description={this.truncateString(result.snippet, 90)}
-          item={result.id}
           buttonText={this.buttontext}
           onClick={() => ""}
           // content={this.content}

@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Prop } from '@stencil/core';
 import * as HubSearchModule from "@esri/hub-search";
-import * as Hub from '../../utils/hub-utils';
+import * as Hub from '../../utils/hub-site';
 
 @Component({
   tag: 'hub-content-table',
