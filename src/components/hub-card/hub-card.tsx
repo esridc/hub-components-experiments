@@ -25,7 +25,7 @@ export class HubCard {
   /** Specify the layout of the card */
   @Prop() layout: "horizontal" | "vertical" = "vertical"
   @Prop() url:string = null;
-  @Prop() buttonText:string;
+  @Prop() buttonText:string = "Explore";
   @Prop() buttonAction:Function;
 
   // @Prop() content:any;
@@ -61,16 +61,16 @@ export class HubCard {
         name = `<a class="hub-content-url" href="${this.url}">${name}</a>`
       }
       // output.push(<div class="hub-content-title" innerHTML={name}></div>)
-      output.push(<h3 slot="title" innerHTML={name}></h3>)
+      output.push(<h3 class="card-title" slot="title" innerHTML={name}></h3>)
     }
     if(this.contenttype) {
-      output.push(<span slot="subtitle">{this.contenttype}
+      output.push(<span class="card-subtitle" slot="subtitle">{this.contenttype}
         </span>)
       // output.push( <span class="hub-content-type">{this.contenttype}</span> )
     }
     if(this.description) {
       // output.push(<p class="hub-content-summary" innerHTML={this.description}></p>)
-      output.push(<div innerHTML={this.description}></div>)
+      output.push(<div class="card-description" innerHTML={this.description}></div>)
     }
     if(this.metadata && this.metadata.length > 0) {
       details = 

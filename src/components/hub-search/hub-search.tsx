@@ -135,8 +135,8 @@ export class HubSearch {
           contenttype={result.type}
           url={result.url}
           image={result.thumbnail} 
-          name={result.title} 
-          description={this.truncateString(result.snippet, 100)}
+          name={this.truncateString(result.title, 60)} 
+          description={this.truncateString(result.snippet, 90)}
           item={result.id}
           buttonText={this.buttontext}
           onClick={() => ""}

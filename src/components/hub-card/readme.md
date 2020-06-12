@@ -10,7 +10,7 @@ A rectangular card for showing content, optionally with an thumbnail image and l
 | Property       | Attribute     | Description                    | Type                         | Default         |
 | -------------- | ------------- | ------------------------------ | ---------------------------- | --------------- |
 | `buttonAction` | --            |                                | `Function`                   | `undefined`     |
-| `buttonText`   | `button-text` |                                | `string`                     | `undefined`     |
+| `buttonText`   | `button-text` |                                | `string`                     | `"Explore"`     |
 | `contenttype`  | `contenttype` |                                | `string`                     | `"Local Topic"` |
 | `description`  | `description` |                                | `string`                     | `"Monday"`      |
 | `image`        | `image`       |                                | `string`                     | `undefined`     |

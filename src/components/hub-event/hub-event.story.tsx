@@ -10,7 +10,7 @@ export default function(stories, knobs) {
       const eventtitle = knobs.text('Event Title', 'Maryland Ave NE Streetscape Project Groundbreaking');
       const orgurl = knobs.text('orgurl', 'https://cityx.maps.arcgis.com');
 
-      mainEl.innerHTML = `<hub-event clientid="${clientid}" eventtitle="${eventtitle}" orgurl="${orgurl}"></hub-event>`
+      mainEl.innerHTML = `<div style="width: 260px"><hub-event clientid="${clientid}" eventtitle="${eventtitle}" orgurl="${orgurl}"></hub-event></div>`
   
       return mainEl;
     }, { notes: readme });

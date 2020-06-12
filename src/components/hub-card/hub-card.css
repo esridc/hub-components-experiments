@@ -13,6 +13,10 @@ calcite-card {
   margin: 10px;
   /* border: 1px solid #EEE; */
   position: relative;
+
+  transition-property: all;
+	transition-duration: .5s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);  
 }
 
 .hub-content-footer {
@@ -36,6 +40,7 @@ calcite-card {
 /* On mouse-over, add a deeper shadow */
 .hub-content-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
 }
 
 .hub-content-title {
@@ -102,4 +107,11 @@ calcite-card {
   align-items: center;
   flex: 1 auto;
   display: grid;
+}
+
+.card-description {
+  min-height: 100px;
+}
+.card-title {
+  height: 44px;
 }

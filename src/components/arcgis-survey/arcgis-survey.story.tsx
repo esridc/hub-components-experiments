@@ -7,7 +7,7 @@ export default function(stories, knobs) {
       const item = knobs.text('item', "1a712571473448e891978869cd899b38")
       mainEl.innerHTML = `<arcgis-survey
         item="${item}"
-        style="height: 400px"
+        style="height: 100%"
       >
       </arcgis-survey>`
   

@@ -10,12 +10,13 @@ export default function(stories, knobs) {
       const clientid = knobs.text('clientid', 'WXC842NRBVB6NZ2r');
       const initiativeid = knobs.text('initiativeid', '4f5c78bfe89a4304aec3a6cfd492d0cd');
 
-      mainEl.innerHTML = `
+      mainEl.innerHTML = `<div style="width: 260px">
       <hub-content-card layout="${layout}" content="${content}" actionButton="button!">
       <div slot="action" >
       <hub-follow-button clientid="${clientid}" initiativeid="${initiativeid}"> </hub-follow-button>
       </div>
       </hub-content-card>
+      </div>
       `
   
       return mainEl;
