@@ -22,10 +22,6 @@
 
 ## Dependencies
 
-### Used by
-
- - [hub-search](../hub-search)
-
 ### Depends on
 
 - calcite-checkbox
@@ -34,7 +30,6 @@
 ```mermaid
 graph TD;
   hub-filter-category --> calcite-checkbox
-  hub-search --> hub-filter-category
   style hub-filter-category fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

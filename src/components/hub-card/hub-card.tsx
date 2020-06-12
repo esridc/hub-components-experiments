@@ -41,29 +41,36 @@ export class HubCard {
 
   render() {
     let output = [];
-    let thumbnail = null;
+    // let thumbnail = null;
     let details = null;
     
     if(this.image) {
       // TODO: improve testing for image URL
       if(this.item || this.image.match(/^http/) === null) {
-        thumbnail = <img class="hub-content-image" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} alt="Thumbnail Image" />
+        // thumbnail = <img class="hub-content-image" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} alt="Thumbnail Image" />
+        output.push (<img slot="thumbnail" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} />)
       } else {
-        thumbnail = <img class="hub-content-image" src={this.image} alt="Thumbnail Image" />
+        // thumbnail = <img class="hub-content-image" src={this.image} alt="Thumbnail Image" />
+        output.push (<img slot="thumbnail" src={this.image} />)
       }
     }
-    if(this.contenttype) {
-      output.push( <span class="hub-content-type">{this.contenttype}</span> )
-    }
+
     if(this.name) {
       let name = this.name
       if(this.url) {
         name = `<a class="hub-content-url" href="${this.url}">${name}</a>`
       }
-      output.push(<div class="hub-content-title" innerHTML={name}></div>)
+      // output.push(<div class="hub-content-title" innerHTML={name}></div>)
+      output.push(<h3 slot="title" innerHTML={name}></h3>)
+    }
+    if(this.contenttype) {
+      output.push(<span slot="subtitle">{this.contenttype}
+        </span>)
+      // output.push( <span class="hub-content-type">{this.contenttype}</span> )
     }
     if(this.description) {
-      output.push(<p class="hub-content-summary" innerHTML={this.description}></p>)
+      // output.push(<p class="hub-content-summary" innerHTML={this.description}></p>)
+      output.push(<div innerHTML={this.description}></div>)
     }
     if(this.metadata && this.metadata.length > 0) {
       details = 
@@ -77,7 +84,28 @@ export class HubCard {
    
     return (
       <Host>
-        <div class={`hub-content-card layout-${this.layout}`} >
+      <calcite-card
+      >
+        {output}
+        {details}
+        <calcite-button onClick={() => window.open(this.url)} slot="footer-leading" width="full">{this.buttonText}</calcite-button>
+
+        {/* <calcite-button slot="footer-leading" color="light" scale="s" icon='circle'></calcite-button>
+        <div slot="footer-trailing">
+          <calcite-button scale="s" color="light" id="card-icon-test-2" icon='circle'></calcite-button>
+          <calcite-button scale="s" color="light" id="card-icon-test-1" icon='circle'></calcite-button>
+          <calcite-dropdown>
+            <calcite-button id="card-icon-test-5" slot="dropdown-trigger" scale="s" color="light" icon='circle'></calcite-button>
+            <calcite-dropdown-group selection-mode="none">
+              <calcite-dropdown-item>View details</calcite-dropdown-item>
+              <calcite-dropdown-item>Duplicate</calcite-dropdown-item>
+              <calcite-dropdown-item>Delete</calcite-dropdown-item>
+            </calcite-dropdown-group>
+          </calcite-dropdown>
+        </div> */}
+      </calcite-card>
+    
+        {/* <div class={`hub-content-card layout-${this.layout}`} >
           {this.url 
             ? <a class="hub-content-link" href={this.url} ></a> : ""}
           {this.image
@@ -96,7 +124,7 @@ export class HubCard {
               : null
             }
 
-        </div>
+        </div> */}
       </Host>
     )
   }

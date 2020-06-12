@@ -174,6 +174,7 @@ export class HubSuggestInput {
       <div class='hub-suggestions-div'>
         <form onSubmit={(e) => this.onSubmit(e)}>
           <slot name="before-input" />
+
           <input
             class='hub-suggestions-input'
             type='text'
@@ -183,11 +184,12 @@ export class HubSuggestInput {
             onFocus={() => this.onFocus()}
             onKeyDown={e => this.onKeyDown(e)}
             onKeyPress={e => this.onKeyPress(e)}
-          />
+          ></input>
           <ul class='hub-suggestions-ul' role='listbox' hidden={!this.showSuggestions}>
             {this.suggestionArr.map(suggestion => this.getSuggestionElement(suggestion))}
           </ul>
-          <input class="hub-suggest-input-submit" type='submit' value={this.submit} />
+          <calcite-button>{this.submit}</calcite-button>
+          {/* <input class="hub-suggest-input-submit" type='submit' value={this.submit} /> */}
         </form>
       </div>  
     );

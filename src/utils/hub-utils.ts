@@ -1,5 +1,71 @@
 // Helper utilities for working with Hub
 import { getItem, getItemData } from "@esri/arcgis-rest-portal";
+import { IItem } from "@esri/arcgis-rest-types"
+import { searchItems } from "@esri/arcgis-rest-portal";
+import { IHubRequestOptions } from "@esri/hub-common"
+import * as HubSearchModule from "@esri/hub-search";
+
+
+
+export interface ISearchResult extends IItem {
+
+}
+
+export function search(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<any> {
+    if(hubRequestOptions !== undefined && hubRequestOptions.isPortal) {
+        return searchPortal(queryParams, hubRequestOptions);
+    } else {
+        return searchHub(queryParams, hubRequestOptions);
+    }
+}
+
+function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<any> {
+    console.log("searchPortal queryParams", queryParams)
+    let query = [];
+    if(queryParams.groups !== undefined && queryParams.groups.length > 0) {
+        query.push(queryParams.groups.map(group => `group:${group}`).join(" OR "))
+    }
+
+    if(queryParams.q.length === 0) {
+        queryParams.q = "*";
+    }
+    
+    query.push(queryParams.q)
+    console.log("searchPortal query", query)
+    return searchItems({q: query.join(' AND ')})
+}
+
+function searchHub(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<any> {
+
+    // Search query params that ArcGIS Hub expects
+    const params:any = {
+      q: queryParams.q,
+      sort: this.sort,
+      agg: { fields: "tags,collection,owner,source,hasApi,downloadable", size: 10 }
+    }
+    params.page = {key: btoa(JSON.stringify({
+      hub: {
+        start: 1,
+        size: 100
+      },
+      ago: {
+        start: 1,
+        size: 100
+      }
+    }))}
+    if(queryParams.groups !== undefined && queryParams.groups.length > 0) {
+        params.groupIds = queryParams.groups.join(",")
+    }
+
+    // const token = 'xxxYYY' // AGO token
+    // const portal = 'https://www.arcgis.com/sharing/rest'
+    // const headers = { authorization: token, portal }
+    const serializedParams = HubSearchModule.serialize(params)
+    // Query hub v3's new search endpoint
+    return fetch(`https://hub.arcgis.com/api/v3/search?${serializedParams}`, { }).then(r =>{ return r.json()})
+
+    // return HubSearchModule.agoSearch({q: query});
+  }
 
 // {
 // "id": "12502",
@@ -47,3 +113,4 @@ export function getSiteCatalog(domain:string):Promise<any> {
         }).catch(reject)
     })
 }
+

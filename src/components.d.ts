@@ -224,18 +224,42 @@ export namespace Components {
         "webmap": string;
     }
     interface HubSearch {
+        /**
+          * Text to show in the button
+         */
+        "buttontext": string;
         "clientid": string;
+        /**
+          * Groups to limit search
+         */
+        "groups": string;
         /**
           * Hub site URL to scope for search
          */
         "layout": "horizontal" | "vertical";
         "portal": string;
         /**
+          * Default Query
+         */
+        "query": string;
+        /**
+          * Search Button text
+         */
+        "searchbutton": string;
+        /**
+          * Search placeholder text
+         */
+        "searchplaceholder": string;
+        /**
+          * Choose to show or hide search
+         */
+        "showsearch": boolean;
+        /**
           * Hub site URL to scope for search
          */
         "site": string;
         /**
-          * Hub site URL to scope for search
+          * Default sort order
          */
         "sort": "name" | "modified";
     }
@@ -729,18 +753,42 @@ declare namespace LocalJSX {
         "webmap"?: string;
     }
     interface HubSearch {
+        /**
+          * Text to show in the button
+         */
+        "buttontext"?: string;
         "clientid"?: string;
+        /**
+          * Groups to limit search
+         */
+        "groups"?: string;
         /**
           * Hub site URL to scope for search
          */
         "layout"?: "horizontal" | "vertical";
         "portal"?: string;
         /**
+          * Default Query
+         */
+        "query"?: string;
+        /**
+          * Search Button text
+         */
+        "searchbutton"?: string;
+        /**
+          * Search placeholder text
+         */
+        "searchplaceholder"?: string;
+        /**
+          * Choose to show or hide search
+         */
+        "showsearch"?: boolean;
+        /**
           * Hub site URL to scope for search
          */
         "site"?: string;
         /**
-          * Hub site URL to scope for search
+          * Default sort order
          */
         "sort"?: "name" | "modified";
     }

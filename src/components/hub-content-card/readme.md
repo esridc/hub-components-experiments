@@ -25,8 +25,10 @@
 ```mermaid
 graph TD;
   hub-content-card --> hub-card
-  hub-card --> hub-button
-  hub-button --> calcite-button
+  hub-card --> calcite-card
+  hub-card --> calcite-button
+  calcite-card --> calcite-loader
+  calcite-card --> calcite-checkbox
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
   style hub-content-card fill:#f9f,stroke:#333,stroke-width:4px

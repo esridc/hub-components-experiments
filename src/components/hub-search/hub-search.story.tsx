@@ -7,9 +7,20 @@ export default function(stories, knobs) {
     stories.add('Hub Search', () => {
       const sort = knobs.select('name', ['name', 'modified'], 'name');
       const site = knobs.text('site', 'notebook-templates-dcdev.hub.arcgis.com'); //'opendata.dc.gov'
-      const layout = knobs.select('layout', ['horizontal', 'vertical'], 'vertical');
-  
-      mainEl.innerHTML = `<hub-search layout=${layout} site=${site} sort="${sort}"></hub-search>`
+      const groups = knobs.text('groups', 'eca7c9c83df04cf5bf916ca487362aae');
+      const searchbutton = knobs.text('searchbutton', "Start Search");
+      const searchplaceholder = knobs.text('searchplaceholder', "Search");
+      const buttontext = knobs.text('buttontext', 'Explore');
+      const showsearch = knobs.boolean('showsearch', true);
+      
+      mainEl.innerHTML = `<hub-search 
+        showsearch=${showsearch} 
+        searchbutton=${searchbutton} 
+        searchplaceholder=${searchplaceholder} 
+        buttontext=${buttontext} 
+        groups=${groups} 
+        site=${site} 
+        sort="${sort}"></hub-search>`
   
       return mainEl;
     }, { notes: readme});

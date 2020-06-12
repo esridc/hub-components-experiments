@@ -31,9 +31,16 @@
  - [hub-input](../hub-input)
  - [hub-search](../hub-search)
 
+### Depends on
+
+- calcite-button
+
 ### Graph
 ```mermaid
 graph TD;
+  hub-suggest-input --> calcite-button
+  calcite-button --> calcite-loader
+  calcite-button --> calcite-icon
   hub-input --> hub-suggest-input
   hub-search --> hub-suggest-input
   style hub-suggest-input fill:#f9f,stroke:#333,stroke-width:4px

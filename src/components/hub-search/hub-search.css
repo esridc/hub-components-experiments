@@ -8,7 +8,7 @@
   grid-template:
     ".   search" auto
     "filters results" auto /
-    10rem 3fr;
+    1rem 3fr;
   padding: 0 1rem 0 3rem;  
 }
 
@@ -18,15 +18,25 @@ hub-suggest-input {
 .filters {
   grid-area: filters;
   }
+
 .search-results {
   grid-area: results;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .search-results > .hub-content-card {
-    border: 1px solid #888;
-    padding: 1.5rem;
-    flex-basis: 100%;
-    margin: 10px;
-    flex-basis: calc(33.333% - 20px);      
+  /* border: 1px solid #888; */
+  /* padding: 1.5rem; */
+  /* flex-basis: 100%; */
+  /* margin: 10px; */
+  /* flex-basis: calc(33.333% - 20px); */
+  flex-basis: calc((100% - (3 * 30px))/ 4);
+  display: flex;
+  flex-flow: column;
+  color: #4c4c4c;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  box-shadow: 0 0 5px 0 rgba(76,76,76,.25);  
+
 }

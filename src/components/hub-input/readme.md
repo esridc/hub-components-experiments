@@ -34,6 +34,9 @@
 ```mermaid
 graph TD;
   hub-input --> hub-suggest-input
+  hub-suggest-input --> calcite-button
+  calcite-button --> calcite-loader
+  calcite-button --> calcite-icon
   hub-radar --> hub-input
   style hub-input fill:#f9f,stroke:#333,stroke-width:4px
 ```

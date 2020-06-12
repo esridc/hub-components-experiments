@@ -95,7 +95,26 @@ export class Notebook {
         console.log("onCopy Done", response)
     })  
   } 
+  // onCopy(itemId:string) {
+  //   console.log("onCopy", this.portal)
+  //   return authenticateUser(this.clientid, this.portal).then(session => {
+  //     this.session = session;
+  //     return this.copyItem(itemId);
+  //   })
+  // }  
 
+  // copyItem(itemId:string) {
+  //   let hub = HubAPI.HubService.create('hub');
+  //   hub.get(itemId).then((item) => {
+  //     console.log("onCopy starting", item)
+  //     hub.create(
+  //       item, 
+  //       UserSession.deserialize(this.session)
+  //     ).then((response) => {
+  //         console.log("onCopy Done", response)
+  //     })  
+  //   });
+  // } 
   render() {
     return (
       <Host>

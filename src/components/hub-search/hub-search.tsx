@@ -1,8 +1,7 @@
 import { Component, Host, h, State, Listen, Prop } from '@stencil/core';
-import * as HubSearchModule from "@esri/hub-search";
 import * as Hub from '../../utils/hub-utils';
-import * as HubAPI from '../../utils/hub-api';
-import { authenticateUser } from '../../utils/utils';
+// import * as HubAPI from '../../utils/hub-api';
+// import { authenticateUser } from '../../utils/utils';
 import { UserSession } from '@esri/arcgis-rest-auth';
 
 // import { IHubResults } from "@esri/hub-search"
@@ -21,7 +20,37 @@ export class HubSearch {
   @Prop() site: string = "";
 
   /**
-   * Hub site URL to scope for search
+   * Groups to limit search
+   */
+  @Prop() groups: string;
+
+  /**
+   * Choose to show or hide search
+   */
+  @Prop() showsearch: boolean = true;
+  
+  /**
+   * Search Button text
+   */
+  @Prop() searchbutton: string = "Start Search";
+  
+  /**
+   * Search placeholder text
+   */
+  @Prop() searchplaceholder: string = "Search for content";
+
+  /**
+   * Text to show in the button
+   */
+  @Prop() buttontext: string = "Explore"
+
+  /**
+   * Default Query
+   */
+  @Prop() query:string = "";
+
+  /**
+   * Default sort order
    */
   @Prop() sort:  "name" | "modified" = "name";
 
@@ -35,7 +64,7 @@ export class HubSearch {
   @Prop() clientid: string = "WXC842NRBVB6NZ2r";
 
   @State() queryInput: string;
-  @State() suggestions: Array<string>;
+  @State() suggestions: Array<string> = [];
   @State() results = [];
   @State() catalog = null;
   @State() session:string;
@@ -51,101 +80,69 @@ export class HubSearch {
   querySelectHandler(event: CustomEvent): string {
     this.queryInput = event.detail;
     this.results = [];
-    this.fetchResults(this.queryInput).then(r => {
-      r.json().then((results) => {
-        // console.log("Hub Search results", results.data)
-        this.results = results.data;
-      });
-    })
-    
+    this.updateGallery(this.queryInput)
     return 'true';
   }  
 
+  updateGallery(query: string): void {
+    let searchParams:any = {q: query};
+    if(this.catalog) {
+      console.debug("Hub Search groups", this.catalog.groups);
+      searchParams.groups = this.catalog.groups;
+    } else {
+      searchParams.groups = this.groups.split(",");
+    }    
+    Hub.search(searchParams, {isPortal: true, hubApiUrl: "", authentication: new UserSession({})}).then((results) => {
+        console.log("Hub Search results", results)
+        this.results = results.results;
+      })
+  }
+  
+  
   componentWillLoad() {
     if(this.site) {
       Hub.getSiteCatalog(this.site).then((catalog) => {
         this.catalog = catalog;
+        this.updateGallery('*');
+
       })
     }
   }
-
-  fetchResults(query: string):Promise<any> {
-
-    // Search query params that ArcGIS Hub expects
-    const params:any = {
-      q: query,
-      sort: this.sort,
-      agg: { fields: "tags,collection,owner,source,hasApi,downloadable", size: 10 }
-    }
-    params.page = {key: btoa(JSON.stringify({
-      hub: {
-        start: 1,
-        size: 100
-      },
-      ago: {
-        start: 1,
-        size: 100
-      }
-    }))}
-    if(this.catalog) {
-      console.debug("Hub Search groups", this.catalog.groups);
-      params.groupIds = this.catalog.groups.join(",");
-    }
-
-    // const token = 'xxxYYY' // AGO token
-    // const portal = 'https://www.arcgis.com/sharing/rest'
-    // const headers = { authorization: token, portal }
-    const serializedParams = HubSearchModule.serialize(params)
-    // Query hub v3's new search endpoint
-    return fetch(`https://hub.arcgis.com/api/v3/search?${serializedParams}`, { })
-
-    // return HubSearchModule.agoSearch({q: query});
+  componentDidLoad() {
+    console.log("componentDidLoad: @Prop groups", this.groups)
+    this.updateGallery('*');
   }
-  
-  onCopy(itemId:string) {
-    console.log("onCopy", this.portal)
-    return authenticateUser(this.clientid, this.portal).then(session => {
-      this.session = session;
-      return this.copyItem(itemId);
-    })
-  }  
 
-  copyItem(itemId:string) {
-    let hub = HubAPI.HubService.create('hub');
-    hub.get(itemId).then((item) => {
-      console.log("onCopy starting", item)
-      hub.create(
-        item, 
-        UserSession.deserialize(this.session)
-      ).then((response) => {
-          console.log("onCopy Done", response)
-      })  
-    });
-  } 
 
+  truncateString(input:string, length: number):string {
+    let ending = "...";
+    if(input === undefined || input === null) {
+      return "";
+    } else if(input.length > length) {
+      return input.substring(0, length-ending.length) + ending;
+    } else {
+      return input;
+    }
+  }
   render() {
     let output = []
     this.results.map(result => {
       // console.log("Search result", result.attributes)
       output.push(
+        
         <hub-card 
-          contenttype={result.attributes.type}
-          url={result.attributes.url}
-          image={result.attributes.thumbnail} 
-          name={result.attributes.name} 
-          description={result.attributes.description}
-          item={result.attributes.id}
-          buttonText="Copy"
-          onClick={() => this.onCopy(result.attributes.id)}
+          class="hub-content-card"
+          contenttype={result.type}
+          url={result.url}
+          image={result.thumbnail} 
+          name={result.title} 
+          description={this.truncateString(result.snippet, 100)}
+          item={result.id}
+          buttonText={this.buttontext}
+          onClick={() => ""}
           // content={this.content}
         >
         </hub-card> 
-        // <hub-content-card 
-        //   layout={this.layout} 
-        //   content={result['id']}
-        //   buttonText="Copy"
-          
-        // ></hub-content-card>
         )
     })
 
@@ -153,16 +150,20 @@ export class HubSearch {
       <Host>     
         <slot></slot>
         <div class="search-grid">
-        <hub-suggest-input 
-          placeholder="Search for content"
-          suggestions={this.suggestions}
-        ></hub-suggest-input>
-        <div class="filters">
+        {this.showsearch ? 
+          <hub-suggest-input 
+            placeholder={this.searchplaceholder}
+            submit={this.searchbutton}
+            suggestions={this.suggestions}
+            query={this.query}
+          ></hub-suggest-input>
+          : ""}
+        {/* <div class="filters">
           <hub-filter-category
             name="Content Type"
             categories={["Sites", "Datasets", "Notebooks", "Maps"]}
           ></hub-filter-category>
-        </div>          
+        </div>           */}
         <div class="search-results">
         {output}
         </div>
