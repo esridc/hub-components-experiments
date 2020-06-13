@@ -164,6 +164,54 @@ export namespace Components {
          */
         "user": IUser;
     }
+    interface HubGallery {
+        /**
+          * Text to show in the button
+         */
+        "buttontext": string;
+        "clientid": string;
+        /**
+          * Groups to limit search
+         */
+        "groups": string;
+        /**
+          * Use the Hub API (true) or the Portal API (false)
+         */
+        "hubapi": boolean;
+        /**
+          * Hub site URL to scope for search
+         */
+        "layout": "horizontal" | "vertical";
+        /**
+          * Maximum number of results to return
+         */
+        "limit": number;
+        "portal": string;
+        /**
+          * Default Query
+         */
+        "query": string;
+        /**
+          * Search Button text
+         */
+        "searchbutton": string;
+        /**
+          * Search placeholder text
+         */
+        "searchplaceholder": string;
+        /**
+          * Choose to show or hide search
+         */
+        "showsearch": boolean;
+        /**
+          * Hub site URL to scope for search
+         */
+        "site": string;
+        /**
+          * Default sort order
+         */
+        "sort": "name" | "modified";
+    }
     interface HubInput {
         /**
           * Default address to search
@@ -222,54 +270,6 @@ export namespace Components {
         "messages": any;
         "showmap": boolean;
         "webmap": string;
-    }
-    interface HubSearch {
-        /**
-          * Text to show in the button
-         */
-        "buttontext": string;
-        "clientid": string;
-        /**
-          * Groups to limit search
-         */
-        "groups": string;
-        /**
-          * Use the Hub API (true) or the Portal API (false)
-         */
-        "hubapi": boolean;
-        /**
-          * Hub site URL to scope for search
-         */
-        "layout": "horizontal" | "vertical";
-        /**
-          * Maximum number of results to return
-         */
-        "limit": number;
-        "portal": string;
-        /**
-          * Default Query
-         */
-        "query": string;
-        /**
-          * Search Button text
-         */
-        "searchbutton": string;
-        /**
-          * Search placeholder text
-         */
-        "searchplaceholder": string;
-        /**
-          * Choose to show or hide search
-         */
-        "showsearch": boolean;
-        /**
-          * Hub site URL to scope for search
-         */
-        "site": string;
-        /**
-          * Default sort order
-         */
-        "sort": "name" | "modified";
     }
     interface HubSonarChat {
         "sendMessages": IHubChat;
@@ -409,6 +409,12 @@ declare global {
         prototype: HTMLHubFollowButtonElement;
         new (): HTMLHubFollowButtonElement;
     };
+    interface HTMLHubGalleryElement extends Components.HubGallery, HTMLStencilElement {
+    }
+    var HTMLHubGalleryElement: {
+        prototype: HTMLHubGalleryElement;
+        new (): HTMLHubGalleryElement;
+    };
     interface HTMLHubInputElement extends Components.HubInput, HTMLStencilElement {
     }
     var HTMLHubInputElement: {
@@ -438,12 +444,6 @@ declare global {
     var HTMLHubRadarElement: {
         prototype: HTMLHubRadarElement;
         new (): HTMLHubRadarElement;
-    };
-    interface HTMLHubSearchElement extends Components.HubSearch, HTMLStencilElement {
-    }
-    var HTMLHubSearchElement: {
-        prototype: HTMLHubSearchElement;
-        new (): HTMLHubSearchElement;
     };
     interface HTMLHubSonarChatElement extends Components.HubSonarChat, HTMLStencilElement {
     }
@@ -511,12 +511,12 @@ declare global {
         "hub-event": HTMLHubEventElement;
         "hub-filter-category": HTMLHubFilterCategoryElement;
         "hub-follow-button": HTMLHubFollowButtonElement;
+        "hub-gallery": HTMLHubGalleryElement;
         "hub-input": HTMLHubInputElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
         "hub-profile-editor": HTMLHubProfileEditorElement;
         "hub-radar": HTMLHubRadarElement;
-        "hub-search": HTMLHubSearchElement;
         "hub-sonar-chat": HTMLHubSonarChatElement;
         "hub-suggest-input": HTMLHubSuggestInputElement;
         "hub-telemetry": HTMLHubTelemetryElement;
@@ -693,6 +693,54 @@ declare namespace LocalJSX {
          */
         "user"?: IUser;
     }
+    interface HubGallery {
+        /**
+          * Text to show in the button
+         */
+        "buttontext"?: string;
+        "clientid"?: string;
+        /**
+          * Groups to limit search
+         */
+        "groups"?: string;
+        /**
+          * Use the Hub API (true) or the Portal API (false)
+         */
+        "hubapi"?: boolean;
+        /**
+          * Hub site URL to scope for search
+         */
+        "layout"?: "horizontal" | "vertical";
+        /**
+          * Maximum number of results to return
+         */
+        "limit"?: number;
+        "portal"?: string;
+        /**
+          * Default Query
+         */
+        "query"?: string;
+        /**
+          * Search Button text
+         */
+        "searchbutton"?: string;
+        /**
+          * Search placeholder text
+         */
+        "searchplaceholder"?: string;
+        /**
+          * Choose to show or hide search
+         */
+        "showsearch"?: boolean;
+        /**
+          * Hub site URL to scope for search
+         */
+        "site"?: string;
+        /**
+          * Default sort order
+         */
+        "sort"?: "name" | "modified";
+    }
     interface HubInput {
         /**
           * Default address to search
@@ -759,54 +807,6 @@ declare namespace LocalJSX {
         "messages"?: any;
         "showmap"?: boolean;
         "webmap"?: string;
-    }
-    interface HubSearch {
-        /**
-          * Text to show in the button
-         */
-        "buttontext"?: string;
-        "clientid"?: string;
-        /**
-          * Groups to limit search
-         */
-        "groups"?: string;
-        /**
-          * Use the Hub API (true) or the Portal API (false)
-         */
-        "hubapi"?: boolean;
-        /**
-          * Hub site URL to scope for search
-         */
-        "layout"?: "horizontal" | "vertical";
-        /**
-          * Maximum number of results to return
-         */
-        "limit"?: number;
-        "portal"?: string;
-        /**
-          * Default Query
-         */
-        "query"?: string;
-        /**
-          * Search Button text
-         */
-        "searchbutton"?: string;
-        /**
-          * Search placeholder text
-         */
-        "searchplaceholder"?: string;
-        /**
-          * Choose to show or hide search
-         */
-        "showsearch"?: boolean;
-        /**
-          * Hub site URL to scope for search
-         */
-        "site"?: string;
-        /**
-          * Default sort order
-         */
-        "sort"?: "name" | "modified";
     }
     interface HubSonarChat {
         "sendMessages"?: IHubChat;
@@ -896,12 +896,12 @@ declare namespace LocalJSX {
         "hub-event": HubEvent;
         "hub-filter-category": HubFilterCategory;
         "hub-follow-button": HubFollowButton;
+        "hub-gallery": HubGallery;
         "hub-input": HubInput;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
         "hub-profile-editor": HubProfileEditor;
         "hub-radar": HubRadar;
-        "hub-search": HubSearch;
         "hub-sonar-chat": HubSonarChat;
         "hub-suggest-input": HubSuggestInput;
         "hub-telemetry": HubTelemetry;
@@ -928,12 +928,12 @@ declare module "@stencil/core" {
             "hub-event": LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
             "hub-filter-category": LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
             "hub-follow-button": LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
+            "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
             "hub-profile-editor": LocalJSX.HubProfileEditor & JSXBase.HTMLAttributes<HTMLHubProfileEditorElement>;
             "hub-radar": LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
-            "hub-search": LocalJSX.HubSearch & JSXBase.HTMLAttributes<HTMLHubSearchElement>;
             "hub-sonar-chat": LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
             "hub-suggest-input": LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
             "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;

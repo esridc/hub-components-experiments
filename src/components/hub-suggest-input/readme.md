@@ -28,8 +28,8 @@
 
 ### Used by
 
+ - [hub-gallery](../hub-gallery)
  - [hub-input](../hub-input)
- - [hub-search](../hub-search)
 
 ### Depends on
 
@@ -41,8 +41,8 @@ graph TD;
   hub-suggest-input --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  hub-gallery --> hub-suggest-input
   hub-input --> hub-suggest-input
-  hub-search --> hub-suggest-input
   style hub-suggest-input fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

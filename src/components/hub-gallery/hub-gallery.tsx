@@ -5,15 +5,12 @@ import * as Site from '../../utils/hub-site';
 // import { authenticateUser } from '../../utils/utils';
 import { UserSession } from '@esri/arcgis-rest-auth';
 
-// import { IHubResults } from "@esri/hub-search"
-// import { IHubResults } from '@esri/hub-search/dist/esm/ago/params';
-
 @Component({
-  tag: 'hub-search',
-  styleUrl: 'hub-search.css',
+  tag: 'hub-gallery',
+  styleUrl: 'hub-gallery.css',
   shadow: true
 })
-export class HubSearch {
+export class HubGallery {
 
   /**
    * Hub site URL to scope for search
@@ -103,7 +100,6 @@ export class HubSearch {
     };
 
     if(this.catalog) {
-      console.debug("Hub Search groups", this.catalog.groups);
       searchParams.groups = this.catalog.groups;
     } else {
       searchParams.groups = this.groups.split(",");
@@ -114,7 +110,6 @@ export class HubSearch {
       hubApiUrl: "https://hub.arcgis.com", 
       authentication: new UserSession({})
     })
-    console.log("Hub Search results", results)
     this.results = results;
   }
   
@@ -151,7 +146,7 @@ export class HubSearch {
       output.push(
         
         <hub-card 
-          class="hub-content-card"
+          class="gallery-card"
           contenttype={`${result.type} by ${result.owner}`}
           url={result.contentUrl}
           image={result.thumbnailUrl} 
@@ -183,7 +178,7 @@ export class HubSearch {
             categories={["Sites", "Datasets", "Notebooks", "Maps"]}
           ></hub-filter-category>
         </div>           */}
-        <div class="search-results">
+        <div class="search-results gallery-lg ">
         {output}
         </div>
         </div>

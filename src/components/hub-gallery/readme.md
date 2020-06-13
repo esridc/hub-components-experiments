@@ -34,8 +34,8 @@
 ### Graph
 ```mermaid
 graph TD;
-  hub-search --> hub-card
-  hub-search --> hub-suggest-input
+  hub-gallery --> hub-card
+  hub-gallery --> hub-suggest-input
   hub-card --> calcite-card
   hub-card --> calcite-button
   calcite-card --> calcite-loader
@@ -43,7 +43,7 @@ graph TD;
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
   hub-suggest-input --> calcite-button
-  style hub-search fill:#f9f,stroke:#333,stroke-width:4px
+  style hub-gallery fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

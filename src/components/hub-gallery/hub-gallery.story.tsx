@@ -4,7 +4,7 @@ import readme from './readme.md'
 export default function(stories, knobs) {
     const mainEl = document.createElement('div'); // do this OUTSIDE the render function below
 
-    stories.add('Hub Search', () => {
+    stories.add('Hub Gallery', () => {
       const sort = knobs.select('sort', ['title', '-title', 'modified', '-modified'], 'title');
       const site = knobs.text('site', ''); //'opendata.dc.gov'
       const groups = knobs.text('groups', 'eca7c9c83df04cf5bf916ca487362aae');
@@ -15,7 +15,7 @@ export default function(stories, knobs) {
       const showsearch = knobs.boolean('showsearch', true);
       const hubapi = knobs.boolean('hubapi', true);
       
-      mainEl.innerHTML = `<hub-search 
+      mainEl.innerHTML = `<hub-gallery 
         showsearch="${showsearch}"
         searchbutton="${searchbutton}" 
         searchplaceholder="${searchplaceholder}" 
@@ -25,7 +25,7 @@ export default function(stories, knobs) {
         site="${site}" 
         sort="${sort}"
         hubapi="${hubapi}"
-        ></hub-search>`
+        ></hub-gallery>`
   
       return mainEl;
     }, { notes: readme});
