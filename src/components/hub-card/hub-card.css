@@ -55,6 +55,9 @@ calcite-card {
 .hub-content-url:hover {
   text-decoration: underline;
 }
+.card-image {
+  height: 175px;
+}
 
 .hub-content-summary, .hub-content-type {
   font-size: 0.9rem;
@@ -111,7 +114,9 @@ calcite-card {
 
 .card-description {
   min-height: 100px;
+  overflow: hidden;
 }
 .card-title {
   height: 44px;
+  overflow: hidden;
 }

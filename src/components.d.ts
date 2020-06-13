@@ -234,9 +234,17 @@ export namespace Components {
          */
         "groups": string;
         /**
+          * Use the Hub API (true) or the Portal API (false)
+         */
+        "hubapi": boolean;
+        /**
           * Hub site URL to scope for search
          */
         "layout": "horizontal" | "vertical";
+        /**
+          * Maximum number of results to return
+         */
+        "limit": number;
         "portal": string;
         /**
           * Default Query
@@ -763,9 +771,17 @@ declare namespace LocalJSX {
          */
         "groups"?: string;
         /**
+          * Use the Hub API (true) or the Portal API (false)
+         */
+        "hubapi"?: boolean;
+        /**
           * Hub site URL to scope for search
          */
         "layout"?: "horizontal" | "vertical";
+        /**
+          * Maximum number of results to return
+         */
+        "limit"?: number;
         "portal"?: string;
         /**
           * Default Query

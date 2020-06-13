@@ -156,7 +156,7 @@ export function getContent(
         modified: hubmodel.attributes.modified,
         size: hubmodel.attributes.size,
         type: hubmodel.attributes.type,
-
+        url: hubmodel.attributes.url,
         name: hubmodel.attributes.name,
         hubType: HubType.dataset, // getCategory(item.item.type),
         summary: hubmodel.attributes.searchDescription,

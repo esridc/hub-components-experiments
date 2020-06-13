@@ -48,17 +48,27 @@ export class HubSearch {
   /**
    * Default Query
    */
-  @Prop() query:string = "";
+  @Prop() query: string = "";
 
   /**
    * Default sort order
    */
-  @Prop() sort:  "name" | "modified" = "name";
+  @Prop() sort:"name" | "modified" = "name";
+
+  /**
+   * Maximum number of results to return
+   */
+  @Prop() limit: number = 12;
 
   /**
    * Hub site URL to scope for search
    */
   @Prop() layout:  "horizontal" | "vertical" = "horizontal";
+
+  /**
+   * Use the Hub API (true) or the Portal API (false)
+   */
+  @Prop() hubapi: boolean = true;
 
   @Prop() portal = "https://www.arcgis.com";
 
@@ -86,14 +96,24 @@ export class HubSearch {
   }  
 
   async updateGallery(query: string) {
-    let searchParams:any = {q: query};
+    let searchParams:any = {
+      q: query,
+      limit: this.limit,
+      sort: this.sort
+    };
+
     if(this.catalog) {
       console.debug("Hub Search groups", this.catalog.groups);
       searchParams.groups = this.catalog.groups;
     } else {
       searchParams.groups = this.groups.split(",");
-    }    
-    let results = await Hub.search(searchParams, {isPortal: false, hubApiUrl: "", authentication: new UserSession({})})
+    } 
+
+    let results = await Hub.search(searchParams, {
+      isPortal: !this.hubapi, 
+      hubApiUrl: "https://hub.arcgis.com", 
+      authentication: new UserSession({})
+    })
     console.log("Hub Search results", results)
     this.results = results;
   }
@@ -132,10 +152,10 @@ export class HubSearch {
         
         <hub-card 
           class="hub-content-card"
-          contenttype={result.type}
-          url={result.url}
+          contenttype={`${result.type} by ${result.owner}`}
+          url={result.contentUrl}
           image={result.thumbnailUrl} 
-          name={this.truncateString(result.title, 60)} 
+          name={this.truncateString(result.title, 55)} 
           description={this.truncateString(result.snippet, 90)}
           buttonText={this.buttontext}
           onClick={() => ""}

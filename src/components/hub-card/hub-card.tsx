@@ -47,11 +47,10 @@ export class HubCard {
     if(this.image) {
       // TODO: improve testing for image URL
       if(this.item || this.image.match(/^http/) === null) {
-        // thumbnail = <img class="hub-content-image" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} alt="Thumbnail Image" />
-        output.push (<img slot="thumbnail" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} />)
+        output.push (<img class="card-image" slot="thumbnail" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} />)
       } else {
         // thumbnail = <img class="hub-content-image" src={this.image} alt="Thumbnail Image" />
-        output.push (<img slot="thumbnail" src={this.image} />)
+        output.push (<img class="card-image" slot="thumbnail" src={this.image} />)
       }
     }
 
@@ -60,7 +59,6 @@ export class HubCard {
       if(this.url) {
         name = `<a class="hub-content-url" href="${this.url}">${name}</a>`
       }
-      // output.push(<div class="hub-content-title" innerHTML={name}></div>)
       output.push(<h3 class="card-title" slot="title" innerHTML={name}></h3>)
     }
     if(this.contenttype) {
