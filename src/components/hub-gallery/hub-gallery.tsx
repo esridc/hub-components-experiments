@@ -80,7 +80,7 @@ export class HubGallery {
   @Listen("queryInput")
   queryInputHandler(event: CustomEvent): string {
     this.queryInput = event.detail;
-    this.query = this.queryInput;
+
     // this.fetchResults(this.queryInput)
     return 'true';
   }
@@ -120,10 +120,11 @@ export class HubGallery {
   
   
   componentWillLoad() {
+    this.queryInput = this.query;
     if(this.site) {
       Site.getSiteCatalog(this.site).then((catalog) => {
         this.catalog = catalog;
-        this.updateGallery(this.query);
+        this.updateGallery(this.queryInput);
 
       })
     }
@@ -131,7 +132,7 @@ export class HubGallery {
   componentDidLoad() {
     console.log("componentDidLoad: @Prop groups", this.groups)
     if(!this.site) {
-      this.updateGallery(this.query);
+      this.updateGallery(this.queryInput);
     }
   }
 
@@ -147,7 +148,7 @@ export class HubGallery {
       }
     }
     
-    this.updateGallery(this.query, customParams);
+    this.updateGallery(this.queryInput, customParams);
   }
 
   truncateString(input:string, length: number):string {
@@ -190,7 +191,7 @@ export class HubGallery {
             placeholder={this.searchplaceholder}
             submit={this.searchbutton}
             suggestions={this.suggestions}
-            query={this.query}
+            query={this.queryInput}
           ></hub-suggest-input>
           : ""}
         <div class="filters">
