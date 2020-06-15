@@ -172,12 +172,19 @@ export class HubGallery {
             query={this.query}
           ></hub-suggest-input>
           : ""}
-        {/* <div class="filters">
+        <div class="filters">
+          <hub-filter-category
+            name="Category"
+            facet="groupcategories"
+          ></hub-filter-category>
+        </div>          
+
+        <div class="filters">
           <hub-filter-category
             name="Content Type"
-            categories={["Sites", "Datasets", "Notebooks", "Maps"]}
+            categories={["Maps", "Data", "Apps", "Files"]}
           ></hub-filter-category>
-        </div>           */}
+        </div>         
         <div class="search-results gallery-lg ">
         {output}
         </div>

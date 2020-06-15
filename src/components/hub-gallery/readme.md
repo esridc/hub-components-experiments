@@ -30,12 +30,14 @@
 
 - [hub-card](../hub-card)
 - [hub-suggest-input](../hub-suggest-input)
+- [hub-filter-category](../hub-filter-category)
 
 ### Graph
 ```mermaid
 graph TD;
   hub-gallery --> hub-card
   hub-gallery --> hub-suggest-input
+  hub-gallery --> hub-filter-category
   hub-card --> calcite-card
   hub-card --> calcite-button
   calcite-card --> calcite-loader
@@ -43,6 +45,10 @@ graph TD;
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
   hub-suggest-input --> calcite-button
+  hub-filter-category --> calcite-checkbox
+  hub-filter-category --> calcite-tree
+  hub-filter-category --> calcite-tree-item
+  calcite-tree-item --> calcite-icon
   style hub-gallery fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

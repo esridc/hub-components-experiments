@@ -124,7 +124,11 @@ export namespace Components {
     }
     interface HubFilterCategory {
         "categories": Array<string>;
+        "facet": string;
+        "facettype": "checkbox" | "tree";
+        "group": string;
         "name": string;
+        "query": string;
     }
     interface HubFollowButton {
         /**
@@ -270,6 +274,8 @@ export namespace Components {
         "messages": any;
         "showmap": boolean;
         "webmap": string;
+    }
+    interface HubSearchFacet {
     }
     interface HubSonarChat {
         "sendMessages": IHubChat;
@@ -445,6 +451,12 @@ declare global {
         prototype: HTMLHubRadarElement;
         new (): HTMLHubRadarElement;
     };
+    interface HTMLHubSearchFacetElement extends Components.HubSearchFacet, HTMLStencilElement {
+    }
+    var HTMLHubSearchFacetElement: {
+        prototype: HTMLHubSearchFacetElement;
+        new (): HTMLHubSearchFacetElement;
+    };
     interface HTMLHubSonarChatElement extends Components.HubSonarChat, HTMLStencilElement {
     }
     var HTMLHubSonarChatElement: {
@@ -517,6 +529,7 @@ declare global {
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
         "hub-profile-editor": HTMLHubProfileEditorElement;
         "hub-radar": HTMLHubRadarElement;
+        "hub-search-facet": HTMLHubSearchFacetElement;
         "hub-sonar-chat": HTMLHubSonarChatElement;
         "hub-suggest-input": HTMLHubSuggestInputElement;
         "hub-telemetry": HTMLHubTelemetryElement;
@@ -652,8 +665,12 @@ declare namespace LocalJSX {
     }
     interface HubFilterCategory {
         "categories"?: Array<string>;
+        "facet"?: string;
+        "facettype"?: "checkbox" | "tree";
+        "group"?: string;
         "name"?: string;
         "onFilterChanged"?: (event: CustomEvent<any>) => void;
+        "query"?: string;
     }
     interface HubFollowButton {
         /**
@@ -808,6 +825,8 @@ declare namespace LocalJSX {
         "showmap"?: boolean;
         "webmap"?: string;
     }
+    interface HubSearchFacet {
+    }
     interface HubSonarChat {
         "sendMessages"?: IHubChat;
         "service"?: string;
@@ -902,6 +921,7 @@ declare namespace LocalJSX {
         "hub-metadata-editor": HubMetadataEditor;
         "hub-profile-editor": HubProfileEditor;
         "hub-radar": HubRadar;
+        "hub-search-facet": HubSearchFacet;
         "hub-sonar-chat": HubSonarChat;
         "hub-suggest-input": HubSuggestInput;
         "hub-telemetry": HubTelemetry;
@@ -934,6 +954,7 @@ declare module "@stencil/core" {
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
             "hub-profile-editor": LocalJSX.HubProfileEditor & JSXBase.HTMLAttributes<HTMLHubProfileEditorElement>;
             "hub-radar": LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
+            "hub-search-facet": LocalJSX.HubSearchFacet & JSXBase.HTMLAttributes<HTMLHubSearchFacetElement>;
             "hub-sonar-chat": LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
             "hub-suggest-input": LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
             "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;
