@@ -79,6 +79,7 @@ export class HubGallery {
 
   @Listen("queryInput")
   queryInputHandler(event: CustomEvent): string {
+    console.log("hub-gallery: queryInputHandler", event)
     this.queryInput = event.detail;
 
     // this.fetchResults(this.queryInput)
@@ -86,6 +87,8 @@ export class HubGallery {
   }
   @Listen("querySelect")
   querySelectHandler(event: CustomEvent): string {
+    console.log("hub-gallery: querySelectHandler", event)
+    
     this.queryInput = event.detail;
     this.results = [];
     this.updateGallery(this.queryInput)

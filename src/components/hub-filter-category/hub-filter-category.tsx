@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Event, EventEmitter, Listen, State } from '@stencil/core';
+import { Component, Host, h, Prop, Event, EventEmitter, Listen, State, Watch } from '@stencil/core';
 import '@esri/calcite-components';
 import { searchGroupContent } from "@esri/arcgis-rest-portal";
 
@@ -66,14 +66,14 @@ export class HubFilterCategory {
         }})
   }
 
-  async componentWillLoad() {
-    console.log("Hub Filter Category", this.categories)
-    if(this.categories !== undefined && this.categories.length > 0) {
-        this.categories.map((category) => {
-        this.selectedCategories[category] = { checked: false }
-      })
-    }
+  @Watch('query')
+  updateQuery(newQuery: string, _oldQuery: string) {
+    console.log("hub-filter-category: updateQuery", newQuery)
+    this.query = newQuery;
+    this.updateCategories();
+  }
 
+  async updateCategories() {
     if(this.facet !== null && this.group !== null) {
       let response = await this.getGroupCategories(this.query, this.facet, this.group);
       this.facets = response.aggregations.counts[0].fieldValues;
@@ -82,7 +82,17 @@ export class HubFilterCategory {
         this.categories.push(`${f.value} (${f.count})`)
       })
 
+    }    
+  }
+  async componentWillLoad() {
+    console.log("Hub Filter Category", this.categories)
+    if(this.categories !== undefined && this.categories.length > 0) {
+        this.categories.map((category) => {
+        this.selectedCategories[category] = { checked: false }
+      })
     }
+
+    this.updateCategories();
   }
 
   handleFilterChange(value) {
