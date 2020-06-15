@@ -11,7 +11,7 @@ export type HubTypes = typeof HubType;
 // Attempting a simple _Hungarian Notation_ for attributes suffix: `*Date`, `*Id`, `*Number`. Plural (e.g. `tags`) is an array.
 
 export interface IHubResource {
-  name: string;
+  name: string; // Generic term for the primary label (title, fullname, username, etc.)
 
   // Derived metadata
   hubType: ContentType;
@@ -110,7 +110,7 @@ export interface IHubMember extends IHubCommunity {
 // title, description, and optional link to license item with more info
 export interface IHubLicense {
   id?: string; // Licenses may be Items, so provide reference for links
-  title: string;
+  name: string;
   description: string;
   link?: string;
   thumbnailUrl?: string;

@@ -1,6 +1,7 @@
 import { Component, Host, h, State, Prop } from '@stencil/core';
-import * as HubSearchModule from "@esri/hub-search";
-import * as Hub from '../../utils/hub-site';
+import * as HubSearch from '../../utils/hub-search';
+import * as HubSite from '../../utils/hub-site';
+import { UserSession } from '@esri/arcgis-rest-auth';
 
 @Component({
   tag: 'hub-content-table',
@@ -29,51 +30,42 @@ export class HubContentTable {
    */
   @Prop() sort:  "name" | "modified" | "-name" | "-modified" = "name";
 
+  /**
+   * Use the Hub API (true) or the Portal API (false)
+   */
+  @Prop() hubapi: boolean = true;
+
+
   @State() results = [];
   @State() catalog = null;
 
-  componentWillLoad() {
+  async componentWillLoad() {
     if(this.site) {
-      Hub.getSiteCatalog(this.site).then((catalog) => {
-        this.catalog = catalog;
-
-        this.fetchResults( '*' ).then(r => {
-          r.json().then((results) => {
-            this.results = results.data;
-          });
-        })        
-      })
+      this.catalog = await HubSite.getSiteCatalog(this.site)
+      this.results = await this.searchContent( '*', { groups: this.catalog.groups } )
     }
   }
 
-  fetchResults(query: string):Promise<any> {
+  async searchContent(query: string, params:any):Promise<any> {
 
-    // Search query params that ArcGIS Hub expects
-    const params:any = {
+    let searchParams:any = {
       q: query,
-      sort: this.sort
-    }
-    // params.agg = { fields: "tags,collection,owner,source,hasApi,downloadable", size: 10 };
+      limit: this.limit,
+      sort: this.sort,
+      ...params
+    };
 
-    params.page = {key: btoa(JSON.stringify({
-      hub: {
-        start: 1,
-        size: this.limit
-      },
-      ago: {
-        start: 1,
-        size: this.limit
-      }
-    }))}
-    if(this.catalog) {
-      params.groupIds = this.catalog.groups.join(",");
-    }
-
-    const serializedParams = HubSearchModule.serialize(params)
-    return fetch(`https://hub.arcgis.com/api/v3/search?${serializedParams}`, { })
+    console.log("hub-content-table: searchParams", searchParams)
+    let results = await HubSearch.search(searchParams, {
+      isPortal: !this.hubapi, 
+      hubApiUrl: "https://hub.arcgis.com", 
+      authentication: new UserSession({})
+    })
+    return results;
   }
+
   renderItemLinks(item) {
-    switch(item.attributes.content) {
+    switch(item.type) {
 
       case "Feature Service": 
         return(
@@ -94,7 +86,7 @@ export class HubContentTable {
         return( <a href={`https://www.arcgis.com/sharing/rest/content/items/${item.id}/data`}>Download</a> )
 
       default:
-        return(<a href={item.attributes.url}>Link</a>)
+        return(<a href={item.contentUrl}>Link</a>)
 
     }
   }
@@ -107,11 +99,11 @@ export class HubContentTable {
       output.push(
       <div class="result">
         <span class="result-name">
-          <a href={`https://${this.site}/datasets/${item.id}`}>{item.attributes.name}</a>
-          <em>{item.attributes.searchDescription}</em>
+          <a href={`https://${this.site}/datasets/${item.id}`}>{item.name}</a>
+          <em>{item.summary}</em>
         </span>
         <span class="result-links">{this.renderItemLinks(item)}</span>
-        <span class="result-type">{item.attributes.content}</span>
+        <span class="result-type">{item.type}</span>
           
       </div>)
     })

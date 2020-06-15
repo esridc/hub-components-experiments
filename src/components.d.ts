@@ -6,7 +6,6 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { IHubChat, } from "./utils/hub-types";
-import { IItem, } from "@esri/arcgis-rest-portal";
 import { IUser, } from "@esri/arcgis-rest-common-types";
 export namespace Components {
     interface ArcgisNotebook {
@@ -77,10 +76,14 @@ export namespace Components {
     interface HubContentCard {
         "actionButton": any;
         "content": string;
-        "contentItem": IItem;
+        "contentItem": HubTypes.IContent;
         "layout": "horizontal" | "vertical";
     }
     interface HubContentTable {
+        /**
+          * Use the Hub API (true) or the Portal API (false)
+         */
+        "hubapi": boolean;
         /**
           * Total number of results to return
          */
@@ -636,10 +639,14 @@ declare namespace LocalJSX {
     interface HubContentCard {
         "actionButton"?: any;
         "content"?: string;
-        "contentItem"?: IItem;
+        "contentItem"?: HubTypes.IContent;
         "layout"?: "horizontal" | "vertical";
     }
     interface HubContentTable {
+        /**
+          * Use the Hub API (true) or the Portal API (false)
+         */
+        "hubapi"?: boolean;
         /**
           * Total number of results to return
          */

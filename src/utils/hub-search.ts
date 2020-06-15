@@ -16,6 +16,8 @@ export async function search(queryParams: any, hubRequestOptions?: IHubRequestOp
 
 // https://developers.arcgis.com/rest/users-groups-and-items/search.htm
 async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<any> {
+    // TODO: Consider better ways to map terms across multiple parameters
+    queryParams.sort = queryParams.sort.replace(/name/,'title');
     let query = [];
 
     if(queryParams.q.length === 0) {

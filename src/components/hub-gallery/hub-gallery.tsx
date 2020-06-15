@@ -1,6 +1,6 @@
 import { Component, Host, h, State, Listen, Prop } from '@stencil/core';
-import * as Hub from '../../utils/hub-search';
-import * as Site from '../../utils/hub-site';
+import * as HubSearch from '../../utils/hub-search';
+import * as HubSite from '../../utils/hub-site';
 // import * as HubAPI from '../../utils/hub-api';
 // import { authenticateUser } from '../../utils/utils';
 import { UserSession } from '@esri/arcgis-rest-auth';
@@ -113,7 +113,7 @@ export class HubGallery {
     } 
 
     console.log("Search: searchParams ", [searchParams, customParams])
-    let results = await Hub.search(searchParams, {
+    let results = await HubSearch.search(searchParams, {
       isPortal: !this.hubapi, 
       hubApiUrl: "https://hub.arcgis.com", 
       authentication: new UserSession({})
@@ -125,10 +125,9 @@ export class HubGallery {
   componentWillLoad() {
     this.queryInput = this.query;
     if(this.site) {
-      Site.getSiteCatalog(this.site).then((catalog) => {
+      HubSite.getSiteCatalog(this.site).then((catalog) => {
         this.catalog = catalog;
         this.updateGallery(this.queryInput);
-
       })
     }
   }

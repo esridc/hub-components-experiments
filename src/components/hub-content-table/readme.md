@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property | Attribute | Description                       | Type                                             | Default                  |
-| -------- | --------- | --------------------------------- | ------------------------------------------------ | ------------------------ |
-| `limit`  | `limit`   | Total number of results to return | `number`                                         | `1000`                   |
-| `query`  | `query`   | Default query for the search      | `string`                                         | `"*"`                    |
-| `site`   | `site`    | Hub site URL to scope for search  | `string`                                         | `"opendata.victoria.ca"` |
-| `sort`   | `sort`    | Hub site URL to scope for search  | `"-modified" \| "-name" \| "modified" \| "name"` | `"name"`                 |
+| Property | Attribute | Description                                      | Type                                             | Default                  |
+| -------- | --------- | ------------------------------------------------ | ------------------------------------------------ | ------------------------ |
+| `hubapi` | `hubapi`  | Use the Hub API (true) or the Portal API (false) | `boolean`                                        | `true`                   |
+| `limit`  | `limit`   | Total number of results to return                | `number`                                         | `1000`                   |
+| `query`  | `query`   | Default query for the search                     | `string`                                         | `"*"`                    |
+| `site`   | `site`    | Hub site URL to scope for search                 | `string`                                         | `"opendata.victoria.ca"` |
+| `sort`   | `sort`    | Hub site URL to scope for search                 | `"-modified" \| "-name" \| "modified" \| "name"` | `"name"`                 |
 
 
 ## Dependencies

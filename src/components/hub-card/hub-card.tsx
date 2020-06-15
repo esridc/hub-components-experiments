@@ -46,7 +46,7 @@ export class HubCard {
     
     if(this.image) {
       // TODO: improve testing for image URL
-      if(this.item || this.image.match(/^http/) === null) {
+      if(this.image.match(/^http/) === null && this.item) {
         output.push (<img class="card-image" slot="thumbnail" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} />)
       } else {
         // thumbnail = <img class="hub-content-image" src={this.image} alt="Thumbnail Image" />

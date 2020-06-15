@@ -11,7 +11,7 @@
 | -------------- | --------------- | ----------- | ---------------------------- | ------------------------------------ |
 | `actionButton` | `action-button` |             | `any`                        | `undefined`                          |
 | `content`      | `content`       |             | `string`                     | `"4f5c78bfe89a4304aec3a6cfd492d0cd"` |
-| `contentItem`  | --              |             | `IItem`                      | `null`                               |
+| `contentItem`  | --              |             | `IContent`                   | `null`                               |
 | `layout`       | `layout`        |             | `"horizontal" \| "vertical"` | `"vertical"`                         |
 
 

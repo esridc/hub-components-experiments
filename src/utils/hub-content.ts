@@ -25,7 +25,8 @@ export function getContent(
     hubRequestOptions?: IHubRequestOptions
   ): Promise<any> {
   
-    if(hubRequestOptions.isPortal) {
+    if(hubRequestOptions !== undefined 
+      && hubRequestOptions.isPortal) {
       return _getContentFromPortal(id, hubRequestOptions);
     } else {
       return _getContentFromHub(id, hubRequestOptions);
@@ -86,7 +87,7 @@ export function getContent(
         },
         contentUrl: item.item.url,
         thumbnailUrl: `${portalUrl}content/items/${item.item.id}/info/${item.item.thumbnail}`,
-        license: { title: 'Custom License', description: item.item.accessInformation},
+        license: { name: 'Custom License', description: item.item.accessInformation},
         // source:
         createdDate: new Date(item.item.created),
         createdDateSource: 'item.created',
@@ -122,7 +123,8 @@ export function getContent(
   ): Promise<any> {
   
     return getFromHubAPI(id, hubRequestOptions).then((hubResponse: any) => {
-      return new Promise((resolve) => {resolve(hubResponse)})
+      let content = _convertHubv3ToContent(hubResponse.data);
+      return new Promise((resolve) => {resolve(content)})
     }).catch(err =>  {
       // TODO: better enumeration / encapsultion of Hub API error handling
       if(err.status == 403) {
@@ -159,7 +161,7 @@ export function getContent(
         url: hubmodel.attributes.url,
         name: hubmodel.attributes.name,
         hubType: HubType.dataset, // getCategory(item.item.type),
-        summary: hubmodel.attributes.searchDescription,
+        summary: (hubmodel.attributes.searchDescription || "").slice(0,200),
         maintainer: { 
             username: hubmodel.attributes.owner 
         },
@@ -169,7 +171,7 @@ export function getContent(
         contentUrl: hubmodel.attributes.url,
         thumbnailUrl: `${portalUrl}content/items/${hubmodel.id}/info/${hubmodel.attributes.thumbnail}`,
         license: { 
-            title: 'Custom License', 
+            name: 'Custom License', 
             description: hubmodel.attributes.accessInformation
         },
         // source:
