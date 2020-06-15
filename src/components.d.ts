@@ -123,11 +123,29 @@ export namespace Components {
         "session": string;
     }
     interface HubFilterCategory {
+        /**
+          * List of categories to show. Can be set or inferred from facet
+         */
         "categories": Array<string>;
+        /**
+          * Build filter from a facet name
+         */
         "facet": string;
+        /**
+          * Type of facet
+         */
         "facettype": "checkbox" | "tree";
+        /**
+          * For group categories, choose a groupid
+         */
         "group": string;
+        /**
+          * Filter name to display at top
+         */
         "name": string;
+        /**
+          * Input query for search box
+         */
         "query": string;
     }
     interface HubFollowButton {
@@ -664,12 +682,33 @@ declare namespace LocalJSX {
         "session"?: string;
     }
     interface HubFilterCategory {
+        /**
+          * List of categories to show. Can be set or inferred from facet
+         */
         "categories"?: Array<string>;
+        /**
+          * Build filter from a facet name
+         */
         "facet"?: string;
+        /**
+          * Type of facet
+         */
         "facettype"?: "checkbox" | "tree";
+        /**
+          * For group categories, choose a groupid
+         */
         "group"?: string;
+        /**
+          * Filter name to display at top
+         */
         "name"?: string;
+        /**
+          * Emitted when a filter is changed
+         */
         "onFilterChanged"?: (event: CustomEvent<any>) => void;
+        /**
+          * Input query for search box
+         */
         "query"?: string;
     }
     interface HubFollowButton {

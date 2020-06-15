@@ -13,7 +13,7 @@ export default function(stories, knobs) {
       const searchplaceholder = knobs.text('searchplaceholder', "Search");
       const buttontext = knobs.text('buttontext', 'Explore');
       const showsearch = knobs.boolean('showsearch', true);
-      const hubapi = knobs.boolean('hubapi', true);
+      const hubapi = knobs.boolean('hubapi', false);
       
       mainEl.innerHTML = `<hub-gallery 
         showsearch="${showsearch}"

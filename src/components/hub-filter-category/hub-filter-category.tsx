@@ -11,19 +11,51 @@ interface HubTree {[field: string]: any};
 })
 export class HubFilterCategory {
 
+  /**
+   * Filter name to display at top
+   */
   @Prop() name: string = "Tree Type";
+  
+  /**
+   * List of categories to show. Can be set or inferred from facet
+   */
   @Prop({mutable: true, reflect: true}) categories: Array<string> = [];
+
+  /**
+   * Build filter from a facet name
+   */
   @Prop() facet: string = null;
+
+  /**
+   * For group categories, choose a groupid
+   */
   @Prop() group: string = null;
-  @Prop() query: string = "*";
+
+  /**
+   * Input query for search box
+   */
+  @Prop({mutable: true, reflect: true}) query: string = "*";
+
+  /**
+   * Type of facet
+   */
   @Prop() facettype: "checkbox" | "tree" = "checkbox";
 
-  @State() facets:[{value: string, count: number}];
+  /**
+   * Emitted when a filter is changed
+   */
   @Event() filterChanged: EventEmitter;
 
+
+  /**
+   * Actual facet values
+   */
+  @State() facets:[{value: string, count: number}];
+  
   @State() selectedCategories = []
 
-  async getFacets(query: string, facet: string, groupId: string):Promise<any> {
+  // TODO: Extract getGroupCategories to general Hub façade
+  async getGroupCategories(query: string, facet: string, groupId: string):Promise<any> {
     return await searchGroupContent({
         groupId: groupId, 
         q: query, 
@@ -43,7 +75,7 @@ export class HubFilterCategory {
     }
 
     if(this.facet !== null && this.group !== null) {
-      let response = await this.getFacets(this.query, this.facet, this.group);
+      let response = await this.getGroupCategories(this.query, this.facet, this.group);
       this.facets = response.aggregations.counts[0].fieldValues;
       console.log("hub-filter-category facets", this.facets)
       this.facets.map(f => {
@@ -162,8 +194,8 @@ export class HubFilterCategory {
   }
 
   render() {
-    // let output = this.renderCheckbox();
-    let output = this.renderTree();
+    let output = (this.facettype == "tree") ? this.renderTree() : this.renderCheckbox();
+    
     return (
       <Host>
         <h3>{this.name}</h3>

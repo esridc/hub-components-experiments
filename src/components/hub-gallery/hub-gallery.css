@@ -8,7 +8,7 @@
   grid-template:
     ".   search" auto
     "filters results" auto /
-    1rem 3fr;
+    12rem 3fr;
   padding: 0 1rem 0 3rem;  
 }
 

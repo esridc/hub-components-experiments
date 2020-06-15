@@ -80,7 +80,7 @@ export class HubGallery {
   @Listen("queryInput")
   queryInputHandler(event: CustomEvent): string {
     this.queryInput = event.detail;
-
+    this.query = this.queryInput;
     // this.fetchResults(this.queryInput)
     return 'true';
   }
@@ -92,12 +92,16 @@ export class HubGallery {
     return 'true';
   }  
 
-  async updateGallery(query: string) {
+  async updateGallery(query: string, customParams?:Object) {
     let searchParams:any = {
       q: query,
       limit: this.limit,
       sort: this.sort
     };
+    // TODO: make this more robuts
+    if(customParams !== undefined) {
+      searchParams.customParams = customParams
+    }
 
     if(this.catalog) {
       searchParams.groups = this.catalog.groups;
@@ -105,6 +109,7 @@ export class HubGallery {
       searchParams.groups = this.groups.split(",");
     } 
 
+    console.log("Search: searchParams ", [searchParams, customParams])
     let results = await Hub.search(searchParams, {
       isPortal: !this.hubapi, 
       hubApiUrl: "https://hub.arcgis.com", 
@@ -118,16 +123,32 @@ export class HubGallery {
     if(this.site) {
       Site.getSiteCatalog(this.site).then((catalog) => {
         this.catalog = catalog;
-        this.updateGallery('*');
+        this.updateGallery(this.query);
 
       })
     }
   }
   componentDidLoad() {
     console.log("componentDidLoad: @Prop groups", this.groups)
-    this.updateGallery('*');
+    if(!this.site) {
+      this.updateGallery(this.query);
+    }
   }
 
+
+  // TODO: this is overly specific to group category filters
+  @Listen('filterChanged')
+  filterChanged(event: CustomEvent) {
+    console.log("Gallery filterChanged", event);
+    let customParams = { 
+      group: {
+        id: this.groups.split(',')[0],
+        categories: event.detail
+      }
+    }
+    
+    this.updateGallery(this.query, customParams);
+  }
 
   truncateString(input:string, length: number):string {
     let ending = "...";
@@ -175,15 +196,15 @@ export class HubGallery {
         <div class="filters">
           <hub-filter-category
             name="Category"
+            facettype="tree"
             facet="groupcategories"
+            group={this.groups.split(",")[0]}
           ></hub-filter-category>
-        </div>          
 
-        <div class="filters">
-          <hub-filter-category
+          {/* <hub-filter-category
             name="Content Type"
             categories={["Maps", "Data", "Apps", "Files"]}
-          ></hub-filter-category>
+          ></hub-filter-category> */}
         </div>         
         <div class="search-results gallery-lg ">
         {output}
