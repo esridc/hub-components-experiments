@@ -56,7 +56,7 @@ export class HubProfileCard {
           // content={this.content}
         >
         </hub-card> 
-      )      
+      )
     }
     return (
       <Host>

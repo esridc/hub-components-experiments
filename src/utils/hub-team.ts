@@ -1,11 +1,30 @@
-import { getGroup } from '@esri/arcgis-rest-portal';
+import { IGroup } from "@esri/arcgis-rest-portal";
+import { getGroup, getGroupUsers } from '@esri/arcgis-rest-portal';
 import * as HubTypes from './hub-types'
+import { getMember } from "./hub-member";
 
 const portalUrl = 'https://www.arcgis.com';
 
 export async function getTeam(id:string): Promise<HubTypes.IHubTeam> {
     let group = await getGroup(id);
+    return convertGroupToTeam(group);
+}
 
+export async function getTeamMembers(id:string): Promise<HubTypes.IHubMember[]> {
+    let users = await getGroupUsers(id);
+    
+    // TODO: handle admin, owner, users per https://esri.github.io/arcgis-rest-js/api/portal/getGroupUsers/
+    // TODO: evaluate Search to get batch user info - or ask Online to add user details
+    let members = users.users.reduce((teamMembers, user) => {
+        let member = getMember(user);
+        teamMembers.push( member )
+        return teamMembers;
+    }, [])
+
+    return members;
+}
+
+export function convertGroupToTeam(group:IGroup): HubTypes.IHubTeam {
     let team:HubTypes.IHubTeam = Object.assign(group, {
         id: group.id,
         name: group.title,
@@ -29,6 +48,6 @@ export async function getTeam(id:string): Promise<HubTypes.IHubTeam> {
       })
     if(group.thumbnail !== undefined && team.thumbnail !== null) {
       team.thumbnailUrl = `${portalUrl}/sharing/rest/community/groups/${group.id}/info/${group.thumbnail}`
-    }
+    }   
     return team;
 }
