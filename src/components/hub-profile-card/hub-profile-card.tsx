@@ -13,12 +13,12 @@ export class HubProfileCard {
   /**
    * ID For the profile. Username, Team ID, Org ID
    */
-  @Prop() id :string = "";
+  @Prop() id: string = "";
 
   /**
    * Which Profile: member, team
    */
-  @Prop() type :HubTypes.CommunityType;
+  @Prop() type: string = "member";
 
   /**
    * Internal storage of profile
@@ -36,7 +36,8 @@ export class HubProfileCard {
    */
   async loadProfile(id:string) {
     try {
-      this.profile = (this.type == HubTypes.CommunityType.team) ? await HubTeam.getTeam(id) : await HubMember.getMember(id);
+      console.log("Profile: ", [this.type, HubTypes.CommunityType.team, HubTypes.CommunityType[this.type] == HubTypes.CommunityType.team])
+      this.profile = (HubTypes.CommunityType[this.type] == HubTypes.CommunityType.team) ? await HubTeam.getTeam(id) : await HubMember.getMember(id);
     } catch {
       console.log("hub-profile-card: error with profile", id)
     }
@@ -50,7 +51,7 @@ export class HubProfileCard {
           contenttype={HubTypes.HubType[this.profile.hubType]}
           image={this.profile.thumbnailUrl} 
           name={this.profile.name} 
-          description={this.profile.description}
+          description={this.profile.summary}
           url={this.profile.url}
           // content={this.content}
         >

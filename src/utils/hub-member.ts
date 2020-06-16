@@ -9,6 +9,7 @@ export async function getMember(id:string): Promise<HubTypes.IHubMember> {
     let member:HubTypes.IHubMember = Object.assign(user, {
         id: user.username,
         name: user.fullName || user.username,
+        summary: user.description || "No profile summary.",
         description: user.description || "No profile description.",
         hubType: HubTypes.HubType.member,
         url: `${portalUrl}/home/user.html?user=${user.username}`,

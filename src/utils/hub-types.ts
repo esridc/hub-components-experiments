@@ -18,12 +18,13 @@ export interface IHubResource {
   id: string
   name: string // Generic term for the primary label (title, fullname, username, etc.)
   description?: string
+  summary?: string // snippet or other summary
   culture?: string
 
   // Derived metadata
   hubType: HubType
   permissions: { // overrides item.access with more attributes. could flatten.
-    visibility: keyof typeof VisibilityOptions // item.access
+    visibility: VisibilityOptions // item.access
     control?:  ControlOptions // item.itemControl
     groups?: Array<IGroup> // item.sharing.groups via content/users/:username/items/:id
   }
