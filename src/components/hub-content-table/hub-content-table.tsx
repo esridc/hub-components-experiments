@@ -1,4 +1,4 @@
-import { Component, Host, h, State, Prop, Watch } from '@stencil/core';
+import { Component, Host, h, State, Prop } from '@stencil/core';
 import * as HubSearch from '../../utils/hub-search';
 import * as HubSite from '../../utils/hub-site';
 import { UserSession } from '@esri/arcgis-rest-auth';
@@ -44,12 +44,6 @@ export class HubContentTable {
       this.catalog = await HubSite.getSiteCatalog(this.site)
       this.results = await this.searchContent( this.query, { groups: this.catalog.groups } )
     }
-  }
-
-  @Watch('query')
-  async updateQuery(newQuery:string) {
-    this.query = newQuery;
-    this.results = await this.searchContent( this.query, { groups: this.catalog.groups } )    
   }
 
   async searchContent(query: string, params:any):Promise<any> {
