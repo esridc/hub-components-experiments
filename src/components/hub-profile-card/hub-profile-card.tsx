@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
 import * as HubMember from '../../utils/hub-member'
+import * as HubTeam from '../../utils/hub-team'
 import * as HubTypes from '../../utils/hub-types'
 
 @Component({
@@ -17,7 +18,7 @@ export class HubProfileCard {
   /**
    * Which Profile: member, team
    */
-  @Prop() type :HubTypes.CommunityTypes;
+  @Prop() type :HubTypes.CommunityType;
 
   /**
    * Internal storage of profile
@@ -35,7 +36,7 @@ export class HubProfileCard {
    */
   async loadProfile(id:string) {
     try {
-      this.profile = await HubMember.getMember(id);
+      this.profile = (this.type == HubTypes.CommunityType.team) ? await HubTeam.getTeam(id) : await HubMember.getMember(id);
     } catch {
       console.log("hub-profile-card: error with profile", id)
     }

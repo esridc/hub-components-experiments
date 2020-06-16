@@ -23,7 +23,7 @@ export interface IHubResource {
   // Derived metadata
   hubType: HubType
   permissions: { // overrides item.access with more attributes. could flatten.
-    visibility: VisibilityOptions // item.access
+    visibility: keyof typeof VisibilityOptions // item.access
     control?:  ControlOptions // item.itemControl
     groups?: Array<IGroup> // item.sharing.groups via content/users/:username/items/:id
   }
@@ -98,7 +98,7 @@ export interface IHubCommunity extends IHubResource {
 }
 export interface IHubOrg extends IHubCommunity { }
 
-export interface IHubTeam extends IHubCommunity  { }
+export interface IHubTeam extends IGroup, IHubCommunity { }
 
 // Minimal Subset for item.owner for now
 export interface IHubOwner {

@@ -285,7 +285,7 @@ export namespace Components {
         /**
           * Which Profile: member, team
          */
-        "type": HubTypes.CommunityTypes;
+        "type": HubTypes.CommunityType;
     }
     interface HubProfileEditor {
         /**
@@ -868,7 +868,7 @@ declare namespace LocalJSX {
         /**
           * Which Profile: member, team
          */
-        "type"?: HubTypes.CommunityTypes;
+        "type"?: HubTypes.CommunityType;
     }
     interface HubProfileEditor {
         /**
