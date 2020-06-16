@@ -19,12 +19,12 @@ export class HubCard {
   portalUrl: string = "http://www.arcgis.com/sharing/rest/"
   @Prop({ attribute: 'item' }) item: string = "";
   @Prop() image: string;
-  @Prop() name: string = "Trash Day";
-  @Prop() description: string = "Monday";
+  @Prop() name: string;
+  @Prop() description: string;
   @Prop() contenttype: string = "Local Topic";
   /** Specify the layout of the card */
   @Prop() layout: "horizontal" | "vertical" = "vertical"
-  @Prop() url:string = null;
+  @Prop() url:string;
   @Prop() buttonText:string = "Explore";
   @Prop() buttonAction:Function;
 
@@ -41,10 +41,8 @@ export class HubCard {
 
   render() {
     let output = [];
-    // let thumbnail = null;
-    let details = null;
     
-    if(this.image) {
+    if(this.image !== undefined && this.image !== null && this.image.length > 0) {
       // TODO: improve testing for image URL
       if(this.image.match(/^http/) === null && this.item) {
         output.push (<img class="card-image" slot="thumbnail" src={`${this.portalUrl}content/items/${this.item}/info/${this.image}`} />)
@@ -71,13 +69,17 @@ export class HubCard {
       output.push(<div class="card-description" innerHTML={this.description}></div>)
     }
     if(this.metadata && this.metadata.length > 0) {
-      details = 
+      output.push( 
         <div class="hub-content-details">
           {this.metadata.map((element) =>
             <div><strong>{element.name}</strong>: {element.value}</div>
           )}
         </div>      
-  
+      )
+    }
+
+    if(this.url !== undefined && this.url !== null && this.url.length != 0) {
+      output.push(<calcite-button onClick={() => window.open(this.url)} slot="footer-leading" width="full">{this.buttonText}</calcite-button>)
     }
    
     return (
@@ -85,9 +87,6 @@ export class HubCard {
       <calcite-card
       >
         {output}
-        {details}
-        <calcite-button onClick={() => window.open(this.url)} slot="footer-leading" width="full">{this.buttonText}</calcite-button>
-
         {/* <calcite-button slot="footer-leading" color="light" scale="s" icon='circle'></calcite-button>
         <div slot="footer-trailing">
           <calcite-button scale="s" color="light" id="card-icon-test-2" icon='circle'></calcite-button>

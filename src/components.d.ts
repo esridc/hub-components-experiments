@@ -277,6 +277,16 @@ export namespace Components {
         "summary": string;
         "tags": Array<string>;
     }
+    interface HubProfileCard {
+        /**
+          * ID For the profile. Username, Team ID, Org ID
+         */
+        "id": string;
+        /**
+          * Which Profile: member, team
+         */
+        "type": HubTypes.CommunityTypes;
+    }
     interface HubProfileEditor {
         /**
           * ClientID to identify the app launching auth
@@ -295,8 +305,6 @@ export namespace Components {
         "messages": any;
         "showmap": boolean;
         "webmap": string;
-    }
-    interface HubSearchFacet {
     }
     interface HubSonarChat {
         "sendMessages": IHubChat;
@@ -460,6 +468,12 @@ declare global {
         prototype: HTMLHubMetadataEditorElement;
         new (): HTMLHubMetadataEditorElement;
     };
+    interface HTMLHubProfileCardElement extends Components.HubProfileCard, HTMLStencilElement {
+    }
+    var HTMLHubProfileCardElement: {
+        prototype: HTMLHubProfileCardElement;
+        new (): HTMLHubProfileCardElement;
+    };
     interface HTMLHubProfileEditorElement extends Components.HubProfileEditor, HTMLStencilElement {
     }
     var HTMLHubProfileEditorElement: {
@@ -471,12 +485,6 @@ declare global {
     var HTMLHubRadarElement: {
         prototype: HTMLHubRadarElement;
         new (): HTMLHubRadarElement;
-    };
-    interface HTMLHubSearchFacetElement extends Components.HubSearchFacet, HTMLStencilElement {
-    }
-    var HTMLHubSearchFacetElement: {
-        prototype: HTMLHubSearchFacetElement;
-        new (): HTMLHubSearchFacetElement;
     };
     interface HTMLHubSonarChatElement extends Components.HubSonarChat, HTMLStencilElement {
     }
@@ -548,9 +556,9 @@ declare global {
         "hub-input": HTMLHubInputElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
+        "hub-profile-card": HTMLHubProfileCardElement;
         "hub-profile-editor": HTMLHubProfileEditorElement;
         "hub-radar": HTMLHubRadarElement;
-        "hub-search-facet": HTMLHubSearchFacetElement;
         "hub-sonar-chat": HTMLHubSonarChatElement;
         "hub-suggest-input": HTMLHubSuggestInputElement;
         "hub-telemetry": HTMLHubTelemetryElement;
@@ -852,6 +860,16 @@ declare namespace LocalJSX {
         "summary"?: string;
         "tags"?: Array<string>;
     }
+    interface HubProfileCard {
+        /**
+          * ID For the profile. Username, Team ID, Org ID
+         */
+        "id"?: string;
+        /**
+          * Which Profile: member, team
+         */
+        "type"?: HubTypes.CommunityTypes;
+    }
     interface HubProfileEditor {
         /**
           * ClientID to identify the app launching auth
@@ -870,8 +888,6 @@ declare namespace LocalJSX {
         "messages"?: any;
         "showmap"?: boolean;
         "webmap"?: string;
-    }
-    interface HubSearchFacet {
     }
     interface HubSonarChat {
         "sendMessages"?: IHubChat;
@@ -965,9 +981,9 @@ declare namespace LocalJSX {
         "hub-input": HubInput;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
+        "hub-profile-card": HubProfileCard;
         "hub-profile-editor": HubProfileEditor;
         "hub-radar": HubRadar;
-        "hub-search-facet": HubSearchFacet;
         "hub-sonar-chat": HubSonarChat;
         "hub-suggest-input": HubSuggestInput;
         "hub-telemetry": HubTelemetry;
@@ -998,9 +1014,9 @@ declare module "@stencil/core" {
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
+            "hub-profile-card": LocalJSX.HubProfileCard & JSXBase.HTMLAttributes<HTMLHubProfileCardElement>;
             "hub-profile-editor": LocalJSX.HubProfileEditor & JSXBase.HTMLAttributes<HTMLHubProfileEditorElement>;
             "hub-radar": LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
-            "hub-search-facet": LocalJSX.HubSearchFacet & JSXBase.HTMLAttributes<HTMLHubSearchFacetElement>;
             "hub-sonar-chat": LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
             "hub-suggest-input": LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
             "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;

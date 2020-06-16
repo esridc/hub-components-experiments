@@ -1,4 +1,4 @@
-import { IContent, HubType } from "./hub-types"
+import { IContent, HubType, ControlOptions } from "./hub-types"
 // import { getCategory } from "@esri/hub-common";
 import { IModel, getModel, IHubRequestOptions} from "@esri/hub-common";
 const portalUrl = 'https://www.arcgis.com/sharing/rest/';
@@ -80,10 +80,10 @@ export function getContent(
         // title: item.item.title,
         summary: item.item.snippet,
         // description: item.item.description,
-        maintainer: { username: item.item.owner },
-        access: { 
+        publisher: { username: item.item.owner },
+        permissions: { 
             visibility: item.item.access,
-            permission: item.item.itemControl || 'view'
+            permission: item.item.itemControl || ControlOptions.view
         },
         contentUrl: item.item.url,
         thumbnailUrl: `${portalUrl}content/items/${item.item.id}/info/${item.item.thumbnail}`,
@@ -162,10 +162,10 @@ export function getContent(
         name: hubmodel.attributes.name,
         hubType: HubType.dataset, // getCategory(item.item.type),
         summary: (hubmodel.attributes.searchDescription || "").slice(0,200),
-        maintainer: { 
+        publisher: { 
             username: hubmodel.attributes.owner 
         },
-        access: { 
+        permissions: { 
             visibility: hubmodel.attributes.access 
         },
         contentUrl: hubmodel.attributes.url,

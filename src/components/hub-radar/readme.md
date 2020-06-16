@@ -62,8 +62,8 @@ graph TD;
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
   hub-map --> calcite-button
-  hub-card --> calcite-card
   hub-card --> calcite-button
+  hub-card --> calcite-card
   calcite-card --> calcite-loader
   calcite-card --> calcite-checkbox
   style hub-radar fill:#f9f,stroke:#333,stroke-width:4px

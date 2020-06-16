@@ -38,12 +38,12 @@ graph TD;
   hub-gallery --> hub-card
   hub-gallery --> hub-suggest-input
   hub-gallery --> hub-filter-category
-  hub-card --> calcite-card
   hub-card --> calcite-button
-  calcite-card --> calcite-loader
-  calcite-card --> calcite-checkbox
+  hub-card --> calcite-card
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  calcite-card --> calcite-loader
+  calcite-card --> calcite-checkbox
   hub-suggest-input --> calcite-button
   hub-filter-category --> calcite-checkbox
   hub-filter-category --> calcite-tree

@@ -44,7 +44,7 @@ export class HubContentCard {
           layout={this.layout}
           url={this.contentItem.url}
           image={this.contentItem.thumbnailUrl} 
-          name={this.contentItem.title} 
+          name={this.contentItem.name} 
           description={this.contentItem.summary}
           // content={this.content}
         >

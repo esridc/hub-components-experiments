@@ -31,12 +31,12 @@
 ```mermaid
 graph TD;
   hub-event --> hub-card
-  hub-card --> calcite-card
   hub-card --> calcite-button
-  calcite-card --> calcite-loader
-  calcite-card --> calcite-checkbox
+  hub-card --> calcite-card
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  calcite-card --> calcite-loader
+  calcite-card --> calcite-checkbox
   style hub-event fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
