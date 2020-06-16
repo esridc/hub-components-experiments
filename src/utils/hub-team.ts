@@ -1,9 +1,19 @@
-import { IGroup } from "@esri/arcgis-rest-portal";
-import { getGroup, getGroupUsers } from '@esri/arcgis-rest-portal';
+import { IGroup, getGroup, getGroupUsers, searchGroups } from '@esri/arcgis-rest-portal';
 import * as HubTypes from './hub-types'
 import { getMember } from "./hub-member";
 
 const portalUrl = 'https://www.arcgis.com';
+
+export async function searchTeams(query: string): Promise<HubTypes.IHubSearchResults> {
+    let groups = await searchGroups(query);
+
+    let teams = groups.results.reduce((teamResults, group) => {
+        teamResults.push(convertGroupToTeam(group))
+        return teamResults;
+    }, []);
+
+    return { results: teams };
+}
 
 export async function getTeam(id:string): Promise<HubTypes.IHubTeam> {
     let group = await getGroup(id);
@@ -28,6 +38,8 @@ export function convertGroupToTeam(group:IGroup): HubTypes.IHubTeam {
     let team:HubTypes.IHubTeam = Object.assign(group, {
         id: group.id,
         name: group.title,
+        hubtype: HubTypes.HubType.team,
+        publisher: { name: group.owner, username: group.owner },
         summary: group.snippet || "No profile summary.",
         description: group.description || "No profile description.",
         hubType: HubTypes.HubType.team,

@@ -42,7 +42,8 @@ export class HubContentTable {
   async componentWillLoad() {
     if(this.site) {
       this.catalog = await HubSite.getSiteCatalog(this.site)
-      this.results = await this.searchContent( this.query, { groups: this.catalog.groups } )
+      let results = await this.searchContent( this.query, { groups: this.catalog.groups } )
+      this.results = results.results;
     }
   }
 

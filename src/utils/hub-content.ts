@@ -80,7 +80,7 @@ export function getContent(
         // title: item.item.title,
         summary: item.item.snippet,
         // description: item.item.description,
-        publisher: { username: item.item.owner },
+        publisher: { name: item.item.owner, username: item.item.owner },
         permissions: { 
             visibility: item.item.access,
             permission: item.item.itemControl || ControlOptions.view
@@ -163,7 +163,8 @@ export function getContent(
         hubType: HubType.dataset, // getCategory(item.item.type),
         summary: (hubmodel.attributes.searchDescription || "").slice(0,200),
         publisher: { 
-            username: hubmodel.attributes.owner 
+          name: hubmodel.attributes.owner,
+          username: hubmodel.attributes.owner 
         },
         permissions: { 
             visibility: hubmodel.attributes.access 

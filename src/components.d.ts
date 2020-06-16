@@ -204,6 +204,10 @@ export namespace Components {
          */
         "hubapi": boolean;
         /**
+          * Which Resources to search
+         */
+        "hubtype": "content" | "members" | "teams";
+        /**
           * Hub site URL to scope for search
          */
         "layout": "horizontal" | "vertical";
@@ -778,6 +782,10 @@ declare namespace LocalJSX {
           * Use the Hub API (true) or the Portal API (false)
          */
         "hubapi"?: boolean;
+        /**
+          * Which Resources to search
+         */
+        "hubtype"?: "content" | "members" | "teams";
         /**
           * Hub site URL to scope for search
          */

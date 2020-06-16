@@ -4,6 +4,10 @@ import * as HubSite from '../../utils/hub-site';
 // import * as HubAPI from '../../utils/hub-api';
 // import { authenticateUser } from '../../utils/utils';
 import { UserSession } from '@esri/arcgis-rest-auth';
+import * as HubTeams from '../../utils/hub-team';
+import * as HubMembers from '../../utils/hub-member';
+import * as HubTypes from '../../utils/hub-types';
+import { readSessionFromCookie } from '../../utils/utils';
 
 @Component({
   tag: 'hub-gallery',
@@ -15,12 +19,12 @@ export class HubGallery {
   /**
    * Hub site URL to scope for search
    */
-  @Prop() site: string = "";
+  @Prop() site: string = null;
 
   /**
    * Groups to limit search
    */
-  @Prop() groups: string;
+  @Prop() groups: string = null;
 
   /**
    * Choose to show or hide search
@@ -46,6 +50,11 @@ export class HubGallery {
    * Default Query
    */
   @Prop() query: string = "";
+
+  /**
+   * Which Resources to search
+   */
+  @Prop() hubtype: "content" | "members" | "teams" = "teams"
 
   /**
    * Default sort order
@@ -75,8 +84,8 @@ export class HubGallery {
   @State() suggestions: Array<string> = [];
   @State() results = [];
   @State() catalog = null;
-  @State() session:string;
-
+  @State() session:string = null;
+  
   @Listen("queryInput")
   queryInputHandler(event: CustomEvent): string {
     console.log("hub-gallery: queryInputHandler", event)
@@ -95,48 +104,65 @@ export class HubGallery {
     return 'true';
   }  
 
-  async updateGallery(query: string, customParams?:Object) {
-    let searchParams:any = {
-      q: query,
-      limit: this.limit,
-      sort: this.sort
-    };
-    // TODO: make this more robuts
-    if(customParams !== undefined) {
-      searchParams.customParams = customParams
-    }
-
-    if(this.catalog) {
-      searchParams.groups = this.catalog.groups;
-    } else {
-      searchParams.groups = this.groups.split(",");
-    } 
-
-    console.log("Search: searchParams ", [searchParams, customParams])
-    let results = await HubSearch.search(searchParams, {
-      isPortal: !this.hubapi, 
-      hubApiUrl: "https://hub.arcgis.com", 
-      authentication: new UserSession({})
-    })
-    this.results = results;
-  }
-  
   
   componentWillLoad() {
+    this.session = readSessionFromCookie();
+    console.log("hub-gallery load: session", this.session)
     this.queryInput = this.query;
     if(this.site) {
       HubSite.getSiteCatalog(this.site).then((catalog) => {
         this.catalog = catalog;
-        this.updateGallery(this.queryInput);
       })
-    }
-  }
-  componentDidLoad() {
-    console.log("componentDidLoad: @Prop groups", this.groups)
-    if(!this.site) {
+    } else {
+      // Don't wait to update
       this.updateGallery(this.queryInput);
+    } 
+      
+    
+  }
+
+  async updateGallery(query: string, customParams?:Object) {
+    let auth = (this.session !== null) ? UserSession.deserialize(this.session) : null;
+
+    console.log("updateGallery: hubtype", [query, this.hubtype, auth])
+    switch(this.hubtype) {
+      case 'teams': 
+        let teams = await HubTeams.searchTeams(query);
+        this.results = teams.results;
+        break;
+      case 'members': 
+        let members = await HubMembers.searchMembers(query, auth);
+        this.results = members.results;
+        break;
+
+      default: 
+        let searchParams:any = {
+          q: query,
+          limit: this.limit,
+          sort: this.sort
+        };
+        // TODO: make this more robuts
+        if(customParams !== undefined) {
+          searchParams.customParams = customParams
+        }
+
+        if(this.catalog) {
+          searchParams.groups = this.catalog.groups;
+        } else if(this.groups !== undefined && this.groups.length > 0) {
+          searchParams.groups = this.groups.split(",");
+        } 
+
+        console.log("Search: searchParams ", [searchParams, customParams])
+        let results = await HubSearch.search(searchParams, {
+          isPortal: !this.hubapi, 
+          hubApiUrl: "https://hub.arcgis.com", 
+          authentication: auth
+        })
+        this.results = results.results;
+        // end case(default)
     }
   }
+
 
 
   // TODO: this is overly specific to group category filters
@@ -171,11 +197,11 @@ export class HubGallery {
         
         <hub-card 
           class="gallery-card"
-          contenttype={`${result.type} by ${result.owner}`}
-          url={result.contentUrl}
+          contenttype={`${HubTypes.HubType[result.hubtype]} by ${result.publisher.name}`}
+          url={result.url}
           image={result.thumbnailUrl} 
           name={this.truncateString(result.title, 55)} 
-          description={this.truncateString(result.snippet, 90)}
+          description={this.truncateString(result.summary, 90)}
           buttonText={this.buttontext}
           onClick={() => ""}
           // content={this.content}
@@ -183,6 +209,18 @@ export class HubGallery {
         </hub-card> 
         )
     })
+    let filters = [];
+    console.log("hub-gallery: groups: ", this.groups)
+    if(this.groups !== undefined && this.groups !== null && this.groups.length > 0) {
+      filters.push(
+        <hub-filter-category
+          name="Category"
+          facettype="tree"
+          facet="groupcategories"
+          group={this.groups.split(",")[0]}
+        ></hub-filter-category>
+      )
+    }
 
     return (
       <Host>     
@@ -196,14 +234,8 @@ export class HubGallery {
             query={this.queryInput}
           ></hub-suggest-input>
           : ""}
-        <div class="filters">
-          <hub-filter-category
-            name="Category"
-            facettype="tree"
-            facet="groupcategories"
-            group={this.groups.split(",")[0]}
-          ></hub-filter-category>
-
+        <div class="filters"> 
+          {filters}
           {/* <hub-filter-category
             name="Content Type"
             categories={["Maps", "Data", "Apps", "Files"]}

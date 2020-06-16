@@ -1,11 +1,12 @@
 import { searchItems } from "@esri/arcgis-rest-portal";
 import { IHubRequestOptions } from "@esri/hub-common"
-import * as HubSearchModule from "@esri/hub-search";
+import * as HubSearch from "@esri/hub-search";
 import { _convertItemToContent, _convertHubv3ToContent } from "./hub-content"
 import { searchGroupContent } from "@esri/arcgis-rest-portal";
+import * as HubTypes from "./hub-types"
 
 // TODO: Change hubRequestOptions to better handle different Hub & Portal endpoints (Prod/QA/Enterprise/etc.)
-export async function search(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<any> {
+export async function search(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
     if(hubRequestOptions !== undefined 
         && hubRequestOptions.isPortal) {
         return await searchPortal(queryParams, hubRequestOptions);
@@ -15,7 +16,7 @@ export async function search(queryParams: any, hubRequestOptions?: IHubRequestOp
 }
 
 // https://developers.arcgis.com/rest/users-groups-and-items/search.htm
-async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<any> {
+async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
     // TODO: Consider better ways to map terms across multiple parameters
     queryParams.sort = queryParams.sort.replace(/name/,'title');
     let query = [];
@@ -51,7 +52,7 @@ async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOp
         }).then((results) => {
             return new Promise((resolve, _reject) => {
                 const output = results.results.map(item => _convertItemToContent({item: item}))
-                resolve(output)
+                resolve({results: output})
             })
         })
     }
@@ -69,13 +70,13 @@ async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOp
     }).then((results) => {
         return new Promise((resolve, _reject) => {
             const output = results.results.map(item => _convertItemToContent({item: item}))
-            resolve(output)
+            resolve({results: output})
         })
     })
 }
 
 // https://gist.github.com/hamhands/b6d1f0f514678b88cdc01070bf006263
-async function searchHub(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<any> {
+async function searchHub(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
     queryParams.sort = queryParams.sort.replace(/title/,'name');
 
     // Search query params that ArcGIS Hub expects
@@ -102,7 +103,7 @@ async function searchHub(queryParams: any, _hubRequestOptions?: IHubRequestOptio
     // const token = 'xxxYYY' // AGO token
     // const portal = 'https://www.arcgis.com/sharing/rest'
     // const headers = { authorization: token, portal }
-    const serializedParams = HubSearchModule.serialize(params)
+    const serializedParams = HubSearch.serialize(params)
 
     // Query hub v3's new search endpoint
     let json = await fetch(`${_hubRequestOptions.hubApiUrl}/api/v3/search?${serializedParams}`, { });
@@ -110,7 +111,7 @@ async function searchHub(queryParams: any, _hubRequestOptions?: IHubRequestOptio
 
     let output = results.data.map(_convertHubv3ToContent);
 
-    return output;
+    return {results: output};
 
-    // return HubSearchModule.agoSearch({q: query});
+    // return HubSearch.agoSearch({q: query});
   }

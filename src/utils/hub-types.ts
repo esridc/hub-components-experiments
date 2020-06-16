@@ -1,15 +1,19 @@
 import { IItem, IGroup, IUser } from "@esri/arcgis-rest-types"
 
-export enum ContentType {dataset = 1, document, map , app , site, initiative, template}
-export enum CommunityType {member = 10, team}
+export enum ContentType {dataset = 1000, document, map , app , site, initiative, template}
+export enum CommunityType {member = 1, team = 2}
 export type CommunityTypes = typeof CommunityType
 export enum VisibilityOptions {private, org, public}
 export enum ControlOptions {view, edit, admin}
 export enum EventType { event }
 
 // TODO: figure out how this can work like { ...ContentType, ...CommunityType, ...EventType}
-export enum HubType {dataset, document, map , app , site, initiative, template, member, team, event}
+export enum HubType {member=1, team=2, event=100, dataset=1000, document, map , app , site, initiative, template}
 
+export type IHubSearchResults = {
+  results: IHubResource[]
+  // TODO: add search metadata
+} 
 
 // Based on the [Hub Content UI Inventory](https://app.lucidchart.com/invitations/accept/dab82a25-2ed9-4f63-8075-3db8873087e3)
 // Attempting a simple _Hungarian Notation_ for attributes suffix: `*Date`, `*Id`, `*Number`. Plural (e.g. `tags`) is an array.
@@ -20,6 +24,7 @@ export interface IHubResource {
   description?: string
   summary?: string // snippet or other summary
   culture?: string
+  publisher: IHubOwner // TODO: better name? item.owner with more user metadata
 
   // Derived metadata
   hubType: HubType
@@ -57,7 +62,6 @@ export interface IContent extends IHubResource,IItem {
   // size: number
 
   license: IHubLicense // [Future] item.licenseInfo 
-  publisher: IHubOwner // item.owner with more user metadata
   publishedDate: Date // formal metadata || new Date(item.created)
   publishedDateSource: string // description of what was used for this attribute
 
@@ -103,7 +107,8 @@ export interface IHubTeam extends IGroup, IHubCommunity { }
 
 // Minimal Subset for item.owner for now
 export interface IHubOwner {
-  username: string
+  name: string, // Readable name
+  username?: string // optional username. 
 }
 // Simple user info - more could be added/cached
 export interface IHubMember extends IUser, IHubCommunity {

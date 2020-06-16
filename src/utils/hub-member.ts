@@ -1,8 +1,19 @@
-import { IUser } from "@esri/arcgis-rest-portal";
-import { getUser } from '@esri/arcgis-rest-portal';
+import { IAuthenticationManager } from "@esri/arcgis-rest-request"
+import { IUser, searchUsers, getUser } from "@esri/arcgis-rest-portal";
 import * as HubTypes from './hub-types'
 
 const portalUrl = 'https://www.arcgis.com';
+
+export async function searchMembers(query: string, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
+  let users = await searchUsers({q: query, authentication});
+
+  let members = users.results.reduce((userResults, user) => {
+      userResults.push(convertUserToMember(user))
+      return userResults;
+  }, []);
+
+  return { results: members };
+}
 
 export async function getMember(id:string): Promise<HubTypes.IHubMember> {
   let user = await getUser(id);
@@ -13,6 +24,8 @@ export function convertUserToMember(user: IUser): HubTypes.IHubMember {
   let member:HubTypes.IHubMember = Object.assign(user, {
     id: user.username,
     name: user.fullName || user.username,
+    publisher: { name: user.username, username: user.username  },
+    hubtype: HubTypes.HubType.member,
     summary: user.description || "No profile summary.",
     description: user.description || "No profile description.",
     hubType: HubTypes.HubType.member,
