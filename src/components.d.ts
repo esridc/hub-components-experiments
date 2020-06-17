@@ -101,6 +101,8 @@ export namespace Components {
          */
         "sort": "name" | "modified" | "-name" | "-modified";
     }
+    interface HubDiscussion {
+    }
     interface HubEvent {
         "attending": boolean;
         /**
@@ -430,6 +432,12 @@ declare global {
         prototype: HTMLHubContentTableElement;
         new (): HTMLHubContentTableElement;
     };
+    interface HTMLHubDiscussionElement extends Components.HubDiscussion, HTMLStencilElement {
+    }
+    var HTMLHubDiscussionElement: {
+        prototype: HTMLHubDiscussionElement;
+        new (): HTMLHubDiscussionElement;
+    };
     interface HTMLHubEventElement extends Components.HubEvent, HTMLStencilElement {
     }
     var HTMLHubEventElement: {
@@ -553,6 +561,7 @@ declare global {
         "hub-chat": HTMLHubChatElement;
         "hub-content-card": HTMLHubContentCardElement;
         "hub-content-table": HTMLHubContentTableElement;
+        "hub-discussion": HTMLHubDiscussionElement;
         "hub-event": HTMLHubEventElement;
         "hub-filter-category": HTMLHubFilterCategoryElement;
         "hub-follow-button": HTMLHubFollowButtonElement;
@@ -675,6 +684,8 @@ declare namespace LocalJSX {
           * Hub site URL to scope for search
          */
         "sort"?: "name" | "modified" | "-name" | "-modified";
+    }
+    interface HubDiscussion {
     }
     interface HubEvent {
         "attending"?: boolean;
@@ -982,6 +993,7 @@ declare namespace LocalJSX {
         "hub-chat": HubChat;
         "hub-content-card": HubContentCard;
         "hub-content-table": HubContentTable;
+        "hub-discussion": HubDiscussion;
         "hub-event": HubEvent;
         "hub-filter-category": HubFilterCategory;
         "hub-follow-button": HubFollowButton;
@@ -1015,6 +1027,7 @@ declare module "@stencil/core" {
             "hub-chat": LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
             "hub-content-card": LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
             "hub-content-table": LocalJSX.HubContentTable & JSXBase.HTMLAttributes<HTMLHubContentTableElement>;
+            "hub-discussion": LocalJSX.HubDiscussion & JSXBase.HTMLAttributes<HTMLHubDiscussionElement>;
             "hub-event": LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
             "hub-filter-category": LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
             "hub-follow-button": LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
