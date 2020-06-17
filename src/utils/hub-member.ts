@@ -4,6 +4,29 @@ import * as HubTypes from './hub-types'
 
 const portalUrl = 'https://www.arcgis.com';
 
+// let member = new HubMember({username: 'aturner'});
+// let org = member.organization 
+// 
+// export class HubMember {
+//   private org: string; 
+
+//   static search(_query:string, _authentication: IAuthenticationManager) {
+//     searchMembers(_query, _authentication);
+//     return [];
+//   }
+
+//   get organization() {
+//     if(this.org !== undefined ) { 
+//       this.org = getMemberOrg(username: this.username)
+//     }
+//     return false;
+//   }
+// }
+
+export function getMemberOrg(_username: string) {
+  return "DCDev";
+}
+
 export async function searchMembers(query: string, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
   let users = await searchUsers({q: query, authentication});
 

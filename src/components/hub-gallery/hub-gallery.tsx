@@ -122,7 +122,7 @@ export class HubGallery {
   }
 
   async updateGallery(query: string, customParams?:Object) {
-    let auth = (this.session !== null) ? UserSession.deserialize(this.session) : null;
+    let auth = (this.session !== undefined && this.session !== null) ? UserSession.deserialize(this.session) : null;
 
     console.log("updateGallery: hubtype", [query, this.hubtype, auth])
     switch(this.hubtype) {
@@ -192,7 +192,7 @@ export class HubGallery {
   render() {
     let output = []
     this.results.map(result => {
-      // console.log("Search result", result.attributes)
+      console.log("hub-gallery: render result", [result, result.hubtype, HubTypes.HubType[result.hubtype]])
       output.push(
         
         <hub-card 
@@ -210,7 +210,7 @@ export class HubGallery {
         )
     })
     let filters = [];
-    console.log("hub-gallery: groups: ", this.groups)
+    // console.log("hub-gallery: groups: ", this.groups)
     if(this.groups !== undefined && this.groups !== null && this.groups.length > 0) {
       filters.push(
         <hub-filter-category
