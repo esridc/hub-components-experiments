@@ -102,6 +102,13 @@ export namespace Components {
         "sort": "name" | "modified" | "-name" | "-modified";
     }
     interface HubDiscussion {
+        "annotationsUrl": string;
+        "author": string;
+        "org": string;
+        "portalUrl": string;
+        "search": string;
+        "target": string;
+        "update": boolean;
     }
     interface HubEvent {
         "attending": boolean;
@@ -686,6 +693,14 @@ declare namespace LocalJSX {
         "sort"?: "name" | "modified" | "-name" | "-modified";
     }
     interface HubDiscussion {
+        "annotationsUrl"?: string;
+        "author"?: string;
+        "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
+        "org"?: string;
+        "portalUrl"?: string;
+        "search"?: string;
+        "target"?: string;
+        "update"?: boolean;
     }
     interface HubEvent {
         "attending"?: boolean;
