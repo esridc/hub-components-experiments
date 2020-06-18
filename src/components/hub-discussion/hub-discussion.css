@@ -1,3 +1,99 @@
 :host {
   display: block;
 }
+img{ max-width:100%;}
+.recent_heading {float: left; width:40%;}
+
+/* Search */
+
+.srch_bar {
+  display: inline-block;
+  text-align: right;
+  width: 60%; padding:
+}
+.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
+
+.recent_heading h4 {
+  color: #05728f;
+  font-size: 21px;
+  margin: auto;
+}
+.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;}
+.srch_bar .input-group-addon button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  padding: 0;
+  color: #707070;
+  font-size: 18px;
+}
+.srch_bar .input-group-addon { margin: 0 0 0 -27px;}
+
+/* Annotation */
+
+:host {
+  background: #f8f8f8 none repeat scroll 0 0;
+  float: left;
+  overflow: hidden;
+  width: 98%;
+  border:1px solid #c4c4c4;
+  font-family: sans-serif;
+}
+
+.chat_ib h5{ font-size:12px; color:#464646; margin:8px 0 8px 0;}
+.chat_ib h5 span { font-size:13px; color: #989898; font-weight: normal; float:right;}
+.chat_ib p{ font-size:14px; color:#333333; margin:auto}
+.chat_img {
+  float: left;
+  
+}
+.chat_img img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.chat_ib {
+  float: left;
+  padding: 0 0 0 15px;
+  width: 82%;
+}
+
+.chat_people{ overflow:hidden; clear:both;}
+.chat_list {
+  border-bottom: 1px solid #c4c4c4;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+
+/* Send */
+
+.input_msg_write textarea {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 80%;
+  padding-left: 20px;
+}
+
+.type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+.msg_send_btn {
+  background: #05728f none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  right: 10px;
+  top: 11px;
+  width: 33px;
+}
+.msg_send_btn:hover {
+  box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.msg_send_btn svg {
+  fill: #fff;
+}

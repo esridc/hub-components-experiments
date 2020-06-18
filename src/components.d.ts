@@ -107,6 +107,13 @@ export namespace Components {
         "title": string;
     }
     interface HubDiscussion {
+        "annotationsUrl": string;
+        "author": string;
+        "org": string;
+        "portalUrl": string;
+        "search": string;
+        "target": string;
+        "update": boolean;
     }
     interface HubEvent {
         "attending": boolean;
@@ -703,6 +710,14 @@ declare namespace LocalJSX {
         "title"?: string;
     }
     interface HubDiscussion {
+        "annotationsUrl"?: string;
+        "author"?: string;
+        "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
+        "org"?: string;
+        "portalUrl"?: string;
+        "search"?: string;
+        "target"?: string;
+        "update"?: boolean;
     }
     interface HubEvent {
         "attending"?: boolean;
