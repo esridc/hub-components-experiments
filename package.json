@@ -24,7 +24,8 @@
     "storybook.run": "start-storybook --port 9001 -s ./public",
     "storybook": "npm-run-all --parallel watch storybook.run",
     "publish-npm": "npm publish --access public",
-    "publish-storybook": "storybook-to-ghpages"
+    "publish-storybook": "storybook-to-ghpages -s build-storybook",
+    "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

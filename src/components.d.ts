@@ -101,6 +101,11 @@ export namespace Components {
          */
         "sort": "name" | "modified" | "-name" | "-modified";
     }
+    interface HubEmbed {
+        "code": string;
+        "description": string;
+        "title": string;
+    }
     interface HubEvent {
         "attending": boolean;
         /**
@@ -430,6 +435,12 @@ declare global {
         prototype: HTMLHubContentTableElement;
         new (): HTMLHubContentTableElement;
     };
+    interface HTMLHubEmbedElement extends Components.HubEmbed, HTMLStencilElement {
+    }
+    var HTMLHubEmbedElement: {
+        prototype: HTMLHubEmbedElement;
+        new (): HTMLHubEmbedElement;
+    };
     interface HTMLHubEventElement extends Components.HubEvent, HTMLStencilElement {
     }
     var HTMLHubEventElement: {
@@ -553,6 +564,7 @@ declare global {
         "hub-chat": HTMLHubChatElement;
         "hub-content-card": HTMLHubContentCardElement;
         "hub-content-table": HTMLHubContentTableElement;
+        "hub-embed": HTMLHubEmbedElement;
         "hub-event": HTMLHubEventElement;
         "hub-filter-category": HTMLHubFilterCategoryElement;
         "hub-follow-button": HTMLHubFollowButtonElement;
@@ -675,6 +687,11 @@ declare namespace LocalJSX {
           * Hub site URL to scope for search
          */
         "sort"?: "name" | "modified" | "-name" | "-modified";
+    }
+    interface HubEmbed {
+        "code"?: string;
+        "description"?: string;
+        "title"?: string;
     }
     interface HubEvent {
         "attending"?: boolean;
@@ -982,6 +999,7 @@ declare namespace LocalJSX {
         "hub-chat": HubChat;
         "hub-content-card": HubContentCard;
         "hub-content-table": HubContentTable;
+        "hub-embed": HubEmbed;
         "hub-event": HubEvent;
         "hub-filter-category": HubFilterCategory;
         "hub-follow-button": HubFollowButton;
@@ -1015,6 +1033,7 @@ declare module "@stencil/core" {
             "hub-chat": LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
             "hub-content-card": LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
             "hub-content-table": LocalJSX.HubContentTable & JSXBase.HTMLAttributes<HTMLHubContentTableElement>;
+            "hub-embed": LocalJSX.HubEmbed & JSXBase.HTMLAttributes<HTMLHubEmbedElement>;
             "hub-event": LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
             "hub-filter-category": LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
             "hub-follow-button": LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
