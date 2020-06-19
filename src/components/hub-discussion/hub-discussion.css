@@ -1,10 +1,89 @@
 :host {
   display: block;
 }
-img{ max-width:100%;}
-.recent_heading {float: left; width:40%;}
 
-/* Search */
+@media screen and (max-width: 530px) { 
+  /* .gallery-sm  */
+  .gallery-card {
+      width: calc((100% - (0 * 30px))/ 1);
+    }
+}
+@media screen and (min-width: 530px) and (max-width: 975px) { 
+  /* .gallery-md  */
+  .gallery-card {
+    width: calc((100% - (1 * 30px))/ 2);
+  }
+}
+@media screen and (min-width: 975px) and (max-width: 1200px) { 
+  /* .gallery-lg  */
+  .gallery-card{
+    width: calc((100% - (2 * 30px))/ 3);
+  }
+}
+
+@media screen and (min-width:1200px) { 
+/* .gallery-xl  */
+  .gallery-card {
+    width: calc((100% - (3 * 30px))/ 4);
+  }
+}
+.gallery-card {
+  /* border: 1px solid #888; */
+  /* padding: 1.5rem; */
+  /* flex-basis: 100%; */
+  /* margin: 10px; */
+  /* flex-basis: calc(33.333% - 20px); */
+  display: flex;
+  flex-flow: column;
+  color: #4c4c4c;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  box-shadow: 0 0 5px 0 rgba(76,76,76,.25);  
+  /* text-align: center; */
+}
+
+.card-image {
+  height: 40px;
+  background-image: url(https://idee.paris.fr/svg/preview-proposal-image.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.search-grid {
+  display: grid;
+  grid-template:
+    ".   search" auto
+    "filters results" auto /
+    12rem 3fr;
+  padding: 0 1rem 0 3rem;  
+}
+
+hub-suggest-input {
+  grid-area: search;
+}
+.filters {
+  grid-area: filters;
+  }
+
+.search-results {
+  grid-area: results;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* :host {
+  background: #f8f8f8 none repeat scroll 0 0;
+  float: left;
+  overflow: hidden;
+  width: 98%;
+  border:1px solid #c4c4c4;
+  font-family: sans-serif;
+} */
+
+/* img { max-width:100%;} */
+.recent_heading {float: left; width:40%;}
 
 .srch_bar {
   display: inline-block;
@@ -28,16 +107,6 @@ img{ max-width:100%;}
 }
 .srch_bar .input-group-addon { margin: 0 0 0 -27px;}
 
-/* Annotation */
-
-:host {
-  background: #f8f8f8 none repeat scroll 0 0;
-  float: left;
-  overflow: hidden;
-  width: 98%;
-  border:1px solid #c4c4c4;
-  font-family: sans-serif;
-}
 
 .chat_ib h5{ font-size:12px; color:#464646; margin:8px 0 8px 0;}
 .chat_ib h5 span { font-size:13px; color: #989898; font-weight: normal; float:right;}
@@ -65,7 +134,6 @@ img{ max-width:100%;}
   padding: 18px 16px 10px;
 }
 
-/* Send */
 
 .input_msg_write textarea {
   background: rgba(0, 0, 0, 0) none repeat scroll 0 0;

@@ -182,7 +182,39 @@ export class HubDiscussion {
     }
   }
 
-  render() {
+  discussionCard(annotation) {
+    return (
+    <calcite-card
+      class="gallery-card"
+      selectable={true}
+      >
+    <img class="card-image" slot="thumbnail"  />
+    <h3 slot="title">
+      <div class="chat_img"> {this.authorImage(annotation.attributes.Creator)} </div>
+      {this.authorName(annotation.attributes.Creator)}
+    </h3>
+    <span slot="subtitle">
+      
+    </span>
+      {annotation.attributes.description}
+      <span slot="footer-leading">
+        {formatDate(annotation.attributes.created_at)}
+      </span>
+    </calcite-card>)    
+  }
+
+  renderGallery() {
+    let output = []
+    this.annotations.map((annotation) => {
+      output.push(this.discussionCard(annotation))
+    });
+
+    return (<div class="search-results gallery-lg ">
+    {output}
+    </div>);
+  }
+
+  renderList() {
     let output = []
     let headerEl = this.getElementById("annotation-header");
     var header = "Comments"
@@ -236,5 +268,9 @@ export class HubDiscussion {
         // onClick2={(event: UIEvent) => this.addAnnotation(event)}
     )
     return output;
+  }
+
+  render() {
+    return this.renderGallery();
   }
 }

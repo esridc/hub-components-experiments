@@ -460,14 +460,13 @@ declare global {
     var HTMLHubDiscussionElement: {
         prototype: HTMLHubDiscussionElement;
         new (): HTMLHubDiscussionElement;
-    }
+    };
     interface HTMLHubEmbedElement extends Components.HubEmbed, HTMLStencilElement {
     }
     var HTMLHubEmbedElement: {
         prototype: HTMLHubEmbedElement;
         new (): HTMLHubEmbedElement;
-
-      };
+    };
     interface HTMLHubEventElement extends Components.HubEvent, HTMLStencilElement {
     }
     var HTMLHubEventElement: {

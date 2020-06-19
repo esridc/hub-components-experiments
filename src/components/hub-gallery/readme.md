@@ -1,6 +1,12 @@
-# hub-search
+# hub-gallery
 
-
+```
+<hub-gallery 
+  hubtype="content"
+  limit="12"
+  sort="modified"
+  ></hub-gallery>
+```
 
 <!-- Auto Generated Below -->
 

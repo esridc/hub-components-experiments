@@ -84,44 +84,9 @@ export class HubCard {
    
     return (
       <Host>
-      <calcite-card
-      >
+      <calcite-card>
         {output}
-        {/* <calcite-button slot="footer-leading" color="light" scale="s" icon='circle'></calcite-button>
-        <div slot="footer-trailing">
-          <calcite-button scale="s" color="light" id="card-icon-test-2" icon='circle'></calcite-button>
-          <calcite-button scale="s" color="light" id="card-icon-test-1" icon='circle'></calcite-button>
-          <calcite-dropdown>
-            <calcite-button id="card-icon-test-5" slot="dropdown-trigger" scale="s" color="light" icon='circle'></calcite-button>
-            <calcite-dropdown-group selection-mode="none">
-              <calcite-dropdown-item>View details</calcite-dropdown-item>
-              <calcite-dropdown-item>Duplicate</calcite-dropdown-item>
-              <calcite-dropdown-item>Delete</calcite-dropdown-item>
-            </calcite-dropdown-group>
-          </calcite-dropdown>
-        </div> */}
       </calcite-card>
-    
-        {/* <div class={`hub-content-card layout-${this.layout}`} >
-          {this.url 
-            ? <a class="hub-content-link" href={this.url} ></a> : ""}
-          {this.image
-            ? thumbnail : "" }
-          <div class="hub-content-metadata">
-            {output}
-            {details}
-          </div>
-          {(this.buttonText) ? 
-              <div class="hub-content-footer">
-                <hub-button
-                  text={this.buttonText}
-                  action={this.buttonAction}>
-                </hub-button> 
-              </div>
-              : null
-            }
-
-        </div> */}
       </Host>
     )
   }

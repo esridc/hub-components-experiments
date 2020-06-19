@@ -25,6 +25,21 @@
 | `eventAddAnnotation` |             | `CustomEvent<any>` |
 
 
+## Dependencies
+
+### Depends on
+
+- calcite-card
+
+### Graph
+```mermaid
+graph TD;
+  hub-discussion --> calcite-card
+  calcite-card --> calcite-loader
+  calcite-card --> calcite-checkbox
+  style hub-discussion fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
