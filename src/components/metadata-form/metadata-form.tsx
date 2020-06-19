@@ -43,7 +43,7 @@ export class MetadataForm {
   }
 
   private async loadSpecification() {
-    const file = `/schema/${this.spec}.json`
+    const file = `./schema/${this.spec}.json`
     return await Metadata.getMetadataSpec(file);
   }
 

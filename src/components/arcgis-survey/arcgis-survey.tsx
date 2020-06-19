@@ -13,12 +13,15 @@ export class ArcgisSurvey {
     const url = `https://survey123.arcgis.com/share/${this.item}`
     this.iFrameEl.src = url
   }
-
+  embedCode() {
+    return `<arcgis-survey item='${this.item}'></arcgis-survey>`
+  }
   render() {
     return (
       <Host>
         <slot></slot>
         <iframe src="" id="survey-iframe" ref={(el: HTMLIFrameElement) => this.iFrameEl = el}></iframe>
+        <hub-embed code={this.embedCode()} />
       </Host>
     );
   }
