@@ -9,12 +9,16 @@
 
 | Property      | Attribute     | Description | Type     | Default                                                                                          |
 | ------------- | ------------- | ----------- | -------- | ------------------------------------------------------------------------------------------------ |
-| `code`        | `code`        |             | `string` | `'&gt;hub-survey&lt;'`                                                                           |
+| `code`        | `code`        |             | `string` | `'<hub-survey />'`                                                                               |
 | `description` | `description` |             | `string` | `"You can add this card to your own site. Copy the code below and paste into your site editor."` |
 | `title`       | `title`       |             | `string` | `"Embed this card"`                                                                              |
 
 
 ## Dependencies
+
+### Used by
+
+ - [arcgis-survey](../arcgis-survey)
 
 ### Depends on
 
@@ -31,6 +35,7 @@ graph TD;
   calcite-modal --> calcite-scrim
   calcite-modal --> calcite-icon
   calcite-scrim --> calcite-loader
+  arcgis-survey --> hub-embed
   style hub-embed fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

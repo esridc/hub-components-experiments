@@ -13,7 +13,7 @@ export class HubEmbed {
 
   @Prop() title: string = "Embed this card";
   @Prop() description: string = "You can add this card to your own site. Copy the code below and paste into your site editor."
-  @Prop() code:string = '&gt;hub-survey&lt;';
+  @Prop() code:string = '<hub-survey />';
 
   componentDidLoad() {
     this.inputEl.value = this.code;
@@ -45,7 +45,7 @@ export class HubEmbed {
         <calcite-modal ref={(el: HTMLCalciteModalElement) => this.modalEl = el} aria-labelledby="modal-title">
           <h3 slot="header" id="modal-title">{this.title}</h3>
           <div slot="content">
-            <input ref={(el: HTMLInputElement) => this.inputEl = el} readonly/>
+            <input type="text" class="code" ref={(el: HTMLInputElement) => this.inputEl = el} readonly/>
           </div>
           <calcite-button onClick={(_ev: Event) => this.copyText()} slot="primary" width="full">
             Copy
