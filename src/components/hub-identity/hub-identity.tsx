@@ -1,5 +1,5 @@
-import { Component, Host, h, Prop } from '@stencil/core';
-import { readSessionFromCookie, authenticateUser } from '../../utils/utils';
+import { Component, Host, h, Prop, State } from '@stencil/core';
+import { readSessionFromCookie, authenticateUser, deleteSessionCookie } from '../../utils/utils';
 
 @Component({
   tag: 'hub-identity',
@@ -8,7 +8,14 @@ import { readSessionFromCookie, authenticateUser } from '../../utils/utils';
 })
 export class HubIdentity {
 
-  @Prop() message:string = "Sign In"
+  @Prop() signin:string = "Sign In"
+
+  @Prop() signout:string = "Sign Out"
+
+  @Prop() displaysignin: boolean = true;
+  @Prop() displaysignout: boolean = true;
+
+  @State() username:string;
 
    /**
    * ClientID to identify the app launching OAuth
@@ -29,21 +36,30 @@ export class HubIdentity {
     this.session = readSessionFromCookie();
   }  
   
-  async identityAuthenticate() {
+  async identitySignin() {
     this.session = await authenticateUser(this.clientid, this.orgurl)
   }
+  async identitySignout() {
+    this.session = null;
+    this.username = null;
+    deleteSessionCookie();
+  }  
 
   render() {
     let output = [];
-    if(this.session === undefined) {
+    if((this.session === undefined || this.session === null) && this.displaysignin) {
       output.push(
-        <calcite-button onClick={(_event: MouseEvent) => this.identityAuthenticate()}>
-          {this.message}
+        <calcite-button onClick={(_event: MouseEvent) => this.identitySignin()}>
+          {this.signin}
         </calcite-button>
       )
-    } else {
+    } else if (this.displaysignout) {
       output.push(
-       <code>{this.session}</code>
+        <div>
+          <calcite-button onClick={(_event: MouseEvent) => this.identitySignout()}>
+            {`${this.signout}`}
+          </calcite-button>
+       </div>
       )
     }    
     return (

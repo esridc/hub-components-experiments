@@ -260,7 +260,8 @@ export namespace Components {
           * ClientID to identify the app launching OAuth
          */
         "clientid": string;
-        "message": string;
+        "displaysignin": boolean;
+        "displaysignout": boolean;
         /**
           * url of the ArcGIS Online organization
          */
@@ -269,6 +270,8 @@ export namespace Components {
           * Serialized authentication information.
          */
         "session": string;
+        "signin": string;
+        "signout": string;
     }
     interface HubInput {
         /**
@@ -903,7 +906,8 @@ declare namespace LocalJSX {
           * ClientID to identify the app launching OAuth
          */
         "clientid"?: string;
-        "message"?: string;
+        "displaysignin"?: boolean;
+        "displaysignout"?: boolean;
         /**
           * url of the ArcGIS Online organization
          */
@@ -912,6 +916,8 @@ declare namespace LocalJSX {
           * Serialized authentication information.
          */
         "session"?: string;
+        "signin"?: string;
+        "signout"?: string;
     }
     interface HubInput {
         /**

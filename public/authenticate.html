@@ -22,6 +22,7 @@
         // hub auth adds a little sugar to make the user public
         session = arcgisHub.completeOAuth2({
           clientId: clientId,
+          popup: true
         })
           .then(() => {
             console.debug("Authenticate: successful!")

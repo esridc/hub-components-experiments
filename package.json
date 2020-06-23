@@ -21,7 +21,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "watch": "stencil build --docs --watch",
-    "storybook.run": "start-storybook --port 9001 -s ./public",
+    "storybook.run": "start-storybook --port 9001 -s ./public,./dist",
     "storybook-ssl.run": "start-storybook --port 9001 -s ./public --https --ssl-cert ~/Downloads/certs/localui.arcgis.com.crt --ssl-ca ~/Downloads/certs/myCA.pem --ssl-key ~/Downloads/certs/localui.arcgis.com.key",
     "storybook": "npm-run-all --parallel watch storybook.run",
     "publish-npm": "npm publish --access public",
