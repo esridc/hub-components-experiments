@@ -14,8 +14,8 @@ export class HubSonarChat {
   open:boolean = true;
   placeholder:string = "Ask a question...";
   @Prop() sendMessages:IHubChat = {messages: [
-    {text: "Welcome to Sonar", type: "text", user: "user"}, 
-    {text: "Search for Datasets", type: "action", user: "user", route: "/index"},
+    {text: "Welcome to Sonar", type: "text", user: "user2"}, 
+    {text: "Search for Datasets", type: "action", user: "user2", route: "/index"},
   ]}
 
   @Listen("onChatSubmitted")
@@ -37,7 +37,7 @@ export class HubSonarChat {
 
     } else {
       messages = {
-        messages: [{text: "Thanks for " + event.detail.text, type: "text", user: "user"}],
+        messages: [{text: "Thanks for " + event.detail.text, type: "text", user: "user2"}],
         actions: [{text: "Search for Data"}]
       }
     }

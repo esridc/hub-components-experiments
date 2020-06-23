@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property       | Attribute | Description | Type       | Default                                                                                                                                                            |
-| -------------- | --------- | ----------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `sendMessages` | --        |             | `IHubChat` | `{messages: [     {text: "Welcome to Sonar", type: "text", user: "user"},      {text: "Search for Datasets", type: "action", user: "user", route: "/index"},   ]}` |
-| `service`      | `service` |             | `string`   | `null`                                                                                                                                                             |
+| Property       | Attribute | Description | Type       | Default                                                                                                                                                              |
+| -------------- | --------- | ----------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sendMessages` | --        |             | `IHubChat` | `{messages: [     {text: "Welcome to Sonar", type: "text", user: "user2"},      {text: "Search for Datasets", type: "action", user: "user2", route: "/index"},   ]}` |
+| `service`      | `service` |             | `string`   | `null`                                                                                                                                                               |
 
 
 ## Dependencies

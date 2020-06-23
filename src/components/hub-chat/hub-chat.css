@@ -183,7 +183,7 @@
     }
 }
 
-.chat-msg.user > .msg-avatar img {
+.chat-msg.user3 > .msg-avatar img, .chat-msg.user2 > .msg-avatar img {
   width:45px;
   height:45px;
   border-radius:50%;
@@ -212,6 +212,17 @@
 }
 .cm-msg-action {  
   cursor: pointer;
+  float: right;
+}
+
+.cm-msg-action .cm-msg-body {
+  font-size: 0.8em;
+  text-decoration: underline;  
+}
+
+.cm-msg-action .msg-avatar {
+  display: none;
+  
 }
 
 .chat-msg {

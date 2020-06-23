@@ -157,9 +157,9 @@ export class HubChat {
 
               {this.messages.map((message) =>           
                 //  add cm-msg- prefix below
-                <div id={"cm-msg-" + this.messageCount} class={`chat-msg ${message.user ? message.user : 'user'}`}>
+                <div id={"cm-msg-" + this.messageCount} class={`cm-msg-${message.type} chat-msg ${message.user ? message.user : 'user2'}`}>
                   <span class="msg-avatar">
-                    <img src={`https://i.pravatar.cc/150?u=${message.user ? message.user : 'user'}@sonar`} />
+                    <img src={`https://i.pravatar.cc/150?u=${message.user ? message.user : 'user2'}@sonar`} />
                   </span>
                   <div innerHTML={message.text} class={`cm-msg-body cm-msg-${message.type}`} onClick={() => this.sendAction(message)}>
                     
