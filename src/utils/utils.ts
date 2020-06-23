@@ -23,11 +23,15 @@ export const authenticateUser = (clientId, orgurl):Promise<string> => {
   let session = readSessionFromCookie();
   return new Promise((resolve, _reject) => {
     if (!session) {
+      // get the host + path without filename
+      let pathname = window.location.pathname;
+      let path = pathname.substring(0, pathname.lastIndexOf('/')) + "/";
+
       // register your own app to create a unique clientId
       return UserSession.beginOAuth2({
         clientId: clientId,
         portal: `${orgurl}/sharing/rest`,
-        redirectUri: `${window.location.origin}/authenticate.html`
+        redirectUri: `${window.location.origin}${path}authenticate.html`
       })
       .then(userSession => {
           writeSessionToCookie(userSession);
