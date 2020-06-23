@@ -14,6 +14,12 @@ export const writeSessionToCookie = (session:UserSession):void => {
 }
 
 export const authenticateUser = (clientId, orgurl):Promise<string> => {
+  console.log("authenticateUser", {
+    clientId: clientId,
+    portal: `${orgurl}/sharing/rest`,
+    redirectUri: `${window.location.origin}/authenticate.html`
+  })
+  debugger;
   let session = readSessionFromCookie();
   return new Promise((resolve, _reject) => {
     if (!session) {

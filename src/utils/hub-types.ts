@@ -12,6 +12,11 @@ export enum HubType {member=1, team=2, event=100, dataset=1000, document, map , 
 
 export type IHubSearchResults = {
   results: IHubResource[]
+  meta?: {
+    total: number, 
+    count: number,
+    start: number
+  }
   // TODO: add search metadata
 } 
 

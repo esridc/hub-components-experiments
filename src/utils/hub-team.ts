@@ -12,7 +12,7 @@ export async function searchTeams(query: string): Promise<HubTypes.IHubSearchRes
         return teamResults;
     }, []);
 
-    return { results: teams };
+    return { results: teams, meta: {total: groups.total, count: groups.num, start: groups.start } };
 }
 
 export async function getTeam(id:string): Promise<HubTypes.IHubTeam> {

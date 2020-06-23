@@ -1,6 +1,7 @@
 import { IAuthenticationManager } from "@esri/arcgis-rest-request"
-import { IUser, searchUsers, getUser } from "@esri/arcgis-rest-portal";
+import { IUser, searchUsers, getUser, searchGroups } from "@esri/arcgis-rest-portal";
 import * as HubTypes from './hub-types'
+import { convertGroupToTeam } from './hub-team'
 
 const portalUrl = 'https://www.arcgis.com';
 
@@ -41,6 +42,20 @@ export async function searchMembers(query: string, authentication: IAuthenticati
 export async function getMember(id:string): Promise<HubTypes.IHubMember> {
   let user = await getUser(id);
   return convertUserToMember(user);
+}
+
+export async function getMemberTeams(authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
+  let groups = await searchGroups({ q: "tags:initiativeCollaborationGroup", 
+                                    params: { searchUserAccess: "groupMember" }, 
+                                    authentication 
+                                });
+
+  let teams = groups.results.reduce((teamResults, group) => {
+      teamResults.push(convertGroupToTeam(group))
+      return teamResults;
+  }, []);
+
+  return { results: teams, meta: {total: groups.total, count: groups.num, start: groups.start } };
 }
 
 export function convertUserToMember(user: IUser): HubTypes.IHubMember {

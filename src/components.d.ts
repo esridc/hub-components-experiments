@@ -255,6 +255,21 @@ export namespace Components {
          */
         "sort": "name" | "modified";
     }
+    interface HubIdentity {
+        /**
+          * ClientID to identify the app launching OAuth
+         */
+        "clientid": string;
+        "message": string;
+        /**
+          * url of the ArcGIS Online organization
+         */
+        "orgurl": string;
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
+    }
     interface HubInput {
         /**
           * Default address to search
@@ -371,6 +386,12 @@ export namespace Components {
         "portal": string;
         "session": string;
     }
+    interface HubWorkspace {
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
+    }
     interface MetadataElementView {
         "description": string;
         "id": string;
@@ -480,6 +501,12 @@ declare global {
         prototype: HTMLHubGalleryElement;
         new (): HTMLHubGalleryElement;
     };
+    interface HTMLHubIdentityElement extends Components.HubIdentity, HTMLStencilElement {
+    }
+    var HTMLHubIdentityElement: {
+        prototype: HTMLHubIdentityElement;
+        new (): HTMLHubIdentityElement;
+    };
     interface HTMLHubInputElement extends Components.HubInput, HTMLStencilElement {
     }
     var HTMLHubInputElement: {
@@ -546,6 +573,12 @@ declare global {
         prototype: HTMLHubUploadFileElement;
         new (): HTMLHubUploadFileElement;
     };
+    interface HTMLHubWorkspaceElement extends Components.HubWorkspace, HTMLStencilElement {
+    }
+    var HTMLHubWorkspaceElement: {
+        prototype: HTMLHubWorkspaceElement;
+        new (): HTMLHubWorkspaceElement;
+    };
     interface HTMLMetadataElementViewElement extends Components.MetadataElementView, HTMLStencilElement {
     }
     var HTMLMetadataElementViewElement: {
@@ -585,6 +618,7 @@ declare global {
         "hub-filter-category": HTMLHubFilterCategoryElement;
         "hub-follow-button": HTMLHubFollowButtonElement;
         "hub-gallery": HTMLHubGalleryElement;
+        "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
@@ -596,6 +630,7 @@ declare global {
         "hub-telemetry": HTMLHubTelemetryElement;
         "hub-upload": HTMLHubUploadElement;
         "hub-upload-file": HTMLHubUploadFileElement;
+        "hub-workspace": HTMLHubWorkspaceElement;
         "metadata-element-view": HTMLMetadataElementViewElement;
         "metadata-form": HTMLMetadataFormElement;
         "metadata-section-help": HTMLMetadataSectionHelpElement;
@@ -863,6 +898,21 @@ declare namespace LocalJSX {
          */
         "sort"?: "name" | "modified";
     }
+    interface HubIdentity {
+        /**
+          * ClientID to identify the app launching OAuth
+         */
+        "clientid"?: string;
+        "message"?: string;
+        /**
+          * url of the ArcGIS Online organization
+         */
+        "orgurl"?: string;
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
+    }
     interface HubInput {
         /**
           * Default address to search
@@ -993,6 +1043,12 @@ declare namespace LocalJSX {
         "portal"?: string;
         "session"?: string;
     }
+    interface HubWorkspace {
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
+    }
     interface MetadataElementView {
         "description"?: string;
         "id"?: string;
@@ -1031,6 +1087,7 @@ declare namespace LocalJSX {
         "hub-filter-category": HubFilterCategory;
         "hub-follow-button": HubFollowButton;
         "hub-gallery": HubGallery;
+        "hub-identity": HubIdentity;
         "hub-input": HubInput;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
@@ -1042,6 +1099,7 @@ declare namespace LocalJSX {
         "hub-telemetry": HubTelemetry;
         "hub-upload": HubUpload;
         "hub-upload-file": HubUploadFile;
+        "hub-workspace": HubWorkspace;
         "metadata-element-view": MetadataElementView;
         "metadata-form": MetadataForm;
         "metadata-section-help": MetadataSectionHelp;
@@ -1066,6 +1124,7 @@ declare module "@stencil/core" {
             "hub-filter-category": LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
             "hub-follow-button": LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
+            "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
@@ -1077,6 +1136,7 @@ declare module "@stencil/core" {
             "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;
             "hub-upload": LocalJSX.HubUpload & JSXBase.HTMLAttributes<HTMLHubUploadElement>;
             "hub-upload-file": LocalJSX.HubUploadFile & JSXBase.HTMLAttributes<HTMLHubUploadFileElement>;
+            "hub-workspace": LocalJSX.HubWorkspace & JSXBase.HTMLAttributes<HTMLHubWorkspaceElement>;
             "metadata-element-view": LocalJSX.MetadataElementView & JSXBase.HTMLAttributes<HTMLMetadataElementViewElement>;
             "metadata-form": LocalJSX.MetadataForm & JSXBase.HTMLAttributes<HTMLMetadataFormElement>;
             "metadata-section-help": LocalJSX.MetadataSectionHelp & JSXBase.HTMLAttributes<HTMLMetadataSectionHelpElement>;
