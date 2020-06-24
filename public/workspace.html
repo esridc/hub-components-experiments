@@ -1,0 +1,29 @@
+<html>
+    <head></head>
+    <body>
+        <hub-workspace></hub-workspace>
+
+        <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://unpkg.com/@esri/calcite-components@1.0.0-beta.30/dist/calcite/calcite.css"
+      />
+    
+    <!-- CSS only needed if you have global styles -->
+    <link rel="stylesheet" href="./myLib/myLib.css" />
+    <script type="module" src="./radar/radar.esm.js"></script>
+    <script nomodule="" src="./radar/radar.js"></script>
+    
+    <hub-identity             
+    clientid="WXC842NRBVB6NZ2r"
+    orgurl="https://dcdev.maps.arcgis.com"
+    showsignin="true" 
+    showsignout="true"></hub-identity>
+    <style>
+        hub-identity {
+            width: 260px;
+            height: 40px;
+        }
+    </style>
+    </body>
+</html>

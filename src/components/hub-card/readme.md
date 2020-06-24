@@ -29,6 +29,7 @@ A rectangular card for showing content, optionally with an thumbnail image and l
  - [hub-gallery](../hub-gallery)
  - [hub-profile-card](../hub-profile-card)
  - [hub-radar](../hub-radar)
+ - [hub-workspace](../hub-workspace)
 
 ### Depends on
 
@@ -49,6 +50,7 @@ graph TD;
   hub-gallery --> hub-card
   hub-profile-card --> hub-card
   hub-radar --> hub-card
+  hub-workspace --> hub-card
   style hub-card fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

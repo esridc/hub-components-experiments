@@ -40,7 +40,7 @@ export async function searchMembers(query: string, authentication: IAuthenticati
 }
 
 export async function getMember(id:string): Promise<HubTypes.IHubMember> {
-  let user = await getUser(id);
+  let user = await getUser({username: id});
   return convertUserToMember(user);
 }
 

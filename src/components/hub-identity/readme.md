@@ -20,10 +20,6 @@
 
 ## Dependencies
 
-### Used by
-
- - [hub-workspace](../hub-workspace)
-
 ### Depends on
 
 - calcite-button
@@ -34,7 +30,6 @@ graph TD;
   hub-identity --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
-  hub-workspace --> hub-identity
   style hub-identity fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

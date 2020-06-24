@@ -7,7 +7,7 @@ import { UserSession } from '@esri/arcgis-rest-auth';
 import * as HubTeams from '../../utils/hub-team';
 import * as HubMembers from '../../utils/hub-member';
 import * as HubTypes from '../../utils/hub-types';
-import { readSessionFromCookie } from '../../utils/utils';
+import { readSessionFromCookie, truncateString } from '../../utils/utils';
 
 @Component({
   tag: 'hub-gallery',
@@ -179,16 +179,6 @@ export class HubGallery {
     this.updateGallery(this.queryInput, customParams);
   }
 
-  truncateString(input:string, length: number):string {
-    let ending = "...";
-    if(input === undefined || input === null) {
-      return "";
-    } else if(input.length > length) {
-      return input.substring(0, length-ending.length) + ending;
-    } else {
-      return input;
-    }
-  }
   render() {
     let output = []
     this.results.map(result => {
@@ -200,8 +190,8 @@ export class HubGallery {
           contenttype={`${HubTypes.HubType[result.hubtype]} by ${result.publisher.name}`}
           url={result.url}
           image={result.thumbnailUrl} 
-          name={this.truncateString(result.title, 55)} 
-          description={this.truncateString(result.summary, 90)}
+          name={truncateString(result.title, 55)} 
+          description={truncateString(result.summary, 90)}
           buttonText={this.buttontext}
           onClick={() => ""}
           // content={this.content}

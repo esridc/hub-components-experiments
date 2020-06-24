@@ -30,7 +30,8 @@ export interface IHubResource {
   summary?: string // snippet or other summary
   culture?: string
   publisher: IHubOwner // TODO: better name? item.owner with more user metadata
-
+  url?: string
+  
   // Derived metadata
   hubType: HubType
   permissions: { // overrides item.access with more attributes. could flatten.
@@ -104,7 +105,7 @@ export interface IContent extends IHubResource,IItem {
 
 // Common interface to people networks: Teams, Orgs, Members
 export interface IHubCommunity extends IHubResource {
-  url?: string
+
 }
 export interface IHubOrg extends IHubCommunity { }
 

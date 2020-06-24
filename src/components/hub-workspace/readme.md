@@ -16,15 +16,18 @@
 
 ### Depends on
 
-- [hub-identity](../hub-identity)
+- [hub-card](../hub-card)
 
 ### Graph
 ```mermaid
 graph TD;
-  hub-workspace --> hub-identity
-  hub-identity --> calcite-button
+  hub-workspace --> hub-card
+  hub-card --> calcite-button
+  hub-card --> calcite-card
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  calcite-card --> calcite-loader
+  calcite-card --> calcite-checkbox
   style hub-workspace fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

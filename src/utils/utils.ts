@@ -18,6 +18,17 @@ export const deleteSessionCookie = ():void => {
 }
 
 
+export function truncateString(input:string, length: number):string {
+  let ending = "...";
+  if(input === undefined || input === null) {
+    return "";
+  } else if(input.length > length) {
+    return input.substring(0, length-ending.length) + ending;
+  } else {
+    return input;
+  }
+}
+
 export const authenticateUser = (clientId, orgurl):Promise<string> => {
   console.log("authenticateUser", {
     clientId: clientId,
