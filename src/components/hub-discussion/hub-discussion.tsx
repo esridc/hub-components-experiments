@@ -1,18 +1,6 @@
 import { Component, Prop, Element, h, State, Listen, Event, EventEmitter} from '@stencil/core';
 import { IResourceObject, getAnnotationServiceUrl, searchAnnotations, addAnnotations, deleteAnnotations } from '@esri/hub-annotations';
-import { camera24, send24 } from "@esri/calcite-ui-icons";
-
-// export interface IResourceObject {
-//   id: string;
-//   type: "annotations" | "users";
-//   attributes: {
-//     [key: string]: any;
-//   };
-// }
-
-function formatDate(date) {
-  return new Date(date).toLocaleString();
-}
+import { convertUserToMember, getAnonymousMember } from "../../utils/hub-member"
 
 @Component({
   tag: 'hub-discussion',
@@ -20,9 +8,10 @@ function formatDate(date) {
   shadow: true,
 })
 export class HubDiscussion {
-  messageEl: HTMLTextAreaElement;
 
   @Element() el: HTMLElement;
+  @Prop() allowReply:boolean = true;
+
   @Prop() org: string;
   @Prop({ mutable: true }) target: string;
   @Prop({ mutable: true }) author: string;
@@ -139,15 +128,16 @@ export class HubDiscussion {
     return null;
   }
 
-  newComment(event) {
-    event.preventDefault();
-    this.addAnnotation({ attributes: {
-                      author: this.author,
-                      source: window.location.href,
-                      target: this.target,
-                      description: this.messageEl.value
-                    }});
-  }
+  // TODO: change this to a listener and get event detail
+  // newComment(event) {
+  //   event.preventDefault();
+  //   this.addAnnotation({ attributes: {
+  //                     author: this.author,
+  //                     source: window.location.href,
+  //                     target: this.target,
+  //                     description: this.messageEl.value
+  //                   }});
+  // }
 
   addAnnotation(newAnnotation) {
     return addAnnotations({url: this.annotationsUrl, features: [
@@ -163,25 +153,21 @@ export class HubDiscussion {
     console.log("removeAnnotation", [event.target.id, event])
   }
 
-  authorName(username) {
-    if(this.authors[username] !== undefined && this.authors[username].fullName.length > 0) {
-      return this.authors[username].fullName;
-    } else {
-      return username;
+  getAuthor(username) {
+    // if(this.authors[username] === undefined) {
+    //   let member = await getMember(username);
+    //   this.authors[username] = member;
+    // }
+    console.log("getAuthor 1", [username, this.authors[username]])
+    if(username.length === 0) {
+      return this.authors[username] || getAnonymousMember();
     }
+    console.log("getAuthor 2", [username, convertUserToMember(this.authors[username])])
+    return convertUserToMember(this.authors[username]);
   }
-  authorImage(username) {
-    console.log("hub-discussion: authorImage", username)
-    if(this.authors[username] !== undefined 
-        && this.authors[username].thumbnail !== undefined 
-        && this.authors[username].thumbnail !== null) {
-      let thumbUrl = this.portalUrl + '/sharing/rest/community/users/' + username + '/info/' + this.authors[username].thumbnail;
-      return <img src={thumbUrl} alt="profile"/>;
-    } else {
-      return <svg width="32" height="32"><path d={camera24}></path></svg>;
-    }
+  private formatDate(date) {
+    return new Date(date).toLocaleString();
   }
-
   discussionCard(annotation) {
     return (
     <calcite-card
@@ -190,15 +176,15 @@ export class HubDiscussion {
       >
     <img class="card-image" slot="thumbnail"  />
     <h3 slot="title">
-      <div class="chat_img"> {this.authorImage(annotation.attributes.Creator)} </div>
-      {this.authorName(annotation.attributes.Creator)}
+      <img src={this.getAuthor(annotation.attributes.Creator).thumbnailUrl} />
+      {this.getAuthor(annotation.attributes.Creator).name}
     </h3>
     <span slot="subtitle">
       
     </span>
       {annotation.attributes.description}
       <span slot="footer-leading">
-        {formatDate(annotation.attributes.created_at)}
+        {this.formatDate(annotation.attributes.created_at)}
       </span>
     </calcite-card>)    
   }
@@ -240,37 +226,28 @@ export class HubDiscussion {
 
     //https://ptetutorials.com/images/user-profile.png
     output.push(
-      <div class="inbox_people">
+      <div class="discussion-list">
         {this.annotations.map((annotation) =>
-          <div class="chat_list" id={"annotation-" + annotation.attributes.OBJECTID}>
-              <div class="chat_people">
-                <div class="chat_img"> {this.authorImage(annotation.attributes.Creator)} </div>
-                <div class="chat_ib">
-                  <p>{annotation.attributes.description}</p>
-                  <h5>{this.authorName(annotation.attributes.Creator)}
-                    <span class="chat_date" onClick={() => this.deleteAnnotation(annotation.attributes.OBJECTID)}>{formatDate(annotation.attributes.created_at)}</span>
-                  </h5>
-                </div>
-              </div>
-            </div>
+          <discussion-entry 
+            annotationId={"annotation-" + annotation.attributes.OBJECTID}
+            authorImage={this.getAuthor(annotation.attributes.Creator).thumbnailUrl}
+            authorName={this.getAuthor(annotation.attributes.Creator).name}
+            description={annotation.attributes.description}
+            publishedDate={this.formatDate(annotation.attributes.created_at)}
+            allowReply={this.allowReply}
+          >
+
+          </discussion-entry>
         )}
       </div>
     )
     output.push(
-      <form id="annotation-form">
-        <div class="type_msg">
-          <div class="input_msg_write">
-            <textarea class="write_msg" placeholder="How can we improve our city?" ref={(el: HTMLTextAreaElement) => this.messageEl = el} />
-            <button class="msg_send_btn" onClick={(event: UIEvent) => this.newComment(event)}><svg width="32" height="32"><path d={send24}></path></svg></button>
-          </div>
-        </div>
-      </form>
-        // onClick2={(event: UIEvent) => this.addAnnotation(event)}
+      <discussion-input></discussion-input>
     )
     return output;
   }
 
   render() {
-    return this.renderGallery();
+    return this.renderList();
   }
 }

@@ -1,5 +1,11 @@
 # hub-discussion
 
+## TODO
+
+- Add options to create new annotation layers
+- Hub-wide, or per team / event
+- How to migrate older services?
+- Target should be `item:id:4ef` or other, not Featureservice URL
 
 
 <!-- Auto Generated Below -->
@@ -9,6 +15,7 @@
 
 | Property         | Attribute         | Description | Type      | Default     |
 | ---------------- | ----------------- | ----------- | --------- | ----------- |
+| `allowReply`     | `allow-reply`     |             | `boolean` | `true`      |
 | `annotationsUrl` | `annotations-url` |             | `string`  | `undefined` |
 | `author`         | `author`          |             | `string`  | `undefined` |
 | `org`            | `org`             |             | `string`  | `undefined` |
@@ -30,13 +37,20 @@
 ### Depends on
 
 - calcite-card
+- [discussion-entry](../discussion-entry)
+- [discussion-input](../discussion-input)
 
 ### Graph
 ```mermaid
 graph TD;
   hub-discussion --> calcite-card
+  hub-discussion --> discussion-entry
+  hub-discussion --> discussion-input
   calcite-card --> calcite-loader
   calcite-card --> calcite-checkbox
+  discussion-input --> calcite-button
+  calcite-button --> calcite-loader
+  calcite-button --> calcite-icon
   style hub-discussion fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -54,7 +54,7 @@ export interface IHubResource {
       // Unique or additional formal metadata that will be displayed in sidebar
   }
 }
-export interface IContent extends IHubResource,IItem {
+export interface IHubContent extends IHubResource,IItem {
   
   // Inherited metadata (noting relevant subset of all item attributes)
   // id: string // item.id
@@ -104,11 +104,8 @@ export interface IContent extends IHubResource,IItem {
 }
 
 // Common interface to people networks: Teams, Orgs, Members
-export interface IHubCommunity extends IHubResource {
-
-}
+export interface IHubCommunity extends IHubResource { }
 export interface IHubOrg extends IHubCommunity { }
-
 export interface IHubTeam extends IGroup, IHubCommunity { }
 
 // Minimal Subset for item.owner for now

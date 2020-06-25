@@ -12,7 +12,7 @@ export class HubContentCard {
   @Prop() content:string = "4f5c78bfe89a4304aec3a6cfd492d0cd";
   @Prop() layout: "horizontal" | "vertical" = "vertical";
   
-  @Prop({ mutable: true }) contentItem: HubTypes.IContent = null; 
+  @Prop({ mutable: true }) contentItem: HubTypes.IHubContent = null; 
 
   @Prop() actionButton; 
 

@@ -1,4 +1,4 @@
-import { IContent, HubType, ControlOptions } from "./hub-types"
+import { IHubContent, HubType, ControlOptions } from "./hub-types"
 // import { getCategory } from "@esri/hub-common";
 import { IModel, getModel, IHubRequestOptions} from "@esri/hub-common";
 const portalUrl = 'https://www.arcgis.com/sharing/rest/';
@@ -67,13 +67,13 @@ export function getContent(
    *
    *
    * @param {IModel} item Portal Item
-   * @returns {IContentModel} Hub content object
+   * @returns {IHubContentModel} Hub content object
    * @export
    */
   export function _convertItemToContent(
     item: IModel
-  ): IContent {
-    let content:IContent = Object.assign(item.item, {
+  ): IHubContent {
+    let content:IHubContent = Object.assign(item.item, {
         // id: item.item.id,
         name: item.item.title,
         hubType: HubType.dataset, // getCategory(item.item.type),
@@ -140,13 +140,13 @@ export function getContent(
    *
    *
    * @param {IModel} item Hub Item
-   * @returns {IContent} Hub content object
+   * @returns {IHubContent} Hub content object
    * @export
    */
   export function _convertHubv3ToContent(
     hubmodel: any
-  ): IContent {
-    let content:IContent = {
+  ): IHubContent {
+    let content:IHubContent = {
         id: hubmodel.id,
         title: hubmodel.attributes.name,
         snippet: hubmodel.attributes.searchDescription,

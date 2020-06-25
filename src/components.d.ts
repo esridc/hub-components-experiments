@@ -24,6 +24,18 @@ export namespace Components {
     interface ArcgisSurvey {
         "item": string;
     }
+    interface DiscussionEntry {
+        "allowReply": boolean;
+        "annotationId": string;
+        "authorImage": string;
+        "authorName": string;
+        "description": string;
+        "publishedDate": string;
+    }
+    interface DiscussionInput {
+        "placeholder": string;
+        "submit": string;
+    }
     interface DropArea {
         "allowedTypes": Array<string>;
     }
@@ -76,7 +88,7 @@ export namespace Components {
     interface HubContentCard {
         "actionButton": any;
         "content": string;
-        "contentItem": HubTypes.IContent;
+        "contentItem": HubTypes.IHubContent;
         "layout": "horizontal" | "vertical";
     }
     interface HubContentTable {
@@ -102,6 +114,7 @@ export namespace Components {
         "sort": "name" | "modified" | "-name" | "-modified";
     }
     interface HubDiscussion {
+        "allowReply": boolean;
         "annotationsUrl": string;
         "author": string;
         "org": string;
@@ -432,6 +445,18 @@ declare global {
         prototype: HTMLArcgisSurveyElement;
         new (): HTMLArcgisSurveyElement;
     };
+    interface HTMLDiscussionEntryElement extends Components.DiscussionEntry, HTMLStencilElement {
+    }
+    var HTMLDiscussionEntryElement: {
+        prototype: HTMLDiscussionEntryElement;
+        new (): HTMLDiscussionEntryElement;
+    };
+    interface HTMLDiscussionInputElement extends Components.DiscussionInput, HTMLStencilElement {
+    }
+    var HTMLDiscussionInputElement: {
+        prototype: HTMLDiscussionInputElement;
+        new (): HTMLDiscussionInputElement;
+    };
     interface HTMLDropAreaElement extends Components.DropArea, HTMLStencilElement {
     }
     var HTMLDropAreaElement: {
@@ -609,6 +634,8 @@ declare global {
     interface HTMLElementTagNameMap {
         "arcgis-notebook": HTMLArcgisNotebookElement;
         "arcgis-survey": HTMLArcgisSurveyElement;
+        "discussion-entry": HTMLDiscussionEntryElement;
+        "discussion-input": HTMLDiscussionInputElement;
         "drop-area": HTMLDropAreaElement;
         "hub-button": HTMLHubButtonElement;
         "hub-card": HTMLHubCardElement;
@@ -656,6 +683,19 @@ declare namespace LocalJSX {
     }
     interface ArcgisSurvey {
         "item"?: string;
+    }
+    interface DiscussionEntry {
+        "allowReply"?: boolean;
+        "annotationId"?: string;
+        "authorImage"?: string;
+        "authorName"?: string;
+        "description"?: string;
+        "publishedDate"?: string;
+    }
+    interface DiscussionInput {
+        "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
+        "placeholder"?: string;
+        "submit"?: string;
     }
     interface DropArea {
         "allowedTypes"?: Array<string>;
@@ -717,7 +757,7 @@ declare namespace LocalJSX {
     interface HubContentCard {
         "actionButton"?: any;
         "content"?: string;
-        "contentItem"?: HubTypes.IContent;
+        "contentItem"?: HubTypes.IHubContent;
         "layout"?: "horizontal" | "vertical";
     }
     interface HubContentTable {
@@ -743,6 +783,7 @@ declare namespace LocalJSX {
         "sort"?: "name" | "modified" | "-name" | "-modified";
     }
     interface HubDiscussion {
+        "allowReply"?: boolean;
         "annotationsUrl"?: string;
         "author"?: string;
         "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
@@ -1081,6 +1122,8 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "arcgis-notebook": ArcgisNotebook;
         "arcgis-survey": ArcgisSurvey;
+        "discussion-entry": DiscussionEntry;
+        "discussion-input": DiscussionInput;
         "drop-area": DropArea;
         "hub-button": HubButton;
         "hub-card": HubCard;
@@ -1118,6 +1161,8 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "arcgis-notebook": LocalJSX.ArcgisNotebook & JSXBase.HTMLAttributes<HTMLArcgisNotebookElement>;
             "arcgis-survey": LocalJSX.ArcgisSurvey & JSXBase.HTMLAttributes<HTMLArcgisSurveyElement>;
+            "discussion-entry": LocalJSX.DiscussionEntry & JSXBase.HTMLAttributes<HTMLDiscussionEntryElement>;
+            "discussion-input": LocalJSX.DiscussionInput & JSXBase.HTMLAttributes<HTMLDiscussionInputElement>;
             "drop-area": LocalJSX.DropArea & JSXBase.HTMLAttributes<HTMLDropAreaElement>;
             "hub-button": LocalJSX.HubButton & JSXBase.HTMLAttributes<HTMLHubButtonElement>;
             "hub-card": LocalJSX.HubCard & JSXBase.HTMLAttributes<HTMLHubCardElement>;

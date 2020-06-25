@@ -44,6 +44,13 @@ export async function getMember(id:string): Promise<HubTypes.IHubMember> {
   return convertUserToMember(user);
 }
 
+export function getAnonymousMember(): HubTypes.IHubMember {
+  return convertUserToMember({
+      username: "",
+      fullName: "Anonymous",
+      thumbnail: ""      
+    })
+}
 export async function getMemberTeams(authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
   let groups = await searchGroups({ q: "tags:initiativeCollaborationGroup", 
                                     params: { searchUserAccess: "groupMember" }, 

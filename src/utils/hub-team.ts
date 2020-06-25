@@ -40,7 +40,7 @@ export function convertGroupToTeam(group:IGroup): HubTypes.IHubTeam {
         name: group.title,
         hubtype: HubTypes.HubType.team,
         publisher: { name: group.owner, username: group.owner },
-        summary: group.snippet || "No profile summary.",
+        summary: group.snippet || group.description || "No profile summary.",
         description: group.description || "No profile description.",
         hubType: HubTypes.HubType.team,
         url: `${portalUrl}/home/group.html?id=${group.id}`,
