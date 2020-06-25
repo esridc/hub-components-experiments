@@ -26,7 +26,7 @@
     "storybook": "npm-run-all --parallel watch storybook.run",
     "publish-npm": "npm publish --access public",
     "publish-storybook": "storybook-to-ghpages -s build-storybook",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s ./public,./dist"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
