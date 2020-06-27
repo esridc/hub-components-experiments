@@ -152,6 +152,12 @@ export namespace Components {
          */
         "session": string;
     }
+    interface HubEventsList {
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
+    }
     interface HubFilterCategory {
         /**
           * List of categories to show. Can be set or inferred from facet
@@ -511,6 +517,12 @@ declare global {
         prototype: HTMLHubEventElement;
         new (): HTMLHubEventElement;
     };
+    interface HTMLHubEventsListElement extends Components.HubEventsList, HTMLStencilElement {
+    }
+    var HTMLHubEventsListElement: {
+        prototype: HTMLHubEventsListElement;
+        new (): HTMLHubEventsListElement;
+    };
     interface HTMLHubFilterCategoryElement extends Components.HubFilterCategory, HTMLStencilElement {
     }
     var HTMLHubFilterCategoryElement: {
@@ -645,6 +657,7 @@ declare global {
         "hub-discussion": HTMLHubDiscussionElement;
         "hub-embed": HTMLHubEmbedElement;
         "hub-event": HTMLHubEventElement;
+        "hub-events-list": HTMLHubEventsListElement;
         "hub-filter-category": HTMLHubFilterCategoryElement;
         "hub-follow-button": HTMLHubFollowButtonElement;
         "hub-gallery": HTMLHubGalleryElement;
@@ -817,6 +830,12 @@ declare namespace LocalJSX {
           * url of the ArcGIS Online organization
          */
         "orgurl"?: string;
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
+    }
+    interface HubEventsList {
         /**
           * Serialized authentication information.
          */
@@ -1133,6 +1152,7 @@ declare namespace LocalJSX {
         "hub-discussion": HubDiscussion;
         "hub-embed": HubEmbed;
         "hub-event": HubEvent;
+        "hub-events-list": HubEventsList;
         "hub-filter-category": HubFilterCategory;
         "hub-follow-button": HubFollowButton;
         "hub-gallery": HubGallery;
@@ -1172,6 +1192,7 @@ declare module "@stencil/core" {
             "hub-discussion": LocalJSX.HubDiscussion & JSXBase.HTMLAttributes<HTMLHubDiscussionElement>;
             "hub-embed": LocalJSX.HubEmbed & JSXBase.HTMLAttributes<HTMLHubEmbedElement>;
             "hub-event": LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
+            "hub-events-list": LocalJSX.HubEventsList & JSXBase.HTMLAttributes<HTMLHubEventsListElement>;
             "hub-filter-category": LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
             "hub-follow-button": LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;

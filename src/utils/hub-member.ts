@@ -1,7 +1,13 @@
-import { IAuthenticationManager } from "@esri/arcgis-rest-request"
+import { IAuthenticationManager, } from "@esri/arcgis-rest-request"
+import { UserSession } from '@esri/arcgis-rest-auth';
+
 import { IUser, searchUsers, getUser, searchGroups } from "@esri/arcgis-rest-portal";
 import * as HubTypes from './hub-types'
 import { convertGroupToTeam } from './hub-team'
+
+import { getPortal } from "@esri/arcgis-rest-portal";
+import { getEventQueryFromType, searchEvents } from "@esri/hub-events";
+import { IQueryFeaturesOptions } from "@esri/arcgis-rest-feature-layer";
 
 const portalUrl = 'https://www.arcgis.com';
 
@@ -39,18 +45,64 @@ export async function searchMembers(query: string, authentication: IAuthenticati
   return { results: members };
 }
 
-export async function getMember(id:string): Promise<HubTypes.IHubMember> {
-  let user = await getUser({username: id});
-  return convertUserToMember(user);
+export async function getMember(id:string, authentication?: IAuthenticationManager): Promise<HubTypes.IHubMember> {
+  let user = await getUser({username: id, authentication: authentication as UserSession});
+  return convertUserToMember(user, authentication);
 }
 
 export function getAnonymousMember(): HubTypes.IHubMember {
   return convertUserToMember({
       username: "",
       fullName: "Anonymous",
-      thumbnail: ""      
+      thumbnail: ""
     })
 }
+
+export async function getMemberEvents(authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
+  // Process:
+  // 1. Find Portal eventGroups=Portal.search where(type=event && members.include?(user))
+  // 2. Query Events Service where(groupId.include?(eventGroups)) && other filters (e.g. upcoming/nearby)
+  // 3. Convert Group+Features into IHubEvent
+  
+  let groups = await searchGroups({ 
+    q: "tags:Hub Event Group", 
+    params: { searchUserAccess: "groupMember", num: 100 }, 
+    authentication 
+  });
+  
+  let eventGroups = groups.results.reduce((teamResults, group) => {
+    teamResults.push(`groupId = '${group.id}'`) // TODO: build this array elsewhere
+    return teamResults;
+  }, []);
+
+  let portal = await getPortal(null, { authentication: authentication });
+  
+  // @esri/hub-events directly calls Feature Service instead of using the Hub API proxy.
+  // let eventServiceUrl = await getEventFeatureServiceUrl( portal.id );
+  let eventServiceUrl = `https://hub.arcgis.com/api/v3/events/${portal.id}/Hub%20Events/FeatureServer/0/`
+
+  const searchOptions: IQueryFeaturesOptions = getEventQueryFromType("upcoming", {
+    url: eventServiceUrl,
+    authentication
+  });
+  searchOptions.where += ` AND (${eventGroups.join(' OR ')})`
+
+  let eventFeatures = await searchEvents( searchOptions );
+  console.log("hub-member: getMemberEvents", [searchOptions, eventFeatures]);
+
+  let events = eventFeatures.data.reduce((eventResults, event) => {
+    eventResults.push({
+      id: event.id,
+      name: event.attributes.title,
+      summary: event.attributes.venue,
+      description: event.attributes.description,
+      hubtype: HubTypes.HubType.event
+    })
+    return eventResults;
+  }, [])
+  return { results: events, meta: {total: 10, count: 10, start: 1 } };
+}
+
 export async function getMemberTeams(authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
   let groups = await searchGroups({ q: "tags:initiativeCollaborationGroup", 
                                     params: { searchUserAccess: "groupMember" }, 
@@ -65,7 +117,7 @@ export async function getMemberTeams(authentication: IAuthenticationManager): Pr
   return { results: teams, meta: {total: groups.total, count: groups.num, start: groups.start } };
 }
 
-export function convertUserToMember(user: IUser): HubTypes.IHubMember {
+export function convertUserToMember(user: IUser, _authentication?: IAuthenticationManager): HubTypes.IHubMember {
   let member:HubTypes.IHubMember = Object.assign(user, {
     id: user.username,
     name: user.fullName || user.username,

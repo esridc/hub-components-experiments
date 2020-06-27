@@ -1,8 +1,6 @@
 import { Component, Host, h, State, Listen, Prop } from '@stencil/core';
 import * as HubSearch from '../../utils/hub-search';
 import * as HubSite from '../../utils/hub-site';
-// import * as HubAPI from '../../utils/hub-api';
-// import { authenticateUser } from '../../utils/utils';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import * as HubTeams from '../../utils/hub-team';
 import * as HubMembers from '../../utils/hub-member';

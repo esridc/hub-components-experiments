@@ -3,15 +3,30 @@
 }
 .workspace-grid {
   display: grid;
-  grid-template:
-    "bio teams" auto
-    "events datasets" auto /
-    12rem 3fr;
+  grid-template-columns: 15% 35% 35% 15%;
+  grid-template-rows: auto;
+
+  grid-template-areas:
+    "avatar bio map map"
+    "interests teams teams events";
+  column-gap: 10px;
   padding: 0 1rem 0 3rem;  
 }
 
+.workspace-avatar {
+  grid-area: avatar;
+}
 .workspace-bio {
   grid-area: bio;
+}
+.workspace-map {
+  grid-area: map;
+}
+.workspace-interests {
+  grid-area: interests;
+}
+.workspace-events {
+  grid-area: events;
 }
 .workspace-teams {
   grid-area: teams;

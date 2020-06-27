@@ -108,6 +108,12 @@ export interface IHubCommunity extends IHubResource { }
 export interface IHubOrg extends IHubCommunity { }
 export interface IHubTeam extends IGroup, IHubCommunity { }
 
+export interface IHubEvent extends IHubCommunity/*, IGroup*/ { 
+  // startDate: Date;
+  // endDate: Date;
+  attendees?: IHubMember[];
+}
+
 // Minimal Subset for item.owner for now
 export interface IHubOwner {
   name: string, // Readable name
