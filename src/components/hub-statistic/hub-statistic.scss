@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+.statistic-s {
+  span {
+    display: inline;
+  }
+  span:not(:last-child) {
+    padding-right: 2px;
+  }
+
+  .value {
+    font-weight: bold;
+  }
+}
+.statistic-m {
+  span {
+    display: block;
+  }
+  .label {
+    border-bottom: 1px solid #888;
+  }
+  span:not(:first-child) {
+    padding-right: 2px;
+    display: inline;
+  }
+
+  .value {
+    font-weight: bold;
+    font-size: 1.5em
+  }
+}
