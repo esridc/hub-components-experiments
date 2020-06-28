@@ -81,6 +81,7 @@ export async function getMemberEvents(authentication: IAuthenticationManager): P
   // let eventServiceUrl = await getEventFeatureServiceUrl( portal.id );
   let eventServiceUrl = `https://hub.arcgis.com/api/v3/events/${portal.id}/Hub%20Events/FeatureServer/0/`
 
+  // TODO: add support for all vs. upcoming events
   const searchOptions: IQueryFeaturesOptions = getEventQueryFromType("upcoming", {
     url: eventServiceUrl,
     authentication
@@ -100,7 +101,9 @@ export async function getMemberEvents(authentication: IAuthenticationManager): P
     })
     return eventResults;
   }, [])
-  return { results: events, meta: {total: 10, count: 10, start: 1 } };
+
+  // EventGroups are all events the user has registered, and events are matches for upcoming.
+  return { results: events, meta: {total: eventGroups.length, count: events.length, start: 1 } };
 }
 
 export async function getMemberTeams(authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {

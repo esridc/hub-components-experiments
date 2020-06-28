@@ -365,6 +365,12 @@ export namespace Components {
         "sendMessages": IHubChat;
         "service": string;
     }
+    interface HubStatistic {
+        "label": string;
+        "size": "s" | "m" | "l";
+        "units": string;
+        "value": string | number;
+    }
     interface HubSuggestInput {
         /**
           * Geographic extent limit for geocoding
@@ -589,6 +595,12 @@ declare global {
         prototype: HTMLHubSonarChatElement;
         new (): HTMLHubSonarChatElement;
     };
+    interface HTMLHubStatisticElement extends Components.HubStatistic, HTMLStencilElement {
+    }
+    var HTMLHubStatisticElement: {
+        prototype: HTMLHubStatisticElement;
+        new (): HTMLHubStatisticElement;
+    };
     interface HTMLHubSuggestInputElement extends Components.HubSuggestInput, HTMLStencilElement {
     }
     var HTMLHubSuggestInputElement: {
@@ -669,6 +681,7 @@ declare global {
         "hub-profile-editor": HTMLHubProfileEditorElement;
         "hub-radar": HTMLHubRadarElement;
         "hub-sonar-chat": HTMLHubSonarChatElement;
+        "hub-statistic": HTMLHubStatisticElement;
         "hub-suggest-input": HTMLHubSuggestInputElement;
         "hub-telemetry": HTMLHubTelemetryElement;
         "hub-upload": HTMLHubUploadElement;
@@ -1060,6 +1073,12 @@ declare namespace LocalJSX {
         "sendMessages"?: IHubChat;
         "service"?: string;
     }
+    interface HubStatistic {
+        "label"?: string;
+        "size"?: "s" | "m" | "l";
+        "units"?: string;
+        "value"?: string | number;
+    }
     interface HubSuggestInput {
         /**
           * Geographic extent limit for geocoding
@@ -1164,6 +1183,7 @@ declare namespace LocalJSX {
         "hub-profile-editor": HubProfileEditor;
         "hub-radar": HubRadar;
         "hub-sonar-chat": HubSonarChat;
+        "hub-statistic": HubStatistic;
         "hub-suggest-input": HubSuggestInput;
         "hub-telemetry": HubTelemetry;
         "hub-upload": HubUpload;
@@ -1204,6 +1224,7 @@ declare module "@stencil/core" {
             "hub-profile-editor": LocalJSX.HubProfileEditor & JSXBase.HTMLAttributes<HTMLHubProfileEditorElement>;
             "hub-radar": LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
             "hub-sonar-chat": LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
+            "hub-statistic": LocalJSX.HubStatistic & JSXBase.HTMLAttributes<HTMLHubStatisticElement>;
             "hub-suggest-input": LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
             "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;
             "hub-upload": LocalJSX.HubUpload & JSXBase.HTMLAttributes<HTMLHubUploadElement>;

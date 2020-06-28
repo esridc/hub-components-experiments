@@ -16,6 +16,7 @@
 
 ### Depends on
 
+- [hub-statistic](../hub-statistic)
 - calcite-chip
 - [hub-events-list](../hub-events-list)
 - [hub-card](../hub-card)
@@ -23,6 +24,7 @@
 ### Graph
 ```mermaid
 graph TD;
+  hub-workspace --> hub-statistic
   hub-workspace --> calcite-chip
   hub-workspace --> hub-events-list
   hub-workspace --> hub-card

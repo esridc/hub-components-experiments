@@ -16,9 +16,9 @@ export class HubWorkspace {
    */
   @Prop({ mutable: true }) session: string;
 
-  @State() teams: HubTypes.IHubResource[];
+  @State() teams: HubTypes.IHubSearchResults;
   @State() member: HubTypes.IHubMember;
-  @State() events: HubTypes.IHubEvent[];
+  @State() events: HubTypes.IHubSearchResults;
 
   async componentWillLoad() {
     this.session = readSessionFromCookie();
@@ -29,11 +29,8 @@ export class HubWorkspace {
       const username = JSON.parse(this.session).username;
       this.member = await HubMember.getMember( username, auth )
       
-      let search = await HubMember.getMemberTeams( auth );
-      this.teams = search.results;
-      
-      let eventSearch = await HubMember.getMemberEvents( auth );
-      this.events = eventSearch.results;
+      this.teams = await HubMember.getMemberTeams( auth );
+      this.events = await HubMember.getMemberEvents( auth );
 
       console.log("Workspace: Events", this.events);
       
@@ -65,6 +62,9 @@ export class HubWorkspace {
             
           </div>
           <div class="workspace-interests">
+            <h4>Stats</h4>
+              <hub-statistic size="m" label="Member of" value={this.teams.meta.total} units="Teams"></hub-statistic>
+              <hub-statistic size="m" label="Attended" value={this.events.meta.total} units="Events"></hub-statistic>
             <h4>Interests</h4>
             {this.member.tags.map((tag) =>
               <calcite-chip value={tag}>{tag}</calcite-chip>
@@ -76,7 +76,7 @@ export class HubWorkspace {
           </div>
           <div class="workspace-teams">
           {/* <h4>Your Teams</h4><br/> */}
-          {this.teams.map((result) =>
+          {this.teams.results.map((result) =>
             // <hub-profile-card id={result.id} type="team"></hub-profile-card>
             <hub-card 
               class="gallery-card"

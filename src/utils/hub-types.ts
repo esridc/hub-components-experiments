@@ -124,6 +124,9 @@ export interface IHubMember extends IUser, IHubCommunity {
   username?: string // user.username
   org?: IHubOrg // Which AGO organization does this user belong to?
   teams?: IHubTeam[]
+  events?: IHubEvent[]
+  interests?: string[]
+  places?: string[]
 }
 
 // title, description, and optional link to license item with more info
