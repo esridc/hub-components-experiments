@@ -20,6 +20,7 @@ export class HubWorkspace {
   @State() member: HubTypes.IHubMember;
   @State() events: HubTypes.IHubSearchResults;
   @State() places: HubTypes.IHubGeography[];
+  @State() content: HubTypes.IHubSearchResults;
 
   async componentWillLoad() {
     this.session = readSessionFromCookie();
@@ -32,11 +33,13 @@ export class HubWorkspace {
       [this.member,
         this.teams,
         this.events,
-        this.places] = await Promise.all([
+        this.places,
+        this.content] = await Promise.all([
         await HubMember.getMember( username, auth ),
         await HubMember.getMemberTeams( auth ),
         await HubMember.getMemberEvents( auth ),
-        await HubMember.getMemberPlaces( username, auth )
+        await HubMember.getMemberPlaces( username, auth ),
+        await HubMember.searchMemberContent( username, auth )
       ])
 
       console.log("Workspace: Events", this.events);
@@ -73,6 +76,7 @@ export class HubWorkspace {
               <hub-statistic size="m" label="Member of" value={this.teams.meta.total} units="Teams"></hub-statistic>
               <hub-statistic size="m" label="Attended" value={this.events.meta.total} units="Events"></hub-statistic>
               <hub-statistic size="m" label="Nearby" value={this.places.length} units="Places"></hub-statistic>
+              <hub-statistic size="m" label="Owns" value={this.content.meta.total} units="Content Items"></hub-statistic>
             <h4>Interests</h4>
             {this.member.metadata?.interests.map((tag) =>
               <calcite-chip value={tag}>{tag}</calcite-chip>

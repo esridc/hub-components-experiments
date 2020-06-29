@@ -9,6 +9,7 @@ import { getPortal } from "@esri/arcgis-rest-portal";
 import { getEventQueryFromType, searchEvents } from "@esri/hub-events";
 import { IQueryFeaturesOptions } from "@esri/arcgis-rest-feature-layer";
 import { getUserResource, addUserResource } from "./arcgis-user"
+import { search } from './hub-search'
 
 const portalUrl = 'https://www.arcgis.com';
 
@@ -108,7 +109,6 @@ export async function getMemberEvents(authentication: IAuthenticationManager): P
 }
 
 
-
 export async function setMemberPlaces(username:string, places: HubTypes.IHubGeography[], authentication?: IAuthenticationManager): Promise<boolean> {
   let resp = await addUserResource({username, name: "places.json", content: JSON.stringify(places), authentication})
   console.log("hub-member: getMemberPlaces", places)
@@ -133,6 +133,14 @@ export async function getMemberTeams(authentication: IAuthenticationManager): Pr
   }, []);
 
   return { results: teams, meta: {total: groups.total, count: groups.num, start: groups.start } };
+}
+
+export async function searchMemberContent(username, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
+  let content = await search({ owner: username,
+                              authentication 
+                            });
+                            debugger;
+  return content
 }
 
 function usersInterests(user: IUser): string[] {
