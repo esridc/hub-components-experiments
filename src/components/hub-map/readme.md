@@ -16,12 +16,13 @@
 
 ## Properties
 
-| Property  | Attribute | Description                                | Type      | Default     |
-| --------- | --------- | ------------------------------------------ | --------- | ----------- |
-| `center`  | `center`  | Center of the map, "[longitude, latitude]" | `string`  | `undefined` |
-| `drawing` | `drawing` | Option to show drawing tools               | `boolean` | `false`     |
-| `webmap`  | `webmap`  | Webmap Item configuration to load          | `string`  | `undefined` |
-| `zoom`    | `zoom`    | Map zoom level: 1=world ... 20=street      | `number`  | `4`         |
+| Property         | Attribute         | Description                                | Type      | Default     |
+| ---------------- | ----------------- | ------------------------------------------ | --------- | ----------- |
+| `center`         | `center`          | Center of the map, "[longitude, latitude]" | `string`  | `undefined` |
+| `drawing`        | `drawing`         | Option to show drawing tools               | `boolean` | `false`     |
+| `showFullscreen` | `show-fullscreen` |                                            | `boolean` | `false`     |
+| `webmap`         | `webmap`          | Webmap Item configuration to load          | `string`  | `undefined` |
+| `zoom`           | `zoom`            | Map zoom level: 1=world ... 20=street      | `number`  | `4`         |
 
 
 ## Events

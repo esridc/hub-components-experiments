@@ -33,6 +33,8 @@ export class HubMap {
    */
   @Prop({ mutable: true, reflect: true }) drawing: boolean = false;
 
+  @Prop() showFullscreen: boolean = false;
+
   /** 
    * Sends event when drawing is complete
    */
@@ -289,9 +291,11 @@ export class HubMap {
         <calcite-button class="drawing-button"
           onClick={() => this.startDrawing() } ref={(el: HTMLElement) => this.drawingButton = el}>
             Add a Note</calcite-button>
+        {this.showFullscreen ? 
         <calcite-button class="fullscreen-button"
           onClick={() => this.requestFullScreen() } ref={(el: HTMLElement) => this.fullScreenButton = el}>
             Full Screen</calcite-button>
+            : ""}
       </Host>
     )
   }

@@ -79,8 +79,6 @@ export class HubRadar {
       if(this.messages !== undefined && this.messages.length > 0) {
         output.push( <slot name="before-results" /> )
         this.messages.forEach(m => {
-            
-          console.log("Radard card", m);
           output.push(
             <hub-card layout="horizontal" 
               contenttype={m.layer}

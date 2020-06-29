@@ -311,6 +311,7 @@ export namespace Components {
           * Option to show drawing tools
          */
         "drawing": boolean;
+        "showFullscreen": boolean;
         /**
           * Webmap Item configuration to load
          */
@@ -1037,6 +1038,7 @@ declare namespace LocalJSX {
           * Sends event when drawing is complete
          */
         "onDrawingComplete"?: (event: CustomEvent<any>) => void;
+        "showFullscreen"?: boolean;
         /**
           * Webmap Item configuration to load
          */

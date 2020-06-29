@@ -64,7 +64,7 @@ export class DropArea {
         <h3>Drag Files to Upload</h3>
         <p>Maximum Size: 200 gb </p>
         <p>
-          Supported types: Spreadsheet CSV, Excel, Shapefile, GeoJSON, ArcGIS GeoService, PDF, Word DOC, Images
+          Supported types: Spreadsheet CSV, Excel, Shapefile, GeoJSON, PDF, Word Doc, Images
         </p>
         <input type="file" id="fileElem" multiple accept={this.allowedTypes.join(",")} onChange={(event: any) => this.handleFiles(event.target.files)}/>
         <label class="button retry" htmlFor="fileElem">Browse</label>
