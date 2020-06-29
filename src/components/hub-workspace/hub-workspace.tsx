@@ -19,6 +19,7 @@ export class HubWorkspace {
   @State() teams: HubTypes.IHubSearchResults;
   @State() member: HubTypes.IHubMember;
   @State() events: HubTypes.IHubSearchResults;
+  @State() places: HubTypes.IHubGeography[];
 
   async componentWillLoad() {
     this.session = readSessionFromCookie();
@@ -27,10 +28,16 @@ export class HubWorkspace {
     console.log("Session", this.session)
     if(this.session !== undefined) {
       const username = JSON.parse(this.session).username;
-      this.member = await HubMember.getMember( username, auth )
-      
-      this.teams = await HubMember.getMemberTeams( auth );
-      this.events = await HubMember.getMemberEvents( auth );
+
+      [this.member,
+        this.teams,
+        this.events,
+        this.places] = await Promise.all([
+        await HubMember.getMember( username, auth ),
+        await HubMember.getMemberTeams( auth ),
+        await HubMember.getMemberEvents( auth ),
+        await HubMember.getMemberPlaces( username, auth )
+      ])
 
       console.log("Workspace: Events", this.events);
       
@@ -65,10 +72,15 @@ export class HubWorkspace {
             <h4>Stats</h4>
               <hub-statistic size="m" label="Member of" value={this.teams.meta.total} units="Teams"></hub-statistic>
               <hub-statistic size="m" label="Attended" value={this.events.meta.total} units="Events"></hub-statistic>
+              <hub-statistic size="m" label="Nearby" value={this.places.length} units="Places"></hub-statistic>
             <h4>Interests</h4>
             {this.member.metadata?.interests.map((tag) =>
               <calcite-chip value={tag}>{tag}</calcite-chip>
             )}
+            <h4>Places</h4>
+            {this.places.map((place) =>
+              <calcite-chip value={place.name}>{place.name} ({place.coverage})</calcite-chip>
+            )}            
           </div>
           <div class="workspace-events">
             <h4>Your Upcoming Events</h4>

@@ -153,7 +153,7 @@ export interface IField {
 }
 
 export interface IHubGeography {
-  title?:string
+  name?:string
   coverage?: 'global' | 'regional' | 'local' // enrichment
   geometry?: string // serialized JSON, or should this refer to /resources/boundary.json
   source?: string // feature layer + feature URL. e.g. "https://server.cityx.gov/FeatureService/0/53"
