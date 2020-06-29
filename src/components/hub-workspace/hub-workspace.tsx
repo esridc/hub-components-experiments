@@ -59,14 +59,14 @@ export class HubWorkspace {
             <em>Joined {this.dateToText(this.member.createdDate)}</em>
           </div>
           <div class="workspace-map">
-            
+            <hub-map></hub-map>
           </div>
           <div class="workspace-interests">
             <h4>Stats</h4>
               <hub-statistic size="m" label="Member of" value={this.teams.meta.total} units="Teams"></hub-statistic>
               <hub-statistic size="m" label="Attended" value={this.events.meta.total} units="Events"></hub-statistic>
             <h4>Interests</h4>
-            {this.member.tags.map((tag) =>
+            {this.member.metadata?.interests.map((tag) =>
               <calcite-chip value={tag}>{tag}</calcite-chip>
             )}
           </div>

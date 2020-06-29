@@ -332,6 +332,17 @@ export namespace Components {
         "summary": string;
         "tags": Array<string>;
     }
+    interface HubPlacesMap {
+        /**
+          * Option to view places map, or edit places map
+         */
+        "mode": "view" | "edit";
+        "places": HubTypes.IHubGeography[];
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
+    }
     interface HubProfileCard {
         /**
           * ID For the profile. Username, Team ID, Org ID
@@ -571,6 +582,12 @@ declare global {
         prototype: HTMLHubMetadataEditorElement;
         new (): HTMLHubMetadataEditorElement;
     };
+    interface HTMLHubPlacesMapElement extends Components.HubPlacesMap, HTMLStencilElement {
+    }
+    var HTMLHubPlacesMapElement: {
+        prototype: HTMLHubPlacesMapElement;
+        new (): HTMLHubPlacesMapElement;
+    };
     interface HTMLHubProfileCardElement extends Components.HubProfileCard, HTMLStencilElement {
     }
     var HTMLHubProfileCardElement: {
@@ -677,6 +694,7 @@ declare global {
         "hub-input": HTMLHubInputElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
+        "hub-places-map": HTMLHubPlacesMapElement;
         "hub-profile-card": HTMLHubProfileCardElement;
         "hub-profile-editor": HTMLHubProfileEditorElement;
         "hub-radar": HTMLHubRadarElement;
@@ -1040,6 +1058,17 @@ declare namespace LocalJSX {
         "summary"?: string;
         "tags"?: Array<string>;
     }
+    interface HubPlacesMap {
+        /**
+          * Option to view places map, or edit places map
+         */
+        "mode"?: "view" | "edit";
+        "places"?: HubTypes.IHubGeography[];
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
+    }
     interface HubProfileCard {
         /**
           * ID For the profile. Username, Team ID, Org ID
@@ -1179,6 +1208,7 @@ declare namespace LocalJSX {
         "hub-input": HubInput;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
+        "hub-places-map": HubPlacesMap;
         "hub-profile-card": HubProfileCard;
         "hub-profile-editor": HubProfileEditor;
         "hub-radar": HubRadar;
@@ -1220,6 +1250,7 @@ declare module "@stencil/core" {
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
+            "hub-places-map": LocalJSX.HubPlacesMap & JSXBase.HTMLAttributes<HTMLHubPlacesMapElement>;
             "hub-profile-card": LocalJSX.HubProfileCard & JSXBase.HTMLAttributes<HTMLHubProfileCardElement>;
             "hub-profile-editor": LocalJSX.HubProfileEditor & JSXBase.HTMLAttributes<HTMLHubProfileEditorElement>;
             "hub-radar": LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;

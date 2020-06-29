@@ -10,6 +10,7 @@
     "avatar bio map map"
     "interests teams teams events";
   column-gap: 10px;
+  row-gap: 20px;
   padding: 0 1rem 0 3rem;  
 }
 
@@ -21,6 +22,7 @@
 }
 .workspace-map {
   grid-area: map;
+  height: 200px;
 }
 .workspace-interests {
   grid-area: interests;

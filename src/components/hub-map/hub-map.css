@@ -7,3 +7,14 @@
   height: 100%;
   min-height: 100%;
 }
+.drawing-button {
+  display: none;
+  position: relative;
+  bottom: 20px;
+  left: 200px;
+}
+.fullscreen-button {
+  position: relative;
+  bottom: 40px;
+  left: 20px;
+}

@@ -50,9 +50,9 @@ export interface IHubResource {
   boundary?: IHubGeography // [Future] Inline, or boolean when stored at known location /resources/boundary.json
   
   // Additional metadata from custom/formal elements
-  metadata?: {
+  metadata?: any
       // Unique or additional formal metadata that will be displayed in sidebar
-  }
+  
 }
 export interface IHubContent extends IHubResource,IItem {
   

@@ -35,7 +35,9 @@
 
 ### Used by
 
+ - [hub-places-map](../hub-places-map)
  - [hub-radar](../hub-radar)
+ - [hub-workspace](../hub-workspace)
 
 ### Depends on
 
@@ -47,7 +49,9 @@ graph TD;
   hub-map --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  hub-places-map --> hub-map
   hub-radar --> hub-map
+  hub-workspace --> hub-map
   style hub-map fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

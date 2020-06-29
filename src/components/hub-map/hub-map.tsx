@@ -11,6 +11,7 @@ export class HubMap {
 
   @Element() hostElement: HTMLElement;
   fullScreenButton: HTMLElement;
+  drawingButton: HTMLElement;
 
   /**
    * Webmap Item configuration to load
@@ -108,9 +109,7 @@ export class HubMap {
     );
   }
 
-  componentDidUpdate() {
-    console.log("component update");
-    
+  componentDidUpdate() {    
     // this.zoomToUrlObjectId(600);
   }
 
@@ -234,8 +233,12 @@ export class HubMap {
         this.esriMap.add(notesLayer);
         this.esriMapView.ui.add(sketch, "top-right");
 
-        
+        sketch.on("update", _event => {
+          // debugger;
+        });
+
         sketch.on('create', event => {
+          
           try {
           if (event.state === 'complete') { // || ['reshape-stop', 'move-stop'].includes(event.toolEventInfo.type)) {
             console.debug("Sketch Complete", event.graphic)
@@ -271,11 +274,24 @@ export class HubMap {
     this.hostElement.requestFullscreen();
   }
 
+  startDrawing() {
+    if(!this.drawing) {
+      this.drawing = true;
+      this.addSketch();  
+      this.drawingButton.style.display = "none";
+    }
+  }
+
   render() {
     return (
       <Host>
         <div class="hub-map"></div>
-        <calcite-button onClick={() => this.requestFullScreen() } ref={(el: HTMLElement) => this.fullScreenButton = el}>Full Screen</calcite-button>
+        <calcite-button class="drawing-button"
+          onClick={() => this.startDrawing() } ref={(el: HTMLElement) => this.drawingButton = el}>
+            Add a Note</calcite-button>
+        <calcite-button class="fullscreen-button"
+          onClick={() => this.requestFullScreen() } ref={(el: HTMLElement) => this.fullScreenButton = el}>
+            Full Screen</calcite-button>
       </Host>
     )
   }
