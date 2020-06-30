@@ -111,7 +111,7 @@ export class HubWorkspace {
               name={truncateString(result.name, 55)} 
               description={truncateString(result.summary, 90)}
               url={result.url}
-              buttonText="View Team"
+              buttonText={`View ${HubTypes.HubType[result.hubType]}`}
               onClick={() => ""}
               // content={this.content}
             >

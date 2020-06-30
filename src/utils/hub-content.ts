@@ -98,10 +98,13 @@ export function getContent(
         // boundary: 
 
     });
-
-    if(item.item.thumbnail) {
+    // debugger
+    if(item.item.thumbnail !== undefined && item.item.thumbnail !== null ) {
       content.thumbnailUrl = `${portalUrl}content/items/${item.item.id}/info/${item.item.thumbnail}`;
+    } else if (item.item.type === "Image") {
+      content.thumbnailUrl =`${portalUrl}content/items/${item.item.id}/data`;
     }
+
   
     return content;
   }
@@ -191,9 +194,11 @@ export function getContent(
         updatedDateSource: 'item.modified'
     };
   
-
-    if(hubmodel.attributes) {
+    // debugger
+    if(hubmodel.attributes.thumbnail !== undefined && hubmodel.attributes.thumbnail !== null) {
       content.thumbnailUrl =`${portalUrl}content/items/${hubmodel.id}/info/${hubmodel.attributes.thumbnail}`;
+    } else if (hubmodel.attributes.type === "Image") {
+      content.thumbnailUrl =`${portalUrl}content/items/${hubmodel.id}/data`;
     }
 
     return content;
