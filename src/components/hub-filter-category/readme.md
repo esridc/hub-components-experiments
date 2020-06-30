@@ -26,10 +26,6 @@
 
 ## Dependencies
 
-### Used by
-
- - [hub-gallery](../hub-gallery)
-
 ### Depends on
 
 - calcite-checkbox
@@ -43,7 +39,6 @@ graph TD;
   hub-filter-category --> calcite-tree
   hub-filter-category --> calcite-tree-item
   calcite-tree-item --> calcite-icon
-  hub-gallery --> hub-filter-category
   style hub-filter-category fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

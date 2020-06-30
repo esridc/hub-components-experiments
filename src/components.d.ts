@@ -261,6 +261,7 @@ export namespace Components {
           * Search placeholder text
          */
         "searchplaceholder": string;
+        "session": string;
         /**
           * Choose to show or hide search
          */
@@ -980,6 +981,7 @@ declare namespace LocalJSX {
           * Search placeholder text
          */
         "searchplaceholder"?: string;
+        "session"?: string;
         /**
           * Choose to show or hide search
          */

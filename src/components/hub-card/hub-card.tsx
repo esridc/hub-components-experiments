@@ -41,7 +41,7 @@ export class HubCard {
 
   render() {
     let output = [];
-    
+    // debugger;
     if(this.image !== undefined && this.image !== null && this.image.length > 0) {
       // TODO: improve testing for image URL
       if(this.image.match(/^http/) === null && this.item) {

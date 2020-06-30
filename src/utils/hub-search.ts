@@ -7,6 +7,8 @@ import * as HubTypes from "./hub-types"
 
 // TODO: Change hubRequestOptions to better handle different Hub & Portal endpoints (Prod/QA/Enterprise/etc.)
 export async function search(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
+    console.debug("hub-search search: queryParams", [queryParams, hubRequestOptions])
+
     if(hubRequestOptions === undefined 
         || (hubRequestOptions !== undefined && hubRequestOptions.isPortal)) {
         return await searchPortal(queryParams, hubRequestOptions);
@@ -16,7 +18,7 @@ export async function search(queryParams: any, hubRequestOptions?: IHubRequestOp
 }
 
 // https://developers.arcgis.com/rest/users-groups-and-items/search.htm
-async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
+async function searchPortal(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
     // TODO: Consider better ways to map terms across multiple parameters
     queryParams.sort = (queryParams.sort || 'modified').replace(/name/,'title');
     
@@ -66,12 +68,15 @@ async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOp
     if(queryParams.groups !== undefined && queryParams.groups.length > 0) {
         query.push(queryParams.groups.map(group => `group:${group}`).join(" OR "))
     }
+    console.debug("hub-search searchPortal: queryParams", [queryParams, hubRequestOptions])
 
     return searchItems({
         q: query.join(' AND '),
         num: queryParams.limit || "10",
         sortField: sortField,
-        sortOrder: sortOrder
+        sortOrder: sortOrder,
+        authentication: hubRequestOptions?.authentication
+
     }).then((results) => {
         return new Promise((resolve, _reject) => {
             const output = results.results.map(item => _convertItemToContent({item: item}))

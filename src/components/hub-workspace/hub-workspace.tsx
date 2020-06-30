@@ -87,13 +87,23 @@ export class HubWorkspace {
             )}            
           </div>
           <div class="workspace-events">
-            <h4>Your Upcoming Events</h4>
+            <h4>Upcoming Events</h4>
             <hub-events-list session={this.session}></hub-events-list>
+            <h4>Your Teams</h4>
+            <ul>
+            {this.teams.results.map((result) =>
+              <li><a href={result.url}>{truncateString(result.name, 55)}</a></li>
+            )}
+            </ul>
           </div>
           <div class="workspace-teams">
-          {/* <h4>Your Teams</h4><br/> */}
-          {this.teams.results.map((result) =>
-            // <hub-profile-card id={result.id} type="team"></hub-profile-card>
+            <div class="gallery-header">
+              <h2>My Content</h2>
+              <a href="#">Explore more...</a>
+            </div>
+
+            <div class="gallery">
+            {this.content.results.slice(0,4).map((result) =>
             <hub-card 
               class="gallery-card"
               contenttype={`${HubTypes.HubType[result.hubType]} by ${result.publisher.name}`}
@@ -106,7 +116,24 @@ export class HubWorkspace {
               // content={this.content}
             >
             </hub-card> 
-          )}
+            )}
+            </div>
+            <h2>Your Teams</h2>
+            {this.teams.results.slice(0,8).map((result) =>
+            <div class="team-gallery">
+              <div class="gallery-header">
+                <h4><a href={result.url}>{result.name} &gt;</a></h4>
+              </div>
+              <hub-gallery
+                session={this.session}
+                limit={4}
+                groups={result.id}
+                showsearch={false}
+                sort="modified"
+                hubtype="content"
+              ></hub-gallery>
+              </div>              
+            )}
           </div>
         </div>
       )

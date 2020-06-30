@@ -45,7 +45,7 @@ export interface IHubResource {
   createdDateSource: string // description of what was used for this attribute
   updatedDate: Date // formal metadata || new Date(item.modified)
   updatedDateSource: string // description of what was used for this attribute
-  thumbnailUrl: string // Full URL. item.thumbnail with host + path 
+  thumbnailUrl?: string // Full URL. item.thumbnail with host + path 
   
   boundary?: IHubGeography // [Future] Inline, or boolean when stored at known location /resources/boundary.json
   

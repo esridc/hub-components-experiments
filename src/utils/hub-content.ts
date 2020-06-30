@@ -86,7 +86,6 @@ export function getContent(
             permission: item.item.itemControl || ControlOptions.view
         },
         contentUrl: item.item.url,
-        thumbnailUrl: `${portalUrl}content/items/${item.item.id}/info/${item.item.thumbnail}`,
         license: { name: 'Custom License', description: item.item.accessInformation},
         // source:
         createdDate: new Date(item.item.created),
@@ -98,6 +97,10 @@ export function getContent(
         // boundary: 
 
     });
+
+    if(item.item.thumbnail) {
+      content.thumbnailUrl = `${portalUrl}content/items/${item.item.id}/info/${item.item.thumbnail}`;
+    }
   
     return content;
   }
@@ -170,7 +173,7 @@ export function getContent(
             visibility: hubmodel.attributes.access 
         },
         contentUrl: hubmodel.attributes.url,
-        thumbnailUrl: `${portalUrl}content/items/${hubmodel.id}/info/${hubmodel.attributes.thumbnail}`,
+        
         license: { 
             name: 'Custom License', 
             description: hubmodel.attributes.accessInformation
@@ -184,6 +187,11 @@ export function getContent(
         updatedDateSource: 'item.modified'
     };
   
+
+    if(hubmodel.attributes) {
+      content.thumbnailUrl =`${portalUrl}content/items/${hubmodel.id}/info/${hubmodel.attributes.thumbnail}`;
+    }
+    
     return content;
   }
   

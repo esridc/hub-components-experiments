@@ -1,5 +1,5 @@
 import { Component, State, Host, Prop, h, Element, Event, EventEmitter, Watch } from "@stencil/core";
-import { loadCss, loadModules } from "esri-loader";
+import { loadModules } from "esri-loader";
 
 // TODO: why won't render() with shadow:true
 @Component({
@@ -85,8 +85,10 @@ export class HubMap {
   constructor() {
     // this.webmap = this.webmap ? this.webmap : "41281c51f9de45edaf1c8ed44bb10e30"
 
-    loadCss(`${this.esriMapOptions.url}/esri/css/main.css`);
-
+    // loadCss(`${this.esriMapOptions.url}/esri/css/main.css`);
+    // this.esriMapOptions['css'] = true
+    // this.esriMapOptions['insertCssBefore'] = 'style'
+    
     loadModules(
       ["esri/Map"],
       this.esriMapOptions

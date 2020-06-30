@@ -21,6 +21,7 @@
 - calcite-chip
 - [hub-events-list](../hub-events-list)
 - [hub-card](../hub-card)
+- [hub-gallery](../hub-gallery)
 
 ### Graph
 ```mermaid
@@ -30,6 +31,7 @@ graph TD;
   hub-workspace --> calcite-chip
   hub-workspace --> hub-events-list
   hub-workspace --> hub-card
+  hub-workspace --> hub-gallery
   hub-map --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
@@ -38,6 +40,9 @@ graph TD;
   hub-card --> calcite-card
   calcite-card --> calcite-loader
   calcite-card --> calcite-checkbox
+  hub-gallery --> hub-card
+  hub-gallery --> hub-suggest-input
+  hub-suggest-input --> calcite-button
   style hub-workspace fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

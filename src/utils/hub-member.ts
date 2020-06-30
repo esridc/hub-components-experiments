@@ -139,7 +139,6 @@ export async function searchMemberContent(username, authentication: IAuthenticat
   let content = await search({ owner: username,
                               authentication 
                             });
-                            debugger;
   return content
 }
 
