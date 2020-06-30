@@ -3,6 +3,7 @@ import * as HubMember from '../../utils/hub-member'
 import { UserSession } from '@esri/arcgis-rest-auth';
 import { readSessionFromCookie, truncateString } from '../../utils/utils';
 import * as HubTypes from '../../utils/hub-types';
+import { IResourceObject } from '@esri/hub-annotations';
 
 @Component({
   tag: 'hub-workspace',
@@ -21,6 +22,7 @@ export class HubWorkspace {
   @State() events: HubTypes.IHubSearchResults;
   @State() places: HubTypes.IHubGeography[];
   @State() content: HubTypes.IHubSearchResults;
+  @State() comments: IResourceObject[];
 
   async componentWillLoad() {
     this.session = readSessionFromCookie();
@@ -34,12 +36,14 @@ export class HubWorkspace {
         this.teams,
         this.events,
         this.places,
-        this.content] = await Promise.all([
+        this.content,
+        this.comments] = await Promise.all([
         await HubMember.getMember( username, auth ),
         await HubMember.getMemberTeams( auth ),
         await HubMember.getMemberEvents( auth ),
         await HubMember.getMemberPlaces( username, auth ),
-        await HubMember.searchMemberContent( username, auth )
+        await HubMember.searchMemberContent( username, auth ),
+        await HubMember.searchMemberComments( username, auth )
       ])
 
       console.log("Workspace: Events", this.events);
@@ -77,6 +81,7 @@ export class HubWorkspace {
               <hub-statistic size="s" value={this.events.meta.total} units="Events"></hub-statistic>
               <hub-statistic size="s" value={this.content.meta.total} units="Content Items"></hub-statistic>
               <hub-statistic size="s" value={this.places.length} units="Places"></hub-statistic>
+              <hub-statistic size="s" value={this.comments.length} units="Comments"></hub-statistic>
             <h3>Interests</h3>
             {this.member.metadata?.interests.map((tag) =>
               <calcite-chip value={tag}>{tag}</calcite-chip>

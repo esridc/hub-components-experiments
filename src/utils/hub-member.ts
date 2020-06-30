@@ -10,6 +10,7 @@ import { getEventQueryFromType, searchEvents } from "@esri/hub-events";
 import { IQueryFeaturesOptions } from "@esri/arcgis-rest-feature-layer";
 import { getUserResource, addUserResource } from "./arcgis-user"
 import { search } from './hub-search'
+import { searchAnnotations, IResourceObject, getAnnotationServiceUrl } from "@esri/hub-annotations";
 
 const portalUrl = 'https://www.arcgis.com';
 
@@ -133,6 +134,20 @@ export async function getMemberTeams(authentication: IAuthenticationManager): Pr
   }, []);
 
   return { results: teams, meta: {total: groups.total, count: groups.num, start: groups.start } };
+}
+
+export async function searchMemberComments(username, authentication: IAuthenticationManager): Promise<IResourceObject[]> { 
+  let query = ["1=1"];
+
+  query.push(`Creator LIKE '${username}'`)
+
+  let portal = await getPortal(null, { authentication: authentication });
+  let annotationsUrl = await getAnnotationServiceUrl( portal.id )
+  annotationsUrl += '/0';
+    
+  console.log("hub-discussion: Search", [search, query, {url: annotationsUrl, params: {where: query.join(" AND ")}}])
+  const annotations = await searchAnnotations({url: annotationsUrl, where: query.join(" AND ")});
+  return annotations.data;
 }
 
 export async function searchMemberContent(username, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
