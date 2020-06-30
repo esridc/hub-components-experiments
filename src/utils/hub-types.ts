@@ -152,19 +152,32 @@ export interface IField {
   statistics:Array<any>
 }
 
-export interface IHubGeography {
-  name?:string
-  coverage?: 'global' | 'regional' | 'local' // enrichment
-  geometry?: string // serialized JSON, or should this refer to /resources/boundary.json
-  source?: string // feature layer + feature URL. e.g. "https://server.cityx.gov/FeatureService/0/53"
-  item?: string // item ID used for setting geometry
-}
-
 // Optional configured app links that replace "Create StoryMap" with links to specific apps/sites
 // per https://esriarlington.tpondemand.com/entity/96316-content-viewer-sees-associated-app-links
 export interface IActionLink {
   title: string
   url: string
+}
+
+import { IGeometry } from "@esri/arcgis-rest-types";
+export interface IHubAnnotation {
+  id?: string
+  author?: string
+  target?: string
+  source?: string
+  status?: string
+  content?: string
+  geometry?: IGeometry
+  createdDate?: Date
+  updatedDate?: Date
+}
+
+export interface IHubGeography {
+  name?:string
+  coverage?: 'global' | 'regional' | 'local' // enrichment
+  geometry?: IGeometry // serialized JSON, or should this refer to /resources/boundary.json
+  source?: string // feature layer + feature URL. e.g. "https://server.cityx.gov/FeatureService/0/53"
+  item?: string // item ID used for setting geometry
 }
 
 

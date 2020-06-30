@@ -25,6 +25,8 @@ export namespace Components {
         "item": string;
     }
     interface DiscussionEntry {
+        "allowDelete": boolean;
+        "allowEdit": boolean;
         "allowReply": boolean;
         "annotationId": string;
         "authorImage": string;
@@ -33,8 +35,14 @@ export namespace Components {
         "publishedDate": string;
     }
     interface DiscussionInput {
+        "annotationsUrl": string;
         "placeholder": string;
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
         "submit": string;
+        "target": string;
     }
     interface DropArea {
         "allowedTypes": Array<string>;
@@ -120,6 +128,10 @@ export namespace Components {
         "org": string;
         "portalUrl": string;
         "search": string;
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
         "target": string;
         "update": boolean;
     }
@@ -745,17 +757,26 @@ declare namespace LocalJSX {
         "item"?: string;
     }
     interface DiscussionEntry {
+        "allowDelete"?: boolean;
+        "allowEdit"?: boolean;
         "allowReply"?: boolean;
         "annotationId"?: string;
         "authorImage"?: string;
         "authorName"?: string;
         "description"?: string;
+        "onEventDeleteAnnotation"?: (event: CustomEvent<any>) => void;
         "publishedDate"?: string;
     }
     interface DiscussionInput {
+        "annotationsUrl"?: string;
         "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
         "placeholder"?: string;
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
         "submit"?: string;
+        "target"?: string;
     }
     interface DropArea {
         "allowedTypes"?: Array<string>;
@@ -846,10 +867,14 @@ declare namespace LocalJSX {
         "allowReply"?: boolean;
         "annotationsUrl"?: string;
         "author"?: string;
-        "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
+        "onNewResponse"?: (event: CustomEvent<any>) => void;
         "org"?: string;
         "portalUrl"?: string;
         "search"?: string;
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
         "target"?: string;
         "update"?: boolean;
     }

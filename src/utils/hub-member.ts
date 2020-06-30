@@ -143,7 +143,7 @@ export async function searchMemberContent(username, authentication: IAuthenticat
 }
 
 function usersInterests(user: IUser): string[] {
-  let interests = user.tags.reduce((agg, tag) => {
+  let interests = user.tags?.reduce((agg, tag) => {
     let m = tag.match(/^interest:(.*)/);
     console.log("usersInterests", m)
     if(m) {

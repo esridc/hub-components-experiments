@@ -27,7 +27,7 @@ export class HubWorkspace {
     const auth = UserSession.deserialize(this.session);
 
     console.log("Session", this.session)
-    if(this.session !== undefined) {
+    if(!!this.session) {
       const username = JSON.parse(this.session).username;
 
       [this.member,
