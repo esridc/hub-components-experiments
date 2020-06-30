@@ -66,7 +66,8 @@ async function searchPortal(queryParams: any, hubRequestOptions?: IHubRequestOpt
 
     // Normal, non-group-specific search
     if(queryParams.groups !== undefined && queryParams.groups.length > 0) {
-        query.push(queryParams.groups.map(group => `group:${group}`).join(" OR "))
+        const groupQuery = queryParams.groups.map(group => `group:${group}`).join(" OR ");
+        query.push(`(${groupQuery})`)
     }
     console.debug("hub-search searchPortal: queryParams", [queryParams, hubRequestOptions])
 

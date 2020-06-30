@@ -183,9 +183,13 @@ export class HubGallery {
     let output = []
     this.results.map(result => {
 
-      let thumbnail = (result.thumbnailUrl !== undefined && result.thumbnailUrl !== null) 
-                        ? `${result.thumbnailUrl}?token=${UserSession.deserialize(this.session).token}` 
-                        : '';
+      let thumbnail = ''
+      if(!!result.thumbnailUrl) {
+        thumbnail = result.thumbnailUrl
+        if(!!this.session) {
+          thumbnail += `?token=${UserSession.deserialize(this.session).token}`
+        }
+      }
       console.log("hub-gallery: render result", [result, thumbnail])
 
       output.push(
