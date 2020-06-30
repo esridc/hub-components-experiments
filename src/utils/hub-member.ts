@@ -117,7 +117,12 @@ export async function setMemberPlaces(username:string, places: HubTypes.IHubGeog
 }
 
 export async function getMemberPlaces(username:string, authentication?: IAuthenticationManager): Promise<HubTypes.IHubGeography[]> {
-  let places = await getUserResource(username, "places.json", {authentication});
+  let places;
+  try {
+    places = await getUserResource(username, "places.json", {authentication});
+  } catch {
+    places = {places: []}
+  }
   console.log("hub-member: getMemberPlaces", places)
   return places.places as HubTypes.IHubGeography[];
 }
@@ -144,9 +149,14 @@ export async function searchMemberComments(username, authentication: IAuthentica
   let portal = await getPortal(null, { authentication: authentication });
   let annotationsUrl = await getAnnotationServiceUrl( portal.id )
   annotationsUrl += '/0';
-    
-  console.log("hub-discussion: Search", [search, query, {url: annotationsUrl, params: {where: query.join(" AND ")}}])
-  const annotations = await searchAnnotations({url: annotationsUrl, where: query.join(" AND ")});
+   
+  let annotations;
+  try {
+    console.log("hub-discussion: Search", [search, query, {url: annotationsUrl, params: {where: query.join(" AND ")}}])
+    annotations = await searchAnnotations({url: annotationsUrl, where: query.join(" AND ")});  
+  } catch {
+    annotations = {data: []}
+  }
   return annotations.data;
 }
 
