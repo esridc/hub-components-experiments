@@ -3,11 +3,11 @@
 }
 .workspace-grid {
   display: grid;
-  grid-template-columns: 15% 35% 35% 15%;
+  grid-template-columns: 15% 30% 30% 25%;
   grid-template-rows: auto;
 
   grid-template-areas:
-    "avatar bio map map"
+    "avatar bio map ."
     "interests teams teams events";
   column-gap: 10px;
   row-gap: 20px;
@@ -17,6 +17,10 @@
 .workspace-avatar {
   grid-area: avatar;
 }
+img.avatar {
+  border-radius: 50%;
+}
+
 .workspace-bio {
   grid-area: bio;
 }
@@ -85,6 +89,7 @@
 .gallery-header {
   border-bottom: 1px solid #888;
   margin-bottom: 3px;
+  width: 100%;
 }
 .gallery-header a, .gallery-header h4, .gallery-header h2 {
   display: inline;
@@ -93,8 +98,11 @@
 .gallery-header a {
   text-decoration: none;
   color: #448;
-  /* float: right;
-  font-size: 0.8em; */
+}
+a.explore {
+  float: right; 
+  font-size: 0.8em;  
+  margin-top: 5px;
 }
 .gallery-header a:hover {
   text-decoration: underline;

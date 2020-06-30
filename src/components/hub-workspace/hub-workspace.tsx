@@ -61,7 +61,7 @@ export class HubWorkspace {
       output.push(
         <div class="workspace-grid">
           <div class="workspace-avatar">
-            <img src={this.member.thumbnailUrl} alt="Profile Image" />
+            <img src={this.member.thumbnailUrl} class="avatar" alt="Profile Image" />
           </div>
           <div class="workspace-bio">
             <h3>{this.member.name}</h3>
@@ -99,7 +99,7 @@ export class HubWorkspace {
           <div class="workspace-teams">
             <div class="gallery-header">
               <h2>My Content</h2>
-              <a href="#">Explore more...</a>
+              <a class="explore" href="#">Explore more&gt;</a>
             </div>
 
             <div class="gallery">

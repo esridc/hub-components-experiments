@@ -156,6 +156,8 @@ export class HubGallery {
           hubApiUrl: "https://hub.arcgis.com", 
           authentication: auth
         })
+
+        console.log("hub-gallery updateGallery: [results] ", [results])
         this.results = results.results;
         // end case(default)
     }
@@ -180,7 +182,7 @@ export class HubGallery {
   render() {
     let output = []
     this.results.map(result => {
-      console.log("hub-gallery: render result", [result, result.hubtype, HubTypes.HubType[result.hubtype]])
+      console.log("hub-gallery: render result", [result, result.hubType, HubTypes.HubType[result.hubType]])
       let thumbnail = (result.thumbnainUrl !== undefined && result.thumbnailUrl !== null) 
                         ? `${result.thumbnailUrl}?token=${UserSession.deserialize(this.session).token}` 
                         : '';
@@ -189,7 +191,7 @@ export class HubGallery {
         
         <hub-card 
           class="gallery-card"
-          contenttype={`${HubTypes.HubType[result.hubtype]} by ${result.publisher.name}`}
+          contenttype={`${HubTypes.HubType[result.hubType]} by ${result.publisher.name}`}
           url={result.url || ""}
           image={thumbnail} 
           name={truncateString(result.title, 55)} 

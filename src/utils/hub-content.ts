@@ -1,5 +1,5 @@
 import { IHubContent, HubType, ControlOptions } from "./hub-types"
-// import { getCategory } from "@esri/hub-common";
+import { getCategory } from "@esri/hub-common";
 import { IModel, getModel, IHubRequestOptions} from "@esri/hub-common";
 const portalUrl = 'https://www.arcgis.com/sharing/rest/';
 
@@ -73,10 +73,11 @@ export function getContent(
   export function _convertItemToContent(
     item: IModel
   ): IHubContent {
+    let typeCategory = getCategory(item.item.type);
     let content:IHubContent = Object.assign(item.item, {
         // id: item.item.id,
         name: item.item.title,
-        hubType: HubType.dataset, // getCategory(item.item.type),
+        hubType: HubType[typeCategory],
         // title: item.item.title,
         summary: item.item.snippet,
         // description: item.item.description,
@@ -149,6 +150,9 @@ export function getContent(
   export function _convertHubv3ToContent(
     hubmodel: any
   ): IHubContent {
+
+    let typeCategory = getCategory(hubmodel.attributes.type);
+    
     let content:IHubContent = {
         id: hubmodel.id,
         title: hubmodel.attributes.name,
@@ -163,7 +167,7 @@ export function getContent(
         type: hubmodel.attributes.type,
         url: hubmodel.attributes.url,
         name: hubmodel.attributes.name,
-        hubType: HubType.dataset, // getCategory(item.item.type),
+        hubType: HubType[typeCategory],
         summary: (hubmodel.attributes.searchDescription || "").slice(0,200),
         publisher: { 
           name: hubmodel.attributes.owner,
@@ -191,7 +195,7 @@ export function getContent(
     if(hubmodel.attributes) {
       content.thumbnailUrl =`${portalUrl}content/items/${hubmodel.id}/info/${hubmodel.attributes.thumbnail}`;
     }
-    
+
     return content;
   }
   
