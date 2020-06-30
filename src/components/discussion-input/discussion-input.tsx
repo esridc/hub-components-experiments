@@ -14,11 +14,25 @@ export class DiscussionInput {
   inputEl: HTMLTextAreaElement;
   errorEl: HTMLCalciteAlertElement;
 
+  /**
+   * Optional placeholder text for the input text area
+   */
   @Prop() placeholder:string = "Join the discussion...";
+  
+  /**
+   * Button string message
+   */
   @Prop() submit:string = "Share comment"
+
+  /**
+   * URI of the comment subject (e.g. item:4ef, item:4ef:feature:42:attribute:width)
+   */
   @Prop() target:string;
   
-  // TODO: extract this implementation detail
+  /**
+   * URL to this Hub's annotation service
+   * TODO: extract this implementation detail
+   */
   @Prop() annotationsUrl: string;
 
   /**
@@ -31,6 +45,9 @@ export class DiscussionInput {
    */
   @Prop({ mutable: true }) session: string;
 
+  /**
+   * Event emitted when a comment is successfully commited
+   */
   @Event() eventAddAnnotation: EventEmitter;
 
 

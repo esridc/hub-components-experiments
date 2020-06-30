@@ -35,13 +35,25 @@ export namespace Components {
         "publishedDate": string;
     }
     interface DiscussionInput {
+        /**
+          * URL to this Hub's annotation service TODO: extract this implementation detail
+         */
         "annotationsUrl": string;
+        /**
+          * Optional placeholder text for the input text area
+         */
         "placeholder": string;
         /**
           * Serialized authentication information.
          */
         "session": string;
+        /**
+          * Button string message
+         */
         "submit": string;
+        /**
+          * URI of the comment subject (e.g. item:4ef, item:4ef:feature:42:attribute:width)
+         */
         "target": string;
     }
     interface DropArea {
@@ -768,14 +780,29 @@ declare namespace LocalJSX {
         "publishedDate"?: string;
     }
     interface DiscussionInput {
+        /**
+          * URL to this Hub's annotation service TODO: extract this implementation detail
+         */
         "annotationsUrl"?: string;
+        /**
+          * Event emitted when a comment is successfully commited
+         */
         "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
+        /**
+          * Optional placeholder text for the input text area
+         */
         "placeholder"?: string;
         /**
           * Serialized authentication information.
          */
         "session"?: string;
+        /**
+          * Button string message
+         */
         "submit"?: string;
+        /**
+          * URI of the comment subject (e.g. item:4ef, item:4ef:feature:42:attribute:width)
+         */
         "target"?: string;
     }
     interface DropArea {
