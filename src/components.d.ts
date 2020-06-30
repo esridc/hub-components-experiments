@@ -303,6 +303,13 @@ export namespace Components {
          */
         "extent": any;
     }
+    interface HubList {
+        "collection": HubTypes.IHubResource[];
+        "icon": string;
+        "name": string;
+        "summary": string;
+        "url": string;
+    }
     interface HubMap {
         /**
           * Center of the map, "[longitude, latitude]"
@@ -572,6 +579,12 @@ declare global {
         prototype: HTMLHubInputElement;
         new (): HTMLHubInputElement;
     };
+    interface HTMLHubListElement extends Components.HubList, HTMLStencilElement {
+    }
+    var HTMLHubListElement: {
+        prototype: HTMLHubListElement;
+        new (): HTMLHubListElement;
+    };
     interface HTMLHubMapElement extends Components.HubMap, HTMLStencilElement {
     }
     var HTMLHubMapElement: {
@@ -694,6 +707,7 @@ declare global {
         "hub-gallery": HTMLHubGalleryElement;
         "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
+        "hub-list": HTMLHubListElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
         "hub-places-map": HTMLHubPlacesMapElement;
@@ -1027,6 +1041,13 @@ declare namespace LocalJSX {
          */
         "onEventAddressUpdated"?: (event: CustomEvent<any>) => void;
     }
+    interface HubList {
+        "collection"?: HubTypes.IHubResource[];
+        "icon"?: string;
+        "name"?: string;
+        "summary"?: string;
+        "url"?: string;
+    }
     interface HubMap {
         /**
           * Center of the map, "[longitude, latitude]"
@@ -1210,6 +1231,7 @@ declare namespace LocalJSX {
         "hub-gallery": HubGallery;
         "hub-identity": HubIdentity;
         "hub-input": HubInput;
+        "hub-list": HubList;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
         "hub-places-map": HubPlacesMap;
@@ -1252,6 +1274,7 @@ declare module "@stencil/core" {
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
             "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
+            "hub-list": LocalJSX.HubList & JSXBase.HTMLAttributes<HTMLHubListElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
             "hub-places-map": LocalJSX.HubPlacesMap & JSXBase.HTMLAttributes<HTMLHubPlacesMapElement>;

@@ -123,7 +123,7 @@ export async function getMemberPlaces(username:string, authentication?: IAuthent
 
 export async function getMemberTeams(authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
   let groups = await searchGroups({ q: "tags:initiativeCollaborationGroup", 
-                                    params: { searchUserAccess: "groupMember" }, 
+                                    params: { searchUserAccess: "groupMember", num: 100 }, 
                                     authentication 
                                 });
 

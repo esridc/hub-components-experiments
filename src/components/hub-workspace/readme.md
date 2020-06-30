@@ -20,6 +20,7 @@
 - [hub-statistic](../hub-statistic)
 - calcite-chip
 - [hub-events-list](../hub-events-list)
+- [hub-list](../hub-list)
 - [hub-card](../hub-card)
 - [hub-gallery](../hub-gallery)
 
@@ -30,6 +31,7 @@ graph TD;
   hub-workspace --> hub-statistic
   hub-workspace --> calcite-chip
   hub-workspace --> hub-events-list
+  hub-workspace --> hub-list
   hub-workspace --> hub-card
   hub-workspace --> hub-gallery
   hub-map --> calcite-button

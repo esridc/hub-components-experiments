@@ -3,6 +3,7 @@ import * as HubMember from '../../utils/hub-member'
 import * as HubTypes from '../../utils/hub-types';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import { readSessionFromCookie } from '../../utils/utils';
+import { event24 } from '@esri/calcite-ui-icons'
 
 @Component({
   tag: 'hub-events-list',
@@ -24,17 +25,21 @@ export class HubEventsList {
 
     let eventSearch = await HubMember.getMemberEvents( auth );
     this.events = eventSearch.results;
+    console.log("hub-events-list events", this.events)
   }
   
   render() {
     return (
       <Host>
         <slot></slot>
-        <ul>
-          {this.events.map((result) =>
-            <li>{result.name}</li>
-          )}
-        </ul>
+        {this.events.map((result) =>
+            
+          <div class="event">
+            <span class="icon"><svg width="24" height="24"><path d={event24}></path></svg></span> 
+            <span class="name"><a href={`#${result.url}`}>{result.name}</a></span>
+            <span class="summary">{result.summary}</span>
+          </div>
+        )}
       </Host>
     );
   }

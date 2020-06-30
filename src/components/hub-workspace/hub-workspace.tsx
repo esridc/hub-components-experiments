@@ -64,7 +64,7 @@ export class HubWorkspace {
             <img src={this.member.thumbnailUrl} class="avatar" alt="Profile Image" />
           </div>
           <div class="workspace-bio">
-            <h3>{this.member.name}</h3>
+            <h1>{this.member.name}</h1>
             <p>{this.member.summary}</p>
             <em>Joined {this.dateToText(this.member.createdDate)}</em>
           </div>
@@ -72,36 +72,32 @@ export class HubWorkspace {
             <hub-map></hub-map>
           </div>
           <div class="workspace-interests">
-            <h4>Stats</h4>
-              <hub-statistic size="m" label="Member of" value={this.teams.meta.total} units="Teams"></hub-statistic>
-              <hub-statistic size="m" label="Attended" value={this.events.meta.total} units="Events"></hub-statistic>
-              <hub-statistic size="m" label="Nearby" value={this.places.length} units="Places"></hub-statistic>
-              <hub-statistic size="m" label="Owns" value={this.content.meta.total} units="Content Items"></hub-statistic>
-            <h4>Interests</h4>
+            <h3>Stats</h3>
+              <hub-statistic size="s" value={this.teams.meta.total} units="Teams"></hub-statistic>
+              <hub-statistic size="s" value={this.events.meta.total} units="Events"></hub-statistic>
+              <hub-statistic size="s" value={this.content.meta.total} units="Content Items"></hub-statistic>
+              <hub-statistic size="s" value={this.places.length} units="Places"></hub-statistic>
+            <h3>Interests</h3>
             {this.member.metadata?.interests.map((tag) =>
               <calcite-chip value={tag}>{tag}</calcite-chip>
             )}
-            <h4>Places</h4>
+            <h3>Places</h3>
             {this.places.map((place) =>
               <calcite-chip value={place.name}>{place.name} ({place.coverage})</calcite-chip>
             )}            
           </div>
           <div class="workspace-events">
-            <h4>Upcoming Events</h4>
+            <h3>Upcoming Events</h3>
             <hub-events-list session={this.session}></hub-events-list>
-            <h4>Your Teams</h4>
-            <ul>
-            {this.teams.results.map((result) =>
-              <li><a href={result.url}>{truncateString(result.name, 55)}</a></li>
-            )}
-            </ul>
+            <hub-list collection={this.teams.results}>
+              <h3>Your Teams</h3>
+            </hub-list>
           </div>
           <div class="workspace-teams">
             <div class="gallery-header">
               <h2>My Content</h2>
               <a class="explore" href="#">Explore more&gt;</a>
             </div>
-
             <div class="gallery">
             {this.content.results.slice(0,4).map((result) =>
             <hub-card 

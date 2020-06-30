@@ -36,9 +36,9 @@ img.avatar {
 }
 .workspace-teams {
   grid-area: teams;
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-between; */
 }
 @media screen and (max-width: 530px) { 
   /* .gallery-sm  */
@@ -86,7 +86,7 @@ img.avatar {
   margin-right: 10px;
   /* text-align: center; */
 }
-.gallery-header {
+.gallery-header, h3, h4 {
   border-bottom: 1px solid #888;
   margin-bottom: 3px;
   width: 100%;
