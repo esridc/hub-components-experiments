@@ -23,7 +23,7 @@
     "watch": "stencil build --docs --watch",
     "storybook.run": "start-storybook --port 9001 -s ./public,./dist",
     "storybook-ssl.run": "start-storybook --port 9001 -s ./public --https --ssl-cert ~/Downloads/certs/localui.arcgis.com.crt --ssl-ca ~/Downloads/certs/myCA.pem --ssl-key ~/Downloads/certs/localui.arcgis.com.key",
-    "storybook": "npm-run-all --parallel watch storybook.run",
+    "storybook": "npm-run-all  --parallel watch storybook.run",
     "publish-npm": "npm publish --access public",
     "publish-storybook": "storybook-to-ghpages -s build-storybook",
     "build-storybook": "build-storybook -s ./public,./dist"

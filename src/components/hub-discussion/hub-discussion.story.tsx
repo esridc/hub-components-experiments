@@ -6,7 +6,7 @@ export default function(stories, knobs) {
     stories.add('Hub Discussion', () => {
         const org = knobs.text('org', 'BBpPn9wZu2D6eTNY'); // neT9SoYxizqTHZPH (DC)
         const search = knobs.text('search', '*');
-        const target = knobs.text('target', '');
+        const target = knobs.text('target', 'item:f6c3c04113944f23a7993f2e603abaf2');
         const allowReply = knobs.boolean('allow-replies', true);
 
       mainEl.innerHTML = `<h3>Discussion</h3>

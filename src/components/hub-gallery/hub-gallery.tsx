@@ -1,8 +1,6 @@
 import { Component, Host, h, State, Listen, Prop } from '@stencil/core';
 import * as HubSearch from '../../utils/hub-search';
 import * as HubSite from '../../utils/hub-site';
-// import * as HubAPI from '../../utils/hub-api';
-// import { authenticateUser } from '../../utils/utils';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import * as HubTeams from '../../utils/hub-team';
 import * as HubMembers from '../../utils/hub-member';
@@ -54,7 +52,7 @@ export class HubGallery {
   /**
    * Which Resources to search
    */
-  @Prop() hubtype: "content" | "members" | "teams" = "teams"
+  @Prop() hubtype: "content" | "members" | "teams" = "content"
 
   /**
    * Default sort order
@@ -74,17 +72,17 @@ export class HubGallery {
   /**
    * Use the Hub API (true) or the Portal API (false)
    */
-  @Prop() hubapi: boolean = true;
+  @Prop() hubapi: boolean = false;
 
   @Prop() portal = "https://www.arcgis.com";
 
   @Prop() clientid: string = "WXC842NRBVB6NZ2r";
+  @Prop({ mutable:true, reflect:true }) session:string = null;
 
   @State() queryInput: string;
   @State() suggestions: Array<string> = [];
   @State() results = [];
   @State() catalog = null;
-  @State() session:string = null;
   
   @Listen("queryInput")
   queryInputHandler(event: CustomEvent): string {
@@ -124,7 +122,7 @@ export class HubGallery {
   async updateGallery(query: string, customParams?:Object) {
     let auth = (this.session !== undefined && this.session !== null) ? UserSession.deserialize(this.session) : null;
 
-    console.log("updateGallery: hubtype", [query, this.hubtype, auth])
+    console.log("hub-gallery updateGallery: [query, hubtype, auth]", [query, this.hubtype, auth])
     switch(this.hubtype) {
       case 'teams': 
         let teams = await HubTeams.searchTeams(query);
@@ -152,12 +150,14 @@ export class HubGallery {
           searchParams.groups = this.groups.split(",");
         } 
 
-        console.log("Search: searchParams ", [searchParams, customParams])
+        console.log("hub-gallery updateGallery: [searchParams, customParams] ", [searchParams, customParams])
         let results = await HubSearch.search(searchParams, {
           isPortal: !this.hubapi, 
           hubApiUrl: "https://hub.arcgis.com", 
           authentication: auth
         })
+
+        console.log("hub-gallery updateGallery: [results] ", [results])
         this.results = results.results;
         // end case(default)
     }
@@ -182,14 +182,23 @@ export class HubGallery {
   render() {
     let output = []
     this.results.map(result => {
-      console.log("hub-gallery: render result", [result, result.hubtype, HubTypes.HubType[result.hubtype]])
+
+      let thumbnail = ''
+      if(!!result.thumbnailUrl) {
+        thumbnail = result.thumbnailUrl
+        if(!!this.session) {
+          thumbnail += `?token=${UserSession.deserialize(this.session).token}`
+        }
+      }
+      console.log("hub-gallery: render result", [result, thumbnail])
+
       output.push(
         
         <hub-card 
           class="gallery-card"
-          contenttype={`${HubTypes.HubType[result.hubtype]} by ${result.publisher.name}`}
-          url={result.url}
-          image={result.thumbnailUrl} 
+          contenttype={`${HubTypes.HubType[result.hubType]} by ${result.publisher.name}`}
+          url={result.url || ""}
+          image={thumbnail} 
           name={truncateString(result.title, 55)} 
           description={truncateString(result.summary, 90)}
           buttonText={this.buttontext}
@@ -199,18 +208,6 @@ export class HubGallery {
         </hub-card> 
         )
     })
-    let filters = [];
-    // console.log("hub-gallery: groups: ", this.groups)
-    if(this.groups !== undefined && this.groups !== null && this.groups.length > 0) {
-      filters.push(
-        <hub-filter-category
-          name="Category"
-          facettype="tree"
-          facet="groupcategories"
-          group={this.groups.split(",")[0]}
-        ></hub-filter-category>
-      )
-    }
 
     return (
       <Host>     
@@ -224,13 +221,9 @@ export class HubGallery {
             query={this.queryInput}
           ></hub-suggest-input>
           : ""}
-        <div class="filters"> 
-          {filters}
-          {/* <hub-filter-category
-            name="Content Type"
-            categories={["Maps", "Data", "Apps", "Files"]}
-          ></hub-filter-category> */}
-        </div>         
+        <div class="filters">
+          <slot name="filters" > </slot>
+        </div>
         <div class="search-results gallery-lg ">
         {output}
         </div>

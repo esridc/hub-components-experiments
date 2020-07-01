@@ -13,23 +13,24 @@
 
 ## Properties
 
-| Property         | Attribute         | Description | Type      | Default     |
-| ---------------- | ----------------- | ----------- | --------- | ----------- |
-| `allowReply`     | `allow-reply`     |             | `boolean` | `true`      |
-| `annotationsUrl` | `annotations-url` |             | `string`  | `undefined` |
-| `author`         | `author`          |             | `string`  | `undefined` |
-| `org`            | `org`             |             | `string`  | `undefined` |
-| `portalUrl`      | `portal-url`      |             | `string`  | `undefined` |
-| `search`         | `search`          |             | `string`  | `undefined` |
-| `target`         | `target`          |             | `string`  | `undefined` |
-| `update`         | `update`          |             | `boolean` | `undefined` |
+| Property         | Attribute         | Description                            | Type      | Default     |
+| ---------------- | ----------------- | -------------------------------------- | --------- | ----------- |
+| `allowReply`     | `allow-reply`     |                                        | `boolean` | `true`      |
+| `annotationsUrl` | `annotations-url` |                                        | `string`  | `undefined` |
+| `author`         | `author`          |                                        | `string`  | `undefined` |
+| `org`            | `org`             |                                        | `string`  | `undefined` |
+| `portalUrl`      | `portal-url`      |                                        | `string`  | `undefined` |
+| `search`         | `search`          |                                        | `string`  | `undefined` |
+| `session`        | `session`         | Serialized authentication information. | `string`  | `undefined` |
+| `target`         | `target`          |                                        | `string`  | `undefined` |
+| `update`         | `update`          |                                        | `boolean` | `undefined` |
 
 
 ## Events
 
-| Event                | Description | Type               |
-| -------------------- | ----------- | ------------------ |
-| `eventAddAnnotation` |             | `CustomEvent<any>` |
+| Event         | Description | Type               |
+| ------------- | ----------- | ------------------ |
+| `newResponse` |             | `CustomEvent<any>` |
 
 
 ## Dependencies
@@ -49,8 +50,10 @@ graph TD;
   calcite-card --> calcite-loader
   calcite-card --> calcite-checkbox
   discussion-input --> calcite-button
+  discussion-input --> calcite-alert
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  calcite-alert --> calcite-icon
   style hub-discussion fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { IHubChat, } from "./utils/hub-types";
-import { IUser, } from "@esri/arcgis-rest-common-types";
+import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
 export namespace Components {
     interface ArcgisNotebook {
         /**
@@ -25,6 +25,8 @@ export namespace Components {
         "item": string;
     }
     interface DiscussionEntry {
+        "allowDelete": boolean;
+        "allowEdit": boolean;
         "allowReply": boolean;
         "annotationId": string;
         "authorImage": string;
@@ -33,8 +35,26 @@ export namespace Components {
         "publishedDate": string;
     }
     interface DiscussionInput {
+        /**
+          * URL to this Hub's annotation service TODO: extract this implementation detail
+         */
+        "annotationsUrl": string;
+        /**
+          * Optional placeholder text for the input text area
+         */
         "placeholder": string;
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
+        /**
+          * Button string message
+         */
         "submit": string;
+        /**
+          * URI of the comment subject (e.g. item:4ef, item:4ef:feature:42:attribute:width)
+         */
+        "target": string;
     }
     interface DropArea {
         "allowedTypes": Array<string>;
@@ -120,6 +140,10 @@ export namespace Components {
         "org": string;
         "portalUrl": string;
         "search": string;
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
         "target": string;
         "update": boolean;
     }
@@ -147,6 +171,12 @@ export namespace Components {
           * url of the ArcGIS Online organization
          */
         "orgurl": string;
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
+    }
+    interface HubEventsList {
         /**
           * Serialized authentication information.
          */
@@ -255,6 +285,7 @@ export namespace Components {
           * Search placeholder text
          */
         "searchplaceholder": string;
+        "session": string;
         /**
           * Choose to show or hide search
          */
@@ -296,6 +327,13 @@ export namespace Components {
          */
         "extent": any;
     }
+    interface HubList {
+        "collection": HubTypes.IHubResource[];
+        "icon": string;
+        "name": string;
+        "summary": string;
+        "url": string;
+    }
     interface HubMap {
         /**
           * Center of the map, "[longitude, latitude]"
@@ -305,6 +343,11 @@ export namespace Components {
           * Option to show drawing tools
          */
         "drawing": boolean;
+        /**
+          * Optional Geometry to display
+         */
+        "geometry": Array<IGeometry>;
+        "showFullscreen": boolean;
         /**
           * Webmap Item configuration to load
          */
@@ -325,6 +368,17 @@ export namespace Components {
         "session": string;
         "summary": string;
         "tags": Array<string>;
+    }
+    interface HubPlacesMap {
+        /**
+          * Option to view places map, or edit places map
+         */
+        "mode": "view" | "edit";
+        "places": HubTypes.IHubGeography[];
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
     }
     interface HubProfileCard {
         /**
@@ -358,6 +412,12 @@ export namespace Components {
     interface HubSonarChat {
         "sendMessages": IHubChat;
         "service": string;
+    }
+    interface HubStatistic {
+        "label": string;
+        "size": "s" | "m" | "l";
+        "units": string;
+        "value": string | number;
     }
     interface HubSuggestInput {
         /**
@@ -511,6 +571,12 @@ declare global {
         prototype: HTMLHubEventElement;
         new (): HTMLHubEventElement;
     };
+    interface HTMLHubEventsListElement extends Components.HubEventsList, HTMLStencilElement {
+    }
+    var HTMLHubEventsListElement: {
+        prototype: HTMLHubEventsListElement;
+        new (): HTMLHubEventsListElement;
+    };
     interface HTMLHubFilterCategoryElement extends Components.HubFilterCategory, HTMLStencilElement {
     }
     var HTMLHubFilterCategoryElement: {
@@ -541,6 +607,12 @@ declare global {
         prototype: HTMLHubInputElement;
         new (): HTMLHubInputElement;
     };
+    interface HTMLHubListElement extends Components.HubList, HTMLStencilElement {
+    }
+    var HTMLHubListElement: {
+        prototype: HTMLHubListElement;
+        new (): HTMLHubListElement;
+    };
     interface HTMLHubMapElement extends Components.HubMap, HTMLStencilElement {
     }
     var HTMLHubMapElement: {
@@ -552,6 +624,12 @@ declare global {
     var HTMLHubMetadataEditorElement: {
         prototype: HTMLHubMetadataEditorElement;
         new (): HTMLHubMetadataEditorElement;
+    };
+    interface HTMLHubPlacesMapElement extends Components.HubPlacesMap, HTMLStencilElement {
+    }
+    var HTMLHubPlacesMapElement: {
+        prototype: HTMLHubPlacesMapElement;
+        new (): HTMLHubPlacesMapElement;
     };
     interface HTMLHubProfileCardElement extends Components.HubProfileCard, HTMLStencilElement {
     }
@@ -576,6 +654,12 @@ declare global {
     var HTMLHubSonarChatElement: {
         prototype: HTMLHubSonarChatElement;
         new (): HTMLHubSonarChatElement;
+    };
+    interface HTMLHubStatisticElement extends Components.HubStatistic, HTMLStencilElement {
+    }
+    var HTMLHubStatisticElement: {
+        prototype: HTMLHubStatisticElement;
+        new (): HTMLHubStatisticElement;
     };
     interface HTMLHubSuggestInputElement extends Components.HubSuggestInput, HTMLStencilElement {
     }
@@ -645,17 +729,21 @@ declare global {
         "hub-discussion": HTMLHubDiscussionElement;
         "hub-embed": HTMLHubEmbedElement;
         "hub-event": HTMLHubEventElement;
+        "hub-events-list": HTMLHubEventsListElement;
         "hub-filter-category": HTMLHubFilterCategoryElement;
         "hub-follow-button": HTMLHubFollowButtonElement;
         "hub-gallery": HTMLHubGalleryElement;
         "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
+        "hub-list": HTMLHubListElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
+        "hub-places-map": HTMLHubPlacesMapElement;
         "hub-profile-card": HTMLHubProfileCardElement;
         "hub-profile-editor": HTMLHubProfileEditorElement;
         "hub-radar": HTMLHubRadarElement;
         "hub-sonar-chat": HTMLHubSonarChatElement;
+        "hub-statistic": HTMLHubStatisticElement;
         "hub-suggest-input": HTMLHubSuggestInputElement;
         "hub-telemetry": HTMLHubTelemetryElement;
         "hub-upload": HTMLHubUploadElement;
@@ -685,17 +773,41 @@ declare namespace LocalJSX {
         "item"?: string;
     }
     interface DiscussionEntry {
+        "allowDelete"?: boolean;
+        "allowEdit"?: boolean;
         "allowReply"?: boolean;
         "annotationId"?: string;
         "authorImage"?: string;
         "authorName"?: string;
         "description"?: string;
+        "onEventDeleteAnnotation"?: (event: CustomEvent<any>) => void;
         "publishedDate"?: string;
     }
     interface DiscussionInput {
+        /**
+          * URL to this Hub's annotation service TODO: extract this implementation detail
+         */
+        "annotationsUrl"?: string;
+        /**
+          * Event emitted when a comment is successfully commited
+         */
         "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
+        /**
+          * Optional placeholder text for the input text area
+         */
         "placeholder"?: string;
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
+        /**
+          * Button string message
+         */
         "submit"?: string;
+        /**
+          * URI of the comment subject (e.g. item:4ef, item:4ef:feature:42:attribute:width)
+         */
+        "target"?: string;
     }
     interface DropArea {
         "allowedTypes"?: Array<string>;
@@ -786,10 +898,14 @@ declare namespace LocalJSX {
         "allowReply"?: boolean;
         "annotationsUrl"?: string;
         "author"?: string;
-        "onEventAddAnnotation"?: (event: CustomEvent<any>) => void;
+        "onNewResponse"?: (event: CustomEvent<any>) => void;
         "org"?: string;
         "portalUrl"?: string;
         "search"?: string;
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
         "target"?: string;
         "update"?: boolean;
     }
@@ -817,6 +933,12 @@ declare namespace LocalJSX {
           * url of the ArcGIS Online organization
          */
         "orgurl"?: string;
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
+    }
+    interface HubEventsList {
         /**
           * Serialized authentication information.
          */
@@ -929,6 +1051,7 @@ declare namespace LocalJSX {
           * Search placeholder text
          */
         "searchplaceholder"?: string;
+        "session"?: string;
         /**
           * Choose to show or hide search
          */
@@ -974,6 +1097,13 @@ declare namespace LocalJSX {
          */
         "onEventAddressUpdated"?: (event: CustomEvent<any>) => void;
     }
+    interface HubList {
+        "collection"?: HubTypes.IHubResource[];
+        "icon"?: string;
+        "name"?: string;
+        "summary"?: string;
+        "url"?: string;
+    }
     interface HubMap {
         /**
           * Center of the map, "[longitude, latitude]"
@@ -984,9 +1114,14 @@ declare namespace LocalJSX {
          */
         "drawing"?: boolean;
         /**
+          * Optional Geometry to display
+         */
+        "geometry"?: Array<IGeometry>;
+        /**
           * Sends event when drawing is complete
          */
         "onDrawingComplete"?: (event: CustomEvent<any>) => void;
+        "showFullscreen"?: boolean;
         /**
           * Webmap Item configuration to load
          */
@@ -1007,6 +1142,17 @@ declare namespace LocalJSX {
         "session"?: string;
         "summary"?: string;
         "tags"?: Array<string>;
+    }
+    interface HubPlacesMap {
+        /**
+          * Option to view places map, or edit places map
+         */
+        "mode"?: "view" | "edit";
+        "places"?: HubTypes.IHubGeography[];
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
     }
     interface HubProfileCard {
         /**
@@ -1040,6 +1186,12 @@ declare namespace LocalJSX {
     interface HubSonarChat {
         "sendMessages"?: IHubChat;
         "service"?: string;
+    }
+    interface HubStatistic {
+        "label"?: string;
+        "size"?: "s" | "m" | "l";
+        "units"?: string;
+        "value"?: string | number;
     }
     interface HubSuggestInput {
         /**
@@ -1133,17 +1285,21 @@ declare namespace LocalJSX {
         "hub-discussion": HubDiscussion;
         "hub-embed": HubEmbed;
         "hub-event": HubEvent;
+        "hub-events-list": HubEventsList;
         "hub-filter-category": HubFilterCategory;
         "hub-follow-button": HubFollowButton;
         "hub-gallery": HubGallery;
         "hub-identity": HubIdentity;
         "hub-input": HubInput;
+        "hub-list": HubList;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
+        "hub-places-map": HubPlacesMap;
         "hub-profile-card": HubProfileCard;
         "hub-profile-editor": HubProfileEditor;
         "hub-radar": HubRadar;
         "hub-sonar-chat": HubSonarChat;
+        "hub-statistic": HubStatistic;
         "hub-suggest-input": HubSuggestInput;
         "hub-telemetry": HubTelemetry;
         "hub-upload": HubUpload;
@@ -1172,17 +1328,21 @@ declare module "@stencil/core" {
             "hub-discussion": LocalJSX.HubDiscussion & JSXBase.HTMLAttributes<HTMLHubDiscussionElement>;
             "hub-embed": LocalJSX.HubEmbed & JSXBase.HTMLAttributes<HTMLHubEmbedElement>;
             "hub-event": LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
+            "hub-events-list": LocalJSX.HubEventsList & JSXBase.HTMLAttributes<HTMLHubEventsListElement>;
             "hub-filter-category": LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
             "hub-follow-button": LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
             "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
+            "hub-list": LocalJSX.HubList & JSXBase.HTMLAttributes<HTMLHubListElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
+            "hub-places-map": LocalJSX.HubPlacesMap & JSXBase.HTMLAttributes<HTMLHubPlacesMapElement>;
             "hub-profile-card": LocalJSX.HubProfileCard & JSXBase.HTMLAttributes<HTMLHubProfileCardElement>;
             "hub-profile-editor": LocalJSX.HubProfileEditor & JSXBase.HTMLAttributes<HTMLHubProfileEditorElement>;
             "hub-radar": LocalJSX.HubRadar & JSXBase.HTMLAttributes<HTMLHubRadarElement>;
             "hub-sonar-chat": LocalJSX.HubSonarChat & JSXBase.HTMLAttributes<HTMLHubSonarChatElement>;
+            "hub-statistic": LocalJSX.HubStatistic & JSXBase.HTMLAttributes<HTMLHubStatisticElement>;
             "hub-suggest-input": LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
             "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;
             "hub-upload": LocalJSX.HubUpload & JSXBase.HTMLAttributes<HTMLHubUploadElement>;

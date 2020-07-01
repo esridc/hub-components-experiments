@@ -8,7 +8,7 @@ export enum ControlOptions {view, edit, admin}
 export enum EventType { event }
 
 // TODO: figure out how this can work like { ...ContentType, ...CommunityType, ...EventType}
-export enum HubType {member=1, team=2, event=100, dataset=1000, document, map , app , site, initiative, template}
+export enum HubType {member=1, team=2, event=100, dataset=1000, document, map , app , site, initiative, template, organization}
 
 export type IHubSearchResults = {
   results: IHubResource[]
@@ -45,14 +45,14 @@ export interface IHubResource {
   createdDateSource: string // description of what was used for this attribute
   updatedDate: Date // formal metadata || new Date(item.modified)
   updatedDateSource: string // description of what was used for this attribute
-  thumbnailUrl: string // Full URL. item.thumbnail with host + path 
+  thumbnailUrl?: string // Full URL. item.thumbnail with host + path 
   
   boundary?: IHubGeography // [Future] Inline, or boolean when stored at known location /resources/boundary.json
   
   // Additional metadata from custom/formal elements
-  metadata?: {
+  metadata?: any
       // Unique or additional formal metadata that will be displayed in sidebar
-  }
+  
 }
 export interface IHubContent extends IHubResource,IItem {
   
@@ -108,6 +108,12 @@ export interface IHubCommunity extends IHubResource { }
 export interface IHubOrg extends IHubCommunity { }
 export interface IHubTeam extends IGroup, IHubCommunity { }
 
+export interface IHubEvent extends IHubCommunity/*, IGroup*/ { 
+  // startDate: Date;
+  // endDate: Date;
+  attendees?: IHubMember[];
+}
+
 // Minimal Subset for item.owner for now
 export interface IHubOwner {
   name: string, // Readable name
@@ -118,6 +124,9 @@ export interface IHubMember extends IUser, IHubCommunity {
   username?: string // user.username
   org?: IHubOrg // Which AGO organization does this user belong to?
   teams?: IHubTeam[]
+  events?: IHubEvent[]
+  interests?: string[]
+  places?: IHubGeography[]
 }
 
 // title, description, and optional link to license item with more info
@@ -143,19 +152,32 @@ export interface IField {
   statistics:Array<any>
 }
 
-export interface IHubGeography {
-  title?:string
-  coverage?: 'global' | 'regional' | 'local' // enrichment
-  geometry?: string // serialized JSON, or should this refer to /resources/boundary.json
-  source?: string // feature layer + feature URL. e.g. "https://server.cityx.gov/FeatureService/0/53"
-  item?: string // item ID used for setting geometry
-}
-
 // Optional configured app links that replace "Create StoryMap" with links to specific apps/sites
 // per https://esriarlington.tpondemand.com/entity/96316-content-viewer-sees-associated-app-links
 export interface IActionLink {
   title: string
   url: string
+}
+
+import { IGeometry } from "@esri/arcgis-rest-types";
+export interface IHubAnnotation {
+  id?: string
+  author?: string
+  target?: string
+  source?: string
+  status?: string
+  content?: string
+  geometry?: IGeometry
+  createdDate?: Date
+  updatedDate?: Date
+}
+
+export interface IHubGeography {
+  name?:string
+  coverage?: 'global' | 'regional' | 'local' // enrichment
+  geometry?: IGeometry // serialized JSON, or should this refer to /resources/boundary.json
+  source?: string // feature layer + feature URL. e.g. "https://server.cityx.gov/FeatureService/0/53"
+  item?: string // item ID used for setting geometry
 }
 
 

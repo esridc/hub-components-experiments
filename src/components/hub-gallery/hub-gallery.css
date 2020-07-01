@@ -8,7 +8,7 @@
   grid-template:
     ".   search" auto
     "filters results" auto /
-    12rem 3fr;
+    min-content 3fr;
   padding: 0 1rem 0 3rem;  
 }
 
@@ -17,7 +17,7 @@ hub-suggest-input {
 }
 .filters {
   grid-area: filters;
-  }
+}
 
 .search-results {
   grid-area: results;

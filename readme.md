@@ -43,6 +43,8 @@ npx stencil g
 Please preface all component files with `hub-` and component modules with `Hub`
 for example `hub-map.tsx` annd `HubMap`
 
+See [Stencil Cheatsheet](https://devhints.io/stencil) for great tips developing with Stencil. 
+
 ### Storybook
 
 To view the components in an explorable player:

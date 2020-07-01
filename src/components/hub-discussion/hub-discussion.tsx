@@ -1,6 +1,9 @@
 import { Component, Prop, Element, h, State, Listen, Event, EventEmitter} from '@stencil/core';
-import { IResourceObject, getAnnotationServiceUrl, searchAnnotations, addAnnotations, deleteAnnotations } from '@esri/hub-annotations';
+import { IResourceObject, getAnnotationServiceUrl, searchAnnotations, deleteAnnotations } from '@esri/hub-annotations';
 import { convertUserToMember, getAnonymousMember } from "../../utils/hub-member"
+import * as HubTypes from '../../utils/hub-types'
+import { UserSession } from '@esri/arcgis-rest-auth';
+import { readSessionFromCookie } from '../../utils/utils';
 
 @Component({
   tag: 'hub-discussion',
@@ -24,34 +27,49 @@ export class HubDiscussion {
   @State() annotationDescription: string;
   @State() searchOptions: any;
 
-  // Component Events
-  @Event() eventAddAnnotation: EventEmitter;
+  /**
+   * Serialized authentication information.
+   */
+  @Prop({ mutable: true }) session: string;
+  @State() username: string;
 
-  @Listen('add-annotation')
-  handleEvent(e) {
-    console.log('Event: add-annotation', e);
-    this.addAnnotation(e.details.annotation);
+  // Component Events
+  @Event() newResponse: EventEmitter;
+
+  @Listen('eventAddAnnotation')
+  eventAddAnnotation(e) {
+    console.log('Event: eventAddAnnotation', e);
+    this.addAnnotation(e.detail.annotation);
   }
 
+  addAnnotation(newAnnotation: HubTypes.IHubAnnotation) {
+    this.updateAnnotations(this.searchOptions);
+    this.newResponse.emit(newAnnotation);
+  }
+
+  
   // Component Methods
   constructor() {
     this.portalUrl = 'https://www.arcgis.com';
     this.authors = {}
     this.searchOptions = {} //author: this.authorSearch};
-
   }
 
   componentWillLoad() {
+    this.session = readSessionFromCookie();
+    if(!!this.session) {
+     this.username = JSON.parse(this.session).username;
+    }
 
-    if(this.search !== null || this.search !== undefined) {
+    if(!!this.search) {
       this.searchOptions.search = this.search;
     }
 
-    if(this.author === null || this.author === undefined) {
-      this.author = 'aturner';
-    } else {
-      this.searchOptions.author = this.author;
-    }
+    // if(this.author === null || this.author === undefined) {
+    //   this.author = 'aturner';
+    // } else {
+    //   this.searchOptions.author = this.author;
+    // }
 
     if(this.target === null || this.target === undefined) {
       this.target = "";
@@ -59,11 +77,11 @@ export class HubDiscussion {
       this.searchOptions.target = this.target;
     }
 
-    if(this.update) {
-      setInterval(() => {
-        this.updateAnnotations(this.searchOptions)
-      }, 1000)
-    }
+    // if(this.update) {
+    //   setInterval(() => {
+    //     this.updateAnnotations(this.searchOptions)
+    //   }, 1000)
+    // }
     return getAnnotationServiceUrl(this.org).then( annotationsUrl => {
       this.annotationsUrl = annotationsUrl + '/0';
       return this.updateAnnotations(this.searchOptions);
@@ -95,21 +113,22 @@ export class HubDiscussion {
   }
   getAnnotations(search) {
     let query = ["1=1"];
-    if(search === undefined || search === null) {
+
+    if(!search) {
       search = {}
     }
 
-    if(search.author) {
+    if(!!search.author) {
       query.push(`author LIKE '${search.author}'`)
     }
-    if(search.target) {
+    if(!!search.target) {
       query.push(`target LIKE '${search.target}'`)
     }
-    if(search.search) {
-      query.push(search.search)
-    }
+    // if(!!search.search) {
+    //   query.push(search.search)
+    // }
     console.log("hub-discussion: Search", [search, query, {url: this.annotationsUrl, params: {where: query.join(" AND ")}}])
-    return searchAnnotations({url: this.annotationsUrl})//, params: {where: query.join(" AND ")}})
+    return searchAnnotations({url: this.annotationsUrl, where: query.join(" AND ")})
   }
 
   searchChanged(event) {
@@ -128,29 +147,19 @@ export class HubDiscussion {
     return null;
   }
 
-  // TODO: change this to a listener and get event detail
-  // newComment(event) {
-  //   event.preventDefault();
-  //   this.addAnnotation({ attributes: {
-  //                     author: this.author,
-  //                     source: window.location.href,
-  //                     target: this.target,
-  //                     description: this.messageEl.value
-  //                   }});
-  // }
-
-  addAnnotation(newAnnotation) {
-    return addAnnotations({url: this.annotationsUrl, features: [
-        newAnnotation
-      ]}).then( (/*response*/) => {
-        this.updateAnnotations(this.searchOptions);
-        this.eventAddAnnotation.emit(newAnnotation);
-        // console.log("addAnnotations", response)
-    });
-  }
-
-  removeAnnotation(event) {
+  @Listen('eventDeleteAnnotation')
+  async removeAnnotation(event) {
     console.log("removeAnnotation", [event.target.id, event])
+    
+    const annotationId = event.detail;
+    let response = await deleteAnnotations({
+        url: this.annotationsUrl, 
+        objectIds: [ annotationId ],
+        authentication: UserSession.deserialize(this.session)
+    })
+
+    console.debug("hub-discussion: removeAnnotation response", response);
+    this.updateAnnotations(this.searchOptions);
   }
 
   getAuthor(username) {
@@ -168,6 +177,8 @@ export class HubDiscussion {
   private formatDate(date) {
     return new Date(date).toLocaleString();
   }
+
+  // TODO: Move discussion card to component
   discussionCard(annotation) {
     return (
     <calcite-card
@@ -200,6 +211,7 @@ export class HubDiscussion {
     </div>);
   }
 
+  // TODO: Refactor into smaller components
   renderList() {
     let output = []
     let headerEl = this.getElementById("annotation-header");
@@ -229,12 +241,14 @@ export class HubDiscussion {
       <div class="discussion-list">
         {this.annotations.map((annotation) =>
           <discussion-entry 
-            annotationId={"annotation-" + annotation.attributes.OBJECTID}
+            annotationId={annotation.attributes.OBJECTID}
             authorImage={this.getAuthor(annotation.attributes.Creator).thumbnailUrl}
             authorName={this.getAuthor(annotation.attributes.Creator).name}
             description={annotation.attributes.description}
             publishedDate={this.formatDate(annotation.attributes.created_at)}
-            allowReply={this.allowReply}
+            allowReply={this.allowReply && (annotation.attributes.Creator !== this.username)}
+            allowDelete={annotation.attributes.Creator === this.username}
+            allowEdit={annotation.attributes.Creator === this.username}
           >
 
           </discussion-entry>
@@ -242,7 +256,10 @@ export class HubDiscussion {
       </div>
     )
     output.push(
-      <discussion-input></discussion-input>
+      <discussion-input 
+        target={this.target}
+        annotationsUrl={this.annotationsUrl}
+      ></discussion-input>
     )
     return output;
   }

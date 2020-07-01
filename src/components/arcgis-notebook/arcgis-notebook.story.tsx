@@ -7,14 +7,15 @@ export default function(stories, knobs) {
       const item = knobs.text('item', "9cd1f9bdc6794e63ae450087b3b67e05")
       const portal = knobs.text('portal', 'https://www.arcgis.com')
       const view = knobs.select('view', ['preview', 'edit'], 'preview')
-      const name = knobs.text('name', 'Census Tracts of unusually high unemployment rates in Atlanta')
-      mainEl.innerHTML = `<arcgis-notebook
-        item="${item}"
-        portal="${portal}"
-        view="${view}"
-      >
-      <h2 slot="title">${name}</h2>
-      </arcgis-notebook>`
+      const name = knobs.text('name', 'ArcGIS Notebook')
+      let code = `<arcgis-notebook
+      item="${item}"
+      portal="${portal}"
+      view="${view}"
+    >
+    <h2 slot="title">${name}</h2>
+    </arcgis-notebook>`;
+      mainEl.innerHTML = code
   
       return mainEl;
     }, { notes: readme });

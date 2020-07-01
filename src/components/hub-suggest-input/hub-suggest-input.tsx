@@ -172,7 +172,7 @@ export class HubSuggestInput {
   render() {
     return (
       <div class='hub-suggestions-div'>
-        <form onSubmit={(e) => this.onSubmit(e)}>
+        {/* <form onSubmit={(e) => {this.onSubmit(e); return false} }> */}
           <slot name="before-input" />
 
           <input
@@ -184,13 +184,14 @@ export class HubSuggestInput {
             onFocus={() => this.onFocus()}
             onKeyDown={e => this.onKeyDown(e)}
             onKeyPress={e => this.onKeyPress(e)}
+            onSubmit={(e) => this.onSubmit(e)}
           ></input>
           <ul class='hub-suggestions-ul' role='listbox' hidden={!this.showSuggestions}>
             {this.suggestionArr.map(suggestion => this.getSuggestionElement(suggestion))}
           </ul>
-          <calcite-button>{this.submit}</calcite-button>
+          <calcite-button onClick={(e) => {this.onSubmit(e)} }>{this.submit}</calcite-button>
           {/* <input class="hub-suggest-input-submit" type='submit' value={this.submit} /> */}
-        </form>
+        {/* </form> */}
       </div>  
     );
   }

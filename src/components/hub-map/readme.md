@@ -16,12 +16,14 @@
 
 ## Properties
 
-| Property  | Attribute | Description                                | Type      | Default     |
-| --------- | --------- | ------------------------------------------ | --------- | ----------- |
-| `center`  | `center`  | Center of the map, "[longitude, latitude]" | `string`  | `undefined` |
-| `drawing` | `drawing` | Option to show drawing tools               | `boolean` | `false`     |
-| `webmap`  | `webmap`  | Webmap Item configuration to load          | `string`  | `undefined` |
-| `zoom`    | `zoom`    | Map zoom level: 1=world ... 20=street      | `number`  | `4`         |
+| Property         | Attribute         | Description                                | Type          | Default     |
+| ---------------- | ----------------- | ------------------------------------------ | ------------- | ----------- |
+| `center`         | `center`          | Center of the map, "[longitude, latitude]" | `string`      | `undefined` |
+| `drawing`        | `drawing`         | Option to show drawing tools               | `boolean`     | `false`     |
+| `geometry`       | --                | Optional Geometry to display               | `IGeometry[]` | `[]`        |
+| `showFullscreen` | `show-fullscreen` |                                            | `boolean`     | `false`     |
+| `webmap`         | `webmap`          | Webmap Item configuration to load          | `string`      | `undefined` |
+| `zoom`           | `zoom`            | Map zoom level: 1=world ... 20=street      | `number`      | `4`         |
 
 
 ## Events
@@ -35,6 +37,7 @@
 
 ### Used by
 
+ - [hub-places-map](../hub-places-map)
  - [hub-radar](../hub-radar)
 
 ### Depends on
@@ -47,6 +50,7 @@ graph TD;
   hub-map --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  hub-places-map --> hub-map
   hub-radar --> hub-map
   style hub-map fill:#f9f,stroke:#333,stroke-width:4px
 ```

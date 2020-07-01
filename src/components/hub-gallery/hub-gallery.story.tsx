@@ -14,6 +14,18 @@ export default function(stories, knobs) {
       const showsearch = knobs.boolean('showsearch', true);
       const hubapi = knobs.boolean('hubapi', false);
       
+      let filters = [];
+        // console.log("hub-gallery: groups: ", this.groups)
+        if(groups !== undefined && groups !== null && groups.length > 0) {
+          filters.push(
+            `<hub-filter-category
+              name="Category"
+              facettype="tree"
+              facet="groupcategories"
+              group=${groups.split(",")[0]}
+            ></hub-filter-category>`
+          )
+        }
       mainEl.innerHTML = `<hub-gallery 
         hubtype="content"
         showsearch="${showsearch}"
@@ -24,7 +36,12 @@ export default function(stories, knobs) {
         limit="${limit}"
         sort="${sort}"
         hubapi="${hubapi}"
-        ></hub-gallery>`
+        >
+        <div slot="filters">
+        ${filters}
+        </div>
+        
+        </hub-gallery>`
   
       return mainEl;
     }, { notes: readme});

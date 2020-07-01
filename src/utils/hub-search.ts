@@ -7,8 +7,10 @@ import * as HubTypes from "./hub-types"
 
 // TODO: Change hubRequestOptions to better handle different Hub & Portal endpoints (Prod/QA/Enterprise/etc.)
 export async function search(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
-    if(hubRequestOptions !== undefined 
-        && hubRequestOptions.isPortal) {
+    console.debug("hub-search search: queryParams", [queryParams, hubRequestOptions])
+
+    if(hubRequestOptions === undefined 
+        || (hubRequestOptions !== undefined && hubRequestOptions.isPortal)) {
         return await searchPortal(queryParams, hubRequestOptions);
     } else {
         return await searchHub(queryParams, hubRequestOptions);
@@ -16,16 +18,21 @@ export async function search(queryParams: any, hubRequestOptions?: IHubRequestOp
 }
 
 // https://developers.arcgis.com/rest/users-groups-and-items/search.htm
-async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
+async function searchPortal(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
     // TODO: Consider better ways to map terms across multiple parameters
-    queryParams.sort = queryParams.sort.replace(/name/,'title');
-    let query = [];
-
-    if(queryParams.q.length === 0) {
+    queryParams.sort = (queryParams.sort || 'modified').replace(/name/,'title');
+    
+    let query = []
+    
+    if(queryParams.q === undefined || queryParams.q?.length === 0) {
         queryParams.q = "*";
     }
     query.push(queryParams.q)
 
+    if(queryParams.owner) {
+        query.push(`owner:${queryParams.owner}`)    
+    }
+    
     // Portal splits "sort=-name" into "sortField=name&sortOrder=desc"
     // Supported sort field names are title, created, type, owner, modified, avgrating, numratings, numcomments, and numviews.
     let sortField = queryParams.sort
@@ -59,25 +66,29 @@ async function searchPortal(queryParams: any, _hubRequestOptions?: IHubRequestOp
 
     // Normal, non-group-specific search
     if(queryParams.groups !== undefined && queryParams.groups.length > 0) {
-        query.push(queryParams.groups.map(group => `group:${group}`).join(" OR "))
+        const groupQuery = queryParams.groups.map(group => `group:${group}`).join(" OR ");
+        query.push(`(${groupQuery})`)
     }
+    console.debug("hub-search searchPortal: queryParams", [queryParams, hubRequestOptions])
 
     return searchItems({
         q: query.join(' AND '),
         num: queryParams.limit || "10",
         sortField: sortField,
-        sortOrder: sortOrder
+        sortOrder: sortOrder,
+        authentication: hubRequestOptions?.authentication
+
     }).then((results) => {
         return new Promise((resolve, _reject) => {
             const output = results.results.map(item => _convertItemToContent({item: item}))
-            resolve({results: output})
+            resolve({results: output, meta: {total: results.total, count: results.num, start: results.start}})
         })
     })
 }
 
 // https://gist.github.com/hamhands/b6d1f0f514678b88cdc01070bf006263
 async function searchHub(queryParams: any, _hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
-    queryParams.sort = queryParams.sort.replace(/title/,'name');
+    queryParams.sort = (queryParams.sort || 'modified').replace(/title/,'name');
 
     // Search query params that ArcGIS Hub expects
     const params:any = {

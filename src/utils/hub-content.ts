@@ -1,5 +1,5 @@
 import { IHubContent, HubType, ControlOptions } from "./hub-types"
-// import { getCategory } from "@esri/hub-common";
+import { getCategory } from "@esri/hub-common";
 import { IModel, getModel, IHubRequestOptions} from "@esri/hub-common";
 const portalUrl = 'https://www.arcgis.com/sharing/rest/';
 
@@ -73,10 +73,11 @@ export function getContent(
   export function _convertItemToContent(
     item: IModel
   ): IHubContent {
+    let typeCategory = getCategory(item.item.type);
     let content:IHubContent = Object.assign(item.item, {
         // id: item.item.id,
         name: item.item.title,
-        hubType: HubType.dataset, // getCategory(item.item.type),
+        hubType: HubType[typeCategory],
         // title: item.item.title,
         summary: item.item.snippet,
         // description: item.item.description,
@@ -86,7 +87,6 @@ export function getContent(
             permission: item.item.itemControl || ControlOptions.view
         },
         contentUrl: item.item.url,
-        thumbnailUrl: `${portalUrl}content/items/${item.item.id}/info/${item.item.thumbnail}`,
         license: { name: 'Custom License', description: item.item.accessInformation},
         // source:
         createdDate: new Date(item.item.created),
@@ -98,6 +98,13 @@ export function getContent(
         // boundary: 
 
     });
+    // debugger
+    if(item.item.thumbnail !== undefined && item.item.thumbnail !== null ) {
+      content.thumbnailUrl = `${portalUrl}content/items/${item.item.id}/info/${item.item.thumbnail}`;
+    } else if (item.item.type === "Image") {
+      content.thumbnailUrl =`${portalUrl}content/items/${item.item.id}/data`;
+    }
+
   
     return content;
   }
@@ -146,6 +153,9 @@ export function getContent(
   export function _convertHubv3ToContent(
     hubmodel: any
   ): IHubContent {
+
+    let typeCategory = getCategory(hubmodel.attributes.type);
+    
     let content:IHubContent = {
         id: hubmodel.id,
         title: hubmodel.attributes.name,
@@ -160,7 +170,7 @@ export function getContent(
         type: hubmodel.attributes.type,
         url: hubmodel.attributes.url,
         name: hubmodel.attributes.name,
-        hubType: HubType.dataset, // getCategory(item.item.type),
+        hubType: HubType[typeCategory],
         summary: (hubmodel.attributes.searchDescription || "").slice(0,200),
         publisher: { 
           name: hubmodel.attributes.owner,
@@ -170,7 +180,7 @@ export function getContent(
             visibility: hubmodel.attributes.access 
         },
         contentUrl: hubmodel.attributes.url,
-        thumbnailUrl: `${portalUrl}content/items/${hubmodel.id}/info/${hubmodel.attributes.thumbnail}`,
+        
         license: { 
             name: 'Custom License', 
             description: hubmodel.attributes.accessInformation
@@ -184,6 +194,13 @@ export function getContent(
         updatedDateSource: 'item.modified'
     };
   
+    // debugger
+    if(hubmodel.attributes.thumbnail !== undefined && hubmodel.attributes.thumbnail !== null) {
+      content.thumbnailUrl =`${portalUrl}content/items/${hubmodel.id}/info/${hubmodel.attributes.thumbnail}`;
+    } else if (hubmodel.attributes.type === "Image") {
+      content.thumbnailUrl =`${portalUrl}content/items/${hubmodel.id}/data`;
+    }
+
     return content;
   }
   
