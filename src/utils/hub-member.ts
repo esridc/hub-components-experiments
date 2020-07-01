@@ -14,11 +14,66 @@ import { searchAnnotations, IResourceObject, getAnnotationServiceUrl } from "@es
 
 const portalUrl = 'https://www.arcgis.com';
 
-// let member = new HubMember({username: 'aturner'});
-// let org = member.organization 
-// 
-// export class HubMember {
-//   private org: string; 
+
+// TODO: prototype class interfaces
+// // let member = new HubMember({username: 'aturner'});
+// // let org = member.organization 
+// // 
+// export class HubMember implements HubTypes.IHubMember {
+//   org: HubTypes.IHubOrg;
+//   username: string;
+//   hubType = HubTypes.HubType.member;
+//   id: string;
+//   name: string;
+
+//   constructor(username: string) {
+//     let member = getMember(username);
+//     Object.assign(this, member);
+//   }
+//   teams?: HubTypes.IHubTeam[];
+//   events?: HubTypes.IHubEvent[];
+//   interests?: string[];
+//   fullName?: string;
+//   availableCredits?: number;
+//   assignedCredits?: number;
+//   firstName?: string;
+//   lastName?: string;
+//   preferredView?: any;
+//   description?: string;
+//   email?: string;
+//   idpUsername?: string;
+//   favGroupId?: string;
+//   lastLogin?: number;
+//   mfaEnabled?: boolean;
+//   access?: string;
+//   storageUsage?: number;
+//   storageQuota?: number;
+//   orgId?: string;
+//   role?: "org_admin" | "org_publisher" | "org_user";
+//   privileges?: string[];
+//   roleId?: string;
+//   level?: string;
+//   disabled?: boolean;
+//   units?: string;
+//   tags?: string[];
+//   culture?: string;
+//   region?: string;
+//   thumbnail?: string;
+//   created?: number;
+//   modified?: number;
+//   groups?: import("@esri/arcgis-rest-portal").IGroup[];
+//   provider?: "arcgis" | "enterprise" | "facebook" | "google";
+//   summary?: string;
+//   publisher: HubTypes.IHubOwner;
+//   url?: string;
+//   permissions: { visibility: HubTypes.VisibilityOptions; control?: HubTypes.ControlOptions; groups?: import("@esri/arcgis-rest-portal").IGroup[]; };
+//   createdDate: Date;
+//   createdDateSource: string;
+//   updatedDate: Date;
+//   updatedDateSource: string;
+//   thumbnailUrl?: string;
+//   boundary?: HubTypes.IHubGeography;
+//   metadata?: any;
 
 //   static search(_query:string, _authentication: IAuthenticationManager) {
 //     searchMembers(_query, _authentication);
@@ -26,15 +81,33 @@ const portalUrl = 'https://www.arcgis.com';
 //   }
 
 //   get organization() {
-//     if(this.org !== undefined ) { 
-//       this.org = getMemberOrg(username: this.username)
+//     if(!!this.org) { 
+//       this.org = getMemberOrg( this.username )
 //     }
 //     return false;
 //   }
+
+//   get places() {
+//     if(!!this.metadata.places) {
+//       this.metadata.places = await getMemberPlaces(this.username, this.authentication)
+//     }
+//     return this.metadata.places;
+//   }
 // }
 
-export function getMemberOrg(_username: string) {
-  return "DCDev";
+// e.g. https://www.arcgis.com/sharing/rest/portals/BBpPn9wZu2D6eTNY?f=json&culture=en
+export function getMemberOrg(_username: string):HubTypes.IHubOrg {
+  return { 
+    id: "BBpPn9wZu2D6eTNY", 
+    name: "Agency Online Organization", 
+    hubType: HubTypes.HubType.organization,
+    createdDate: new Date(),
+    createdDateSource: "portal",
+    updatedDate: new Date(),
+    updatedDateSource: "portal",
+    permissions: {  visibility:  HubTypes.VisibilityOptions.public },
+    publisher: {name: "cityx_admin"}
+  };
 }
 
 export async function searchMembers(query: string, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
@@ -111,7 +184,7 @@ export async function getMemberEvents(authentication: IAuthenticationManager): P
 
 
 export async function setMemberPlaces(username:string, places: HubTypes.IHubGeography[], authentication?: IAuthenticationManager): Promise<boolean> {
-  let resp = await addUserResource({username, name: "places.json", content: JSON.stringify(places), authentication})
+  let resp = await addUserResource({username, name: "places.json", content: JSON.stringify({places}), authentication})
   console.log("hub-member: getMemberPlaces", places)
   return resp.success;
 }

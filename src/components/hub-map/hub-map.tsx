@@ -1,5 +1,6 @@
 import { Component, State, Host, Prop, h, Element, Event, EventEmitter, Watch } from "@stencil/core";
 import { loadModules } from "esri-loader";
+import { IGeometry } from "@esri/arcgis-rest-common-types";
 
 // TODO: why won't render() with shadow:true
 @Component({
@@ -34,6 +35,11 @@ export class HubMap {
   @Prop({ mutable: true, reflect: true }) drawing: boolean = false;
 
   @Prop() showFullscreen: boolean = false;
+
+  /**
+   * Optional Geometry to display
+   */
+  @Prop() geometry: Array<IGeometry> = [];
 
   /** 
    * Sends event when drawing is complete
@@ -126,6 +132,10 @@ export class HubMap {
     if(this.drawing) {
       this.addSketch();
     }
+
+    if(this.geometry.length > 0) {
+      this.addGeometry(this.geometry);      
+    }
       // .then(() => this.zoomToUrlObjectId())
       // .then(() => this.addZoomOnClickAndUrlUpdate());
   }
@@ -206,6 +216,42 @@ export class HubMap {
         easing: "ease-in"
       });
     });
+  }
+
+  addGeometry(geometry: Array<IGeometry>) {
+    loadModules(
+      ["esri/Graphic",
+      "esri/layers/GraphicsLayer"]
+    ).then(
+      ([Graphic, GraphicsLayer]: [
+        __esri.GraphicConstructor,
+        __esri.GraphicsLayerConstructor
+      ]) => {
+        
+        const geometryLayer = new GraphicsLayer();
+        this.esriMap.add(geometryLayer);
+        geometry.map((polygon) => {
+
+          polygon['type'] = "polygon";
+          var simpleFillSymbol = {
+            type: "simple-fill",
+            color: [227, 139, 79, 0.8],  // orange, opacity 80%
+            outline: {
+              color: [255, 255, 255],
+              width: 1
+            }
+          };
+   
+          var polygonGraphic = new Graphic({
+            geometry: polygon,
+            symbol: simpleFillSymbol
+          });
+   
+          geometryLayer.add(polygonGraphic);
+
+        })
+      
+      })
   }
 
   addSketch() {

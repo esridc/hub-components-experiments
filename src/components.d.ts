@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { IHubChat, } from "./utils/hub-types";
-import { IUser, } from "@esri/arcgis-rest-common-types";
+import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
 export namespace Components {
     interface ArcgisNotebook {
         /**
@@ -343,6 +343,10 @@ export namespace Components {
           * Option to show drawing tools
          */
         "drawing": boolean;
+        /**
+          * Optional Geometry to display
+         */
+        "geometry": Array<IGeometry>;
         "showFullscreen": boolean;
         /**
           * Webmap Item configuration to load
@@ -1109,6 +1113,10 @@ declare namespace LocalJSX {
           * Option to show drawing tools
          */
         "drawing"?: boolean;
+        /**
+          * Optional Geometry to display
+         */
+        "geometry"?: Array<IGeometry>;
         /**
           * Sends event when drawing is complete
          */

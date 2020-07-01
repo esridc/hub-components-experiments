@@ -21,7 +21,8 @@ export class HubPlacesMap {
    */
   @Prop({ mutable: true, reflect: true }) mode: "view" | "edit" = "view";
 
-  @Prop({ mutable: true }) places: HubTypes.IHubGeography[];
+  @Prop({ mutable: true }) places: HubTypes.IHubGeography[] = [];
+
   async componentWillLoad() {
     this.session = readSessionFromCookie();
     const auth = UserSession.deserialize(this.session);
@@ -36,15 +37,29 @@ export class HubPlacesMap {
   @Listen('drawingComplete')
   placeAdded(event: CustomEvent) {
     console.log("hub-places-map: placeAdded", event)
+    const authentication = UserSession.deserialize(this.session);
+    const places = [
+      {
+        name: "Custom",
+        geometry: event.detail.geometry
+      }
+    ]
+    let response = HubMember.setMemberPlaces(
+      authentication.username, 
+      places,
+      authentication)
 
+      console.log("hub-places-map: placeAdded", response);
   }
 
   render() {
     return (
       <Host>
         <slot></slot>
-        <hub-map class="places-map"
+        <hub-map 
+          class="places-map"
           drawing={true}
+          geometry={this.places.map((place) => {return place.geometry})}
         ></hub-map>
       </Host>
     );

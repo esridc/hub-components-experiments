@@ -8,7 +8,7 @@ export enum ControlOptions {view, edit, admin}
 export enum EventType { event }
 
 // TODO: figure out how this can work like { ...ContentType, ...CommunityType, ...EventType}
-export enum HubType {member=1, team=2, event=100, dataset=1000, document, map , app , site, initiative, template}
+export enum HubType {member=1, team=2, event=100, dataset=1000, document, map , app , site, initiative, template, organization}
 
 export type IHubSearchResults = {
   results: IHubResource[]
@@ -126,7 +126,7 @@ export interface IHubMember extends IUser, IHubCommunity {
   teams?: IHubTeam[]
   events?: IHubEvent[]
   interests?: string[]
-  places?: string[]
+  places?: IHubGeography[]
 }
 
 // title, description, and optional link to license item with more info

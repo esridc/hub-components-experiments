@@ -73,7 +73,9 @@ export class HubWorkspace {
             <em>Joined {this.dateToText(this.member.createdDate)}</em>
           </div>
           <div class="workspace-map">
-            <hub-map></hub-map>
+          
+            <hub-places-map mode="view" session={this.session}></hub-places-map>
+          
           </div>
           <div class="workspace-interests">
             <h3>Stats</h3>
@@ -101,7 +103,7 @@ export class HubWorkspace {
           <div class="workspace-teams">
             <div class="gallery-header">
               <h2>My Content</h2>
-              <a class="explore" href="#">Explore more&gt;</a>
+              <a class="explore" href="#">See all&gt;</a>
             </div>
             <div class="gallery">
             {this.content.results.slice(0,4).map((result) =>

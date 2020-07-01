@@ -16,7 +16,7 @@
 
 ### Depends on
 
-- [hub-map](../hub-map)
+- [hub-places-map](../hub-places-map)
 - [hub-statistic](../hub-statistic)
 - calcite-chip
 - [hub-events-list](../hub-events-list)
@@ -27,13 +27,14 @@
 ### Graph
 ```mermaid
 graph TD;
-  hub-workspace --> hub-map
+  hub-workspace --> hub-places-map
   hub-workspace --> hub-statistic
   hub-workspace --> calcite-chip
   hub-workspace --> hub-events-list
   hub-workspace --> hub-list
   hub-workspace --> hub-card
   hub-workspace --> hub-gallery
+  hub-places-map --> hub-map
   hub-map --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
