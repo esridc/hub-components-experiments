@@ -1,4 +1,4 @@
-import { Component, Prop, Element, h, State, Listen, Event, EventEmitter} from '@stencil/core';
+import { Component, Prop, Element, h, State, Listen, Event, EventEmitter, Watch} from '@stencil/core';
 import { IResourceObject, getAnnotationServiceUrl, searchAnnotations, deleteAnnotations } from '@esri/hub-annotations';
 import { convertUserToMember, getAnonymousMember } from "../../../utils/hub-member"
 import * as HubTypes from '../../../utils/hub-types'
@@ -18,7 +18,7 @@ export class HubDiscussion {
   @Prop() org: string;
   @Prop({ mutable: true }) target: string;
   @Prop({ mutable: true }) author: string;
-  @Prop() search: string;
+  @Prop({ mutable: true, reflect: true }) query: string;
   @Prop({ mutable: true }) portalUrl: string;
   @Prop({ mutable: true }) annotationsUrl: string;
   @Prop() update: boolean; // Automatic updates
@@ -43,10 +43,19 @@ export class HubDiscussion {
   }
 
   addAnnotation(newAnnotation: HubTypes.IHubAnnotation) {
-    this.updateAnnotations(this.searchOptions);
+    this.updateAnnotations();
     this.newResponse.emit(newAnnotation);
   }
 
+  @Watch('query')
+  queryUpdated() {
+    this.updateAnnotations();
+  }
+  @Watch('target')
+  targetUpdated(newTarget: string) {
+    console.log("hub-discussion: Updated discussion target", newTarget)
+    this.updateAnnotations();
+  }
   
   // Component Methods
   constructor() {
@@ -61,9 +70,9 @@ export class HubDiscussion {
      this.username = JSON.parse(this.session).username;
     }
 
-    if(!!this.search) {
-      this.searchOptions.search = this.search;
-    }
+    // if(!!this.search) {
+    //   this.searchOptions.search = this.search;
+    // }
 
     // if(this.author === null || this.author === undefined) {
     //   this.author = 'aturner';
@@ -84,13 +93,13 @@ export class HubDiscussion {
     // }
     return getAnnotationServiceUrl(this.org).then( annotationsUrl => {
       this.annotationsUrl = annotationsUrl + '/0';
-      return this.updateAnnotations(this.searchOptions);
+      return this.updateAnnotations();
     });
   }
 
   // Retrieve annotations from service and create combined list
-  updateAnnotations(options) {
-    return this.getAnnotations(options).then(response => {
+  updateAnnotations() {
+    return this.getAnnotations().then(response => {
       // console.log("Annotations", response)
       this.annotations = response.data;
 
@@ -108,32 +117,31 @@ export class HubDiscussion {
     deleteAnnotations({url: this.annotationsUrl, objectIds: [ annotationId ] })
     .then( response => {
         console.log("deleteAnnotations", response);
-        return this.updateAnnotations(this.searchOptions);
+        return this.updateAnnotations();
     });
   }
-  getAnnotations(search) {
-    let query = ["1=1"];
+  getAnnotations() {
+    let searchOptions = ["1=1"];
 
-    if(!search) {
-      search = {}
+    if(!!this.query) {
+      searchOptions.push(`description LIKE '%${this.query}%'`)
     }
-
-    if(!!search.author) {
-      query.push(`author LIKE '${search.author}'`)
-    }
-    if(!!search.target) {
-      query.push(`target LIKE '${search.target}'`)
+    // if(!!this.author) {
+    //   query.push(`author LIKE '${search.author}'`)
+    // }
+    if(!!this.target) {
+      searchOptions.push(`target LIKE '${this.target}'`)
     }
     // if(!!search.search) {
     //   query.push(search.search)
     // }
-    console.log("hub-discussion: Search", [search, query, {url: this.annotationsUrl, params: {where: query.join(" AND ")}}])
-    return searchAnnotations({url: this.annotationsUrl, where: query.join(" AND ")})
+    // console.log("hub-discussion: Search", [search, query, {url: this.annotationsUrl, params: {where: query.join(" AND ")}}])
+    return searchAnnotations({url: this.annotationsUrl, where: searchOptions.join(" AND ")})
   }
 
   searchChanged(event) {
-    this.searchOptions.author = event.target.value;
-    return this.updateAnnotations(this.searchOptions);
+    this.query = event.target.value;
+    return this.updateAnnotations();
   }
 
   getElementById(id) {
@@ -159,7 +167,7 @@ export class HubDiscussion {
     })
 
     console.debug("hub-discussion: removeAnnotation response", response);
-    this.updateAnnotations(this.searchOptions);
+    this.updateAnnotations();
   }
 
   getAuthor(username) {

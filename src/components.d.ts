@@ -139,7 +139,7 @@ export namespace Components {
         "author": string;
         "org": string;
         "portalUrl": string;
-        "search": string;
+        "query": string;
         /**
           * Serialized authentication information.
          */
@@ -901,7 +901,7 @@ declare namespace LocalJSX {
         "onNewResponse"?: (event: CustomEvent<any>) => void;
         "org"?: string;
         "portalUrl"?: string;
-        "search"?: string;
+        "query"?: string;
         /**
           * Serialized authentication information.
          */

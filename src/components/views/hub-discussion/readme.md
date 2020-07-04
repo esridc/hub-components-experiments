@@ -20,7 +20,7 @@
 | `author`         | `author`          |                                        | `string`  | `undefined` |
 | `org`            | `org`             |                                        | `string`  | `undefined` |
 | `portalUrl`      | `portal-url`      |                                        | `string`  | `undefined` |
-| `search`         | `search`          |                                        | `string`  | `undefined` |
+| `query`          | `query`           |                                        | `string`  | `undefined` |
 | `session`        | `session`         | Serialized authentication information. | `string`  | `undefined` |
 | `target`         | `target`          |                                        | `string`  | `undefined` |
 | `update`         | `update`          |                                        | `boolean` | `undefined` |
