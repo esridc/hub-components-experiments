@@ -255,12 +255,15 @@ export class HubDiscussion {
         )}
       </div>
     )
-    output.push(
-      <discussion-input 
-        target={this.target}
-        annotationsUrl={this.annotationsUrl}
-      ></discussion-input>
-    )
+    if(!!this.username) {
+      output.push(
+        <discussion-input 
+          target={this.target}
+          annotationsUrl={this.annotationsUrl}
+        ></discussion-input>
+      )
+    }
+
     return output;
   }
 
