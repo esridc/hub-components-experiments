@@ -24,6 +24,11 @@ export class HubTopicPicker {
   @Prop({ mutable: true, reflect: true }) topicsSelected: Array<string> = ['education', 'transportation'];
   
   /**
+   * Option to allow for selected & de-selecting topics
+   */
+  @Prop({ }) allowSelection:boolean = true;
+
+  /**
    * Event sent when a topic is selected or deselected
    */
   @Event() topicSelected: EventEmitter<ITopic>;
@@ -39,6 +44,7 @@ export class HubTopicPicker {
   @State() topicsState: Array<ITopic>
 
   componentWillLoad() {
+    console.log("hub-topic-picker: this.allowSelection", this.allowSelection)
     this.updateTopics();
   }
 
@@ -56,6 +62,12 @@ export class HubTopicPicker {
   }
 
   onTopicSelected(selectedName: string, selectedState: boolean) {
+    
+    // If selection isn't allowed, block events
+    if(!this.allowSelection) {
+      return false;
+    }
+
     this.topicSelected.emit({name: selectedName, selected: selectedState})
 
     if(selectedState) {
@@ -71,10 +83,11 @@ export class HubTopicPicker {
         <slot></slot>
         {this.topicsState.map((topic) => 
           <calcite-chip 
+            class={this.allowSelection ? "topic-selectable" : ""}
             onClick={(_ref) => this.onTopicSelected(topic.name, !topic.selected)}
             value={topic.name}
             appearance={topic.selected ? 'solid' : 'clear'}
-            dismissible={topic.selected}
+            dismissible={this.allowSelection && topic.selected}
             >{topic.name}</calcite-chip> 
         )}
       </Host>

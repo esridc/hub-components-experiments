@@ -446,6 +446,10 @@ export namespace Components {
     }
     interface HubTopicPicker {
         /**
+          * Option to allow for selected & de-selecting topics
+         */
+        "allowSelection": boolean;
+        /**
           * Array of topics to be displayed
          */
         "topicsAvailable": Array<string>;
@@ -1241,6 +1245,10 @@ declare namespace LocalJSX {
         "google"?: string;
     }
     interface HubTopicPicker {
+        /**
+          * Option to allow for selected & de-selecting topics
+         */
+        "allowSelection"?: boolean;
         /**
           * Event sent when a topic is selected or deselected
          */

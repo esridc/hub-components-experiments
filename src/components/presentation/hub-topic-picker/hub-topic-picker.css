@@ -2,7 +2,7 @@
   display: block;
 }
 
-calcite-chip {
+calcite-chip.topic-selectable {
   cursor: pointer;
 }
 calcite-chip:hover {
