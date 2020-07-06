@@ -6,9 +6,9 @@ import buildStencilStories from './stories/stencil';
 // useful for monorepos where multiple packages might exist.
 const COLLECTIONS = [
   {
-    name: 'Hub Views',
+    name: 'Hub Containers',
     loader: require('../loader/index.cjs.js'),
-    componentsCtx: require.context('../dist/collection', true, /\/components\/views\/([^/]+)\/\1\.js$/),
+    componentsCtx: require.context('../dist/collection', true, /\/components\/containers\/([^/]+)\/\1\.js$/),
     storiesCtx: require.context('../src', true, /\.story\.tsx$/)
   }, {
     name: 'Hub Blocks',
@@ -16,9 +16,9 @@ const COLLECTIONS = [
     componentsCtx: require.context('../dist/collection', true, /\/components\/blocks\/([^/]+)\/\1\.js$/),
     storiesCtx: require.context('../src', true, /\.story\.tsx$/)
   }, {
-    name: 'Hub Elements',
+    name: 'Hub Presentation',
     loader: require('../loader/index.cjs.js'),
-    componentsCtx: require.context('../dist/collection', true, /\/components\/elements\/([^/]+)\/\1\.js$/),
+    componentsCtx: require.context('../dist/collection', true, /\/components\/presentation\/([^/]+)\/\1\.js$/),
     storiesCtx: require.context('../src', true, /\.story\.tsx$/)
   }
 ];
