@@ -63,8 +63,8 @@ graph TD;
   metadata-form --> metadata-section-view
   metadata-section-view --> metadata-section-help
   metadata-section-view --> metadata-element-view
-  metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input
+  metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input-message
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon

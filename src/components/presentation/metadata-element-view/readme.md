@@ -7,14 +7,15 @@
 
 ## Properties
 
-| Property      | Attribute     | Description | Type      | Default          |
-| ------------- | ------------- | ----------- | --------- | ---------------- |
-| `description` | `description` |             | `string`  | `""`             |
-| `id`          | `id`          |             | `string`  | `"title"`        |
-| `required`    | `required`    |             | `boolean` | `false`          |
-| `title`       | `title`       |             | `string`  | `"Input: Title"` |
-| `type`        | `type`        |             | `string`  | `"text"`         |
-| `value`       | `value`       |             | `string`  | `""`             |
+| Property      | Attribute     | Description | Type                                                                                                                                                                                   | Default          |
+| ------------- | ------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| `description` | `description` |             | `string`                                                                                                                                                                               | `""`             |
+| `id`          | `id`          |             | `string`                                                                                                                                                                               | `"title"`        |
+| `required`    | `required`    |             | `boolean`                                                                                                                                                                              | `false`          |
+| `subtype`     | `subtype`     |             | `string`                                                                                                                                                                               | `null`           |
+| `title`       | `title`       |             | `string`                                                                                                                                                                               | `"Input: Title"` |
+| `type`        | `type`        |             | `"color" \| "date" \| "datetime-local" \| "email" \| "file" \| "image" \| "month" \| "number" \| "password" \| "search" \| "tel" \| "text" \| "textarea" \| "time" \| "url" \| "week"` | `"text"`         |
+| `value`       | `value`       |             | `string`                                                                                                                                                                               | `""`             |
 
 
 ## Dependencies
@@ -25,15 +26,15 @@
 
 ### Depends on
 
-- calcite-label
 - calcite-input
+- calcite-label
 - calcite-input-message
 
 ### Graph
 ```mermaid
 graph TD;
-  metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input
+  metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input-message
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon

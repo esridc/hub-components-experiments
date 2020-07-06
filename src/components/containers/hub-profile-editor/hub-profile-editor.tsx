@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, State} from '@stencil/core';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import * as Portal from "@esri/arcgis-rest-portal";
 import { readSessionFromCookie } from '../../../utils/utils';
+import { getMember } from '../../../utils/hub-member';
 
 @Component({
   tag: 'hub-profile-editor',
@@ -21,11 +22,12 @@ export class HubProfileEditor {
 
   @State() user: any = null;
 
-  componentWillLoad() {
+  async componentWillLoad() {
     this.session = readSessionFromCookie()
-    Portal.getUser(this.username).then((response) => {
-      this.user = response; // For sending into the metadata form
-    })
+    this.user = await getMember(this.username);
+    // Portal.getUser(this.username).then((response) => {
+    //   this.user = response; // For sending into the metadata form
+    // })
   }
 
   onSave(e) {

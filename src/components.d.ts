@@ -486,8 +486,9 @@ export namespace Components {
         "description": string;
         "id": string;
         "required": boolean;
+        "subtype": string;
         "title": string;
-        "type": string;
+        "type": "number" | "text" | "color" | "date" | "datetime-local" | "email" | "file" | "image" | "month" | "password" | "search" | "tel" | "textarea" | "time" | "url" | "week";
         "value": string;
     }
     interface MetadataForm {
@@ -1295,8 +1296,9 @@ declare namespace LocalJSX {
         "description"?: string;
         "id"?: string;
         "required"?: boolean;
+        "subtype"?: string;
         "title"?: string;
-        "type"?: string;
+        "type"?: "number" | "text" | "color" | "date" | "datetime-local" | "email" | "file" | "image" | "month" | "password" | "search" | "tel" | "textarea" | "time" | "url" | "week";
         "value"?: string;
     }
     interface MetadataForm {

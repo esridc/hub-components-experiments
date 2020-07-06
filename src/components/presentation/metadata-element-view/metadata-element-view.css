@@ -12,7 +12,7 @@ textarea {
   height: 80px;
 }
 
-label.metadata-required::after {
+calcite-label.metadata-required::after {
   content: '*';
   color: red;
 }
@@ -21,4 +21,8 @@ label {
   margin-top: 5px;
   display: block;
   font-weight: 600;
+}
+
+.map {
+  height: 400px;
 }

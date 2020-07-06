@@ -18,8 +18,8 @@
 
 ### Used by
 
- - [hub-metadata-editor](../hub-metadata-editor)
- - [hub-profile-editor](../hub-profile-editor)
+ - [hub-metadata-editor](../../containers/hub-metadata-editor)
+ - [hub-profile-editor](../../containers/hub-profile-editor)
 
 ### Depends on
 
@@ -31,8 +31,8 @@ graph TD;
   metadata-form --> metadata-section-view
   metadata-section-view --> metadata-section-help
   metadata-section-view --> metadata-element-view
-  metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input
+  metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input-message
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon

@@ -33,7 +33,8 @@ export class MetadataSectionView {
             {Object.keys(this.inputs).map((attr) =>
               <metadata-element-view 
                 title={attr} 
-                type={this.inputs[attr].type} 
+                type={this.inputs[attr].type}
+                subtype={this.inputs[attr].subtype || null}
                 description={this.inputs[attr].description} 
                 value={this.metadataValue(attr)}
                 required={true}></metadata-element-view>

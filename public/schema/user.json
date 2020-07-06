@@ -34,22 +34,34 @@
             "arcgis": ["user.description"]
         }
       },
+      "places": {
+        "type": "string",
+        "subtype": "geography",
+        "description": "What places do you care about?",
+        "translation": {
+            "arcgis": ["user.metadata.places"]
+        }
+      },      
       "languages": {
         "type": "array",
+        "subtype": "topics",
         "description": "What languages do you speak fluently?",
         "translation": {
+          "arcgis": ["user.culture"],
           "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
           "FGDC CSDGM": ["idinfo > keywords"]
         },
         "uniqueItems": true,
         "items": {
-            "type": "string"
+            "type": "string",
+            "enum": ["es", "en", "zh"]
         }
       },
       "tags": {
         "type": "array",
         "description": "What skills do you have?",
         "translation": {
+          "arcgis": ["user.tags"],
           "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
           "FGDC CSDGM": ["idinfo > keywords"]
         },
