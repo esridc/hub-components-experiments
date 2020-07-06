@@ -38,7 +38,7 @@
 ### Used by
 
  - [hub-places-map](../hub-places-map)
- - [hub-radar](../../views/hub-radar)
+ - [hub-radar](../../containers/hub-radar)
 
 ### Depends on
 

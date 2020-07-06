@@ -25,7 +25,7 @@
 ### Depends on
 
 - calcite-notice
-- [hub-metadata-editor](../../views/hub-metadata-editor)
+- [hub-metadata-editor](../../containers/hub-metadata-editor)
 - calcite-loader
 
 ### Graph

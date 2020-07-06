@@ -40,8 +40,8 @@
 
 ### Depends on
 
-- [hub-card](../../elements/hub-card)
-- [hub-suggest-input](../../elements/hub-suggest-input)
+- [hub-card](../../presentation/hub-card)
+- [hub-suggest-input](../../presentation/hub-suggest-input)
 
 ### Graph
 ```mermaid

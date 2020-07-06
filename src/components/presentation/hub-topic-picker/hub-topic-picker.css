@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+calcite-chip {
+  cursor: pointer;
+}
+calcite-chip:hover {
+  box-shadow: 0 0 5px 0 rgba(76,76,76,.25);  
+}

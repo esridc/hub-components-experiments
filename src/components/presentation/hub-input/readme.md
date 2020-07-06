@@ -24,7 +24,7 @@
 
 ### Used by
 
- - [hub-radar](../../views/hub-radar)
+ - [hub-radar](../../containers/hub-radar)
 
 ### Depends on
 

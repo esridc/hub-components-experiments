@@ -23,7 +23,7 @@
 
 ### Depends on
 
-- [metadata-section-view](../../elements/metadata-section-view)
+- [metadata-section-view](../../presentation/metadata-section-view)
 
 ### Graph
 ```mermaid

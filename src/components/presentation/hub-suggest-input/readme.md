@@ -28,7 +28,7 @@
 
 ### Used by
 
- - [hub-gallery](../../views/hub-gallery)
+ - [hub-gallery](../../containers/hub-gallery)
  - [hub-input](../hub-input)
 
 ### Depends on

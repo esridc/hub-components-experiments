@@ -25,7 +25,7 @@
 
 ### Depends on
 
-- [hub-card](../../elements/hub-card)
+- [hub-card](../../presentation/hub-card)
 
 ### Graph
 ```mermaid

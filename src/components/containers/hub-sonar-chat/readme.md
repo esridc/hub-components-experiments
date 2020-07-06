@@ -17,7 +17,7 @@
 
 ### Depends on
 
-- [hub-chat](../../elements/hub-chat)
+- [hub-chat](../../presentation/hub-chat)
 
 ### Graph
 ```mermaid

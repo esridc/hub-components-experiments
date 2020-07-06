@@ -27,7 +27,7 @@
 
 ### Used by
 
- - [hub-discussion](../../views/hub-discussion)
+ - [hub-discussion](../../containers/hub-discussion)
 
 ### Depends on
 

@@ -1,0 +1,40 @@
+# hub-topic-picker
+
+
+
+<!-- Auto Generated Below -->
+
+
+## Properties
+
+| Property          | Attribute | Description                               | Type       | Default                                                   |
+| ----------------- | --------- | ----------------------------------------- | ---------- | --------------------------------------------------------- |
+| `topicsAvailable` | --        | Array of topics to be displayed           | `string[]` | `['education', 'health', 'recreation', 'transportation']` |
+| `topicsSelected`  | --        | Array of topics that are current selected | `string[]` | `['education', 'transportation']`                         |
+
+
+## Events
+
+| Event           | Description                                       | Type                    |
+| --------------- | ------------------------------------------------- | ----------------------- |
+| `topicsChanged` | Event sent after any or all topics updated        | `CustomEvent<ITopic[]>` |
+| `topicSelected` | Event sent when a topic is selected or deselected | `CustomEvent<ITopic>`   |
+
+
+## Dependencies
+
+### Depends on
+
+- calcite-chip
+
+### Graph
+```mermaid
+graph TD;
+  hub-topic-picker --> calcite-chip
+  calcite-chip --> calcite-icon
+  style hub-topic-picker fill:#f9f,stroke:#333,stroke-width:4px
+```
+
+----------------------------------------------
+
+*Built with [StencilJS](https://stenciljs.com/)*

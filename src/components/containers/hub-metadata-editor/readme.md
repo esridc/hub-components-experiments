@@ -22,7 +22,7 @@
 
 ### Used by
 
- - [hub-upload-file](../../elements/hub-upload-file)
+ - [hub-upload-file](../../presentation/hub-upload-file)
 
 ### Depends on
 

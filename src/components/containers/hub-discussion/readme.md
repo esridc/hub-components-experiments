@@ -38,7 +38,7 @@
 ### Depends on
 
 - calcite-card
-- [discussion-entry](../../elements/discussion-entry)
+- [discussion-entry](../../presentation/discussion-entry)
 - [discussion-input](../../blocks/discussion-input)
 
 ### Graph

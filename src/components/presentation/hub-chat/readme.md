@@ -26,7 +26,7 @@
 
 ### Used by
 
- - [hub-sonar-chat](../../views/hub-sonar-chat)
+ - [hub-sonar-chat](../../containers/hub-sonar-chat)
 
 ### Graph
 ```mermaid

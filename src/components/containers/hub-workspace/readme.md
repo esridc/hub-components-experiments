@@ -20,8 +20,8 @@
 - [hub-statistic](../../blocks/hub-statistic)
 - calcite-chip
 - [hub-events-list](../../blocks/hub-events-list)
-- [hub-list](../../elements/hub-list)
-- [hub-card](../../elements/hub-card)
+- [hub-list](../../presentation/hub-list)
+- [hub-card](../../presentation/hub-card)
 - [hub-gallery](../hub-gallery)
 
 ### Graph

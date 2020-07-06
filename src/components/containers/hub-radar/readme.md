@@ -45,10 +45,10 @@ using `slots`
 
 ### Depends on
 
-- [hub-input](../../elements/hub-input)
+- [hub-input](../../presentation/hub-input)
 - [hub-map](../../blocks/hub-map)
 - calcite-loader
-- [hub-card](../../elements/hub-card)
+- [hub-card](../../presentation/hub-card)
 
 ### Graph
 ```mermaid

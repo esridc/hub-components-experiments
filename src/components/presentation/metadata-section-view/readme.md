@@ -19,7 +19,7 @@
 
 ### Used by
 
- - [metadata-form](../../views/metadata-form)
+ - [metadata-form](../../containers/metadata-form)
 
 ### Depends on
 

@@ -47,8 +47,8 @@ typeKeywords: showUnmatchedAddresses,Data,Service,Feature Service,ArcGIS Server,
 
 ### Depends on
 
-- [hub-upload-file](../../elements/hub-upload-file)
-- [drop-area](../../elements/drop-area)
+- [hub-upload-file](../../presentation/hub-upload-file)
+- [drop-area](../../presentation/drop-area)
 
 ### Graph
 ```mermaid

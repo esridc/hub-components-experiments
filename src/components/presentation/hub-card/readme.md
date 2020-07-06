@@ -26,10 +26,10 @@ A rectangular card for showing content, optionally with an thumbnail image and l
 
  - [hub-content-card](../../blocks/hub-content-card)
  - [hub-event](../../blocks/hub-event)
- - [hub-gallery](../../views/hub-gallery)
+ - [hub-gallery](../../containers/hub-gallery)
  - [hub-profile-card](../../blocks/hub-profile-card)
- - [hub-radar](../../views/hub-radar)
- - [hub-workspace](../../views/hub-workspace)
+ - [hub-radar](../../containers/hub-radar)
+ - [hub-workspace](../../containers/hub-workspace)
 
 ### Depends on
 

@@ -19,7 +19,7 @@
 
 ### Used by
 
- - [hub-workspace](../../views/hub-workspace)
+ - [hub-workspace](../../containers/hub-workspace)
 
 ### Graph
 ```mermaid

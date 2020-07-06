@@ -444,6 +444,16 @@ export namespace Components {
     interface HubTelemetry {
         "google": string;
     }
+    interface HubTopicPicker {
+        /**
+          * Array of topics to be displayed
+         */
+        "topicsAvailable": Array<string>;
+        /**
+          * Array of topics that are current selected
+         */
+        "topicsSelected": Array<string>;
+    }
     interface HubUpload {
         /**
           * ClientID to identify the app launching auth
@@ -673,6 +683,12 @@ declare global {
         prototype: HTMLHubTelemetryElement;
         new (): HTMLHubTelemetryElement;
     };
+    interface HTMLHubTopicPickerElement extends Components.HubTopicPicker, HTMLStencilElement {
+    }
+    var HTMLHubTopicPickerElement: {
+        prototype: HTMLHubTopicPickerElement;
+        new (): HTMLHubTopicPickerElement;
+    };
     interface HTMLHubUploadElement extends Components.HubUpload, HTMLStencilElement {
     }
     var HTMLHubUploadElement: {
@@ -746,6 +762,7 @@ declare global {
         "hub-statistic": HTMLHubStatisticElement;
         "hub-suggest-input": HTMLHubSuggestInputElement;
         "hub-telemetry": HTMLHubTelemetryElement;
+        "hub-topic-picker": HTMLHubTopicPickerElement;
         "hub-upload": HTMLHubUploadElement;
         "hub-upload-file": HTMLHubUploadFileElement;
         "hub-workspace": HTMLHubWorkspaceElement;
@@ -1223,6 +1240,24 @@ declare namespace LocalJSX {
     interface HubTelemetry {
         "google"?: string;
     }
+    interface HubTopicPicker {
+        /**
+          * Event sent when a topic is selected or deselected
+         */
+        "onTopicSelected"?: (event: CustomEvent<ITopic>) => void;
+        /**
+          * Event sent after any or all topics updated
+         */
+        "onTopicsChanged"?: (event: CustomEvent<Array<ITopic>>) => void;
+        /**
+          * Array of topics to be displayed
+         */
+        "topicsAvailable"?: Array<string>;
+        /**
+          * Array of topics that are current selected
+         */
+        "topicsSelected"?: Array<string>;
+    }
     interface HubUpload {
         /**
           * ClientID to identify the app launching auth
@@ -1302,6 +1337,7 @@ declare namespace LocalJSX {
         "hub-statistic": HubStatistic;
         "hub-suggest-input": HubSuggestInput;
         "hub-telemetry": HubTelemetry;
+        "hub-topic-picker": HubTopicPicker;
         "hub-upload": HubUpload;
         "hub-upload-file": HubUploadFile;
         "hub-workspace": HubWorkspace;
@@ -1345,6 +1381,7 @@ declare module "@stencil/core" {
             "hub-statistic": LocalJSX.HubStatistic & JSXBase.HTMLAttributes<HTMLHubStatisticElement>;
             "hub-suggest-input": LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
             "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;
+            "hub-topic-picker": LocalJSX.HubTopicPicker & JSXBase.HTMLAttributes<HTMLHubTopicPickerElement>;
             "hub-upload": LocalJSX.HubUpload & JSXBase.HTMLAttributes<HTMLHubUploadElement>;
             "hub-upload-file": LocalJSX.HubUploadFile & JSXBase.HTMLAttributes<HTMLHubUploadFileElement>;
             "hub-workspace": LocalJSX.HubWorkspace & JSXBase.HTMLAttributes<HTMLHubWorkspaceElement>;

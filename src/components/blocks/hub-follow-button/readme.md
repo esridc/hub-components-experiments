@@ -24,7 +24,7 @@
 
 ### Depends on
 
-- [hub-button](../../elements/hub-button)
+- [hub-button](../../presentation/hub-button)
 
 ### Graph
 ```mermaid
