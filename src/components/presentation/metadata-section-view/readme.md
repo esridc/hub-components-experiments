@@ -7,12 +7,20 @@
 
 ## Properties
 
-| Property      | Attribute     | Description | Type     | Default |
-| ------------- | ------------- | ----------- | -------- | ------- |
-| `description` | `description` |             | `string` | `""`    |
-| `inputs`      | --            |             | `any[]`  | `[]`    |
-| `resource`    | `resource`    |             | `any`    | `{}`    |
-| `title`       | `title`       |             | `string` | `""`    |
+| Property       | Attribute       | Description                                        | Type           | Default    |
+| -------------- | --------------- | -------------------------------------------------- | -------------- | ---------- |
+| `description`  | `description`   |                                                    | `string`       | `""`       |
+| `elementTitle` | `element-title` |                                                    | `string`       | `""`       |
+| `inputs`       | --              | JSON Schema Properties section                     | `any[]`        | `[]`       |
+| `resource`     | --              | Hub Resource object.                               | `IHubResource` | `null`     |
+| `translator`   | `translator`    | Which translator to use from the schema definition | `string`       | `"arcgis"` |
+
+
+## Events
+
+| Event             | Description | Type               |
+| ----------------- | ----------- | ------------------ |
+| `resourceUpdated` |             | `CustomEvent<any>` |
 
 
 ## Dependencies

@@ -17,21 +17,21 @@
         "type": "string",
         "description": "How would you like to be called?",
         "translation": {
-            "arcgis": ["user.firstName"]
+            "arcgis": ["firstName"]
         }
       },
       "lastName": {
         "type": "string",
         "description": "What is your lastname?",
         "translation": {
-            "arcgis": ["user.lastName"]
+            "arcgis": ["lastName"]
         }
       },      
       "description": {
         "type": "string",
         "description": "Why do you love your city?",
         "translation": {
-            "arcgis": ["user.description"]
+            "arcgis": ["description"]
         }
       },
       "places": {
@@ -39,7 +39,7 @@
         "subtype": "geography",
         "description": "What places do you care about?",
         "translation": {
-            "arcgis": ["user.metadata.places"]
+            "arcgis": ["metadata.places"]
         }
       },      
       "languages": {
@@ -47,7 +47,7 @@
         "subtype": "topics",
         "description": "What languages do you speak fluently?",
         "translation": {
-          "arcgis": ["user.culture"],
+          "arcgis": ["culture"],
           "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
           "FGDC CSDGM": ["idinfo > keywords"]
         },
@@ -61,7 +61,7 @@
         "type": "array",
         "description": "What skills do you have?",
         "translation": {
-          "arcgis": ["user.tags"],
+          "arcgis": ["tags"],
           "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
           "FGDC CSDGM": ["idinfo > keywords"]
         },

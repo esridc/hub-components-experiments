@@ -5,11 +5,11 @@ export default function(stories, knobs) {
 
     stories.add('Hub Profile Card', () => {
       const type = knobs.select('type', ['member', 'team'], 'member');
-      const id = knobs.text('id', 'ajturner')
+      const username = knobs.text('username', 'ajturner')
 
       mainEl.innerHTML = `<div style="width: 260px"><hub-profile-card
         type="${type}"
-        id="${id}"
+        username="${username}"
       ></hub-profile-card></div>`
   
       return mainEl;

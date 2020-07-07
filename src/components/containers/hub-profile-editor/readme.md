@@ -12,7 +12,7 @@
 | `clientid` | `clientid` | ClientID to identify the app launching auth | `string` | `"WXC842NRBVB6NZ2r"`       |
 | `portal`   | `portal`   |                                             | `string` | `"https://www.arcgis.com"` |
 | `session`  | `session`  |                                             | `string` | `null`                     |
-| `username` | `username` |                                             | `string` | `"ajturner"`               |
+| `username` | `username` |                                             | `string` | `"aturner_cityx"`          |
 
 
 ## Dependencies

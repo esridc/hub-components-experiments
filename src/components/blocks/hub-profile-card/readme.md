@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property | Attribute | Description                                   | Type     | Default    |
-| -------- | --------- | --------------------------------------------- | -------- | ---------- |
-| `id`     | `id`      | ID For the profile. Username, Team ID, Org ID | `string` | `""`       |
-| `type`   | `type`    | Which Profile: member, team                   | `string` | `"member"` |
+| Property   | Attribute  | Description                                   | Type     | Default    |
+| ---------- | ---------- | --------------------------------------------- | -------- | ---------- |
+| `type`     | `type`     | Which Profile: member, team                   | `string` | `"member"` |
+| `username` | `username` | ID For the profile. Username, Team ID, Org ID | `string` | `""`       |
 
 
 ## Dependencies

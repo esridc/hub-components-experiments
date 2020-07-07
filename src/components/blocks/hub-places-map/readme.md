@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property  | Attribute | Description                                   | Type               | Default     |
-| --------- | --------- | --------------------------------------------- | ------------------ | ----------- |
-| `mode`    | `mode`    | Option to view places map, or edit places map | `"edit" \| "view"` | `"view"`    |
-| `places`  | --        |                                               | `IHubGeography[]`  | `[]`        |
-| `session` | `session` | Serialized authentication information.        | `string`           | `undefined` |
+| Property    | Attribute    | Description                                                                         | Type               | Default     |
+| ----------- | ------------ | ----------------------------------------------------------------------------------- | ------------------ | ----------- |
+| `bindState` | `bind-state` | Choose to save or load places from user profile directly from session               | `boolean`          | `false`     |
+| `mode`      | `mode`       | Option to view places map, or edit places map                                       | `"edit" \| "view"` | `"view"`    |
+| `session`   | `session`    | Serialized authentication information.                                              | `string`           | `undefined` |
+| `value`     | --           | Hub places array of geography. Property name `value` because re-used across editors | `IHubGeography[]`  | `[]`        |
 
 
 ## Dependencies

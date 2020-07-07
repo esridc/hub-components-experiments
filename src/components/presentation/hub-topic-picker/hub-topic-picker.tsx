@@ -37,6 +37,7 @@ export class HubTopicPicker {
    * Event sent after any or all topics updated
    */
   @Event() topicsChanged: EventEmitter<Array<ITopic>>;
+  @Event() editorUpdated:EventEmitter;
 
   /**
    * Internal variable that merges available topics + selected topics
@@ -59,6 +60,7 @@ export class HubTopicPicker {
     });
     // Send event that topics changed
     this.topicsChanged.emit(this.topicsState);
+    this.editorUpdated.emit(this.topicsSelected);
   }
 
   onTopicSelected(selectedName: string, selectedState: boolean) {

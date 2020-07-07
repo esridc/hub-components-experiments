@@ -13,7 +13,7 @@ export class HubProfileCard {
   /**
    * ID For the profile. Username, Team ID, Org ID
    */
-  @Prop() id: string = "";
+  @Prop() username: string = "";
 
   /**
    * Which Profile: member, team
@@ -26,7 +26,7 @@ export class HubProfileCard {
   @State() profile :HubTypes.IHubMember;
 
   componentWillLoad() {
-    this.loadProfile(this.id);
+    this.loadProfile(this.username);
   }
 
   /**

@@ -18,6 +18,7 @@
 
 | Event           | Description                                       | Type                    |
 | --------------- | ------------------------------------------------- | ----------------------- |
+| `editorUpdated` |                                                   | `CustomEvent<any>`      |
 | `topicsChanged` | Event sent after any or all topics updated        | `CustomEvent<ITopic[]>` |
 | `topicSelected` | Event sent when a topic is selected or deselected | `CustomEvent<ITopic>`   |
 

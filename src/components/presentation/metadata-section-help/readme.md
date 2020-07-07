@@ -7,10 +7,10 @@
 
 ## Properties
 
-| Property      | Attribute     | Description | Type     | Default                                                                                 |
-| ------------- | ------------- | ----------- | -------- | --------------------------------------------------------------------------------------- |
-| `description` | `description` |             | `string` | `"This information is used in search results, gallery cards and on the details views."` |
-| `title`       | `title`       |             | `string` | `"Basic Info"`                                                                          |
+| Property       | Attribute       | Description | Type     | Default                                                                                 |
+| -------------- | --------------- | ----------- | -------- | --------------------------------------------------------------------------------------- |
+| `description`  | `description`   |             | `string` | `"This information is used in search results, gallery cards and on the details views."` |
+| `elementTitle` | `element-title` |             | `string` | `"Basic Info"`                                                                          |
 
 
 ## Dependencies

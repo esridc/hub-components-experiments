@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { IHubChat, } from "./utils/hub-types";
 import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
+import { IHubResource, } from "./utils/hub-api";
 export namespace Components {
     interface ArcgisNotebook {
         /**
@@ -371,24 +372,31 @@ export namespace Components {
     }
     interface HubPlacesMap {
         /**
+          * Choose to save or load places from user profile directly from session
+         */
+        "bindState": boolean;
+        /**
           * Option to view places map, or edit places map
          */
         "mode": "view" | "edit";
-        "places": HubTypes.IHubGeography[];
         /**
           * Serialized authentication information.
          */
         "session": string;
+        /**
+          * Hub places array of geography. Property name `value` because re-used across editors
+         */
+        "value": HubTypes.IHubGeography[];
     }
     interface HubProfileCard {
-        /**
-          * ID For the profile. Username, Team ID, Org ID
-         */
-        "id": string;
         /**
           * Which Profile: member, team
          */
         "type": string;
+        /**
+          * ID For the profile. Username, Team ID, Org ID
+         */
+        "username": string;
     }
     interface HubProfileEditor {
         /**
@@ -484,10 +492,24 @@ export namespace Components {
     }
     interface MetadataElementView {
         "description": string;
-        "id": string;
+        "elementId": string;
+        "elementTitle": string;
         "required": boolean;
+        /**
+          * JSON schema definition for a specific metadata property see https://json-schema.org/understanding-json-schema/basics.html
+         */
+        "schema": object;
+        /**
+          * Subtype is used to override the metadata editor for this element e.g. `geography` or `topics` show specific editors
+         */
         "subtype": string;
-        "title": string;
+        /**
+          * Which translator to use from the schema definition
+         */
+        "translator": string;
+        /**
+          * Currently based on calcite-components input
+         */
         "type": "number" | "text" | "color" | "date" | "datetime-local" | "email" | "file" | "image" | "month" | "password" | "search" | "tel" | "textarea" | "time" | "url" | "week";
         "value": string;
     }
@@ -498,13 +520,23 @@ export namespace Components {
     }
     interface MetadataSectionHelp {
         "description": string;
-        "title": string;
+        "elementTitle": string;
     }
     interface MetadataSectionView {
         "description": string;
+        "elementTitle": string;
+        /**
+          * JSON Schema Properties section
+         */
         "inputs": Array<any>;
-        "resource": any;
-        "title": string;
+        /**
+          * Hub Resource object.
+         */
+        "resource": IHubResource;
+        /**
+          * Which translator to use from the schema definition
+         */
+        "translator": string;
     }
 }
 declare global {
@@ -1167,24 +1199,31 @@ declare namespace LocalJSX {
     }
     interface HubPlacesMap {
         /**
+          * Choose to save or load places from user profile directly from session
+         */
+        "bindState"?: boolean;
+        /**
           * Option to view places map, or edit places map
          */
         "mode"?: "view" | "edit";
-        "places"?: HubTypes.IHubGeography[];
         /**
           * Serialized authentication information.
          */
         "session"?: string;
+        /**
+          * Hub places array of geography. Property name `value` because re-used across editors
+         */
+        "value"?: HubTypes.IHubGeography[];
     }
     interface HubProfileCard {
-        /**
-          * ID For the profile. Username, Team ID, Org ID
-         */
-        "id"?: string;
         /**
           * Which Profile: member, team
          */
         "type"?: string;
+        /**
+          * ID For the profile. Username, Team ID, Org ID
+         */
+        "username"?: string;
     }
     interface HubProfileEditor {
         /**
@@ -1250,6 +1289,7 @@ declare namespace LocalJSX {
           * Option to allow for selected & de-selecting topics
          */
         "allowSelection"?: boolean;
+        "onEditorUpdated"?: (event: CustomEvent<any>) => void;
         /**
           * Event sent when a topic is selected or deselected
          */
@@ -1294,10 +1334,25 @@ declare namespace LocalJSX {
     }
     interface MetadataElementView {
         "description"?: string;
-        "id"?: string;
+        "elementId"?: string;
+        "elementTitle"?: string;
+        "onElementUpdated"?: (event: CustomEvent<any>) => void;
         "required"?: boolean;
+        /**
+          * JSON schema definition for a specific metadata property see https://json-schema.org/understanding-json-schema/basics.html
+         */
+        "schema"?: object;
+        /**
+          * Subtype is used to override the metadata editor for this element e.g. `geography` or `topics` show specific editors
+         */
         "subtype"?: string;
-        "title"?: string;
+        /**
+          * Which translator to use from the schema definition
+         */
+        "translator"?: string;
+        /**
+          * Currently based on calcite-components input
+         */
         "type"?: "number" | "text" | "color" | "date" | "datetime-local" | "email" | "file" | "image" | "month" | "password" | "search" | "tel" | "textarea" | "time" | "url" | "week";
         "value"?: string;
     }
@@ -1308,13 +1363,24 @@ declare namespace LocalJSX {
     }
     interface MetadataSectionHelp {
         "description"?: string;
-        "title"?: string;
+        "elementTitle"?: string;
     }
     interface MetadataSectionView {
         "description"?: string;
+        "elementTitle"?: string;
+        /**
+          * JSON Schema Properties section
+         */
         "inputs"?: Array<any>;
-        "resource"?: any;
-        "title"?: string;
+        "onResourceUpdated"?: (event: CustomEvent<any>) => void;
+        /**
+          * Hub Resource object.
+         */
+        "resource"?: IHubResource;
+        /**
+          * Which translator to use from the schema definition
+         */
+        "translator"?: string;
     }
     interface IntrinsicElements {
         "arcgis-notebook": ArcgisNotebook;

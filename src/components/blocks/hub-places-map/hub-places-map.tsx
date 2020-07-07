@@ -12,6 +12,18 @@ import * as HubMember from '../../../utils/hub-member'
 export class HubPlacesMap {
 
   /**
+   * Hub places array of geography.
+   * Property name `value` because re-used across editors
+   */
+  @Prop({ mutable: true }) value: HubTypes.IHubGeography[] = [];
+
+
+  /**
+ * Choose to save or load places from user profile directly from session
+   */
+  @Prop() bindState: boolean = false;
+
+  /**
    * Serialized authentication information.
    */
   @Prop({ mutable: true }) session: string;
@@ -21,36 +33,40 @@ export class HubPlacesMap {
    */
   @Prop({ mutable: true, reflect: true }) mode: "view" | "edit" = "view";
 
-  @Prop({ mutable: true }) places: HubTypes.IHubGeography[] = [];
 
   async componentWillLoad() {
-    this.session = readSessionFromCookie();
-    const auth = UserSession.deserialize(this.session);
-
-    console.log("Session", this.session)
-    if(this.session !== undefined) {
-      const username = JSON.parse(this.session).username;
-      this.places = await HubMember.getMemberPlaces( username, auth )
-      
+    if(this.bindState)  {
+      this.session = readSessionFromCookie();
+      const auth = UserSession.deserialize(this.session);
+  
+      console.log("Session", this.session)
+      if(this.session !== undefined) {
+        const username = JSON.parse(this.session).username;
+        this.value = await HubMember.getMemberPlaces( username, auth )
+      }
     }
   }
+
   @Listen('drawingComplete')
   placeAdded(event: CustomEvent) {
     console.log("hub-places-map: placeAdded", event)
-    const authentication = UserSession.deserialize(this.session);
-    const places = [
-      {
-        name: "Custom",
-        geometry: event.detail.geometry
-      }
-    ]
-    let response = HubMember.setMemberPlaces(
-      authentication.username, 
-      places,
-      authentication)
+    if(this.bindState) {
 
-      console.log("hub-places-map: placeAdded", response);
+      const authentication = UserSession.deserialize(this.session);
+      const places = [
+        {
+          name: "Custom",
+          geometry: event.detail.geometry
+        }
+      ]
+      let response = HubMember.setMemberPlaces(
+        authentication.username, 
+        places,
+        authentication)
+      console.log("hub-places-map: placeAdded", response);  
+    }
   }
+
 
   render() {
     return (
@@ -59,7 +75,7 @@ export class HubPlacesMap {
         <hub-map 
           class="places-map"
           drawing={true}
-          geometry={this.places.map((place) => {return place.geometry})}
+          geometry={this.value.map((place) => {return place.geometry})}
         ></hub-map>
       </Host>
     );

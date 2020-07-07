@@ -1,8 +1,8 @@
 import { Component, Host, h, Prop, State} from '@stencil/core';
 import { UserSession } from '@esri/arcgis-rest-auth';
-import * as Portal from "@esri/arcgis-rest-portal";
+// import * as Portal from "@esri/arcgis-rest-portal";
 import { readSessionFromCookie } from '../../../utils/utils';
-import { getMember } from '../../../utils/hub-member';
+import { getMember, updateMember } from '../../../utils/hub-member';
 
 @Component({
   tag: 'hub-profile-editor',
@@ -11,7 +11,7 @@ import { getMember } from '../../../utils/hub-member';
 })
 export class HubProfileEditor {
 
-  @Prop({ mutable: false }) username:string = "ajturner";
+  @Prop({ mutable: false }) username:string = "aturner_cityx";
 
   /**
    * ClientID to identify the app launching auth
@@ -33,16 +33,28 @@ export class HubProfileEditor {
   onSave(e) {
     e.preventDefault()
     e.stopPropagation()
+    
+    console.log("trace hub-profile-editor: onSave", e, this.user)
 
     const authentication = UserSession.deserialize(this.session);
-    Portal.updateUser({
-      user: {
-        username: this.username,
-        description: this.user.description,
-        tags: this.user.tags
-      },
+    
+    // TODO: remove need to load user first 
+    const member = Object.assign(getMember(this.username, authentication), this.user);
+
+
+    updateMember(
+      this.username,
+      member,
       authentication
-    })
+    )
+    // Portal.updateUser({
+    //   user: {
+    //     username: this.username,
+    //     description: this.user.description,
+    //     tags: this.user.tags
+    //   },
+    //   authentication
+    // })
   }
   render() {
     return (
@@ -52,7 +64,7 @@ export class HubProfileEditor {
             spec="user"
             resource={this.user}
           ></metadata-form>
-          <button type="submit" class="chat-submit" id="chat-submit">
+          <button type="submit">
               Save Profile
           </button>
         </form>  

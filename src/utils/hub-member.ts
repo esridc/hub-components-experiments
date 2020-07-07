@@ -1,7 +1,7 @@
 import { IAuthenticationManager, } from "@esri/arcgis-rest-request"
 import { UserSession } from '@esri/arcgis-rest-auth';
 
-import { IUser, searchUsers, getUser, searchGroups } from "@esri/arcgis-rest-portal";
+import { IUser, searchUsers, getUser, searchGroups, updateUser } from "@esri/arcgis-rest-portal";
 import * as HubTypes from './hub-types'
 import { convertGroupToTeam } from './hub-team'
 
@@ -119,6 +119,18 @@ export async function searchMembers(query: string, authentication: IAuthenticati
   }, []);
 
   return { results: members };
+}
+export async function updateMember(id:string, attributes:HubTypes.IHubMember, authentication?: UserSession): Promise<HubTypes.IHubMember> {
+    // Portal
+    updateUser({
+      user: {
+        username: id,
+        description: attributes.description,
+        tags: attributes.tags
+      },
+      authentication
+    })  
+    return getMember(id, authentication);
 }
 
 export async function getMember(id:string, authentication?: IAuthenticationManager): Promise<HubTypes.IHubMember> {
