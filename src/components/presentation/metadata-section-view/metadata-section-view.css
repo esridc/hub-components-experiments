@@ -1,5 +1,6 @@
 :host {
   display: block;
+  border-top: 1px solid #444;
 }
 .metadata-section {
   /* border-bottom: 1px solid #333; */

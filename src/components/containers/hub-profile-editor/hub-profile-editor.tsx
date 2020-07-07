@@ -31,7 +31,7 @@ export class HubProfileEditor {
     // })
   }
 
-  onSave(e) {
+  saveForm(e) {
     e.preventDefault()
     e.stopPropagation()
     
@@ -60,15 +60,15 @@ export class HubProfileEditor {
   render() {
     return (
       <Host>
-        <form onSubmit={(e) => this.onSave(e)}>
-          <metadata-form
-            spec="user"
-            resource={this.user}
-          ></metadata-form>
-          <button type="submit">
-              Save Profile
-          </button>
-        </form>  
+        <metadata-form
+          sections={['user', 'places']}
+          resource={this.user}
+        ></metadata-form>
+        <calcite-button 
+            onClick={(event) => this.saveForm(event)}
+        >
+            Save Profile
+        </calcite-button>
       </Host>
        
     );

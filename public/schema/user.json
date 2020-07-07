@@ -40,15 +40,7 @@
         "translation": {
             "arcgis": ["description"]
         }
-      },
-      "places": {
-        "type": "string",
-        "subtype": "geography",
-        "description": "What places do you care about?",
-        "translation": {
-            "arcgis": ["metadata.places"]
-        }
-      },      
+      },     
       "languages": {
         "type": "array",
         "subtype": "topics",

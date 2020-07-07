@@ -1,6 +1,8 @@
 import { IHubContent, HubType, ControlOptions } from "./hub-types"
 import { getCategory } from "@esri/hub-common";
 import { IModel, getModel, IHubRequestOptions} from "@esri/hub-common";
+import { updateItem } from '@esri/arcgis-rest-portal';
+import { UserSession } from "@esri/arcgis-rest-auth";
 const portalUrl = 'https://www.arcgis.com/sharing/rest/';
 
 /**
@@ -32,6 +34,20 @@ export function getContent(
       return _getContentFromHub(id, hubRequestOptions);
     }
   }
+
+  export async function updateContent(id:string, attributes:IHubContent, authentication?: UserSession): Promise<IHubContent> {
+    // Portal
+    updateItem({
+      item: {
+        id,
+        ...attributes
+      },
+      authentication
+    })
+    
+    // TODO add getContent authentication 
+    return getContent(id);
+}
   
   /**
    * ```js

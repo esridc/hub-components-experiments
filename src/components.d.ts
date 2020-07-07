@@ -518,7 +518,7 @@ export namespace Components {
     interface MetadataForm {
         "locale": string;
         "resource": any;
-        "spec": string;
+        "sections": Array<string>;
     }
     interface MetadataSectionHelp {
         "description": string;
@@ -531,10 +531,12 @@ export namespace Components {
           * JSON Schema Properties section
          */
         "inputs": Array<any>;
+        "locale": string;
         /**
           * Hub Resource object.
          */
         "resource": IHubResource;
+        "spec": string;
         /**
           * Which translator to use from the schema definition
          */
@@ -1363,7 +1365,7 @@ declare namespace LocalJSX {
     interface MetadataForm {
         "locale"?: string;
         "resource"?: any;
-        "spec"?: string;
+        "sections"?: Array<string>;
     }
     interface MetadataSectionHelp {
         "description"?: string;
@@ -1376,11 +1378,13 @@ declare namespace LocalJSX {
           * JSON Schema Properties section
          */
         "inputs"?: Array<any>;
+        "locale"?: string;
         "onResourceUpdated"?: (event: CustomEvent<any>) => void;
         /**
           * Hub Resource object.
          */
         "resource"?: IHubResource;
+        "spec"?: string;
         /**
           * Which translator to use from the schema definition
          */

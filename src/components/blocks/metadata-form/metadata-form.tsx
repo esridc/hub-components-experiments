@@ -1,6 +1,5 @@
-import { Component, Element, Host, h, Prop, State, Listen } from '@stencil/core';
-import * as Metadata from '../../../utils/metadata-utils'
-import * as Locale from '../../../utils/locale'
+import { Component, Element, Host, h, Prop, Listen } from '@stencil/core';
+
 import { sendTelemetry } from '../../../utils/telemetry-utils'
 
 @Component({
@@ -12,39 +11,17 @@ export class MetadataForm {
 
   @Element() element: HTMLElement;
 
-  @Prop() spec:string = "arcgis";
+  @Prop({ mutable: true }) sections:Array<string> = [];
   @Prop() locale:string = "en";
   @Prop({ mutable: true, reflect: true }) resource:any = null;
 
-  @State() sections: Array<any> = [];
-  @State() strings: any; 
-  @State() elementTitle: string;
-  @State() description: string;
-
   async componentWillLoad() {
-    this.sections = await this.loadSpecification();
-    this.locale = this.locale || Locale.getComponentClosestLanguage(this.element);
-
-    this.elementTitle = this.sections['title'];
-    this.description = this.sections['description'];
-
-    // TODO: send input translation down to components
-    Locale.getMetadataLocaleStrings(this.spec, this.locale).then((result) => {
-      this.strings = result;
-      this.elementTitle = this.strings.t(`${this.spec}.metadata.${this.spec}.title`)
-      this.description = this.strings.t(`${this.spec}.metadata.${this.spec}.description`)
-    })
 
     sendTelemetry({
       category: 'hub-component',
       action: 'hub-metadata-form:loaded', 
-      label: this.spec
+      label: ''
     });
-  }
-
-  private async loadSpecification() {
-    const file = `./schema/${this.spec}.json`
-    return await Metadata.getMetadataSpec(file);
   }
 
   // When an element updates and merges into the resource object.
@@ -58,12 +35,17 @@ export class MetadataForm {
     return (
       <Host>
         <slot></slot>
-        <metadata-section-view
-          elementTitle={this.elementTitle}
-          description={this.description}
-          inputs={this.sections['properties']}
-          resource={this.resource}
-        ></metadata-section-view>
+        <calcite-accordion>
+        {this.sections.map((section) => 
+          <calcite-accordion-item item-title={section} active>
+          <metadata-section-view
+            spec={section}
+            locale={this.locale}
+            resource={this.resource}
+          ></metadata-section-view>
+          </calcite-accordion-item>        
+        )}
+        </calcite-accordion>
       </Host>
     );
   }

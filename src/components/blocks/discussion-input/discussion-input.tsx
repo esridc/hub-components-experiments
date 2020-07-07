@@ -52,6 +52,7 @@ export class DiscussionInput {
 
 
   async componentWillLoad() {
+    // TODO: fix case where cookie isn't available.
     this.session = readSessionFromCookie();
     const auth = UserSession.deserialize(this.session);
 

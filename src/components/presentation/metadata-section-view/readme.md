@@ -12,7 +12,9 @@
 | `description`  | `description`   |                                                    | `string`       | `""`       |
 | `elementTitle` | `element-title` |                                                    | `string`       | `""`       |
 | `inputs`       | --              | JSON Schema Properties section                     | `any[]`        | `[]`       |
+| `locale`       | `locale`        |                                                    | `string`       | `"en"`     |
 | `resource`     | --              | Hub Resource object.                               | `IHubResource` | `null`     |
+| `spec`         | `spec`          |                                                    | `string`       | `"arcgis"` |
 | `translator`   | `translator`    | Which translator to use from the schema definition | `string`       | `"arcgis"` |
 
 

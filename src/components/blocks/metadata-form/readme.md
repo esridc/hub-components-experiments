@@ -7,11 +7,11 @@
 
 ## Properties
 
-| Property   | Attribute  | Description | Type     | Default    |
-| ---------- | ---------- | ----------- | -------- | ---------- |
-| `locale`   | `locale`   |             | `string` | `"en"`     |
-| `resource` | `resource` |             | `any`    | `null`     |
-| `spec`     | `spec`     |             | `string` | `"arcgis"` |
+| Property   | Attribute  | Description | Type       | Default |
+| ---------- | ---------- | ----------- | ---------- | ------- |
+| `locale`   | `locale`   |             | `string`   | `"en"`  |
+| `resource` | `resource` |             | `any`      | `null`  |
+| `sections` | --         |             | `string[]` | `[]`    |
 
 
 ## Dependencies
@@ -23,12 +23,17 @@
 
 ### Depends on
 
+- calcite-accordion
+- calcite-accordion-item
 - [metadata-section-view](../../presentation/metadata-section-view)
 
 ### Graph
 ```mermaid
 graph TD;
+  metadata-form --> calcite-accordion
+  metadata-form --> calcite-accordion-item
   metadata-form --> metadata-section-view
+  calcite-accordion-item --> calcite-icon
   metadata-section-view --> metadata-section-help
   metadata-section-view --> metadata-element-view
   metadata-element-view --> calcite-input

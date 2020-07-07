@@ -1,6 +1,8 @@
-import { Component, Event, EventEmitter, Host, h, Listen, Prop } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Host, h, Listen, Prop, State } from '@stencil/core';
 import '@esri/calcite-components';
 import { IHubResource } from '../../../utils/hub-api';
+import * as Metadata from '../../../utils/metadata-utils'
+import * as Locale from '../../../utils/locale'
 
 @Component({
   tag: 'metadata-section-view',
@@ -8,9 +10,13 @@ import { IHubResource } from '../../../utils/hub-api';
   shadow: true,
 })
 export class MetadataSectionView {
+  @Element() element: HTMLElement;
 
-  @Prop() elementTitle: string = "";
-  @Prop() description: string = "";
+  @Prop() spec:string = "arcgis";
+  @Prop({ mutable: true }) elementTitle: string = "";
+  @Prop({ mutable: true }) description: string = "";
+  @Prop() locale:string = "en";
+
 
   /**
    * JSON Schema Properties section
@@ -28,6 +34,31 @@ export class MetadataSectionView {
   @Prop() translator:string = "arcgis";
 
   @Event() resourceUpdated: EventEmitter;
+
+  @State() strings: any; 
+  @State() sectionSchema: any; 
+
+  async componentWillLoad() {
+    this.sectionSchema = await this.loadSpecification();
+    this.locale = this.locale || Locale.getComponentClosestLanguage(this.element);
+
+    this.elementTitle = this.sectionSchema['title'];
+    this.description = this.sectionSchema['description'];
+    this.inputs = this.sectionSchema['properties'];
+
+    // TODO: send input translation down to components / per input
+    Locale.getMetadataLocaleStrings(this.spec, this.locale).then((result) => {
+      this.strings = result;
+      this.elementTitle = this.strings.t(`${this.spec}.metadata.${this.spec}.title`)
+      this.description = this.strings.t(`${this.spec}.metadata.${this.spec}.description`)
+    })
+
+  }
+
+  private async loadSpecification() {
+    const file = `./schema/${this.spec}.json`
+    return await Metadata.getMetadataSpec(file);
+  }
 
   // TODO: use `schema.translation` to get correct metadata element, e.g. `summer = item.snippet`
   private metadataValue(attr :string) :string {

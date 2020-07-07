@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, State} from '@stencil/core';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import * as Portal from "@esri/arcgis-rest-portal";
 import { readSessionFromCookie } from '../../../utils/utils';
+import { updateContent } from '../../../utils/hub-content';
 
 @Component({
   tag: 'hub-metadata-editor',
@@ -47,34 +48,37 @@ export class HubMetadataEditor {
     // return Portal.getItem(itemId)
   }
 
-  onSave(e) {
+  saveForm(e) {
     e.preventDefault()
     e.stopPropagation()
 
     console.log("Save form", this.resource);
     const authentication = UserSession.deserialize(this.session);
-    Portal.updateItem({
-      item: {
-        id: this.item,
-        title: this.titleEl.value,
-        tags: this.tagsEl.value,
-        snippet: this.summaryEl.value
-      },
-      authentication
-    })
+    
+    updateContent(this.item, this.resource, authentication);
+    
+    // Portal.updateItem({
+    //   item: {
+    //     id: this.item,
+    //     title: this.titleEl.value,
+    //     tags: this.tagsEl.value,
+    //     snippet: this.summaryEl.value
+    //   },
+    //   authentication
+    // })
   }
   render() {
     return (
       <Host>
-        <form onSubmit={(e) => this.onSave(e)}>
           <metadata-form
-            spec="arcgis"
+            sections={["arcgis"]}
             resource={this.resource}
           ></metadata-form>
-          <button type="submit" class="chat-submit" id="chat-submit">
-              Save
-          </button>
-        </form>  
+          <calcite-button 
+            onClick={(event) => this.saveForm(event)}
+            >
+              Save Info
+          </calcite-button>
       </Host>
        
     );

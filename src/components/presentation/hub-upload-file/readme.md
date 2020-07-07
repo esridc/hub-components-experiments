@@ -36,7 +36,11 @@ graph TD;
   hub-upload-file --> calcite-loader
   calcite-notice --> calcite-icon
   hub-metadata-editor --> metadata-form
+  hub-metadata-editor --> calcite-button
+  metadata-form --> calcite-accordion
+  metadata-form --> calcite-accordion-item
   metadata-form --> metadata-section-view
+  calcite-accordion-item --> calcite-icon
   metadata-section-view --> metadata-section-help
   metadata-section-view --> metadata-element-view
   metadata-element-view --> calcite-input
@@ -45,6 +49,8 @@ graph TD;
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon
   calcite-input-message --> calcite-icon
+  calcite-button --> calcite-loader
+  calcite-button --> calcite-icon
   hub-upload --> hub-upload-file
   style hub-upload-file fill:#f9f,stroke:#333,stroke-width:4px
 ```
