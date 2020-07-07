@@ -125,8 +125,7 @@ export async function updateMember(id:string, attributes:HubTypes.IHubMember, au
     updateUser({
       user: {
         username: id,
-        description: attributes.description,
-        tags: attributes.tags
+        ...attributes
       },
       authentication
     })  

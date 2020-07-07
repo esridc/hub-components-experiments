@@ -76,9 +76,10 @@ export class MetadataElementView {
     console.log("renderEditor", elementType, this.getMetadataEditor(elementSubType))
     if(!!elementSubType) {
       const editorType = this.getMetadataEditor(elementSubType);
-      const someHtml = `<${editorType.component}></${editorType.component}>`;
+      // TODO: handle different types, such as array parse, date new, etc.
+    const editorComponent = `<${editorType.component} options="${this.schema['items']?.enum}" values="${this.value}"></${editorType.component}>`;
 
-      return (<div class={elementSubType} innerHTML={someHtml}></div>)
+      return (<div class={elementSubType} innerHTML={editorComponent}></div>)
     } else {
       return (
           <calcite-input

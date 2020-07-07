@@ -457,6 +457,7 @@ export namespace Components {
           * Option to allow for selected & de-selecting topics
          */
         "allowSelection": boolean;
+        "options": string;
         /**
           * Array of topics to be displayed
          */
@@ -465,6 +466,7 @@ export namespace Components {
           * Array of topics that are current selected
          */
         "topicsSelected": Array<string>;
+        "values": string;
     }
     interface HubUpload {
         /**
@@ -1298,6 +1300,7 @@ declare namespace LocalJSX {
           * Event sent after any or all topics updated
          */
         "onTopicsChanged"?: (event: CustomEvent<Array<ITopic>>) => void;
+        "options"?: string;
         /**
           * Array of topics to be displayed
          */
@@ -1306,6 +1309,7 @@ declare namespace LocalJSX {
           * Array of topics that are current selected
          */
         "topicsSelected"?: Array<string>;
+        "values"?: string;
     }
     interface HubUpload {
         /**

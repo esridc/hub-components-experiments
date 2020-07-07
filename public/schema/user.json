@@ -26,7 +26,14 @@
         "translation": {
             "arcgis": ["lastName"]
         }
-      },      
+      },  
+      "email": {
+        "type": "string",
+        "description": "What is your email?",
+        "translation": {
+            "arcgis": ["email"]
+        }
+      },            
       "description": {
         "type": "string",
         "description": "Why do you love your city?",
@@ -54,11 +61,12 @@
         "uniqueItems": true,
         "items": {
             "type": "string",
-            "enum": ["es", "en", "zh"]
+            "enum": ["es-ES", "en-US", "zh"]
         }
       },
       "tags": {
         "type": "array",
+        "subtype": "topics",
         "description": "What skills do you have?",
         "translation": {
           "arcgis": ["tags"],
@@ -67,7 +75,8 @@
         },
         "uniqueItems": true,
         "items": {
-            "type": "string"
+            "type": "string",
+            "enum": ["education", "history", "transportation"]
         }
       }
     }

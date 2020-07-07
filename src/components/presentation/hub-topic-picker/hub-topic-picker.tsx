@@ -18,10 +18,13 @@ export class HubTopicPicker {
    */
   @Prop() topicsAvailable: Array<string> = ['education', 'health', 'recreation', 'transportation'];
   
+  @Prop() values: string;
+  @Prop() options: string;
+
   /** 
    * Array of topics that are current selected
    */
-  @Prop({ mutable: true, reflect: true }) topicsSelected: Array<string> = ['education', 'transportation'];
+  @Prop({ mutable: true, reflect: true }) topicsSelected: Array<string> = []; // 'education', 'transportation'
   
   /**
    * Option to allow for selected & de-selecting topics
@@ -46,6 +49,15 @@ export class HubTopicPicker {
 
   componentWillLoad() {
     console.log("hub-topic-picker: this.allowSelection", this.allowSelection)
+    if(!!this.values) {
+      console.log("hub-topic-picker: componentWillLoad: values", this.values);
+      this.topicsSelected = this.values.split(",")
+    }
+    if(!!this.options) {
+      console.log("hub-topic-picker: componentWillLoad: options", this.options);
+      this.topicsAvailable = this.options.split(",")
+    }
+    console.log('hub-topic-picker: componentWillLoad', this.topicsAvailable, this.values)
     this.updateTopics();
   }
 

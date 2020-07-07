@@ -24,7 +24,8 @@ export class HubProfileEditor {
 
   async componentWillLoad() {
     this.session = readSessionFromCookie()
-    this.user = await getMember(this.username);
+    const auth = UserSession.deserialize(this.session)
+    this.user = await getMember(this.username, auth);
     // Portal.getUser(this.username).then((response) => {
     //   this.user = response; // For sending into the metadata form
     // })
