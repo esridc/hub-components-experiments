@@ -328,6 +328,8 @@ export namespace Components {
          */
         "extent": any;
     }
+    interface HubLicensePicker {
+    }
     interface HubList {
         "collection": HubTypes.IHubResource[];
         "icon": string;
@@ -658,6 +660,12 @@ declare global {
         prototype: HTMLHubInputElement;
         new (): HTMLHubInputElement;
     };
+    interface HTMLHubLicensePickerElement extends Components.HubLicensePicker, HTMLStencilElement {
+    }
+    var HTMLHubLicensePickerElement: {
+        prototype: HTMLHubLicensePickerElement;
+        new (): HTMLHubLicensePickerElement;
+    };
     interface HTMLHubListElement extends Components.HubList, HTMLStencilElement {
     }
     var HTMLHubListElement: {
@@ -792,6 +800,7 @@ declare global {
         "hub-gallery": HTMLHubGalleryElement;
         "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
+        "hub-license-picker": HTMLHubLicensePickerElement;
         "hub-list": HTMLHubListElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
@@ -1155,6 +1164,8 @@ declare namespace LocalJSX {
          */
         "onEventAddressUpdated"?: (event: CustomEvent<any>) => void;
     }
+    interface HubLicensePicker {
+    }
     interface HubList {
         "collection"?: HubTypes.IHubResource[];
         "icon"?: string;
@@ -1410,6 +1421,7 @@ declare namespace LocalJSX {
         "hub-gallery": HubGallery;
         "hub-identity": HubIdentity;
         "hub-input": HubInput;
+        "hub-license-picker": HubLicensePicker;
         "hub-list": HubList;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
@@ -1454,6 +1466,7 @@ declare module "@stencil/core" {
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
             "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
+            "hub-license-picker": LocalJSX.HubLicensePicker & JSXBase.HTMLAttributes<HTMLHubLicensePickerElement>;
             "hub-list": LocalJSX.HubList & JSXBase.HTMLAttributes<HTMLHubListElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;

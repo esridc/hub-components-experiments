@@ -3,6 +3,7 @@ import '@esri/calcite-components';
 import { IHubResource } from '../../../utils/hub-api';
 import * as Metadata from '../../../utils/metadata-utils'
 import * as Locale from '../../../utils/locale'
+import { setUpdateProp } from '../../../utils/utils';
 
 @Component({
   tag: 'metadata-section-view',
@@ -61,7 +62,7 @@ export class MetadataSectionView {
   }
 
   // TODO: use `schema.translation` to get correct metadata element, e.g. `summer = item.snippet`
-  private metadataValue(attr :string) :string {
+  private getMetadataValue(attr :string) :string {
     let value = "";
     console.log("metadata-section-view: metadataValue", attr  , this.resource)
     if(!!this.resource) {
@@ -73,12 +74,45 @@ export class MetadataSectionView {
     return value;
   }
 
+  /**
+   * Set the correct attribute that may be embedded (e.g. {'metadata.interests': ['topic1', 'topic2']})
+   * 
+   * @param resource Hub Resource
+   * @param attributes Object of attributes that may be embedded (e.g. {'metadata.interests': ['topic1', 'topic2']})
+   */
+  private setMetadataValue(resource:IHubResource, attributes:any): IHubResource {
+
+    
+    console.log('setMetadataValue input', resource)
+    Object.keys(attributes).map((key) => {
+      setUpdateProp(resource, key.split('.'), attributes[key])
+    })
+    console.log('setMetadataValue output', resource)
+    //   let value = attributes[attribute];
+
+    //   attribute.split('.').reduce((obj, attr, currentIndex, array) => {
+    //     console.log("obj, attr", obj,attr, currentIndex, array)
+    //     if(currentIndex === (array.length-1)) {
+    //       obj[attr] = value;
+    //     } else {
+    //       // If there isn't yet a child object, add one
+    //       obj[attr] = (!!obj[attr]) ?  obj[attr] : {};
+    //     }
+        
+    //     return obj;
+    //   }, resource)
+    // })
+    // Merge the element property update into the resource, then send up...
+    // this.resource = Object.assign(this.resource, attributes)
+    
+    return resource;
+  }
+
   @Listen('elementUpdated')
   elementUpdatedHandler(event: CustomEvent<any>) {
     console.log('trace metadata-section-view: elementUpdatedHandler', event.detail, this.resource);
+    this.resource = this.setMetadataValue(this.resource, event.detail);
     
-    // Merge the element property update into the resource, then send up...
-    this.resource = Object.assign(this.resource, event.detail)
     console.log('trace metadata-section-view: elementUpdatedHandler', event.detail, this.resource);
     this.resourceUpdated.emit(this.resource);
   }
@@ -98,7 +132,7 @@ export class MetadataSectionView {
                 type={this.inputs[attr].type}
                 subtype={this.inputs[attr].subtype || null}
                 description={this.inputs[attr].description} 
-                value={this.metadataValue(this.inputs[attr].translation[this.translator][0])}
+                value={this.getMetadataValue(this.inputs[attr].translation[this.translator][0])}
                 required={true}></metadata-element-view>
             )}
           </div>

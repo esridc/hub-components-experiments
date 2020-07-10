@@ -79,11 +79,11 @@ export class HubWorkspace {
           </div>
           <div class="workspace-interests">
             <h3>Stats</h3>
-              <hub-statistic size="s" value={this.teams.meta.total} units="Teams"></hub-statistic>
-              <hub-statistic size="s" value={this.events.meta.total} units="Events"></hub-statistic>
-              <hub-statistic size="s" value={this.content.meta.total} units="Content Items"></hub-statistic>
-              <hub-statistic size="s" value={this.places.length} units="Places"></hub-statistic>
-              <hub-statistic size="s" value={this.comments.length} units="Comments"></hub-statistic>
+              <hub-statistic size="m" value={this.teams.meta.total} units="Teams"></hub-statistic>
+              <hub-statistic size="m" value={this.events.meta.total} units="Events"></hub-statistic>
+              <hub-statistic size="m" value={this.content.meta.total} units="Content Items"></hub-statistic>
+              <hub-statistic size="m" value={this.places.length} units="Places"></hub-statistic>
+              <hub-statistic size="m" value={this.comments.length} units="Comments"></hub-statistic>
             <h3>Interests</h3>
             {this.member.metadata?.interests.map((tag) =>
               <calcite-chip value={tag}>{tag}</calcite-chip>
@@ -140,12 +140,13 @@ export class HubWorkspace {
           </div>
         </div>
       )
+    } else {
+      output.push(<calcite-loader text="Fetching workspace..." is-active></calcite-loader>)
     }
     return (
       <Host>
         <slot></slot>
         {output}
-        
       </Host>
     );
   }

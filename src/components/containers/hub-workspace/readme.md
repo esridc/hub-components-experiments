@@ -23,6 +23,7 @@
 - [hub-list](../../presentation/hub-list)
 - [hub-card](../../presentation/hub-card)
 - [hub-gallery](../hub-gallery)
+- calcite-loader
 
 ### Graph
 ```mermaid
@@ -34,6 +35,7 @@ graph TD;
   hub-workspace --> hub-list
   hub-workspace --> hub-card
   hub-workspace --> hub-gallery
+  hub-workspace --> calcite-loader
   hub-places-map --> hub-map
   hub-map --> calcite-button
   calcite-button --> calcite-loader

@@ -83,6 +83,7 @@
     "@esri/hub-search": "^4.1.0",
     "@esri/hub-sites": "^4.1.0",
     "@esri/telemetry": "^1.5.1",
+    "@storybook/addon-a11y": "^5.3.19",
     "@types/arcgis-js-api": "^4.15.0",
     "@types/node": "^13.13.6",
     "esri-loader": "^2.14.0",

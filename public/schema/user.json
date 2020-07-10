@@ -56,19 +56,19 @@
             "enum": ["es-ES", "en-US", "zh"]
         }
       },
-      "tags": {
+      "interests": {
         "type": "array",
         "subtype": "topics",
         "description": "What skills do you have?",
         "translation": {
-          "arcgis": ["tags"],
+          "arcgis": ["metadata.interests"],
           "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
           "FGDC CSDGM": ["idinfo > keywords"]
         },
         "uniqueItems": true,
         "items": {
             "type": "string",
-            "enum": ["education", "history", "transportation"]
+            "enum": ["education", "history", "transportation", "bikes", "health"]
         }
       }
     }

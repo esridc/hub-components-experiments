@@ -120,16 +120,31 @@ export async function searchMembers(query: string, authentication: IAuthenticati
 
   return { results: members };
 }
+
+async function convertMemberToUser(attributes: HubTypes.IHubMember):Promise<IUser> {
+
+  attributes = embedUserInterests(attributes);
+
+
+  // Member is a superset of User
+  let user = attributes;
+
+  return user;
+}
+
 export async function updateMember(id:string, attributes:HubTypes.IHubMember, authentication?: UserSession): Promise<HubTypes.IHubMember> {
-    // Portal
-    updateUser({
-      user: {
-        username: id,
-        ...attributes
-      },
-      authentication
-    })  
-    return getMember(id, authentication);
+  console.log("hub-member: updateMember", id, attributes)
+  
+  let user = convertMemberToUser(attributes);
+  // Portal
+  updateUser({
+    user: {
+      username: id,
+      ...user
+    },
+    authentication
+  })  
+  return getMember(id, authentication);
 }
 
 export async function getMember(id:string, authentication?: IAuthenticationManager): Promise<HubTypes.IHubMember> {
@@ -251,7 +266,13 @@ export async function searchMemberContent(username, authentication: IAuthenticat
   return content
 }
 
-function usersInterests(user: IUser): string[] {
+function embedUserInterests(member: HubTypes.IHubMember): HubTypes.IHubMember {
+  
+  member.tags = member.tags.concat(member.metadata.interests.map((interest) => {return `interest:${interest}`}))
+
+  return member;
+}
+function extractUserInterests(user: IUser): string[] {
   let interests = user.tags?.reduce((agg, tag) => {
     let m = tag.match(/^interest:(.*)/);
     console.log("usersInterests", m)
@@ -287,7 +308,7 @@ export function convertUserToMember(user: IUser, _authentication?: IAuthenticati
     culture: user.culture,
     region: user.region,
     metadata: {
-      interests: usersInterests(user)
+      interests: extractUserInterests(user)
     }    
   })
   if(user.thumbnail !== undefined && user.thumbnail !== null) {

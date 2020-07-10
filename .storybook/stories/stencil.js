@@ -2,6 +2,7 @@ import path from 'path';
 import Case from 'case';
 import { storiesOf } from '@storybook/html';
 import * as KNOBS from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
 
 /*******************************************************************************
  * You should not need to edit anything within this file unless you really     *
@@ -287,19 +288,34 @@ function buildStencilStories(name, loader, componentsCtx, storiesCtx) {
 	// define the custom elements so they are available
   loader.defineCustomElements(window);
 
-  const stories = storiesOf(name, module);
-  stories.addDecorator(KNOBS.withKnobs);
-  
-  Object.keys(configs)
-    .map(comp => configs[comp])
-    .forEach(config => {
-	typeof config === 'function'
-        ? // If the config is a function, call it with the stories context.
-          // The function is responsible for calling stories.add(...) manually.
-          // Pass any additional utilities such as knobs.
-          config(stories, KNOBS)
-        : createStencilStory(config, stories)
-    });
+	// Group stories by the component
+	for (let [key, config] of Object.entries(configs)) {
+		let folder = `${name}/${key}`
+		const stories = storiesOf(folder, module);
+		stories.addDecorator(KNOBS.withKnobs);
+		stories.addDecorator(withA11y);
+
+		typeof config === 'function'
+			? // If the config is a function, call it with the stories context.
+			// The function is responsible for calling stories.add(...) manually.
+			// Pass any additional utilities such as knobs.
+			config(stories, KNOBS)
+			: createStencilStory(config, stories)
+		};
 }
+//   const stories = storiesOf(name, module);
+//   stories.addDecorator(KNOBS.withKnobs);
+  
+//   Object.keys(configs)
+//     .map(comp => configs[comp])
+//     .forEach(config => {
+// 	typeof config === 'function'
+//         ? // If the config is a function, call it with the stories context.
+//           // The function is responsible for calling stories.add(...) manually.
+//           // Pass any additional utilities such as knobs.
+//           config(stories, KNOBS)
+//         : createStencilStory(config, stories)
+//     });
+// }
 
 export default buildStencilStories;
