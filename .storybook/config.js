@@ -40,7 +40,7 @@ addParameters({
      * URL for name in top left corner to link to
      * @type {String}
      */
-    url: 'https://hub.arcgis.com',
+    url: 'https://github.com/esridc/hub-components-experiments',
 /**
      * show story component as full screen
      * @type {Boolean}
