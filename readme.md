@@ -2,6 +2,20 @@
 
 Web components for embedding Hub into websites and custom applications.
 
+## Types of Components
+
+- **Containers** - full-featured composition of multiple blocks + elements, optionally managing state
+- **Blocks** - 'Smart' components (optionally) managing data; composed of elements, and maybe other blocks
+- **Presentation** - Functional presentation components that only contain other elements
+
+_Containers_ are complex, manage state and are used for prototypes and optionally as larger reusable components. For example, _Content Picker_ or _Discussion_
+
+_Blocks_ are the most common component that can be used stand-alone within a card or website by providing configuration to either fetch new data or display data that is provided. Examples include _Event List_ or _Data Statistic_ 
+
+_Presentation_ provide consistent presentation but do not interact with outside systems. 
+
+There are many components which may work as both a Block or Presentation, for example _Data Statistic_. This example component could be configured with static strings + values; or it could be configured with a data reference + statistical operations. At first this component can be a single block with minimal logic that's delegated to an external library (e.g. Hub.js). Only when the Block becomes sufficiently complex, or there are variations (or desired re-used in the presentation) then this Block could be decomposed into external Presentation components. 
+
 ## Using these components
 
 ### Script tag
