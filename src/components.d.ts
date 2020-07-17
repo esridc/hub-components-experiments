@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { IHubChat, } from "./utils/hub-types";
 import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
+import { IHubResource, } from "./utils/hub-api";
 export namespace Components {
     interface ArcgisNotebook {
         /**
@@ -139,7 +140,7 @@ export namespace Components {
         "author": string;
         "org": string;
         "portalUrl": string;
-        "search": string;
+        "query": string;
         /**
           * Serialized authentication information.
          */
@@ -327,6 +328,8 @@ export namespace Components {
          */
         "extent": any;
     }
+    interface HubLicensePicker {
+    }
     interface HubList {
         "collection": HubTypes.IHubResource[];
         "icon": string;
@@ -371,24 +374,31 @@ export namespace Components {
     }
     interface HubPlacesMap {
         /**
+          * Choose to save or load places from user profile directly from session
+         */
+        "bindState": boolean;
+        /**
           * Option to view places map, or edit places map
          */
         "mode": "view" | "edit";
-        "places": HubTypes.IHubGeography[];
         /**
           * Serialized authentication information.
          */
         "session": string;
+        /**
+          * Hub places array of geography. Property name `value` because re-used across editors
+         */
+        "value": HubTypes.IHubGeography[];
     }
     interface HubProfileCard {
-        /**
-          * ID For the profile. Username, Team ID, Org ID
-         */
-        "id": string;
         /**
           * Which Profile: member, team
          */
         "type": string;
+        /**
+          * ID For the profile. Username, Team ID, Org ID
+         */
+        "username": string;
     }
     interface HubProfileEditor {
         /**
@@ -444,6 +454,22 @@ export namespace Components {
     interface HubTelemetry {
         "google": string;
     }
+    interface HubTopicPicker {
+        /**
+          * Option to allow for selected & de-selecting topics
+         */
+        "allowSelection": boolean;
+        "options": string;
+        /**
+          * Array of topics to be displayed
+         */
+        "topicsAvailable": Array<string>;
+        /**
+          * Array of topics that are current selected
+         */
+        "topicsSelected": Array<string>;
+        "values": string;
+    }
     interface HubUpload {
         /**
           * ClientID to identify the app launching auth
@@ -470,26 +496,53 @@ export namespace Components {
     }
     interface MetadataElementView {
         "description": string;
-        "id": string;
+        "elementId": string;
+        "elementTitle": string;
         "required": boolean;
-        "title": string;
-        "type": string;
+        /**
+          * JSON schema definition for a specific metadata property see https://json-schema.org/understanding-json-schema/basics.html
+         */
+        "schema": object;
+        /**
+          * Subtype is used to override the metadata editor for this element e.g. `geography` or `topics` show specific editors
+         */
+        "subtype": string;
+        /**
+          * Which translator to use from the schema definition
+         */
+        "translator": string;
+        /**
+          * Currently based on calcite-components input
+         */
+        "type": "number" | "text" | "color" | "date" | "datetime-local" | "email" | "file" | "image" | "month" | "password" | "search" | "tel" | "textarea" | "time" | "url" | "week";
         "value": string;
     }
     interface MetadataForm {
         "locale": string;
         "resource": any;
-        "spec": string;
+        "sections": Array<string>;
     }
     interface MetadataSectionHelp {
         "description": string;
-        "title": string;
+        "elementTitle": string;
     }
     interface MetadataSectionView {
         "description": string;
+        "elementTitle": string;
+        /**
+          * JSON Schema Properties section
+         */
         "inputs": Array<any>;
-        "resource": any;
-        "title": string;
+        "locale": string;
+        /**
+          * Hub Resource object.
+         */
+        "resource": IHubResource;
+        "spec": string;
+        /**
+          * Which translator to use from the schema definition
+         */
+        "translator": string;
     }
 }
 declare global {
@@ -607,6 +660,12 @@ declare global {
         prototype: HTMLHubInputElement;
         new (): HTMLHubInputElement;
     };
+    interface HTMLHubLicensePickerElement extends Components.HubLicensePicker, HTMLStencilElement {
+    }
+    var HTMLHubLicensePickerElement: {
+        prototype: HTMLHubLicensePickerElement;
+        new (): HTMLHubLicensePickerElement;
+    };
     interface HTMLHubListElement extends Components.HubList, HTMLStencilElement {
     }
     var HTMLHubListElement: {
@@ -673,6 +732,12 @@ declare global {
         prototype: HTMLHubTelemetryElement;
         new (): HTMLHubTelemetryElement;
     };
+    interface HTMLHubTopicPickerElement extends Components.HubTopicPicker, HTMLStencilElement {
+    }
+    var HTMLHubTopicPickerElement: {
+        prototype: HTMLHubTopicPickerElement;
+        new (): HTMLHubTopicPickerElement;
+    };
     interface HTMLHubUploadElement extends Components.HubUpload, HTMLStencilElement {
     }
     var HTMLHubUploadElement: {
@@ -735,6 +800,7 @@ declare global {
         "hub-gallery": HTMLHubGalleryElement;
         "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
+        "hub-license-picker": HTMLHubLicensePickerElement;
         "hub-list": HTMLHubListElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
@@ -746,6 +812,7 @@ declare global {
         "hub-statistic": HTMLHubStatisticElement;
         "hub-suggest-input": HTMLHubSuggestInputElement;
         "hub-telemetry": HTMLHubTelemetryElement;
+        "hub-topic-picker": HTMLHubTopicPickerElement;
         "hub-upload": HTMLHubUploadElement;
         "hub-upload-file": HTMLHubUploadFileElement;
         "hub-workspace": HTMLHubWorkspaceElement;
@@ -901,7 +968,7 @@ declare namespace LocalJSX {
         "onNewResponse"?: (event: CustomEvent<any>) => void;
         "org"?: string;
         "portalUrl"?: string;
-        "search"?: string;
+        "query"?: string;
         /**
           * Serialized authentication information.
          */
@@ -1097,6 +1164,8 @@ declare namespace LocalJSX {
          */
         "onEventAddressUpdated"?: (event: CustomEvent<any>) => void;
     }
+    interface HubLicensePicker {
+    }
     interface HubList {
         "collection"?: HubTypes.IHubResource[];
         "icon"?: string;
@@ -1145,24 +1214,31 @@ declare namespace LocalJSX {
     }
     interface HubPlacesMap {
         /**
+          * Choose to save or load places from user profile directly from session
+         */
+        "bindState"?: boolean;
+        /**
           * Option to view places map, or edit places map
          */
         "mode"?: "view" | "edit";
-        "places"?: HubTypes.IHubGeography[];
         /**
           * Serialized authentication information.
          */
         "session"?: string;
+        /**
+          * Hub places array of geography. Property name `value` because re-used across editors
+         */
+        "value"?: HubTypes.IHubGeography[];
     }
     interface HubProfileCard {
-        /**
-          * ID For the profile. Username, Team ID, Org ID
-         */
-        "id"?: string;
         /**
           * Which Profile: member, team
          */
         "type"?: string;
+        /**
+          * ID For the profile. Username, Team ID, Org ID
+         */
+        "username"?: string;
     }
     interface HubProfileEditor {
         /**
@@ -1223,6 +1299,31 @@ declare namespace LocalJSX {
     interface HubTelemetry {
         "google"?: string;
     }
+    interface HubTopicPicker {
+        /**
+          * Option to allow for selected & de-selecting topics
+         */
+        "allowSelection"?: boolean;
+        "onEditorUpdated"?: (event: CustomEvent<any>) => void;
+        /**
+          * Event sent when a topic is selected or deselected
+         */
+        "onTopicSelected"?: (event: CustomEvent<ITopic>) => void;
+        /**
+          * Event sent after any or all topics updated
+         */
+        "onTopicsChanged"?: (event: CustomEvent<Array<ITopic>>) => void;
+        "options"?: string;
+        /**
+          * Array of topics to be displayed
+         */
+        "topicsAvailable"?: Array<string>;
+        /**
+          * Array of topics that are current selected
+         */
+        "topicsSelected"?: Array<string>;
+        "values"?: string;
+    }
     interface HubUpload {
         /**
           * ClientID to identify the app launching auth
@@ -1250,26 +1351,55 @@ declare namespace LocalJSX {
     }
     interface MetadataElementView {
         "description"?: string;
-        "id"?: string;
+        "elementId"?: string;
+        "elementTitle"?: string;
+        "onElementUpdated"?: (event: CustomEvent<any>) => void;
         "required"?: boolean;
-        "title"?: string;
-        "type"?: string;
+        /**
+          * JSON schema definition for a specific metadata property see https://json-schema.org/understanding-json-schema/basics.html
+         */
+        "schema"?: object;
+        /**
+          * Subtype is used to override the metadata editor for this element e.g. `geography` or `topics` show specific editors
+         */
+        "subtype"?: string;
+        /**
+          * Which translator to use from the schema definition
+         */
+        "translator"?: string;
+        /**
+          * Currently based on calcite-components input
+         */
+        "type"?: "number" | "text" | "color" | "date" | "datetime-local" | "email" | "file" | "image" | "month" | "password" | "search" | "tel" | "textarea" | "time" | "url" | "week";
         "value"?: string;
     }
     interface MetadataForm {
         "locale"?: string;
         "resource"?: any;
-        "spec"?: string;
+        "sections"?: Array<string>;
     }
     interface MetadataSectionHelp {
         "description"?: string;
-        "title"?: string;
+        "elementTitle"?: string;
     }
     interface MetadataSectionView {
         "description"?: string;
+        "elementTitle"?: string;
+        /**
+          * JSON Schema Properties section
+         */
         "inputs"?: Array<any>;
-        "resource"?: any;
-        "title"?: string;
+        "locale"?: string;
+        "onResourceUpdated"?: (event: CustomEvent<any>) => void;
+        /**
+          * Hub Resource object.
+         */
+        "resource"?: IHubResource;
+        "spec"?: string;
+        /**
+          * Which translator to use from the schema definition
+         */
+        "translator"?: string;
     }
     interface IntrinsicElements {
         "arcgis-notebook": ArcgisNotebook;
@@ -1291,6 +1421,7 @@ declare namespace LocalJSX {
         "hub-gallery": HubGallery;
         "hub-identity": HubIdentity;
         "hub-input": HubInput;
+        "hub-license-picker": HubLicensePicker;
         "hub-list": HubList;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
@@ -1302,6 +1433,7 @@ declare namespace LocalJSX {
         "hub-statistic": HubStatistic;
         "hub-suggest-input": HubSuggestInput;
         "hub-telemetry": HubTelemetry;
+        "hub-topic-picker": HubTopicPicker;
         "hub-upload": HubUpload;
         "hub-upload-file": HubUploadFile;
         "hub-workspace": HubWorkspace;
@@ -1334,6 +1466,7 @@ declare module "@stencil/core" {
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
             "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
+            "hub-license-picker": LocalJSX.HubLicensePicker & JSXBase.HTMLAttributes<HTMLHubLicensePickerElement>;
             "hub-list": LocalJSX.HubList & JSXBase.HTMLAttributes<HTMLHubListElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
@@ -1345,6 +1478,7 @@ declare module "@stencil/core" {
             "hub-statistic": LocalJSX.HubStatistic & JSXBase.HTMLAttributes<HTMLHubStatisticElement>;
             "hub-suggest-input": LocalJSX.HubSuggestInput & JSXBase.HTMLAttributes<HTMLHubSuggestInputElement>;
             "hub-telemetry": LocalJSX.HubTelemetry & JSXBase.HTMLAttributes<HTMLHubTelemetryElement>;
+            "hub-topic-picker": LocalJSX.HubTopicPicker & JSXBase.HTMLAttributes<HTMLHubTopicPickerElement>;
             "hub-upload": LocalJSX.HubUpload & JSXBase.HTMLAttributes<HTMLHubUploadElement>;
             "hub-upload-file": LocalJSX.HubUploadFile & JSXBase.HTMLAttributes<HTMLHubUploadFileElement>;
             "hub-workspace": LocalJSX.HubWorkspace & JSXBase.HTMLAttributes<HTMLHubWorkspaceElement>;

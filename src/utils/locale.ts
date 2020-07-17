@@ -24,7 +24,7 @@ export async function getLocaleStrings(name :string, locale :string, path :strin
 }
 
 export async function getMetadataLocaleStrings(metadataName :string, metadataLocale :string) {
-    const localePath = `/schema/locale`;
+    const localePath = `./schema/locale`;
     return await getLocaleStrings(metadataName, metadataLocale, localePath)
 }
 

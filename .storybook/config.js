@@ -6,9 +6,19 @@ import buildStencilStories from './stories/stencil';
 // useful for monorepos where multiple packages might exist.
 const COLLECTIONS = [
   {
-    name: 'Hub Components',
+    name: 'Hub Containers',
     loader: require('../loader/index.cjs.js'),
-    componentsCtx: require.context('../dist/collection', true, /\/components\/([^/]+)\/\1\.js$/),
+    componentsCtx: require.context('../dist/collection', true, /\/components\/containers\/([^/]+)\/\1\.js$/),
+    storiesCtx: require.context('../src', true, /\.story\.tsx$/)
+  }, {
+    name: 'Hub Blocks',
+    loader: require('../loader/index.cjs.js'),
+    componentsCtx: require.context('../dist/collection', true, /\/components\/blocks\/([^/]+)\/\1\.js$/),
+    storiesCtx: require.context('../src', true, /\.story\.tsx$/)
+  }, {
+    name: 'Hub Presentation',
+    loader: require('../loader/index.cjs.js'),
+    componentsCtx: require.context('../dist/collection', true, /\/components\/presentation\/([^/]+)\/\1\.js$/),
     storiesCtx: require.context('../src', true, /\.story\.tsx$/)
   }
 ];
@@ -30,7 +40,7 @@ addParameters({
      * URL for name in top left corner to link to
      * @type {String}
      */
-    url: 'https://hub.arcgis.com',
+    url: 'https://github.com/esridc/hub-components-experiments',
 /**
      * show story component as full screen
      * @type {Boolean}

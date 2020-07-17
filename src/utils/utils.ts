@@ -1,5 +1,20 @@
 import { UserSession } from '@esri/arcgis-rest-auth';
 
+export const setUpdateProp = (object, path, value) => {
+  if (path.length === 1) {
+    object[path[0]] = value;
+  } else if (path.length === 0) {
+    //throw error;
+  } else {
+     if (object[path[0]])
+        return setUpdateProp(object[path[0]], path.slice(1), value);
+     else {
+        object[path[0]] = {};
+        return setUpdateProp(object[path[0]], path.slice(1), value);
+     }
+  }
+};
+
 export const readSessionFromCookie = ():string => {
   const b = document.cookie.match('(^|[^;]+)\\s*' + 'arcgis_hub_component_auth' + '\\s*=\\s*([^;]+)');
   return b ? b.pop() : undefined;

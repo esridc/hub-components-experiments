@@ -1,0 +1,67 @@
+:host {
+  display: block;
+}
+
+.comment {
+  position: relative;
+  background: 0 0;
+  margin: .5em 0 0;
+  padding: .5em 0 0;
+  border: none;
+  border-top: none;
+  line-height: 1.2;    
+}
+
+.avatar { 
+  display: block;
+  width: 2.5em;
+  height: 2.5em;
+  float: left;
+  margin: .2em 0 0;  
+}
+
+.avatar img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  border-radius: .25rem;
+}
+.author {
+  font-weight: 600;
+}
+.metadata { 
+  display: inline-block;
+  margin-left: .5em;
+  color: rgba(0,0,0,.4);
+  font-size: .875em;  
+}
+.metadata >* {
+  display: inline-block;
+  margin: 0 .5em 0 0;
+}
+
+.content {
+  margin-left: 3.5em;
+}
+.text {
+  margin: .25em 0 .5em;
+  font-size: 1em;
+  word-wrap: break-word;
+  color: rgba(0,0,0,.87);
+  line-height: 1.3;
+}
+
+.actions {
+  font-size: .875em;
+}
+.actions a {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 .75em 0 0;
+  color: rgba(0,0,0,.4);  
+}
+.actions a:hover {
+  text-decoration: underline;
+  color: rgba(0,0,0,0.8);
+}
