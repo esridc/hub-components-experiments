@@ -1,6 +1,15 @@
 # metadata-section-view
 
+narrative:
+- `/:resource/:id/edit` - calls `elements:[IEditor] = getSchema(:resource)` and `resource:IHubResource = getResource(:id)`
+- Template renders `forEach(elements as Element) { <md-editor type=element.type value=resource[element.translation] .../> }`
+- Types can be simple: `text` `date` `array<string>` etc. and includes validations/requirements and use simple editor components
+- Types can be custom: `license` `boundary` `attribute` that can be specialized editor components (e.g. “<boundary-picker>“)
+- when the form is saved, the collection is sent back to `updateResource(values:IHubResource)` 
+- and inside `updateResource()` it delegates to the specific type, e.g. `updateContent()`  or `updateMember()` which translates the Resource values into the portal specific values (e.g. `content.boundary -> sharing/content/items/:id/resources/boundary.json`
 
+with this mechanism, validation and translation occurs within Hub.js - which itself provides a domain interface
+Editors are components that are dynamically loaded 
 
 <!-- Auto Generated Below -->
 
