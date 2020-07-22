@@ -1,0 +1,41 @@
+dt {
+  float: left;
+  clear: left;
+  margin-right: 4px;
+  font-size: inherit;
+}
+
+dt::after {
+  content: ':';
+}
+
+dd {
+  margin: 0 0 0 110px;
+  padding: 0;
+  margin-inline-start: 0;
+  font-size: inherit;
+}
+
+a {
+  vertical-align: middle;
+}
+
+calcite-icon {
+  margin-left: 4px;
+}
+
+a:visited {
+  color: inherit;
+}
+
+calcite-dropdown {
+  width: 100%;
+  --calcite-dropdown-width: 100%;
+}
+calcite-button {
+  width: 100%;
+}
+
+calcite-card div {
+  width: 100%;
+}

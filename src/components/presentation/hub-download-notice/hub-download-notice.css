@@ -1,0 +1,7 @@
+calcite-notice {
+  margin-bottom: 10px;
+}
+
+calcite-notice[active="false"] {
+  display: none;
+}

@@ -148,6 +148,26 @@ export namespace Components {
         "target": string;
         "update": boolean;
     }
+    interface HubDownloadCard {
+        "datasetId": string;
+        "filename": string;
+        "format": string;
+        "geometry": string;
+        "host": string;
+        "name": string;
+        "spatialRefId": string;
+        "target": string;
+        "token": string;
+        "username": string;
+        "where": string;
+    }
+    interface HubDownloadNotice {
+        "apiError": string;
+        "cached": boolean;
+        "exportRequested": boolean;
+        "fileStatus": string;
+        "lastEditDate": string;
+    }
     interface HubEmbed {
         "code": string;
         "description": string;
@@ -327,8 +347,6 @@ export namespace Components {
           * Geographic extent limit for geocoding
          */
         "extent": any;
-    }
-    interface HubLicensePicker {
     }
     interface HubList {
         "collection": HubTypes.IHubResource[];
@@ -612,6 +630,18 @@ declare global {
         prototype: HTMLHubDiscussionElement;
         new (): HTMLHubDiscussionElement;
     };
+    interface HTMLHubDownloadCardElement extends Components.HubDownloadCard, HTMLStencilElement {
+    }
+    var HTMLHubDownloadCardElement: {
+        prototype: HTMLHubDownloadCardElement;
+        new (): HTMLHubDownloadCardElement;
+    };
+    interface HTMLHubDownloadNoticeElement extends Components.HubDownloadNotice, HTMLStencilElement {
+    }
+    var HTMLHubDownloadNoticeElement: {
+        prototype: HTMLHubDownloadNoticeElement;
+        new (): HTMLHubDownloadNoticeElement;
+    };
     interface HTMLHubEmbedElement extends Components.HubEmbed, HTMLStencilElement {
     }
     var HTMLHubEmbedElement: {
@@ -659,12 +689,6 @@ declare global {
     var HTMLHubInputElement: {
         prototype: HTMLHubInputElement;
         new (): HTMLHubInputElement;
-    };
-    interface HTMLHubLicensePickerElement extends Components.HubLicensePicker, HTMLStencilElement {
-    }
-    var HTMLHubLicensePickerElement: {
-        prototype: HTMLHubLicensePickerElement;
-        new (): HTMLHubLicensePickerElement;
     };
     interface HTMLHubListElement extends Components.HubList, HTMLStencilElement {
     }
@@ -792,6 +816,8 @@ declare global {
         "hub-content-card": HTMLHubContentCardElement;
         "hub-content-table": HTMLHubContentTableElement;
         "hub-discussion": HTMLHubDiscussionElement;
+        "hub-download-card": HTMLHubDownloadCardElement;
+        "hub-download-notice": HTMLHubDownloadNoticeElement;
         "hub-embed": HTMLHubEmbedElement;
         "hub-event": HTMLHubEventElement;
         "hub-events-list": HTMLHubEventsListElement;
@@ -800,7 +826,6 @@ declare global {
         "hub-gallery": HTMLHubGalleryElement;
         "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
-        "hub-license-picker": HTMLHubLicensePickerElement;
         "hub-list": HTMLHubListElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
@@ -975,6 +1000,26 @@ declare namespace LocalJSX {
         "session"?: string;
         "target"?: string;
         "update"?: boolean;
+    }
+    interface HubDownloadCard {
+        "datasetId"?: string;
+        "filename"?: string;
+        "format"?: string;
+        "geometry"?: string;
+        "host"?: string;
+        "name"?: string;
+        "spatialRefId"?: string;
+        "target"?: string;
+        "token"?: string;
+        "username"?: string;
+        "where"?: string;
+    }
+    interface HubDownloadNotice {
+        "apiError"?: string;
+        "cached"?: boolean;
+        "exportRequested"?: boolean;
+        "fileStatus"?: string;
+        "lastEditDate"?: string;
     }
     interface HubEmbed {
         "code"?: string;
@@ -1163,8 +1208,6 @@ declare namespace LocalJSX {
           * Emits the {address, coordinates} of the geocoded result
          */
         "onEventAddressUpdated"?: (event: CustomEvent<any>) => void;
-    }
-    interface HubLicensePicker {
     }
     interface HubList {
         "collection"?: HubTypes.IHubResource[];
@@ -1413,6 +1456,8 @@ declare namespace LocalJSX {
         "hub-content-card": HubContentCard;
         "hub-content-table": HubContentTable;
         "hub-discussion": HubDiscussion;
+        "hub-download-card": HubDownloadCard;
+        "hub-download-notice": HubDownloadNotice;
         "hub-embed": HubEmbed;
         "hub-event": HubEvent;
         "hub-events-list": HubEventsList;
@@ -1421,7 +1466,6 @@ declare namespace LocalJSX {
         "hub-gallery": HubGallery;
         "hub-identity": HubIdentity;
         "hub-input": HubInput;
-        "hub-license-picker": HubLicensePicker;
         "hub-list": HubList;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
@@ -1458,6 +1502,8 @@ declare module "@stencil/core" {
             "hub-content-card": LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
             "hub-content-table": LocalJSX.HubContentTable & JSXBase.HTMLAttributes<HTMLHubContentTableElement>;
             "hub-discussion": LocalJSX.HubDiscussion & JSXBase.HTMLAttributes<HTMLHubDiscussionElement>;
+            "hub-download-card": LocalJSX.HubDownloadCard & JSXBase.HTMLAttributes<HTMLHubDownloadCardElement>;
+            "hub-download-notice": LocalJSX.HubDownloadNotice & JSXBase.HTMLAttributes<HTMLHubDownloadNoticeElement>;
             "hub-embed": LocalJSX.HubEmbed & JSXBase.HTMLAttributes<HTMLHubEmbedElement>;
             "hub-event": LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
             "hub-events-list": LocalJSX.HubEventsList & JSXBase.HTMLAttributes<HTMLHubEventsListElement>;
@@ -1466,7 +1512,6 @@ declare module "@stencil/core" {
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
             "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
-            "hub-license-picker": LocalJSX.HubLicensePicker & JSXBase.HTMLAttributes<HTMLHubLicensePickerElement>;
             "hub-list": LocalJSX.HubList & JSXBase.HTMLAttributes<HTMLHubListElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
