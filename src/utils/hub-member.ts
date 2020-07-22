@@ -188,8 +188,11 @@ export async function getMemberEvents(authentication: IAuthenticationManager): P
     url: eventServiceUrl,
     authentication
   });
-  searchOptions.where += ` AND (${eventGroups.join(' OR ')})`
 
+  if(!!eventGroups) {
+    searchOptions.where += ` AND (${eventGroups.join(' OR ')})`
+  }
+  
   let eventFeatures = await searchEvents( searchOptions );
   console.log("hub-member: getMemberEvents", [searchOptions, eventFeatures]);
 
