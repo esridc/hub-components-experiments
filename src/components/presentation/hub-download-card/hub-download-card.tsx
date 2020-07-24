@@ -4,8 +4,7 @@ import { enUS } from 'date-fns/locale'
 import EventEmitter from 'eventemitter3';
 import { UserSession } from '@esri/arcgis-rest-auth';
 import { requestDownloadMetadata, requestDatasetExport, pollDownloadMetadata, DownloadFormat } from '@esri/hub-downloads';
-import { componentLanguage } from '../utils/component-locale';
-import { i18next } from '../utils/localizer';
+import { i18next, componentLanguage } from '../../../utils/localizer';
 
 @Component({
   tag: 'hub-download-card',
@@ -60,6 +59,7 @@ export class DownloadCard {
     const language = componentLanguage(this.element)
     this.locale = this.locales[language] || enUS
     await i18next.changeLanguage(language);
+    await i18next.loadNamespaces('hub-download-card')
   }
 
   getServiceParams () {
@@ -199,11 +199,11 @@ export class DownloadCard {
     if (!this.downloadCached()) return null
     
     if (lastModified) {
-      fileDescription.push(<dt>{i18next.t('fileCreated')}</dt>)
+      fileDescription.push(<dt>{i18next.t('hub-download-card:fileCreated')}</dt>)
       fileDescription.push(<dd>{format(new Date(lastModified), 'PPp', { locale: this.locale })}</dd>)
     }
     if (contentLength) {
-      fileDescription.push(<dt>{i18next.t('fileSize')}</dt>,<dd>{calculateSize(contentLength)}</dd>)
+      fileDescription.push(<dt>{i18next.t('hub-download-card:fileSize')}</dt>,<dd>{calculateSize(contentLength)}</dd>)
     }
     return fileDescription
   }
@@ -217,14 +217,14 @@ export class DownloadCard {
         scale="m"
         icon-position="start"
         disabled={this.shouldDisableDownload()}
-        onClick={this.download.bind(this)}>{i18next.t('buttonDownload')}</calcite-button>
+        onClick={this.download.bind(this)}>{i18next.t('hub-download-card:buttonDownload')}</calcite-button>
     }
 
-    return <calcite-dropdown alignment="start" scale="m" type="click" dir="ltr" active="false">
-      <calcite-button slot="dropdown-trigger" hastext="" color="blue" appearance="outline" scale="m" icon="caretDown" icon-position="end">{i18next.t('buttonOptions')}</calcite-button>
+    return <calcite-dropdown alignment="start" scale="m" type="click" dir="ltr" active={false}>
+      <calcite-button slot="dropdown-trigger" color="blue" appearance="outline" scale="m" icon="caretDown" icon-position="end">{i18next.t('hub-download-card:buttonOptions')}</calcite-button>
       <calcite-dropdown-group group-title="Choose one:" selection-mode="none">
-        <calcite-dropdown-item dir="ltr" tabindex="0" role="menuitem" selection-mode="none"  onClick={this.exportDataset.bind(this)} hidden={this.exportInProgress()}>{i18next.t('menuRequest')}</calcite-dropdown-item>
-        <calcite-dropdown-item dir="ltr" tabindex="0" role="menuitem" selection-mode="none" onClick={this.download.bind(this)}>{i18next.t('menuDownload')}</calcite-dropdown-item>
+        <calcite-dropdown-item dir="ltr" tabindex="0" role="menuitem" selection-mode="none"  onClick={this.exportDataset.bind(this)} hidden={this.exportInProgress()}>{i18next.t('hub-download-card:menuRequest')}</calcite-dropdown-item>
+        <calcite-dropdown-item dir="ltr" tabindex="0" role="menuitem" selection-mode="none" onClick={this.download.bind(this)}>{i18next.t('hub-download-card:menuDownload')}</calcite-dropdown-item>
       </calcite-dropdown-group>
     </calcite-dropdown>
   }

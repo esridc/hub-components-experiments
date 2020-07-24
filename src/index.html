@@ -7,7 +7,11 @@
 
   <script type="module" src="/build/radar.esm.js"></script>
   <script nomodule src="/build/radar.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@esri/calcite-components@1.0.0-beta.18/dist/calcite/calcite.css">
+  <link
+  rel="stylesheet"
+  type="text/css"
+  href="https://unpkg.com/@esri/calcite-components@1.0.0-beta.25/dist/calcite/calcite.css"
+/>
 
   <style>
   header { grid-area: header; }
@@ -63,7 +67,26 @@
       <hub-radar-map center="[-77, 38.9]" zoom="9"></hub-radar-map>
       <hub-topic name="before" description="longer..."></hub-topic>
     </div>
-
+    <div>
+      <hub-download-card
+      host="https://qa-pre-hub.mapsqa.arcgis.com"
+      name="Portal QA API - Shp (58c0f7e741094ebe84834d1ab448630b_0)"
+      dataset-id="58c0f7e741094ebe84834d1ab448630b_0"
+      format="Shapefile"
+      token="5qa4KvrSIXPiIQqiBFwPkzolzqZLQQZBtZCAi1sfzDXEwkTNlThJ3nXnuAO7w_Lk9tWfUnEdX0nitGFzNikx2x4x494PVdxQzacAkepmZ45SUD_iERFj3P1S1esHhD2IoaBec_1R2DUhAxfNA4tenFV8S_wScoNVkkGp5M4u98aLTEsWSjtPWkCWlHJ1rbCFIrQbghrk5h-CYUSxoBEeYQXnXSoIVx9zjyGprkl0afY."
+      target="portal",
+      username='paige_p'
+      filename='test-item',
+      spatial-ref-id='2821'
+      ></hub-download-card>
+  
+      <hub-download-card
+      host="https://opendataqa.arcgis.com"
+      name="Hub QA API - CSV (17fd123479e941f1af89a74597e3f201_2)"
+      dataset-id="17fd123479e941f1af89a74597e3f201_2"
+      format="CSV"
+      ></hub-download-card>
+    </div>
 </div>
   
   <script>

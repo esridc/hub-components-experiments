@@ -9,6 +9,7 @@ export const config: Config = {
     }),
   ],
   globalStyle: 'src/global/global.scss',
+  globalScript: 'src/global/global-script.ts',
   commonjs: {
     namedExports: {
       "node_modules/esri-loader/dist/umd/esri-loader.js": [
@@ -41,5 +42,9 @@ export const config: Config = {
       ],
       serviceWorker: null // disable service workers
     }
-  ]
+  ],
+  copy: [{
+    src: "**/*.i18n.*.json",
+    dest: "i18n"
+  }]  
 };
