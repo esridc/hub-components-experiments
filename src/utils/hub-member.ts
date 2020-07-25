@@ -165,45 +165,49 @@ export async function getMemberEvents(authentication: IAuthenticationManager): P
   // 1. Find Portal eventGroups=Portal.search where(type=event && members.include?(user))
   // 2. Query Events Service where(groupId.include?(eventGroups)) && other filters (e.g. upcoming/nearby)
   // 3. Convert Group+Features into IHubEvent
-  
-  let groups = await searchGroups({ 
-    q: "tags:Hub Event Group", 
-    params: { searchUserAccess: "groupMember", num: 100 }, 
-    authentication 
-  });
-  
-  let eventGroups = groups.results.reduce((teamResults, group) => {
-    teamResults.push(`groupId = '${group.id}'`) // TODO: build this array elsewhere
-    return teamResults;
-  }, []);
+  let events = [];
+    let groups = await searchGroups({ 
+      q: "tags:Hub Event Group", 
+      params: { searchUserAccess: "groupMember", num: 100 }, 
+      authentication 
+    });
+    
+    let eventGroups = groups.results.reduce((teamResults, group) => {
+      teamResults.push(`groupId = '${group.id}'`) // TODO: build this array elsewhere
+      return teamResults;
+    }, []); 
 
-  let portal = await getPortal(null, { authentication: authentication });
-  
-  // @esri/hub-events directly calls Feature Service instead of using the Hub API proxy.
-  // let eventServiceUrl = await getEventFeatureServiceUrl( portal.id );
-  let eventServiceUrl = `https://hub.arcgis.com/api/v3/events/${portal.id}/Hub%20Events/FeatureServer/0/`
+    let portal = await getPortal(null, { authentication: authentication });
+  try {
+      
+    // @esri/hub-events directly calls Feature Service instead of using the Hub API proxy.
+    // let eventServiceUrl = await getEventFeatureServiceUrl( portal.id );
+    let eventServiceUrl = `https://hub.arcgis.com/api/v3/events/${portal.id}/Hub%20Events/FeatureServer/0/`
 
-  // TODO: add support for all vs. upcoming events
-  const searchOptions: IQueryFeaturesOptions = getEventQueryFromType("upcoming", {
-    url: eventServiceUrl,
-    authentication
-  });
-  searchOptions.where += ` AND (${eventGroups.join(' OR ')})`
+    // TODO: add support for all vs. upcoming events
+    const searchOptions: IQueryFeaturesOptions = getEventQueryFromType("upcoming", {
+      url: eventServiceUrl,
+      authentication
+    });
 
-  let eventFeatures = await searchEvents( searchOptions );
-  console.log("hub-member: getMemberEvents", [searchOptions, eventFeatures]);
+    if(!!eventGroups) {
+      searchOptions.where += ` AND (${eventGroups.join(' OR ')})`
+    }
+    
+    let eventFeatures = await searchEvents( searchOptions );
+    console.log("hub-member: getMemberEvents", [searchOptions, eventFeatures]);
 
-  let events = eventFeatures.data.reduce((eventResults, event) => {
-    eventResults.push({
-      id: event.id,
-      name: event.attributes.title,
-      summary: event.attributes.venue,
-      description: event.attributes.description,
-      hubtype: HubTypes.HubType.event
-    })
-    return eventResults;
-  }, [])
-
+    events = eventFeatures.data.reduce((eventResults, event) => {
+      eventResults.push({
+        id: event.id,
+        name: event.attributes.title,
+        summary: event.attributes.venue,
+        description: event.attributes.description,
+        hubtype: HubTypes.HubType.event
+      })
+      return eventResults;
+    }, [])
+  } catch {}
   // EventGroups are all events the user has registered, and events are matches for upcoming.
   return { results: events, meta: {total: eventGroups.length, count: events.length, start: 1 } };
 }
@@ -246,11 +250,11 @@ export async function searchMemberComments(username, authentication: IAuthentica
   query.push(`Creator LIKE '${username}'`)
 
   let portal = await getPortal(null, { authentication: authentication });
-  let annotationsUrl = await getAnnotationServiceUrl( portal.id )
-  annotationsUrl += '/0';
-   
   let annotations;
   try {
+    let annotationsUrl = await getAnnotationServiceUrl( portal.id )
+    annotationsUrl += '/0';
+    
     console.log("hub-discussion: Search", [search, query, {url: annotationsUrl, params: {where: query.join(" AND ")}}])
     annotations = await searchAnnotations({url: annotationsUrl, where: query.join(" AND ")});  
   } catch {
