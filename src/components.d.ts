@@ -134,6 +134,10 @@ export namespace Components {
          */
         "sort": "name" | "modified" | "-name" | "-modified";
     }
+    interface HubCountdown {
+        "endDate": Date;
+        "remainingText": string;
+    }
     interface HubDiscussion {
         "allowReply": boolean;
         "annotationsUrl": string;
@@ -327,8 +331,6 @@ export namespace Components {
           * Geographic extent limit for geocoding
          */
         "extent": any;
-    }
-    interface HubLicensePicker {
     }
     interface HubList {
         "collection": HubTypes.IHubResource[];
@@ -606,6 +608,12 @@ declare global {
         prototype: HTMLHubContentTableElement;
         new (): HTMLHubContentTableElement;
     };
+    interface HTMLHubCountdownElement extends Components.HubCountdown, HTMLStencilElement {
+    }
+    var HTMLHubCountdownElement: {
+        prototype: HTMLHubCountdownElement;
+        new (): HTMLHubCountdownElement;
+    };
     interface HTMLHubDiscussionElement extends Components.HubDiscussion, HTMLStencilElement {
     }
     var HTMLHubDiscussionElement: {
@@ -659,12 +667,6 @@ declare global {
     var HTMLHubInputElement: {
         prototype: HTMLHubInputElement;
         new (): HTMLHubInputElement;
-    };
-    interface HTMLHubLicensePickerElement extends Components.HubLicensePicker, HTMLStencilElement {
-    }
-    var HTMLHubLicensePickerElement: {
-        prototype: HTMLHubLicensePickerElement;
-        new (): HTMLHubLicensePickerElement;
     };
     interface HTMLHubListElement extends Components.HubList, HTMLStencilElement {
     }
@@ -791,6 +793,7 @@ declare global {
         "hub-chat": HTMLHubChatElement;
         "hub-content-card": HTMLHubContentCardElement;
         "hub-content-table": HTMLHubContentTableElement;
+        "hub-countdown": HTMLHubCountdownElement;
         "hub-discussion": HTMLHubDiscussionElement;
         "hub-embed": HTMLHubEmbedElement;
         "hub-event": HTMLHubEventElement;
@@ -800,7 +803,6 @@ declare global {
         "hub-gallery": HTMLHubGalleryElement;
         "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
-        "hub-license-picker": HTMLHubLicensePickerElement;
         "hub-list": HTMLHubListElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
@@ -960,6 +962,10 @@ declare namespace LocalJSX {
           * Hub site URL to scope for search
          */
         "sort"?: "name" | "modified" | "-name" | "-modified";
+    }
+    interface HubCountdown {
+        "endDate"?: Date;
+        "remainingText"?: string;
     }
     interface HubDiscussion {
         "allowReply"?: boolean;
@@ -1163,8 +1169,6 @@ declare namespace LocalJSX {
           * Emits the {address, coordinates} of the geocoded result
          */
         "onEventAddressUpdated"?: (event: CustomEvent<any>) => void;
-    }
-    interface HubLicensePicker {
     }
     interface HubList {
         "collection"?: HubTypes.IHubResource[];
@@ -1412,6 +1416,7 @@ declare namespace LocalJSX {
         "hub-chat": HubChat;
         "hub-content-card": HubContentCard;
         "hub-content-table": HubContentTable;
+        "hub-countdown": HubCountdown;
         "hub-discussion": HubDiscussion;
         "hub-embed": HubEmbed;
         "hub-event": HubEvent;
@@ -1421,7 +1426,6 @@ declare namespace LocalJSX {
         "hub-gallery": HubGallery;
         "hub-identity": HubIdentity;
         "hub-input": HubInput;
-        "hub-license-picker": HubLicensePicker;
         "hub-list": HubList;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
@@ -1457,6 +1461,7 @@ declare module "@stencil/core" {
             "hub-chat": LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
             "hub-content-card": LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
             "hub-content-table": LocalJSX.HubContentTable & JSXBase.HTMLAttributes<HTMLHubContentTableElement>;
+            "hub-countdown": LocalJSX.HubCountdown & JSXBase.HTMLAttributes<HTMLHubCountdownElement>;
             "hub-discussion": LocalJSX.HubDiscussion & JSXBase.HTMLAttributes<HTMLHubDiscussionElement>;
             "hub-embed": LocalJSX.HubEmbed & JSXBase.HTMLAttributes<HTMLHubEmbedElement>;
             "hub-event": LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
@@ -1466,7 +1471,6 @@ declare module "@stencil/core" {
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
             "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
-            "hub-license-picker": LocalJSX.HubLicensePicker & JSXBase.HTMLAttributes<HTMLHubLicensePickerElement>;
             "hub-list": LocalJSX.HubList & JSXBase.HTMLAttributes<HTMLHubListElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
