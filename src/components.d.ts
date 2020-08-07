@@ -135,8 +135,18 @@ export namespace Components {
         "sort": "name" | "modified" | "-name" | "-modified";
     }
     interface HubCountdown {
-        "endDate": Date;
-        "remainingText": string;
+        /**
+          * End Date as a 'YYYY-MM-DD'string. e.g. "2020-12-31" Leave blank to set to current time
+         */
+        "end": string;
+        /**
+          * Text to add after the date difference
+         */
+        "endText": string;
+        /**
+          * Start Date as a 'YYYY-MM-DD' string. e.g. "2020-12-31" Leave blank to set to current time
+         */
+        "start": string;
     }
     interface HubDiscussion {
         "allowReply": boolean;
@@ -967,8 +977,18 @@ declare namespace LocalJSX {
         "sort"?: "name" | "modified" | "-name" | "-modified";
     }
     interface HubCountdown {
-        "endDate"?: Date;
-        "remainingText"?: string;
+        /**
+          * End Date as a 'YYYY-MM-DD'string. e.g. "2020-12-31" Leave blank to set to current time
+         */
+        "end"?: string;
+        /**
+          * Text to add after the date difference
+         */
+        "endText"?: string;
+        /**
+          * Start Date as a 'YYYY-MM-DD' string. e.g. "2020-12-31" Leave blank to set to current time
+         */
+        "start"?: string;
     }
     interface HubDiscussion {
         "allowReply"?: boolean;
