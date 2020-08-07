@@ -49,6 +49,10 @@ export class HubLicensePicker {
   }
   renderLicense(licenseId:string) {
     const license = this.licenses[licenseId];
+    console.log("renderLicense", license)
+    if(!license) {
+      return( this.renderNoLicense() );
+    }
     return (
       <calcite-card
         class="license-option"

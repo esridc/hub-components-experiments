@@ -267,8 +267,7 @@ export async function searchMemberContent(username, authentication: IAuthenticat
   console.log("searchMemberContent", [username, authentication]);
   let content = await search({  owner: username,
                                 sort: 'modified',
-                                order: 'desc',
-                                authentication 
+                                order: 'desc'
                             });
   return content
 }
