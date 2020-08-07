@@ -9,6 +9,8 @@ export class HubLicensePicker {
   @Prop() license:string = "cc0";
 
   pickerModal: HTMLCalciteModalElement;
+
+  // TODO: move this to an @esri/hub-licenses module
   licenses = {
     "cc0": {
       name: "Creative Commons Zero (CC0)",
