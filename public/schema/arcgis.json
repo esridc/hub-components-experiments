@@ -32,16 +32,17 @@
             "arcgis": ["description"]
         }
       },
-      "language": {
+      "license": {
         "type": "string",
-        "description": "Language of the content",
-        "enum": ["en", "es", "fr"],
+        "subtype": "license",
+        "description": "Content License for re-use",
         "translation": {
-            "arcgis": ["culture"]
+            "arcgis": ["accessInfo"]
         }
       },
       "tags": {
         "type": "array",
+        "subtype": "topics",
         "description": "Provides content tags.",
         "default" : "content",
         "translation": {
@@ -52,7 +53,8 @@
         "uniqueItems": true,
         "items": {
             "type": "string",
-            "pattern": "^(.*){50}$"
+            "pattern": "^(.*){50}$",
+            "enum": ["education", "history", "transportation", "bikes", "health"]
         }
       }
     }
