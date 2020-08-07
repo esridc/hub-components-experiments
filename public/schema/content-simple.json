@@ -40,7 +40,7 @@
             "pattern": "^(.*){50}$"
         }
       },
-      "license": {
+      "licenseInfo": {
         "type": "string",
         "subtype": "license",
         "description": "Content License for re-use",

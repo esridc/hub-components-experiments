@@ -89,6 +89,7 @@ export function getContent(
   export function _convertItemToContent(
     item: IModel
   ): IHubContent {
+    console.log("_convertItemToContent", item)
     let typeCategory = getCategory(item.item.type);
     let content:IHubContent = Object.assign(item.item, {
         // id: item.item.id,
