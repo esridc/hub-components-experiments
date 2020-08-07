@@ -1,8 +1,10 @@
 <html>
     <head></head>
     <body>
-        <hub-workspace></hub-workspace>
-
+        <div class="user-actions">
+          <calcite-button onclick="embedModal.open()">New Upload</calcite-button>
+          <hub-workspace></hub-workspace>
+        </div>
         <link
         rel="stylesheet"
         type="text/css"
@@ -14,16 +16,50 @@
     <script type="module" src="./radar/radar.esm.js"></script>
     <script nomodule="" src="./radar/radar.js"></script>
     
+    <calcite-modal 
+      aria-labelledby="modal-title"
+      size="m"
+      width="800">
+        <h3 slot="header" id="modal-title">Upload new content</h3>
+        <div slot="content">
+          <hub-upload
+          clientid="WXC842NRBVB6NZ2r"
+          portal="https://www.arcgis.com"></hub-upload>
+        </div>
+        <!-- <calcite-button slot="secondary" width="full" appearance="outline">
+          Cancel
+        </calcite-button>
+        <calcite-button slot="primary" width="full">
+          Save
+        </calcite-button> -->
+      </calcite-modal>   
+      
     <hub-identity             
-    clientid="WXC842NRBVB6NZ2r"
-    orgurl="https://www.arcgis.com"
-    showsignin="true" 
-    showsignout="true"></hub-identity>
+      clientid="WXC842NRBVB6NZ2r"
+      orgurl="https://www.arcgis.com"
+      showsignin="true" 
+      showsignout="true"></hub-identity>
     <style>
-        hub-identity {
+        .user-actions {
+        }
+        hub-identity, calcite-button {
             width: 260px;
             height: 40px;
         }
     </style>
+
+  <script>
+    const embedModal = document.querySelector("calcite-modal");
+    const hubIdentity = document.querySelector('hub-identity');
+    hubIdentity.addEventListener('onSignin', event => { 
+      console.log("hubIdentity signin", event)
+      location.reload();
+    })
+    hubIdentity.addEventListener('onSignout', event => { 
+      console.log("hubIdentity signout", event)
+      location.reload();
+    })
+
+  </script>    
     </body>
 </html>

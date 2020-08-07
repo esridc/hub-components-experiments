@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, Host, h, Prop, State } from '@stencil/core';
 import { readSessionFromCookie, authenticateUser, deleteSessionCookie } from '../../../utils/utils';
 
 @Component({
@@ -32,17 +32,36 @@ export class HubIdentity {
    */
   @Prop({ mutable: true }) session: string;
 
+  @Event({ 
+    eventName: 'onSignin',
+    composed: true,
+    cancelable: true,
+    bubbles: true
+  }) onSignin: EventEmitter;  
+  @Event({ 
+    eventName: 'onSignout',
+    composed: true,
+    cancelable: true,
+    bubbles: true
+  }) onSignout: EventEmitter;    
+
   componentWillLoad() {
     this.session = readSessionFromCookie();
   }  
   
   async identitySignin() {
     this.session = await authenticateUser(this.clientid, this.orgurl)
+    if(!!this.session) {
+      this.onSignin.emit( this.session );
+    }
   }
   async identitySignout() {
+    const username = this.username
     this.session = null;
     this.username = null;
     deleteSessionCookie();
+    // Which user was signed out
+    this.onSignout.emit( username );
   }  
 
   render() {

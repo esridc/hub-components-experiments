@@ -1139,6 +1139,8 @@ declare namespace LocalJSX {
         "clientid"?: string;
         "displaysignin"?: boolean;
         "displaysignout"?: boolean;
+        "onOnSignin"?: (event: CustomEvent<any>) => void;
+        "onOnSignout"?: (event: CustomEvent<any>) => void;
         /**
           * url of the ArcGIS Online organization
          */
