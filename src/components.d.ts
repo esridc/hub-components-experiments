@@ -134,6 +134,10 @@ export namespace Components {
          */
         "sort": "name" | "modified" | "-name" | "-modified";
     }
+    interface HubCountdown {
+        "endDate": Date;
+        "remainingText": string;
+    }
     interface HubDiscussion {
         "allowReply": boolean;
         "annotationsUrl": string;
@@ -607,6 +611,12 @@ declare global {
         prototype: HTMLHubContentTableElement;
         new (): HTMLHubContentTableElement;
     };
+    interface HTMLHubCountdownElement extends Components.HubCountdown, HTMLStencilElement {
+    }
+    var HTMLHubCountdownElement: {
+        prototype: HTMLHubCountdownElement;
+        new (): HTMLHubCountdownElement;
+    };
     interface HTMLHubDiscussionElement extends Components.HubDiscussion, HTMLStencilElement {
     }
     var HTMLHubDiscussionElement: {
@@ -786,6 +796,7 @@ declare global {
         "hub-chat": HTMLHubChatElement;
         "hub-content-card": HTMLHubContentCardElement;
         "hub-content-table": HTMLHubContentTableElement;
+        "hub-countdown": HTMLHubCountdownElement;
         "hub-discussion": HTMLHubDiscussionElement;
         "hub-embed": HTMLHubEmbedElement;
         "hub-event": HTMLHubEventElement;
@@ -954,6 +965,10 @@ declare namespace LocalJSX {
           * Hub site URL to scope for search
          */
         "sort"?: "name" | "modified" | "-name" | "-modified";
+    }
+    interface HubCountdown {
+        "endDate"?: Date;
+        "remainingText"?: string;
     }
     interface HubDiscussion {
         "allowReply"?: boolean;
@@ -1409,6 +1424,7 @@ declare namespace LocalJSX {
         "hub-chat": HubChat;
         "hub-content-card": HubContentCard;
         "hub-content-table": HubContentTable;
+        "hub-countdown": HubCountdown;
         "hub-discussion": HubDiscussion;
         "hub-embed": HubEmbed;
         "hub-event": HubEvent;
@@ -1453,6 +1469,7 @@ declare module "@stencil/core" {
             "hub-chat": LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;
             "hub-content-card": LocalJSX.HubContentCard & JSXBase.HTMLAttributes<HTMLHubContentCardElement>;
             "hub-content-table": LocalJSX.HubContentTable & JSXBase.HTMLAttributes<HTMLHubContentTableElement>;
+            "hub-countdown": LocalJSX.HubCountdown & JSXBase.HTMLAttributes<HTMLHubCountdownElement>;
             "hub-discussion": LocalJSX.HubDiscussion & JSXBase.HTMLAttributes<HTMLHubDiscussionElement>;
             "hub-embed": LocalJSX.HubEmbed & JSXBase.HTMLAttributes<HTMLHubEmbedElement>;
             "hub-event": LocalJSX.HubEvent & JSXBase.HTMLAttributes<HTMLHubEventElement>;
