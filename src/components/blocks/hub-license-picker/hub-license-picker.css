@@ -1,3 +1,9 @@
 :host {
   display: block;
 }
+.license-option {
+  width:260px;
+}
+.license-option img {
+  height: 40px;
+}

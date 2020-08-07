@@ -329,6 +329,7 @@ export namespace Components {
         "extent": any;
     }
     interface HubLicensePicker {
+        "license": string;
     }
     interface HubList {
         "collection": HubTypes.IHubResource[];
@@ -1167,6 +1168,7 @@ declare namespace LocalJSX {
         "onEventAddressUpdated"?: (event: CustomEvent<any>) => void;
     }
     interface HubLicensePicker {
+        "license"?: string;
     }
     interface HubList {
         "collection"?: HubTypes.IHubResource[];
