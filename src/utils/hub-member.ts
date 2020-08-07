@@ -264,8 +264,11 @@ export async function searchMemberComments(username, authentication: IAuthentica
 }
 
 export async function searchMemberContent(username, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
-  let content = await search({ owner: username,
-                              authentication 
+  console.log("searchMemberContent", [username, authentication]);
+  let content = await search({  owner: username,
+                                sort: 'modified',
+                                order: 'desc',
+                                authentication 
                             });
   return content
 }
