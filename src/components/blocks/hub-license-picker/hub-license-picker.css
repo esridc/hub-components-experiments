@@ -2,7 +2,8 @@
   display: block;
 }
 .license-option {
-  width:260px;
+  width: 100%;
+  max-height: 200px;
 }
 .license-option img {
   height: 40px;

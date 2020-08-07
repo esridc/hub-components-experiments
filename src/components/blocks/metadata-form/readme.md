@@ -18,6 +18,7 @@
 
 ### Used by
 
+ - [hub-license-picker](../hub-license-picker)
  - [hub-metadata-editor](../../containers/hub-metadata-editor)
  - [hub-profile-editor](../../containers/hub-profile-editor)
 
@@ -42,6 +43,7 @@ graph TD;
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon
   calcite-input-message --> calcite-icon
+  hub-license-picker --> metadata-form
   hub-metadata-editor --> metadata-form
   hub-profile-editor --> metadata-form
   style metadata-form fill:#f9f,stroke:#333,stroke-width:4px

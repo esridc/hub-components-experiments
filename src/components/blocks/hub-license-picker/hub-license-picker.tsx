@@ -54,14 +54,15 @@ export class HubLicensePicker {
       return( this.renderNoLicense() );
     }
     return (
+      <div class="license-option">
       <calcite-card
-        class="license-option"
         selectable={true}
         >
         <h3 slot="title">{license.name}</h3>
         <span slot="subtitle"><img slot="" src={license.thumbnail} /> <br/>{license.summary}</span>
         <calcite-link theme="dark" slot="footer-leading" href={license.url}>More info</calcite-link>
       </calcite-card>        
+      </div>
     )
   }
   render() {
@@ -74,11 +75,24 @@ export class HubLicensePicker {
           aria-labelledby="modal-title"
           size="medium"
           >
-          <h3 slot="header" id="modal-title">Recommended Licenses</h3>
+          <h3 slot="header" id="modal-title">Choose a License</h3>
           <div slot="content">
-            {Object.keys(this.licenses).map(license => 
-              this.renderLicense(license)
-            )}
+            <calcite-tabs>
+              <calcite-tab-nav slot="tab-nav">
+                <calcite-tab-title isActive={true}>Recommended Licenses</calcite-tab-title>
+                <calcite-tab-title>Custom license</calcite-tab-title>
+              </calcite-tab-nav>
+              <calcite-tab isActive={true}>
+                  {Object.keys(this.licenses).map(license => 
+                    this.renderLicense(license)
+                  )}
+              </calcite-tab>
+              <calcite-tab>
+                <metadata-form
+                  sections={['license']}
+                ></metadata-form>
+              </calcite-tab>
+            </calcite-tabs>
           </div>
           <calcite-button slot="secondary" width="full" appearance="outline">
             Cancel
