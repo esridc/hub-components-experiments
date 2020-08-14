@@ -1,6 +1,6 @@
 # hub-countdown
 
-
+`<hub-countdown start="" end="2020-09-30" end-text="days remaining"></hub-countdown>`
 
 <!-- Auto Generated Below -->
 

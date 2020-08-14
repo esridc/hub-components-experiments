@@ -1,9 +1,16 @@
 <html>
-    <head></head>
+    <head>
+        <style>
+            hub-countdown {
+                opacity: 0;
+                transition: all 1.5s ease-in-out 0s;
+            }
+        </style>        
+    </head>
     <body>
         <hub-countdown
             end="2020-12-31"
-            end-text="days until the end of the year."
+            end-text=""
         ></hub-countdown>
 
         <link
@@ -16,5 +23,21 @@
     <!-- <link rel="stylesheet" href="./radar/radar.css" /> -->
     <script type="module" src="./radar/radar.esm.js"></script>
     <script nomodule="" src="./radar/radar.js"></script>
+
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        window.onload = function () {
+            const start = urlParams.get('start');
+            const end = urlParams.get('end');
+            const text = urlParams.get('text');
+
+            const countdown = document.querySelector('hub-countdown');
+            countdown.start = start || '';
+            countdown.end = end || '2020-12-31';
+            countdown.endText = text || `days until ${countdown.end}` 
+            countdown.style.opacity = 1;
+        }
+    </script>
     </body>
 </html>
