@@ -18,6 +18,14 @@
 | `signout`        | `signout`        |                                              | `string`  | `"Sign Out"`               |
 
 
+## Events
+
+| Event       | Description | Type               |
+| ----------- | ----------- | ------------------ |
+| `onSignin`  |             | `CustomEvent<any>` |
+| `onSignout` |             | `CustomEvent<any>` |
+
+
 ## Dependencies
 
 ### Depends on

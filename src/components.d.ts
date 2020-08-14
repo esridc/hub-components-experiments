@@ -329,6 +329,7 @@ export namespace Components {
         "extent": any;
     }
     interface HubLicensePicker {
+        "license": string;
     }
     interface HubList {
         "collection": HubTypes.IHubResource[];
@@ -1139,6 +1140,8 @@ declare namespace LocalJSX {
         "clientid"?: string;
         "displaysignin"?: boolean;
         "displaysignout"?: boolean;
+        "onOnSignin"?: (event: CustomEvent<any>) => void;
+        "onOnSignout"?: (event: CustomEvent<any>) => void;
         /**
           * url of the ArcGIS Online organization
          */
@@ -1165,6 +1168,7 @@ declare namespace LocalJSX {
         "onEventAddressUpdated"?: (event: CustomEvent<any>) => void;
     }
     interface HubLicensePicker {
+        "license"?: string;
     }
     interface HubList {
         "collection"?: HubTypes.IHubResource[];

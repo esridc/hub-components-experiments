@@ -11,6 +11,7 @@ import { IQueryFeaturesOptions } from "@esri/arcgis-rest-feature-layer";
 import { getUserResource, addUserResource } from "./arcgis-user"
 import { search } from './hub-search'
 import { searchAnnotations, IResourceObject, getAnnotationServiceUrl } from "@esri/hub-annotations";
+import { IHubRequestOptions } from "@esri/hub-common";
 
 const portalUrl = 'https://www.arcgis.com';
 
@@ -264,9 +265,12 @@ export async function searchMemberComments(username, authentication: IAuthentica
 }
 
 export async function searchMemberContent(username, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults> {
-  let content = await search({ owner: username,
-                              authentication 
-                            });
+  console.log("searchMemberContent", [username, authentication]);
+  let content = await search({  owner: username,
+                                sort: 'modified',
+                                order: 'desc' 
+                            },
+                            {isPortal: true, hubApiUrl: "https://hub.arcgis.com", authentication: authentication} as IHubRequestOptions);
   return content
 }
 

@@ -16,7 +16,7 @@
             "arcgis": ["title"]
         }
       },
-      "snippet": {
+      "summary": {
         "type": "string",
         "description": "A short description of the content. Max of 300 characters.",
         "pattern": "^(.*){300}$",
@@ -24,25 +24,9 @@
             "arcgis": ["snippet"]
         }
       },
-      "description": {
-        "type": "string",
-        "description": "Full description",
-        "pattern": "^(.*){2000}$",
-        "translation": {
-            "arcgis": ["description"]
-        }
-      },
-      "license": {
-        "type": "string",
-        "subtype": "license",
-        "description": "Content License for re-use",
-        "translation": {
-            "arcgis": ["accessInfo"]
-        }
-      },
       "tags": {
         "type": "array",
-        "subtype": "topics",
+
         "description": "Provides content tags.",
         "default" : "content",
         "translation": {
@@ -53,10 +37,17 @@
         "uniqueItems": true,
         "items": {
             "type": "string",
-            "pattern": "^(.*){50}$",
-            "enum": ["education", "history", "transportation", "bikes", "health"]
+            "pattern": "^(.*){50}$"
         }
-      }
+      },
+      "licenseInfo": {
+        "type": "string",
+        "subtype": "license",
+        "description": "Content License for re-use",
+        "translation": {
+            "arcgis": ["accessInfo"]
+        }
+      }      
     }
   }
   

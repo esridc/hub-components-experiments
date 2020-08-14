@@ -71,7 +71,7 @@ export class HubMetadataEditor {
     return (
       <Host>
           <metadata-form
-            sections={["arcgis"]}
+            sections={["content-simple"]}
             resource={this.resource}
           ></metadata-form>
           <calcite-button 

@@ -46,7 +46,8 @@ export class MetadataElementView {
 
   metadataEditors = {
     "geography": { component: "hub-places-map" },
-    "topics": { component: "hub-topic-picker" }
+    "topics": { component: "hub-topic-picker" },
+    "license": { component: "hub-license-picker" }
   };
 
   private getMetadataEditor(editorType:string) {

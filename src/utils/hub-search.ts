@@ -7,7 +7,7 @@ import * as HubTypes from "./hub-types"
 
 // TODO: Change hubRequestOptions to better handle different Hub & Portal endpoints (Prod/QA/Enterprise/etc.)
 export async function search(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
-    console.debug("hub-search search: queryParams", [queryParams, hubRequestOptions])
+    console.log("hub-search search: queryParams", [queryParams, hubRequestOptions])
 
     if(hubRequestOptions === undefined 
         || (hubRequestOptions !== undefined && hubRequestOptions.isPortal)) {
@@ -19,6 +19,7 @@ export async function search(queryParams: any, hubRequestOptions?: IHubRequestOp
 
 // https://developers.arcgis.com/rest/users-groups-and-items/search.htm
 async function searchPortal(queryParams: any, hubRequestOptions?: IHubRequestOptions):Promise<HubTypes.IHubSearchResults> {
+    console.log("searchPortal", [queryParams, hubRequestOptions]);
     // TODO: Consider better ways to map terms across multiple parameters
     queryParams.sort = (queryParams.sort || 'modified').replace(/name/,'title');
     
@@ -36,7 +37,7 @@ async function searchPortal(queryParams: any, hubRequestOptions?: IHubRequestOpt
     // Portal splits "sort=-name" into "sortField=name&sortOrder=desc"
     // Supported sort field names are title, created, type, owner, modified, avgrating, numratings, numcomments, and numviews.
     let sortField = queryParams.sort
-    let sortOrder = "asc";
+    let sortOrder = queryParams.order || "asc";
     let match = queryParams.sort.match(/^-/);
     if(match !== null) {
         sortField = match[1];

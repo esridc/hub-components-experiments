@@ -23,6 +23,7 @@ export class HubWorkspace {
   @State() places: HubTypes.IHubGeography[];
   @State() content: HubTypes.IHubSearchResults;
   @State() comments: IResourceObject[];
+  @State() token:string; // Optional authentication token
 
   async componentWillLoad() {
     this.session = readSessionFromCookie();
@@ -31,6 +32,7 @@ export class HubWorkspace {
     console.log("Session", this.session)
     if(!!this.session) {
       const username = JSON.parse(this.session).username;
+      this.token = JSON.parse(this.session).token;
 
       [this.member,
         this.teams,
@@ -110,7 +112,7 @@ export class HubWorkspace {
             <hub-card 
               class="gallery-card"
               contenttype={`${HubTypes.HubType[result.hubType]} by ${result.publisher.name}`}
-              image={result.thumbnailUrl} 
+              image={`${result.thumbnailUrl}?token=${this.token}`} 
               name={truncateString(result.name, 55)} 
               description={truncateString(result.summary, 90)}
               url={result.url}
