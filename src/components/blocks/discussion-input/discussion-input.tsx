@@ -108,7 +108,7 @@ export class DiscussionInput {
       this.eventAddAnnotation.emit({ newAnnotation });
       this.clearAnnotation();
     } else {
-      this.errorEl.open();
+      this.errorEl.active = true;
       // TODO: Using actual error for debugging; Change to a better public facing message for production
       this.error = response.addResults[0]['error'].description
     }
