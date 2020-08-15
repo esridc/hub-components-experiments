@@ -1,5 +1,6 @@
 # hub-events-list
 
+Lists the upcoming events for a user. 
 
 
 <!-- Auto Generated Below -->
