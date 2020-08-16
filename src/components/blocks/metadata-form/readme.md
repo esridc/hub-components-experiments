@@ -40,8 +40,8 @@ graph TD;
   metadata-element-view --> calcite-input
   metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input-message
-  calcite-input --> calcite-progress
   calcite-input --> calcite-icon
+  calcite-input --> calcite-progress
   calcite-input-message --> calcite-icon
   hub-license-picker --> metadata-form
   hub-metadata-editor --> metadata-form

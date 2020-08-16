@@ -28,6 +28,8 @@ export class HubCountdown {
   @State() daysRemaining:number;
 
   componentWillLoad() {
+    console.log("hub-countdown...", [this.start, this.end])
+    console.log("hub-countdown... end",  new Date(this.end))
     this.endDate = this.end ? new Date(this.end) : new Date();
     this.startDate = this.start ? new Date(this.start) : new Date();
 

@@ -29,11 +29,11 @@ export class HubEmbed {
 
     console.log("copied code!");
     // this.confirmEl = 
-    this.modalEl.close();
+    this.modalEl.active = false;
 }
 
   showModal() {
-    this.modalEl.open();
+    this.modalEl.active = true;
   }
   render() {
     return (

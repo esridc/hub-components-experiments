@@ -38,7 +38,7 @@ export class HubLicensePicker {
     }
   }
   showModal() {
-    this.pickerModal.open();
+    this.pickerModal.active = true;
   }
 
   renderNoLicense() {
@@ -73,16 +73,17 @@ export class HubLicensePicker {
         <calcite-modal 
           ref={(el: HTMLCalciteModalElement) => this.pickerModal = el} 
           aria-labelledby="modal-title"
-          size="medium"
+          scale="m"
+          width="m"
           >
           <h3 slot="header" id="modal-title">Choose a License</h3>
           <div slot="content">
             <calcite-tabs>
               <calcite-tab-nav slot="tab-nav">
-                <calcite-tab-title isActive={true}>Recommended Licenses</calcite-tab-title>
+                <calcite-tab-title active>Recommended Licenses</calcite-tab-title>
                 <calcite-tab-title>Custom license</calcite-tab-title>
               </calcite-tab-nav>
-              <calcite-tab isActive={true}>
+              <calcite-tab active>
                   {Object.keys(this.licenses).map(license => 
                     this.renderLicense(license)
                   )}
