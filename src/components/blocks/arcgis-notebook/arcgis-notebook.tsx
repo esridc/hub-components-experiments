@@ -8,7 +8,7 @@ import { UserSession } from '@esri/arcgis-rest-auth';
   styleUrl: 'arcgis-notebook.css',
   shadow: true
 })
-export class Notebook {
+export class ArcgisNotebook {
   @Prop() item = "9cd1f9bdc6794e63ae450087b3b67e05";
   @Prop() view:"preview" | "edit" = "preview";
 

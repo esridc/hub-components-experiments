@@ -1,7 +1,7 @@
-import { Notebook } from './arcgis-notebook';
+import { ArcgisNotebook } from './arcgis-notebook';
 
 describe('arcgis-notebook', () => {
   it('builds', () => {
-    expect(new Notebook()).toBeTruthy();
+    expect(new ArcgisNotebook()).toBeTruthy();
   });
 });
