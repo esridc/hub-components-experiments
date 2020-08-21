@@ -27,7 +27,7 @@ export class HubCountdown {
   @State() startDate:Date;
   @State() daysRemaining:number;
 
-  componentWillLoad() {
+  calculateDiff() {
     console.log("hub-countdown...", [this.start, this.end])
     console.log("hub-countdown... end",  new Date(this.end))
     this.endDate = this.end ? new Date(this.end) : new Date();
@@ -38,7 +38,11 @@ export class HubCountdown {
     this.daysRemaining = Math.ceil(diff / (1000 * 3600 * 24));     
 
   }
+  componentWillRender() {
+    this.calculateDiff();
+  }
   render() {
+    
     return (
       <Host>
         <slot></slot>
