@@ -8,10 +8,12 @@ export default function(stories, knobs) {
       const portal = knobs.text('portal', 'https://www.arcgis.com')
       const view = knobs.select('view', ['preview', 'edit'], 'preview')
       const name = knobs.text('name', 'ArcGIS Notebook')
+      const allowScripts = knobs.boolean('allowScripts', true)
       let code = `<arcgis-notebook
       item="${item}"
       portal="${portal}"
       view="${view}"
+      allow-scripts=${allowScripts}
     >
     <h2 slot="title">${name}</h2>
     </arcgis-notebook>`;

@@ -7,13 +7,14 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                                 | Type                  | Default                              |
-| ---------- | ---------- | ------------------------------------------- | --------------------- | ------------------------------------ |
-| `clientid` | `clientid` | ClientID to identify the app launching auth | `string`              | `"WXC842NRBVB6NZ2r"`                 |
-| `item`     | `item`     |                                             | `string`              | `"9cd1f9bdc6794e63ae450087b3b67e05"` |
-| `portal`   | `portal`   |                                             | `string`              | `"https://www.arcgis.com"`           |
-| `session`  | `session`  | Serialized authentication information.      | `string`              | `undefined`                          |
-| `view`     | `view`     |                                             | `"edit" \| "preview"` | `"preview"`                          |
+| Property       | Attribute       | Description                                                                                                                                        | Type                  | Default                    |
+| -------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------- | -------------------------- |
+| `allowScripts` | `allow-scripts` | Notebook can include other Javascript libraries Useful for some charting libraries (e.g. Vega Altair) But may be a security concern. Default: true | `boolean`             | `true`                     |
+| `clientid`     | `clientid`      | Optional ClientID to identify the app launching authentication Only required if accessing restricted notebooks                                     | `string`              | `""`                       |
+| `item`         | `item`          | Notebook Item ID from ArcGIS Online or Enterprise Required                                                                                         | `string`              | `""`                       |
+| `portal`       | `portal`        | ArcGIS Online or Enterprise URL                                                                                                                    | `string`              | `"https://www.arcgis.com"` |
+| `session`      | `session`       | Optional serialized authentication information. Only required to access restricted notebooks.                                                      | `string`              | `undefined`                |
+| `view`         | `view`          | Show the notebook preview (live/non-edit) or Edit Note: Edit currently blocked by ArcGIS security restrictions                                     | `"edit" \| "preview"` | `"preview"`                |
 
 
 ## Dependencies
