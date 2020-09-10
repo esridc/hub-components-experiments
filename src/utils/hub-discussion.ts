@@ -1,6 +1,5 @@
 import { getItem, getItemData, createItem, searchItems, IItem, ISearchResult } from "@esri/arcgis-rest-portal";
 import { UserSession } from "@esri/arcgis-rest-auth";
-import { left24 } from "@esri/calcite-ui-icons";
 
 export interface IHubDiscussion {
     id: string
@@ -58,7 +57,7 @@ export async function searchDiscussions(query: any):Promise<ISearchResult<IHubDi
         nextStart: search.nextStart,
         aggregations: search.aggregations,
         results: discussions // the whole point
-    }    
+    }
     return results;
 }
 export async function getDiscussion( id: string ):Promise<IHubDiscussion> {
@@ -101,7 +100,7 @@ export async function createDiscussion(discussion: IHubDiscussion, authenticatio
 export async function updateDiscussion( updateDiscussion: IHubDiscussion ):Promise<IHubDiscussion> {
     return getDiscussion(updateDiscussion.id)
 }
-export async function deleteDiscussion( id: string ):Promise<boolean> {
+export async function deleteDiscussion( _id: string ):Promise<boolean> {
     // Delete features
     // Delete discussion item
     return false;
