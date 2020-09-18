@@ -32,6 +32,7 @@ export class HubDiscussion {
    */
   @Prop({ mutable: true }) session: string;
   @State() username: string;
+  @State() auth: UserSession = null;
 
   // Component Events
   @Event() newResponse: EventEmitter;
@@ -67,7 +68,8 @@ export class HubDiscussion {
   componentWillLoad() {
     this.session = readSessionFromCookie();
     if(!!this.session) {
-     this.username = JSON.parse(this.session).username;
+      this.auth = UserSession.deserialize(this.session);
+      this.username = JSON.parse(this.session).username;
     }
 
     // if(!!this.search) {
@@ -163,7 +165,7 @@ export class HubDiscussion {
     let response = await deleteAnnotations({
         url: this.annotationsUrl, 
         objectIds: [ annotationId ],
-        authentication: UserSession.deserialize(this.session)
+        authentication: this.auth
     })
 
     console.debug("hub-discussion: removeAnnotation response", response);
