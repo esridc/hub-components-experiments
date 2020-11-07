@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { IHubChat, } from "./utils/hub-types";
-import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
-import { IHubResource, } from "./utils/hub-api";
+import { IHubChat } from "./utils/hub-types";
+import { IGeometry, IUser } from "@esri/arcgis-rest-common-types";
+import { IHubResource } from "./utils/hub-api";
 export namespace Components {
     interface ArcgisNotebook {
         /**
@@ -453,7 +453,7 @@ export namespace Components {
     }
     interface HubStatistic {
         "label": string;
-        "size": "s" | "m" | "l";
+        "size": 's' | 'm' | 'l';
         "units": string;
         "value": string | number;
     }
@@ -1330,7 +1330,7 @@ declare namespace LocalJSX {
     }
     interface HubStatistic {
         "label"?: string;
-        "size"?: "s" | "m" | "l";
+        "size"?: 's' | 'm' | 'l';
         "units"?: string;
         "value"?: string | number;
     }

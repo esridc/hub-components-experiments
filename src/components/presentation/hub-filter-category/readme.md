@@ -38,6 +38,7 @@ graph TD;
   hub-filter-category --> calcite-checkbox
   hub-filter-category --> calcite-tree
   hub-filter-category --> calcite-tree-item
+  calcite-checkbox --> calcite-label
   calcite-tree-item --> calcite-icon
   style hub-filter-category fill:#f9f,stroke:#333,stroke-width:4px
 ```
