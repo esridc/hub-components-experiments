@@ -9,26 +9,58 @@ import { UserSession } from '@esri/arcgis-rest-auth';
   shadow: true
 })
 export class ArcgisNotebook {
-  @Prop() item = "9cd1f9bdc6794e63ae450087b3b67e05";
+
+  /**
+   * Notebook Item ID from ArcGIS Online or Enterprise
+   * Required
+   */
+  @Prop() item = "";
+
+  /**
+   * Notebook can include other Javascript libraries
+   * Useful for some charting libraries (e.g. Vega Altair)
+   * But may be a security concern.
+   * Default: true
+   */
+  @Prop() allowScripts = true; 
+
+  /**
+   * Show the notebook preview (live/non-edit) or Edit
+   * Note: Edit currently blocked by ArcGIS security restrictions
+   * 
+   */
   @Prop() view:"preview" | "edit" = "preview";
 
   /**
-   * ClientID to identify the app launching auth
+   * Optional ClientID to identify the app launching authentication
+   * Only required if accessing restricted notebooks
    */
-  @Prop() clientid: string = "WXC842NRBVB6NZ2r";
+  @Prop() clientid: string = "";
+
+  /**
+   * ArcGIS Online or Enterprise URL
+   *
+   */
   @Prop() portal = "https://www.arcgis.com";
 
   /**
-   * Serialized authentication information.
+   * Optional serialized authentication information.
+   * Only required to access restricted notebooks.
    */
   @Prop({ mutable: true }) session: string;
 
-  @State() previewUrl;
+  @State() sandboxSettings:Array<string> = ["allow-same-origin"];
+  @State() previewUrl:string;
   @State() notebook;
 
   iFrameEl: HTMLIFrameElement; 
   titleEl: HTMLElement; 
 
+  componentWillLoad() {
+    if(this.allowScripts) {
+      this.sandboxSettings.push("allow-scripts")
+    }
+  }
   componentDidLoad() {
     if(this.view == "edit") {
       this.getEdit();
@@ -129,7 +161,7 @@ export class ArcgisNotebook {
           action={this.onCopy}>
         </hub-button>
       
-        <iframe src="" id="notebook-iframe" ref={(el: HTMLIFrameElement) => this.iFrameEl = el}></iframe>
+        <iframe sandbox={this.sandboxSettings.join(" ")} src="" id="notebook-iframe" ref={(el: HTMLIFrameElement) => this.iFrameEl = el}></iframe>
       </Host>
     );
   }

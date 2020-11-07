@@ -36,8 +36,8 @@ graph TD;
   metadata-element-view --> calcite-input
   metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input-message
-  calcite-input --> calcite-icon
   calcite-input --> calcite-progress
+  calcite-input --> calcite-icon
   calcite-input-message --> calcite-icon
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon

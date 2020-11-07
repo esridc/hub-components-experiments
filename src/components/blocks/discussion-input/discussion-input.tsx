@@ -40,6 +40,8 @@ export class DiscussionInput {
    */
   @State() error: string;
   @State() member: HubTypes.IHubMember; 
+  @State() auth: UserSession = null;
+
   /**
    * Serialized authentication information.
    */
@@ -54,11 +56,11 @@ export class DiscussionInput {
   async componentWillLoad() {
     // TODO: fix case where cookie isn't available.
     this.session = readSessionFromCookie();
-    const auth = UserSession.deserialize(this.session);
 
     console.log("Session", this.session)
     if(this.session !== undefined) {
-      this.member = await getMember( JSON.parse(this.session).username, auth )
+      this.auth = UserSession.deserialize(this.session);
+      this.member = await getMember( JSON.parse(this.session).username, this.auth )
     }
   }
   // Component Events
@@ -101,7 +103,7 @@ export class DiscussionInput {
     let response = await addAnnotations({
         url: this.annotationsUrl, 
         features: [ feature ],
-        authentication: UserSession.deserialize(this.session)
+        authentication: this.auth
     })
 
     if(!!response && response.addResults[0].success ) { // TODO: Check response 

@@ -5,7 +5,7 @@ export default function(stories, knobs) {
     const mainEl = document.createElement('div'); // do this OUTSIDE the render function below
 
     stories.add('Hub Metadata Form', () => {
-        const spec = knobs.select('spec', ["arcgis", 
+        const sections = knobs.select('sections', ["arcgis", 
                                             "team", "user", 
                                             "additionalDocumentation", 
                                             "attribute", 
@@ -25,7 +25,9 @@ export default function(stories, knobs) {
                                         ], "arcgis");  
         const locale = knobs.select('locale', ['en', 'es'], 'en');
 
-        mainEl.innerHTML = `<metadata-form spec="${spec}" locale="${locale}"></metadata-form>`
+        mainEl.innerHTML = `<metadata-form locale="${locale}"></metadata-form>` // sections="['${sections}']"
+        const form = mainEl.querySelector('metadata-form');
+        form.sections = [sections]
                 
         return mainEl;
     }, { notes: readme });

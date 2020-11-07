@@ -5,21 +5,34 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { IHubChat, } from "./utils/hub-types";
-import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
-import { IHubResource, } from "./utils/hub-api";
+import { IHubChat } from "./utils/hub-types";
+import { IGeometry, IUser } from "@esri/arcgis-rest-common-types";
+import { IHubResource } from "./utils/hub-api";
 export namespace Components {
     interface ArcgisNotebook {
         /**
-          * ClientID to identify the app launching auth
+          * Notebook can include other Javascript libraries Useful for some charting libraries (e.g. Vega Altair) But may be a security concern. Default: true
+         */
+        "allowScripts": boolean;
+        /**
+          * Optional ClientID to identify the app launching authentication Only required if accessing restricted notebooks
          */
         "clientid": string;
+        /**
+          * Notebook Item ID from ArcGIS Online or Enterprise Required
+         */
         "item": string;
+        /**
+          * ArcGIS Online or Enterprise URL
+         */
         "portal": string;
         /**
-          * Serialized authentication information.
+          * Optional serialized authentication information. Only required to access restricted notebooks.
          */
         "session": string;
+        /**
+          * Show the notebook preview (live/non-edit) or Edit Note: Edit currently blocked by ArcGIS security restrictions
+         */
         "view": "preview" | "edit";
     }
     interface ArcgisSurvey {
@@ -440,7 +453,7 @@ export namespace Components {
     }
     interface HubStatistic {
         "label": string;
-        "size": "s" | "m" | "l";
+        "size": 's' | 'm' | 'l';
         "units": string;
         "value": string | number;
     }
@@ -847,15 +860,28 @@ declare global {
 declare namespace LocalJSX {
     interface ArcgisNotebook {
         /**
-          * ClientID to identify the app launching auth
+          * Notebook can include other Javascript libraries Useful for some charting libraries (e.g. Vega Altair) But may be a security concern. Default: true
+         */
+        "allowScripts"?: boolean;
+        /**
+          * Optional ClientID to identify the app launching authentication Only required if accessing restricted notebooks
          */
         "clientid"?: string;
+        /**
+          * Notebook Item ID from ArcGIS Online or Enterprise Required
+         */
         "item"?: string;
+        /**
+          * ArcGIS Online or Enterprise URL
+         */
         "portal"?: string;
         /**
-          * Serialized authentication information.
+          * Optional serialized authentication information. Only required to access restricted notebooks.
          */
         "session"?: string;
+        /**
+          * Show the notebook preview (live/non-edit) or Edit Note: Edit currently blocked by ArcGIS security restrictions
+         */
         "view"?: "preview" | "edit";
     }
     interface ArcgisSurvey {
@@ -1304,7 +1330,7 @@ declare namespace LocalJSX {
     }
     interface HubStatistic {
         "label"?: string;
-        "size"?: "s" | "m" | "l";
+        "size"?: 's' | 'm' | 'l';
         "units"?: string;
         "value"?: string | number;
     }

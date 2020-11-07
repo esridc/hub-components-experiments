@@ -16,7 +16,7 @@ export class MetadataForm {
   @Prop({ mutable: true, reflect: true }) resource:any = null;
 
   async componentWillLoad() {
-
+    console.log("Metadata Form componentWillLoad", this.sections)
     sendTelemetry({
       category: 'hub-component',
       action: 'hub-metadata-form:loaded', 

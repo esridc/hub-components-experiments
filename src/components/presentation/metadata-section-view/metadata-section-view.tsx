@@ -66,9 +66,15 @@ export class MetadataSectionView {
     let value = "";
     console.log("metadata-section-view: metadataValue", attr  , this.resource)
     if(!!this.resource) {
-      // value = this.resource[attr];
       console.log("metadata-section-view: metadataValue - translation", attr, attr.split('.'))
-      value = attr.split('.').reduce((o,i)=>o[i], this.resource); 
+
+        // check if there is an translation from the explicit property name to a platform specific attribute
+      if(!!this.inputs[attr].translation[this.translator]) {
+        value = this.inputs[attr].translation[this.translator][0].split('.').reduce((o,i)=>o[i], this.resource); 
+      } else {
+        value = this.resource[attr];
+      }
+      
     }
     console.log("metadata-section-view: metadataValue", attr, value, this.resource)
     return value;
@@ -132,7 +138,7 @@ export class MetadataSectionView {
                 type={this.inputs[attr].type}
                 subtype={this.inputs[attr].subtype || null}
                 description={this.inputs[attr].description} 
-                value={this.getMetadataValue(this.inputs[attr].translation[this.translator][0])}
+                value={this.getMetadataValue(this.inputs[attr])}
                 required={true}></metadata-element-view>
             )}
           </div>
