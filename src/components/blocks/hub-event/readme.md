@@ -37,7 +37,6 @@ graph TD;
   calcite-button --> calcite-icon
   calcite-card --> calcite-loader
   calcite-card --> calcite-checkbox
-  calcite-checkbox --> calcite-label
   style hub-event fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

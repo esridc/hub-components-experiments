@@ -13,7 +13,11 @@ import { setUpdateProp } from '../../../utils/utils';
 export class MetadataSectionView {
   @Element() element: HTMLElement;
 
-  @Prop() spec:string = "arcgis";
+  // Optional name of schema file to load
+  @Prop() spec:string = null;
+  // Alternative pass in schema JSON
+  @Prop({ mutable: true }) schema: any; 
+  
   @Prop({ mutable: true }) elementTitle: string = "";
   @Prop({ mutable: true }) description: string = "";
   @Prop() locale:string = "en";
@@ -37,15 +41,19 @@ export class MetadataSectionView {
   @Event() resourceUpdated: EventEmitter;
 
   @State() strings: any; 
-  @State() sectionSchema: any; 
+  
 
   async componentWillLoad() {
-    this.sectionSchema = await this.loadSpecification();
+    // Optional to pass in schema directly.
+    if(!this.schema && this.spec !== null) {
+      this.schema = await this.loadSpecification();
+    }
+    
     this.locale = this.locale || Locale.getComponentClosestLanguage(this.element);
 
-    this.elementTitle = this.sectionSchema['title'];
-    this.description = this.sectionSchema['description'];
-    this.inputs = this.sectionSchema['properties'];
+    this.elementTitle = this.schema['title'];
+    this.description = this.schema['description'];
+    this.inputs = this.schema['properties'];
 
     // TODO: send input translation down to components / per input
     Locale.getMetadataLocaleStrings(this.spec, this.locale).then((result) => {
@@ -133,7 +141,7 @@ export class MetadataSectionView {
           <div class="metadata-section-input">
             {Object.keys(this.inputs).map((attr) =>
               <metadata-element-view 
-                elementTitle={attr}
+                elementTitle={this.inputs[attr].title || attr}
                 schema={this.inputs[attr]}
                 type={this.inputs[attr].type}
                 subtype={this.inputs[attr].subtype || null}

@@ -16,15 +16,16 @@ Editors are components that are dynamically loaded
 
 ## Properties
 
-| Property       | Attribute       | Description                                        | Type           | Default    |
-| -------------- | --------------- | -------------------------------------------------- | -------------- | ---------- |
-| `description`  | `description`   |                                                    | `string`       | `""`       |
-| `elementTitle` | `element-title` |                                                    | `string`       | `""`       |
-| `inputs`       | --              | JSON Schema Properties section                     | `any[]`        | `[]`       |
-| `locale`       | `locale`        |                                                    | `string`       | `"en"`     |
-| `resource`     | --              | Hub Resource object.                               | `IHubResource` | `null`     |
-| `spec`         | `spec`          |                                                    | `string`       | `"arcgis"` |
-| `translator`   | `translator`    | Which translator to use from the schema definition | `string`       | `"arcgis"` |
+| Property       | Attribute       | Description                                        | Type           | Default     |
+| -------------- | --------------- | -------------------------------------------------- | -------------- | ----------- |
+| `description`  | `description`   |                                                    | `string`       | `""`        |
+| `elementTitle` | `element-title` |                                                    | `string`       | `""`        |
+| `inputs`       | --              | JSON Schema Properties section                     | `any[]`        | `[]`        |
+| `locale`       | `locale`        |                                                    | `string`       | `"en"`      |
+| `resource`     | --              | Hub Resource object.                               | `IHubResource` | `null`      |
+| `schema`       | `schema`        |                                                    | `any`          | `undefined` |
+| `spec`         | `spec`          |                                                    | `string`       | `null`      |
+| `translator`   | `translator`    | Which translator to use from the schema definition | `string`       | `"arcgis"`  |
 
 
 ## Events
@@ -38,6 +39,7 @@ Editors are components that are dynamically loaded
 
 ### Used by
 
+ - [hub-api-explorer](../../containers/hub-api-explorer)
  - [metadata-form](../../blocks/metadata-form)
 
 ### Depends on
@@ -53,9 +55,10 @@ graph TD;
   metadata-element-view --> calcite-input
   metadata-element-view --> calcite-label
   metadata-element-view --> calcite-input-message
-  calcite-input --> calcite-progress
   calcite-input --> calcite-icon
+  calcite-input --> calcite-progress
   calcite-input-message --> calcite-icon
+  hub-api-explorer --> metadata-section-view
   metadata-form --> metadata-section-view
   style metadata-section-view fill:#f9f,stroke:#333,stroke-width:4px
 ```

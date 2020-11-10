@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { IHubChat } from "./utils/hub-types";
-import { IGeometry, IUser } from "@esri/arcgis-rest-common-types";
-import { IHubResource } from "./utils/hub-api";
+import { IHubChat, } from "./utils/hub-types";
+import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
+import { IHubResource, } from "./utils/hub-api";
 export namespace Components {
     interface ArcgisNotebook {
         /**
@@ -72,6 +72,11 @@ export namespace Components {
     }
     interface DropArea {
         "allowedTypes": Array<string>;
+    }
+    interface HubApiExplorer {
+        "format": "python" | "javascript" | "http";
+        "item": string;
+        "url": string;
     }
     interface HubButton {
         /**
@@ -453,7 +458,7 @@ export namespace Components {
     }
     interface HubStatistic {
         "label": string;
-        "size": 's' | 'm' | 'l';
+        "size": "s" | "m" | "l";
         "units": string;
         "value": string | number;
     }
@@ -566,6 +571,7 @@ export namespace Components {
           * Hub Resource object.
          */
         "resource": IHubResource;
+        "schema": any;
         "spec": string;
         /**
           * Which translator to use from the schema definition
@@ -603,6 +609,12 @@ declare global {
     var HTMLDropAreaElement: {
         prototype: HTMLDropAreaElement;
         new (): HTMLDropAreaElement;
+    };
+    interface HTMLHubApiExplorerElement extends Components.HubApiExplorer, HTMLStencilElement {
+    }
+    var HTMLHubApiExplorerElement: {
+        prototype: HTMLHubApiExplorerElement;
+        new (): HTMLHubApiExplorerElement;
     };
     interface HTMLHubButtonElement extends Components.HubButton, HTMLStencilElement {
     }
@@ -820,6 +832,7 @@ declare global {
         "discussion-entry": HTMLDiscussionEntryElement;
         "discussion-input": HTMLDiscussionInputElement;
         "drop-area": HTMLDropAreaElement;
+        "hub-api-explorer": HTMLHubApiExplorerElement;
         "hub-button": HTMLHubButtonElement;
         "hub-card": HTMLHubCardElement;
         "hub-chat": HTMLHubChatElement;
@@ -930,6 +943,11 @@ declare namespace LocalJSX {
           * Emits the chat input
          */
         "onOnFilesSubmitted"?: (event: CustomEvent<any>) => void;
+    }
+    interface HubApiExplorer {
+        "format"?: "python" | "javascript" | "http";
+        "item"?: string;
+        "url"?: string;
     }
     interface HubButton {
         /**
@@ -1330,7 +1348,7 @@ declare namespace LocalJSX {
     }
     interface HubStatistic {
         "label"?: string;
-        "size"?: 's' | 'm' | 'l';
+        "size"?: "s" | "m" | "l";
         "units"?: string;
         "value"?: string | number;
     }
@@ -1460,6 +1478,7 @@ declare namespace LocalJSX {
           * Hub Resource object.
          */
         "resource"?: IHubResource;
+        "schema"?: any;
         "spec"?: string;
         /**
           * Which translator to use from the schema definition
@@ -1472,6 +1491,7 @@ declare namespace LocalJSX {
         "discussion-entry": DiscussionEntry;
         "discussion-input": DiscussionInput;
         "drop-area": DropArea;
+        "hub-api-explorer": HubApiExplorer;
         "hub-button": HubButton;
         "hub-card": HubCard;
         "hub-chat": HubChat;
@@ -1518,6 +1538,7 @@ declare module "@stencil/core" {
             "discussion-entry": LocalJSX.DiscussionEntry & JSXBase.HTMLAttributes<HTMLDiscussionEntryElement>;
             "discussion-input": LocalJSX.DiscussionInput & JSXBase.HTMLAttributes<HTMLDiscussionInputElement>;
             "drop-area": LocalJSX.DropArea & JSXBase.HTMLAttributes<HTMLDropAreaElement>;
+            "hub-api-explorer": LocalJSX.HubApiExplorer & JSXBase.HTMLAttributes<HTMLHubApiExplorerElement>;
             "hub-button": LocalJSX.HubButton & JSXBase.HTMLAttributes<HTMLHubButtonElement>;
             "hub-card": LocalJSX.HubCard & JSXBase.HTMLAttributes<HTMLHubCardElement>;
             "hub-chat": LocalJSX.HubChat & JSXBase.HTMLAttributes<HTMLHubChatElement>;

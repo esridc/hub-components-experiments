@@ -1,0 +1,14 @@
+{
+    "name": "Python",
+    "text": [
+    "from arcgis import GIS",
+    "gis = GIS()",
+    "item = gis.content.get('{{item.id}}')",
+    "flayer = item.layers[0]",
+    "",
+    "# create a Spatially Enabled DataFrame object",
+    "sdf = pd.DataFrame.spatial.from_layer(flayer)",
+    "sdf.head()"
+    ],
+    "link": "https://developers.arcgis.com/python"
+}
