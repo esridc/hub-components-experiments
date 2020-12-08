@@ -1,0 +1,11 @@
+{
+  "name": "Javascript",
+  "text": [
+    "import { queryFeatures } from '@esri/arcgis-rest-feature-layer';",
+    "queryFeatures({",
+      "url: \"{{item.url}}",
+      "where: \"STATE_NAME = 'Alaska'\"",
+    "})"
+  ],
+  "link": "https://developers.arcgis.com/javascript"
+}

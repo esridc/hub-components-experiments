@@ -108,13 +108,29 @@ export class HubApiExplorer {
     return (
       <Host>
         <slot></slot>
-        <p>
-          <h3>Code!</h3>
-          <pre><code>{this.example}</code></pre>
-        </p>
-        <metadata-section-view locale="en" schema={this.schema.query}></metadata-section-view>
-        <metadata-section-view locale="en" schema={this.schema.spatial}></metadata-section-view>
-        <metadata-section-view locale="en" schema={this.schema.output}></metadata-section-view>
+
+        <div class="queryBuilder">
+          <h3>Build a Query</h3>
+          <metadata-section-view locale="en" schema={this.schema.query}></metadata-section-view>
+          <metadata-section-view locale="en" schema={this.schema.spatial}></metadata-section-view>
+          <metadata-section-view locale="en" schema={this.schema.output}></metadata-section-view>
+        </div>
+
+        <div class="codeExamples">
+          <h3>Code Examples</h3>
+          <calcite-tabs>
+            <calcite-tab-nav slot="tab-nav">
+              <calcite-tab-title active>Python</calcite-tab-title>
+              <calcite-tab-title>Javascript</calcite-tab-title>
+              <calcite-tab-title>HTTP</calcite-tab-title>
+            </calcite-tab-nav>
+
+            <calcite-tab active><pre><code>{this.example}</code></pre></calcite-tab>
+            <calcite-tab>Javascript Example</calcite-tab>
+            <calcite-tab>HTTP Example</calcite-tab>
+          </calcite-tabs>
+        </div>
+
       </Host>
     );
   }

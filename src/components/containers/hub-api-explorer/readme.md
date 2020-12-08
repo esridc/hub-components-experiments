@@ -19,11 +19,19 @@
 ### Depends on
 
 - [metadata-section-view](../../presentation/metadata-section-view)
+- calcite-tabs
+- calcite-tab-nav
+- calcite-tab-title
+- calcite-tab
 
 ### Graph
 ```mermaid
 graph TD;
   hub-api-explorer --> metadata-section-view
+  hub-api-explorer --> calcite-tabs
+  hub-api-explorer --> calcite-tab-nav
+  hub-api-explorer --> calcite-tab-title
+  hub-api-explorer --> calcite-tab
   metadata-section-view --> metadata-section-help
   metadata-section-view --> metadata-element-view
   metadata-element-view --> calcite-input
