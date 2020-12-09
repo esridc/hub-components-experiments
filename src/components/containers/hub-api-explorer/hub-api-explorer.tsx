@@ -99,8 +99,7 @@ export class HubApiExplorer {
     
     const _interp = adlib(_template, { item });
     const _output:string = _interp.text.join("\r\n");
-
-    console.debug("generateExample 2", _output);
+    eainfo
     return _output;
   }
 
