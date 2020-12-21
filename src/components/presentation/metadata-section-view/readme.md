@@ -16,16 +16,16 @@ Editors are components that are dynamically loaded
 
 ## Properties
 
-| Property       | Attribute       | Description                                        | Type           | Default     |
-| -------------- | --------------- | -------------------------------------------------- | -------------- | ----------- |
-| `description`  | `description`   |                                                    | `string`       | `""`        |
-| `elementTitle` | `element-title` |                                                    | `string`       | `""`        |
-| `inputs`       | --              | JSON Schema Properties section                     | `any[]`        | `[]`        |
-| `locale`       | `locale`        |                                                    | `string`       | `"en"`      |
-| `resource`     | --              | Hub Resource object.                               | `IHubResource` | `null`      |
-| `schema`       | `schema`        |                                                    | `any`          | `undefined` |
-| `spec`         | `spec`          |                                                    | `string`       | `null`      |
-| `translator`   | `translator`    | Which translator to use from the schema definition | `string`       | `"arcgis"`  |
+| Property       | Attribute       | Description                                        | Type     | Default     |
+| -------------- | --------------- | -------------------------------------------------- | -------- | ----------- |
+| `description`  | `description`   |                                                    | `string` | `""`        |
+| `elementTitle` | `element-title` |                                                    | `string` | `""`        |
+| `inputs`       | --              | JSON Schema Properties section                     | `any[]`  | `[]`        |
+| `locale`       | `locale`        |                                                    | `string` | `"en"`      |
+| `resource`     | `resource`      | Hub Resource object.                               | `any`    | `null`      |
+| `schema`       | `schema`        |                                                    | `any`    | `undefined` |
+| `spec`         | `spec`          |                                                    | `string` | `null`      |
+| `translator`   | `translator`    | Which translator to use from the schema definition | `string` | `"arcgis"`  |
 
 
 ## Events

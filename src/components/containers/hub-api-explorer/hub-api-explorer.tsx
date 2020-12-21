@@ -14,6 +14,12 @@ export class HubApiExplorer {
   @Prop({ mutable:true }) format: "python"|"javascript"|"http" = "python";
   @State() example:string = "";
 
+  resource:any = {
+    query: {
+      where: "1=1"
+    }
+  }
+
   schema:any = {
     query: {
       "id": "query.json#",
@@ -99,7 +105,6 @@ export class HubApiExplorer {
     
     const _interp = adlib(_template, { item });
     const _output:string = _interp.text.join("\r\n");
-    eainfo
     return _output;
   }
 
@@ -110,7 +115,7 @@ export class HubApiExplorer {
 
         <div class="queryBuilder">
           <h3>Build a Query</h3>
-          <metadata-section-view locale="en" schema={this.schema.query}></metadata-section-view>
+          <metadata-section-view locale="en" resource={this.resource.query} schema={this.schema.query}></metadata-section-view>
           <metadata-section-view locale="en" schema={this.schema.spatial}></metadata-section-view>
           <metadata-section-view locale="en" schema={this.schema.output}></metadata-section-view>
         </div>

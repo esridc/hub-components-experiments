@@ -7,7 +7,6 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { IHubChat, } from "./utils/hub-types";
 import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
-import { IHubResource, } from "./utils/hub-api";
 export namespace Components {
     interface ArcgisNotebook {
         /**
@@ -570,7 +569,7 @@ export namespace Components {
         /**
           * Hub Resource object.
          */
-        "resource": IHubResource;
+        "resource": any;
         "schema": any;
         "spec": string;
         /**
@@ -1477,7 +1476,7 @@ declare namespace LocalJSX {
         /**
           * Hub Resource object.
          */
-        "resource"?: IHubResource;
+        "resource"?: any;
         "schema"?: any;
         "spec"?: string;
         /**

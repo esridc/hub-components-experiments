@@ -31,7 +31,7 @@ export class MetadataSectionView {
   /**
    * Hub Resource object. 
    */
-  @Prop({ mutable:true, reflect:true }) resource: IHubResource = null;
+  @Prop({ mutable:true, reflect:true }) resource: any = null;
 
   /**
    * Which translator to use from the schema definition
@@ -74,10 +74,12 @@ export class MetadataSectionView {
     let value = "";
     console.log("metadata-section-view: metadataValue", attr  , this.resource)
     if(!!this.resource) {
-      console.log("metadata-section-view: metadataValue - translation", attr, attr.split('.'))
+      // console.log("metadata-section-view: metadataValue - translation", attr, attr.split('.'))
 
         // check if there is an translation from the explicit property name to a platform specific attribute
-      if(!!this.inputs[attr].translation[this.translator]) {
+      if(!!this.inputs[attr] 
+          && !!this.inputs[attr].translation 
+          && !!this.inputs[attr].translation[this.translator]) {
         value = this.inputs[attr].translation[this.translator][0].split('.').reduce((o,i)=>o[i], this.resource); 
       } else {
         value = this.resource[attr];
