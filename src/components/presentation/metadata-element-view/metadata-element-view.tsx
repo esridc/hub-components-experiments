@@ -45,7 +45,7 @@ export class MetadataElementView {
   }
 
   metadataEditors = {
-    "geography": { component: "hub-places-map" },
+    "geography": { component: "hub-geography-picker" },
     "topics": { component: "hub-topic-picker" },
     "license": { component: "hub-license-picker" }
   };

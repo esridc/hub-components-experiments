@@ -37,6 +37,7 @@
 
 ### Used by
 
+ - [hub-geography-picker](../../presentation/hub-geography-picker)
  - [hub-places-map](../hub-places-map)
  - [hub-radar](../../containers/hub-radar)
 
@@ -50,6 +51,7 @@ graph TD;
   hub-map --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  hub-geography-picker --> hub-map
   hub-places-map --> hub-map
   hub-radar --> hub-map
   style hub-map fill:#f9f,stroke:#333,stroke-width:4px

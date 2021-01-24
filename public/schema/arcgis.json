@@ -40,6 +40,14 @@
             "arcgis": ["accessInfo"]
         }
       },
+      "boundary": {
+        "type": "string",
+        "subtype": "geometry",
+        "description": "Boundary of content",
+        "translation": {
+            "arcgis": ["extent"]
+        }
+      },      
       "tags": {
         "type": "array",
         "subtype": "topics",

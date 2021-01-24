@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.picker-grid {
+  height: 500px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 50px auto;
+
+  grid-template-areas:
+    "search map"
+    "list map";
+  column-gap: 10px;
+  row-gap: 20px;
+  padding: 0 1rem 0 3rem;  
+}
+.picker-search {
+  grid-area: search;
+}
+.picker-map {
+  grid-area: map;
+}
+.picker-list {
+  grid-area: list;
+  max-height: 400px;
+  overflow: auto;
+}
+hub-map, .places-map {
+  height: 100%;
+}
+.location-result {
+  width: 100%;
+  cursor: pointer;
+}

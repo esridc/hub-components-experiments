@@ -67,6 +67,15 @@ export class HubMap {
     }
   }  
 
+  @Watch('geometry')
+  geometryDidChangeHandler(newGeometry: Array<IGeometry>) {
+    console.debug("Hub-Map: geometryHandler", newGeometry);
+    if(newGeometry.length > 0) {
+      this.geometry = newGeometry
+      this.addGeometry(this.geometry);      
+    }
+  }
+
   componentWillLoad() {
     if(this.center) {
       console.debug("HubMap componentWillLoad", this.center)
@@ -230,6 +239,7 @@ export class HubMap {
         
         const geometryLayer = new GraphicsLayer();
         this.esriMap.add(geometryLayer);
+
         geometry.map((polygon) => {
 
           polygon['type'] = "polygon";
@@ -248,8 +258,15 @@ export class HubMap {
           });
    
           geometryLayer.add(polygonGraphic);
+          this.esriMapView.goTo(polygonGraphic)
 
         })
+        // Zoom to first geometry
+        // TODO make this zoom to all
+        //   , {
+        //   duration: 1,
+        //   easing: "ease-in"
+        // });        
       
       })
   }
