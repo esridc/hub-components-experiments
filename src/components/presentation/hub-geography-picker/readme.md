@@ -22,6 +22,10 @@
 - calcite-input
 - calcite-card
 - [hub-map](../../blocks/hub-map)
+- calcite-stepper
+- calcite-stepper-item
+- calcite-modal
+- calcite-button
 
 ### Graph
 ```mermaid
@@ -29,6 +33,10 @@ graph TD;
   hub-geography-picker --> calcite-input
   hub-geography-picker --> calcite-card
   hub-geography-picker --> hub-map
+  hub-geography-picker --> calcite-stepper
+  hub-geography-picker --> calcite-stepper-item
+  hub-geography-picker --> calcite-modal
+  hub-geography-picker --> calcite-button
   calcite-input --> calcite-icon
   calcite-input --> calcite-progress
   calcite-card --> calcite-loader
@@ -36,6 +44,10 @@ graph TD;
   hub-map --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
+  calcite-stepper-item --> calcite-icon
+  calcite-modal --> calcite-scrim
+  calcite-modal --> calcite-icon
+  calcite-scrim --> calcite-loader
   style hub-geography-picker fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

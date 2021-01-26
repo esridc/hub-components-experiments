@@ -6,13 +6,13 @@
   height: 500px;
   display: grid;
   grid-template-columns: 30% 70%;
-  grid-template-rows: 50px auto;
+  grid-template-rows: 50px 600px;
 
   grid-template-areas:
     "search map"
     "list map";
   column-gap: 10px;
-  row-gap: 20px;
+  row-gap: 10px;
   padding: 0 1rem 0 3rem;  
 }
 .picker-search {
@@ -27,9 +27,12 @@
   overflow: auto;
 }
 hub-map, .places-map {
-  height: 100%;
+  height: 600px;
 }
 .location-result {
   width: 100%;
   cursor: pointer;
+}
+calcite-card {
+  height: 200px;
 }
