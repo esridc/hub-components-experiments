@@ -49,7 +49,6 @@ graph TD;
   hub-discussion --> discussion-input
   calcite-card --> calcite-loader
   calcite-card --> calcite-checkbox
-  calcite-checkbox --> calcite-label
   discussion-input --> calcite-button
   discussion-input --> calcite-alert
   calcite-button --> calcite-loader

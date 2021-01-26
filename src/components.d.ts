@@ -5,10 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { IHubChat } from "./utils/hub-types";
-import { IGeometry, IUser } from "@esri/arcgis-rest-common-types";
-import { IHubResource } from "./utils/hub-api";
+import { IHubChat, } from "./utils/hub-types";
+import { IGeometry, IUser, } from "@esri/arcgis-rest-common-types";
+import { IHubResource, } from "./utils/hub-api";
 export namespace Components {
+    interface ArcgisGeocard {
+    }
     interface ArcgisNotebook {
         /**
           * Notebook can include other Javascript libraries Useful for some charting libraries (e.g. Vega Altair) But may be a security concern. Default: true
@@ -327,6 +329,21 @@ export namespace Components {
          */
         "sort": "name" | "modified";
     }
+    interface HubGeographyPicker {
+        "inputLocation": string;
+        /**
+          * Default location to search
+         */
+        "location": string;
+        /**
+          * Serialized authentication information.
+         */
+        "session": string;
+        /**
+          * Existing Hub places array of geography from metadata editor Property name `value` because re-used across editors
+         */
+        "value": HubTypes.IHubGeography[];
+    }
     interface HubIdentity {
         /**
           * ClientID to identify the app launching OAuth
@@ -453,7 +470,7 @@ export namespace Components {
     }
     interface HubStatistic {
         "label": string;
-        "size": 's' | 'm' | 'l';
+        "size": "s" | "m" | "l";
         "units": string;
         "value": string | number;
     }
@@ -574,6 +591,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLArcgisGeocardElement extends Components.ArcgisGeocard, HTMLStencilElement {
+    }
+    var HTMLArcgisGeocardElement: {
+        prototype: HTMLArcgisGeocardElement;
+        new (): HTMLArcgisGeocardElement;
+    };
     interface HTMLArcgisNotebookElement extends Components.ArcgisNotebook, HTMLStencilElement {
     }
     var HTMLArcgisNotebookElement: {
@@ -681,6 +704,12 @@ declare global {
     var HTMLHubGalleryElement: {
         prototype: HTMLHubGalleryElement;
         new (): HTMLHubGalleryElement;
+    };
+    interface HTMLHubGeographyPickerElement extends Components.HubGeographyPicker, HTMLStencilElement {
+    }
+    var HTMLHubGeographyPickerElement: {
+        prototype: HTMLHubGeographyPickerElement;
+        new (): HTMLHubGeographyPickerElement;
     };
     interface HTMLHubIdentityElement extends Components.HubIdentity, HTMLStencilElement {
     }
@@ -815,6 +844,7 @@ declare global {
         new (): HTMLMetadataSectionViewElement;
     };
     interface HTMLElementTagNameMap {
+        "arcgis-geocard": HTMLArcgisGeocardElement;
         "arcgis-notebook": HTMLArcgisNotebookElement;
         "arcgis-survey": HTMLArcgisSurveyElement;
         "discussion-entry": HTMLDiscussionEntryElement;
@@ -833,6 +863,7 @@ declare global {
         "hub-filter-category": HTMLHubFilterCategoryElement;
         "hub-follow-button": HTMLHubFollowButtonElement;
         "hub-gallery": HTMLHubGalleryElement;
+        "hub-geography-picker": HTMLHubGeographyPickerElement;
         "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
         "hub-license-picker": HTMLHubLicensePickerElement;
@@ -858,6 +889,8 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface ArcgisGeocard {
+    }
     interface ArcgisNotebook {
         /**
           * Notebook can include other Javascript libraries Useful for some charting libraries (e.g. Vega Altair) But may be a security concern. Default: true
@@ -1194,6 +1227,21 @@ declare namespace LocalJSX {
          */
         "sort"?: "name" | "modified";
     }
+    interface HubGeographyPicker {
+        "inputLocation"?: string;
+        /**
+          * Default location to search
+         */
+        "location"?: string;
+        /**
+          * Serialized authentication information.
+         */
+        "session"?: string;
+        /**
+          * Existing Hub places array of geography from metadata editor Property name `value` because re-used across editors
+         */
+        "value"?: HubTypes.IHubGeography[];
+    }
     interface HubIdentity {
         /**
           * ClientID to identify the app launching OAuth
@@ -1330,7 +1378,7 @@ declare namespace LocalJSX {
     }
     interface HubStatistic {
         "label"?: string;
-        "size"?: 's' | 'm' | 'l';
+        "size"?: "s" | "m" | "l";
         "units"?: string;
         "value"?: string | number;
     }
@@ -1467,6 +1515,7 @@ declare namespace LocalJSX {
         "translator"?: string;
     }
     interface IntrinsicElements {
+        "arcgis-geocard": ArcgisGeocard;
         "arcgis-notebook": ArcgisNotebook;
         "arcgis-survey": ArcgisSurvey;
         "discussion-entry": DiscussionEntry;
@@ -1485,6 +1534,7 @@ declare namespace LocalJSX {
         "hub-filter-category": HubFilterCategory;
         "hub-follow-button": HubFollowButton;
         "hub-gallery": HubGallery;
+        "hub-geography-picker": HubGeographyPicker;
         "hub-identity": HubIdentity;
         "hub-input": HubInput;
         "hub-license-picker": HubLicensePicker;
@@ -1513,6 +1563,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "arcgis-geocard": LocalJSX.ArcgisGeocard & JSXBase.HTMLAttributes<HTMLArcgisGeocardElement>;
             "arcgis-notebook": LocalJSX.ArcgisNotebook & JSXBase.HTMLAttributes<HTMLArcgisNotebookElement>;
             "arcgis-survey": LocalJSX.ArcgisSurvey & JSXBase.HTMLAttributes<HTMLArcgisSurveyElement>;
             "discussion-entry": LocalJSX.DiscussionEntry & JSXBase.HTMLAttributes<HTMLDiscussionEntryElement>;
@@ -1531,6 +1582,7 @@ declare module "@stencil/core" {
             "hub-filter-category": LocalJSX.HubFilterCategory & JSXBase.HTMLAttributes<HTMLHubFilterCategoryElement>;
             "hub-follow-button": LocalJSX.HubFollowButton & JSXBase.HTMLAttributes<HTMLHubFollowButtonElement>;
             "hub-gallery": LocalJSX.HubGallery & JSXBase.HTMLAttributes<HTMLHubGalleryElement>;
+            "hub-geography-picker": LocalJSX.HubGeographyPicker & JSXBase.HTMLAttributes<HTMLHubGeographyPickerElement>;
             "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
             "hub-license-picker": LocalJSX.HubLicensePicker & JSXBase.HTMLAttributes<HTMLHubLicensePickerElement>;
