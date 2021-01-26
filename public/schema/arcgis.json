@@ -32,6 +32,14 @@
             "arcgis": ["description"]
         }
       },
+      "boundary": {
+        "type": "string",
+        "subtype": "geography",
+        "description": "Boundary of content",
+        "translation": {
+            "arcgis": ["extent"]
+        }
+      },         
       "license": {
         "type": "string",
         "subtype": "license",
@@ -39,15 +47,7 @@
         "translation": {
             "arcgis": ["accessInfo"]
         }
-      },
-      "boundary": {
-        "type": "string",
-        "subtype": "geometry",
-        "description": "Boundary of content",
-        "translation": {
-            "arcgis": ["extent"]
-        }
-      },      
+      },   
       "tags": {
         "type": "array",
         "subtype": "topics",

@@ -40,6 +40,14 @@
             "pattern": "^(.*){50}$"
         }
       },
+      "boundary": {
+        "type": "string",
+        "subtype": "geography",
+        "description": "Boundary of content",
+        "translation": {
+            "arcgis": ["extent"]
+        }
+      },      
       "licenseInfo": {
         "type": "string",
         "subtype": "license",

@@ -105,9 +105,10 @@ export class MetadataElementView {
           status="valid"
           >
           {this.elementTitle}
+        </calcite-label>
         {this.renderEditor(this.type, this.subtype)}
         <calcite-input-message active>{this.description}</calcite-input-message>
-        </calcite-label>
+        
 
         {/* <label class={ this.requiredStatus() }>{this.title}</label>
         <input type={this.type} ref={(el: HTMLInputElement) => this.metadataEl = el} id={this.id} name={this.id} class={ this.requiredStatus()} value={this.value} />

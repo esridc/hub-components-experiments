@@ -41,6 +41,7 @@ export class HubGeographyPicker {
   @Prop({ mutable: true }) session: string;
   @State() auth: UserSession = null;
 
+  pickerModal: HTMLCalciteModalElement;
 
   async componentWillLoad() {
     this.session = readSessionFromCookie();
@@ -83,19 +84,20 @@ export class HubGeographyPicker {
     this.locations = [ results[0] ];
   }
 
-  render() {
+  showModal() {
+    this.pickerModal.active = true;
+  }
+
+  renderMap() {
     return (
-      <Host>
-        <slot></slot>
-        
-        <div class="picker-grid">
-          <div class="picker-search">
-            <calcite-input
-              scale="m"
-              placeholder="Search for locations..."
-              onInput={(event) => this.searchInputHandler(event)}
-            ></calcite-input>
-          </div>
+      <div class="picker-grid">
+        <div class="picker-search">
+          <calcite-input
+            scale="m"
+            placeholder="Search for locations..."
+            onInput={(event) => this.searchInputHandler(event)}
+          ></calcite-input>
+        </div>
         <div class="picker-list">
         {this.locationList.length > 0 ? <h3>Pick a Boundary</h3> : '' }
           {this.locationList.map((location) => 
@@ -116,10 +118,78 @@ export class HubGeographyPicker {
             center="[-77,38.8]"
             zoom={10}
             geometry={this.locations.map((place) => {return place.geometry})}
-
           ></hub-map>
         </div>
+      </div>    
+    )
+  }
+  renderEdit() {
+    return (
+      <div class="picker-grid">
+      <div class="picker-list">
+        <calcite-input></calcite-input>
       </div>
+      <div class="picker-map places-map">
+        <hub-map 
+          class="places-hub-map"
+          center="[-77,38.8]"
+          zoom={10}
+          drawing={true}
+          geometry={this.locations.map((place) => {return place.geometry})}
+        ></hub-map>
+      </div>
+    </div>  
+    )
+  }
+  renderStepper() {
+    return (
+      <calcite-stepper 
+          numbered
+          >
+          <calcite-stepper-item
+            item-title="Choose Boundary"
+            item-subtitle="..."
+          >
+            {this.renderMap()}
+          </calcite-stepper-item>
+          <calcite-stepper-item
+          item-title="Edit & Confirm"
+          item-subtitle="..."
+        >
+          Edit...
+        </calcite-stepper-item>
+      </calcite-stepper>   
+    )
+  }
+  renderModal() {
+    return (
+      <calcite-modal 
+          ref={(el: HTMLCalciteModalElement) => this.pickerModal = el} 
+          aria-labelledby="modal-title"
+          scale="m"
+          width="m"
+          >
+          <h3 slot="header" id="modal-title">Choose a Boundary</h3>
+          <div slot="content">
+            {this.renderStepper()}
+          </div>
+          <calcite-button slot="secondary" width="full" appearance="outline">
+            Cancel
+          </calcite-button>
+          <calcite-button slot="primary" width="full">
+            Select Boundary
+          </calcite-button> 
+        </calcite-modal>  
+    )
+  }
+  render() {
+    return (
+      <Host>
+        <slot></slot>
+        { this.renderMap() }
+        {/* <calcite-button onClick={(_ev: Event) => this.showModal()}>
+          Choose a Boundary
+        </calcite-button>     */}
       </Host>
     );
   }
