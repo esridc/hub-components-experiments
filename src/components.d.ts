@@ -351,6 +351,7 @@ export namespace Components {
         "clientid": string;
         "displaysignin": boolean;
         "displaysignout": boolean;
+        "displayusername": boolean;
         /**
           * url of the ArcGIS Online organization
          */
@@ -1249,6 +1250,7 @@ declare namespace LocalJSX {
         "clientid"?: string;
         "displaysignin"?: boolean;
         "displaysignout"?: boolean;
+        "displayusername"?: boolean;
         "onOnSignin"?: (event: CustomEvent<any>) => void;
         "onOnSignout"?: (event: CustomEvent<any>) => void;
         /**

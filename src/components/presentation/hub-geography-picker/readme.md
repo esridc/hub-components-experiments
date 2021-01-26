@@ -37,10 +37,11 @@ graph TD;
   hub-geography-picker --> calcite-stepper-item
   hub-geography-picker --> calcite-modal
   hub-geography-picker --> calcite-button
-  calcite-input --> calcite-icon
   calcite-input --> calcite-progress
+  calcite-input --> calcite-icon
   calcite-card --> calcite-loader
   calcite-card --> calcite-checkbox
+  calcite-checkbox --> calcite-label
   hub-map --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon

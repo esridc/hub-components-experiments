@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, Host, h, Prop, State } from '@stencil/core';
 import { readSessionFromCookie, authenticateUser, deleteSessionCookie } from '../../../utils/utils';
+import { UserSession } from '@esri/arcgis-rest-auth';
 
 @Component({
   tag: 'hub-identity',
@@ -14,6 +15,7 @@ export class HubIdentity {
 
   @Prop() displaysignin: boolean = true;
   @Prop() displaysignout: boolean = true;
+  @Prop() displayusername: boolean = true;
 
   @State() username:string;
 
@@ -47,11 +49,15 @@ export class HubIdentity {
 
   componentWillLoad() {
     this.session = readSessionFromCookie();
+    if(!!this.session) {
+      this.username = UserSession.deserialize(this.session).username;
+    }
   }  
   
   async identitySignin() {
     this.session = await authenticateUser(this.clientid, this.orgurl)
     if(!!this.session) {
+      this.username = UserSession.deserialize(this.session).username;
       this.onSignin.emit( this.session );
     }
   }
@@ -66,21 +72,29 @@ export class HubIdentity {
 
   render() {
     let output = [];
-    if((this.session === undefined || this.session === null) && this.displaysignin) {
-      output.push(
-        <calcite-button onClick={(_event: MouseEvent) => this.identitySignin()}>
-          {this.signin}
-        </calcite-button>
-      )
-    } else if (this.displaysignout) {
-      output.push(
-        <div>
-          <calcite-button onClick={(_event: MouseEvent) => this.identitySignout()}>
-            {`${this.signout}`}
+
+    if((this.session === undefined || this.session === null)) {
+      if(this.displaysignin) {
+        output.push(
+          <calcite-button onClick={(_event: MouseEvent) => this.identitySignin()}>
+            {this.signin}
           </calcite-button>
-       </div>
-      )
-    }    
+        )  
+      }
+    } else { 
+      if (this.displayusername) {
+        output.push( `User: ${this.username}` )
+      }
+      if (this.displaysignout) {
+        output.push(
+          <div>
+            <calcite-button onClick={(_event: MouseEvent) => this.identitySignout()}>
+              {`${this.signout}`}
+            </calcite-button>
+        </div>
+        )
+      }
+    }
     return (
       <Host>
         <slot></slot>

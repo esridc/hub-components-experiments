@@ -30,9 +30,7 @@ hub-map, .places-map {
   height: 600px;
 }
 .location-result {
+  height: 150px;
   width: 100%;
   cursor: pointer;
-}
-calcite-card {
-  height: 200px;
 }

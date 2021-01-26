@@ -102,7 +102,7 @@ export class HubGeographyPicker {
         {this.locationList.length > 0 ? <h3>Pick a Boundary</h3> : '' }
           {this.locationList.map((location) => 
             <div class="location-result">
-              <calcite-card dir="ltr" calcite-hydrated="" onClick={(_event) => this.selectLocation(location['AreaID'],location['DataLayerID'])}>
+              <calcite-card dir="ltr" onClick={(_event) => this.selectLocation(location['AreaID'],location['DataLayerID'])}>
                 <h3 slot="title">{location['AreaName']}</h3>
                 <span slot="subtitle">
                   {location['MajorSubdivisionName']}, {location['CountryAbbr']} <br/>
