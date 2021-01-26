@@ -1,0 +1,15 @@
+[{
+  "uri": "http://URI.example.com",
+  "protocol": "protocol",
+  "name": "name",
+  "description": "description",
+  "applicationProfile": "applicationProfile",
+  "function": "function",
+  "protocolRequest": "protocolRequest"
+}, {
+  "uri": "https://www.amazon.com/Kindle-eBooks",
+  "protocol": "HTTP",
+  "name": "Kindle Books",
+  "description": "Home for Amazon Kindle eBooks",
+  "function": "sales"
+}]

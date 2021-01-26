@@ -1,0 +1,44 @@
+
+{
+    "id": "team.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Team Info",
+    "description": "What's this team about?",
+    "type": "object",
+    "example": "../examples/team.json",
+    "translation": {
+        "ISO 19115-2": ["MD_DataIdentification"],
+        "FGDC CSDGM": ["idinfo"]
+    },
+    "required": ["title", "tags", "description"],
+    "additionalProperties": true,
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Name of the team",
+        "translation": {
+            "arcgis": ["group.title"]
+        }
+      },
+      "description": {
+        "type": "string",
+        "description": "What does this team hope to accomplish?",
+        "translation": {
+            "arcgis": ["group.description"]
+        }
+      },
+      "tags": {
+        "type": "array",
+        "description": "Provide group tags.",
+        "translation": {
+          "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
+          "FGDC CSDGM": ["idinfo > keywords"]
+        },
+        "uniqueItems": true,
+        "items": {
+            "type": "string"
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,14 @@
+{
+    "metadata": {
+        "arcgis": {
+            "title": "¿Content Info (es)",
+            "description": "¿Let's describe this content (es)",
+            "properties": {
+                "title": {
+                    "title": "¿Content Title (es)",
+                    "description": "¿How do you describe this content (es)."
+                }    
+            }
+        }
+    }
+}

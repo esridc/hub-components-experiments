@@ -1,0 +1,134 @@
+[{
+  "metadataIdentifier": {
+    "identifier": "identifier"
+  },
+  "parentMetadata": {
+    "title": "title"
+  },
+  "defaultMetadataLocale": {
+    "language": "language",
+    "country": "country",
+    "characterSet": "characterSet"
+  },
+  "otherMetadataLocale": [{
+    "language": "language",
+    "country": "country",
+    "characterSet": "characterSet"
+  }, {
+    "language": "language",
+    "country": "country",
+    "characterSet": "characterSet"
+  }],
+  "scope": [{
+    "scopeCode": "scopeCode"
+  }, {
+    "scopeCode": "scopeCode"
+  }],
+  "metadataContact": [{
+      "role": "role",
+      "roleExtent": [{
+        "temporalExtent": [{
+          "timePeriod": {
+            "startDateTime": "2016-10-24T11:10:15.2-10:00"
+          }
+        }]
+      }],
+      "party": [{
+        "contactId": "individualId0"
+      }]
+    },
+    {
+      "role": "role",
+      "roleExtent": [{
+        "temporalExtent": [{
+          "timePeriod": {
+            "startDateTime": "2016-10-24T11:10:15.2-10:00"
+          }
+        }]
+      }],
+      "party": [{
+        "contactId": "individualId0"
+      }]
+    }
+  ],
+  "metadataDate": [{
+    "date": "2016-10-31",
+    "dateType": "creation"
+  }, {
+    "date": "2016-10-31",
+    "dateType": "dateType"
+  }, {
+    "date": "2016-10-31",
+    "dateType": "dateType"
+  }],
+  "metadataOnlineResource": [{
+    "uri": "http://adiwg.org"
+  }, {
+    "uri": "http://adiwg.org"
+  }],
+  "metadataConstraint": [{
+    "type": "use",
+    "useLimitation": [
+      "useLimitation0",
+      "useLimitation1"
+    ],
+    "scope": {
+      "scopeCode": "scopeCode"
+    },
+    "graphic": [{
+      "fileName": "fileName0"
+    }, {
+      "fileName": "fileName1"
+    }],
+    "reference": [{
+      "title": "title0"
+    }, {
+      "title": "title1"
+    }],
+    "releasability": {
+      "statement": "statement"
+    },
+    "responsibleParty": [{
+      "role": "role0",
+      "roleExtent": [{
+        "temporalExtent": [{
+          "timePeriod": {
+            "startDateTime": "2016-10-24T11:10:15.2-10:00"
+          }
+        }]
+      }],
+      "party": [{
+        "contactId": "individualId0"
+      }]
+    }],
+    "legal": {
+      "useConstraint": [
+        "useConstraint0",
+        "useConstraint1"
+      ],
+      "accessConstraint": [
+        "accessConstraint0",
+        "accessConstraint1"
+      ],
+      "otherConstraint": [
+        "otherConstraint0",
+        "otherConstraint1"
+      ]
+    },
+    "security": {
+      "classification": "classification",
+      "classificationSystem": "classificationSystem",
+      "userNote": "userNote",
+      "handlingDescription": "handlingDescription"
+    }
+  }],
+  "metadataMaintenance": {
+    "frequency": "frequency"
+  },
+  "alternateMetadataReference": [{
+    "title": "title"
+  }, {
+    "title": "title"
+  }],
+  "metadataStatus": "metadataStatus"
+}]

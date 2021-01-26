@@ -1,0 +1,17 @@
+import { IAuthenticationManager } from "@esri/arcgis-rest-request";
+import { UserSession } from '@esri/arcgis-rest-auth';
+import { IUser } from "@esri/arcgis-rest-portal";
+import * as HubTypes from './hub-types';
+import { IResourceObject } from "@esri/hub-annotations";
+export declare function getMemberOrg(_username: string): HubTypes.IHubOrg;
+export declare function searchMembers(query: string, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults>;
+export declare function updateMember(id: string, attributes: HubTypes.IHubMember, authentication?: UserSession): Promise<HubTypes.IHubMember>;
+export declare function getMember(id: string, authentication?: IAuthenticationManager): Promise<HubTypes.IHubMember>;
+export declare function getAnonymousMember(): HubTypes.IHubMember;
+export declare function getMemberEvents(authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults>;
+export declare function setMemberPlaces(username: string, places: HubTypes.IHubGeography[], authentication?: IAuthenticationManager): Promise<boolean>;
+export declare function getMemberPlaces(username: string, authentication?: IAuthenticationManager): Promise<HubTypes.IHubGeography[]>;
+export declare function getMemberTeams(authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults>;
+export declare function searchMemberComments(username: any, authentication: IAuthenticationManager): Promise<IResourceObject[]>;
+export declare function searchMemberContent(username: any, authentication: IAuthenticationManager): Promise<HubTypes.IHubSearchResults>;
+export declare function convertUserToMember(user: IUser, _authentication?: IAuthenticationManager): HubTypes.IHubMember;

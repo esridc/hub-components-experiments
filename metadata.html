@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://unpkg.com/@esri/calcite-components@1.0.0-beta.25/dist/calcite/calcite.css"
+      />
+
+        <style>
+            body {
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            }
+            .wrapper {
+                display: grid;
+                grid-template:
+                    "header header" auto
+                    "sidebar body " auto /
+                    40% 60% ;
+                    padding: 0 1rem 0 3rem;  
+                }
+                .header {
+                    grid-area: header;
+                    border-bottom: 1px solid #888;
+                }
+                .body { grid-area: body; }
+                .example {
+                    border-bottom: 1px solid #BBB;
+                    padding: 0 1rem 0 3rem;  
+                }
+                .demo { grid-area: demo; }
+                .code { grid-area: code; }
+                .sidebar {
+                    border-right: 1px solid #BBB;
+                    margin-top: 20px;
+                    padding-right: 10px;
+                    grid-area: sidebar;
+                }
+                code {
+                    padding: 2px 4px;
+                    font-size: 90%;
+                    color: #c7254e;
+                    background-color: #f9f2f4;
+                    border-radius: 4px;
+                }
+                pre {
+                    display: block;
+                    padding: 9.5px;
+                    margin: 0 0 10px;
+                    font-size: 13px;
+                    line-height: 1.42857143;
+                    color: #333;
+                    word-break: break-all;
+                    word-wrap: break-word;
+                    background-color: #f5f5f5;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <hub-upload  clientid="WXC842NRBVB6NZ2r" portal="https://www.arcgis.com"></hub-upload >
+            </br>
+            <!-- <hub-metadata-editor item="1467319d449c44548bd63217f9b3c45a" clientid="WXC842NRBVB6NZ2r" portal="https://www.arcgis.com"></hub-metadata-editor> -->
+
+        </div>
+        <script src='http://localui.arcgis.com:8080//build/radar.js'></script>                
+        
+    </body>
+</html>

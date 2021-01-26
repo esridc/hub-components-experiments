@@ -1,0 +1,51 @@
+<html>
+    <head></head>
+    <body>
+        <hub-discussion
+            id="discussion"
+            org="BBpPn9wZu2D6eTNY"
+            target="item:f6c3c04113944f23a7993f2e603abaf2"
+            search="*"
+        ></hub-discussion>
+
+        <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://unpkg.com/@esri/calcite-components/dist/calcite/calcite.css"
+      />
+    
+    <!-- CSS only needed if you have global styles -->
+    <!-- <link rel="stylesheet" href="./radar/radar.css" /> -->
+    <script type="module" src="https://esridc.github.io/hub-components-experiments/radar/radar.esm.js"></script>
+    <script nomodule="" src="https://esridc.github.io/hub-components-experiments/radar/radar.js"></script>
+    
+     <!-- <script type="module" src="http://localui.arcgis.com:9001/radar/radar.esm.js"></script>
+     <script nomodule="" src="https://localui.arcgis.com:9001/radar/radar.js"></script>
+           -->
+    <hub-identity             
+    clientid="WXC842NRBVB6NZ2r"
+    orgurl="https://www.arcgis.com"
+    displaysignin="false" 
+    displaysignout="false"></hub-identity>
+    <style>
+        hub-identity {
+            width: 260px;
+            height: 40px;
+        }
+    </style>
+
+    <script>
+        var discussionEl = null;
+        var discussionTarget = null;
+        const urlParams = new URLSearchParams(window.location.search);
+
+        window.onload = function () {
+            discussionTarget = urlParams.get("target");
+            discussionEl = document.getElementById('discussion');
+            console.log("Updating discussion target", discussionEl.attributes.target)
+            discussionEl.target = discussionTarget;
+            console.log("Updated discussion target", discussionEl.target)
+        }
+    </script>
+    </body>
+</html>

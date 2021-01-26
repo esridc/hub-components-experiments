@@ -1,0 +1,1 @@
+const a={container:"container",arrow:"arrow",imageContainer:"image-container",closeButton:"close-button",content:"content"},e={close:"Close"},o="data-calcite-popover-reference",n="aria-controls",t="aria-expanded";export{t as A,a as C,o as P,e as T,n as a}

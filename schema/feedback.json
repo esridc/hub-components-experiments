@@ -1,0 +1,60 @@
+{
+    "id": "arcgis.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "About Content",
+    "description": "Information about the content.",
+    "type": "object",
+    "example": "../examples/arcgis.json",
+    "required": ["title", "tags", "summary", "description"],
+    "additionalProperties": true,
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Name of the content itme",
+        "pattern": "^(.*){50}$",
+        "translation": {
+            "arcgis": ["title"]
+        }
+      },
+      "snippet": {
+        "type": "string",
+        "description": "A short description of the content. Max of 300 characters.",
+        "pattern": "^(.*){300}$",
+        "translation": {
+            "arcgis": ["snippet"]
+        }
+      },
+      "description": {
+        "type": "string",
+        "description": "Full description",
+        "pattern": "^(.*){2000}$",
+        "translation": {
+            "arcgis": ["description"]
+        }
+      },
+      "language": {
+        "type": "string",
+        "description": "Language of the content",
+        "enum": ["en", "es", "fr"],
+        "translation": {
+            "arcgis": ["culture"]
+        }
+      },
+      "tags": {
+        "type": "array",
+        "description": "Provides content tags.",
+        "default" : "content",
+        "translation": {
+          "arcgis": ["tags"],
+          "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
+          "FGDC CSDGM": ["idinfo > keywords"]
+        },
+        "uniqueItems": true,
+        "items": {
+            "type": "string",
+            "pattern": "^(.*){50}$"
+        }
+      }
+    }
+  }
+  

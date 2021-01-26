@@ -1,0 +1,1 @@
+System.register([],(function(e){"use strict";return{execute:function(){var t=e("s",(function(e){var t=e.category,n=e.action,r=e.label;console.log("sendTelemetry",{category:t,action:n,label:r});var a={category:t,action:n,label:r};var o=new CustomEvent("hub-telemetry-event",{detail:a});return window.dispatchEvent(o)}))}}}));

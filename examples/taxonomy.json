@@ -1,0 +1,119 @@
+[{
+  "taxonomicSystem": [{
+      "citation": {
+        "title": "title"
+      },
+      "modifications": "modification"
+    },
+    {
+      "citation": {
+        "title": "title"
+      }
+    }
+  ],
+  "generalScope": "generalScope",
+  "identificationReference": [{
+      "identifier": "identifier0",
+      "namespace": "namespace0",
+      "version": "version0",
+      "description": "description0",
+      "authority": {
+        "title": "title0"
+      }
+    },
+    {
+      "title": "title",
+      "identifier": [{
+        "identifier": "identifier1",
+        "namespace": "namespace1",
+        "version": "version1",
+        "description": "description1",
+        "authority": {
+          "title": "title1"
+        }
+      }]
+    }
+  ],
+  "observer": [{
+      "role": "role",
+      "roleExtent": [{
+        "temporalExtent": [{
+          "timePeriod": {
+            "startDateTime": "2016-10-24T11:10:15.2-10:00"
+          }
+        }]
+      }],
+      "party": [{
+        "contactId": "individualId0"
+      }]
+    },
+    {
+      "role": "role",
+      "roleExtent": [{
+        "temporalExtent": [{
+          "timePeriod": {
+            "startDateTime": "2016-10-24T11:10:15.2-10:00"
+          }
+        }]
+      }],
+      "party": [{
+        "contactId": "individualId0"
+      }]
+    }
+  ],
+  "identificationProcedure": "identificationProcedure",
+  "identificationCompleteness": "identificationCompleteness",
+  "voucher": [{
+      "specimen": "specimen",
+      "repository": {
+        "role": "role",
+        "roleExtent": [{
+          "temporalExtent": [{
+            "timePeriod": {
+              "startDateTime": "2016-10-24T11:10:15.2-10:00"
+            }
+          }]
+        }],
+        "party": [{
+          "contactId": "individualId0"
+        }]
+      }
+    },
+    {
+      "specimen": "specimen",
+      "repository": {
+        "role": "role",
+        "roleExtent": [{
+          "temporalExtent": [{
+            "timePeriod": {
+              "startDateTime": "2016-10-24T11:10:15.2-10:00"
+            }
+          }]
+        }],
+        "party": [{
+          "contactId": "individualId0"
+        }]
+      }
+    }
+  ],
+  "taxonomicClassification": [{
+    "taxonomicSystemId": "taxonomicSystemId0",
+    "commonName": [
+      "commonName0",
+      "commonName1"
+    ],
+    "taxonomicLevel": "taxonomicLevel0",
+    "taxonomicName": "taxonomicName0",
+    "subClassification": [{
+      "taxonomicSystemId": "taxonomicSystemId1",
+      "commonName": [
+        "commonName0",
+        "commonName1"
+      ],
+      "taxonomicLevel": "taxonomicLevel1",
+      "taxonomicName": "taxonomicName1",
+      "latinName": "latinName",
+      "taxonomicRank": "taxonomicName1"
+    }]
+  }]
+}]

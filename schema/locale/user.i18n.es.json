@@ -1,0 +1,15 @@
+{
+    "metadata": {
+        "user": {
+            "title": "Informacion del equipo",
+            "description": "¿De qué se trata este equipo?",
+            "properties": {
+                "title": {
+                    "title": "Team Name (es)",
+                    "description": "How do you describe this team (es).",
+                    "tags": "Team tags (es)"
+                }    
+            }
+        }
+    }
+}

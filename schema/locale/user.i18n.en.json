@@ -1,0 +1,16 @@
+{
+    "metadata": {
+        "user": {
+            "title": "About this member",
+            "description": "Tell us about yourself (en)",
+            "properties": {
+                "title": {
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "description": "How do you describe this yourself (en).",
+                    "tags": "User skills (en)"
+                }    
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "id": "license.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Custom License",
+    "description": "Create a custom license",
+    "type": "object",
+    "example": "../examples/arcgis.json",
+    "required": ["title", "summary"],
+    "additionalProperties": true,
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "Name of the content itme",
+        "pattern": "^(.*){50}$",
+        "translation": {
+            "arcgis": ["title"]
+        }
+      },
+      "summary": {
+        "type": "string",
+        "description": "A short description of the content. Max of 300 characters.",
+        "pattern": "^(.*){300}$",
+        "translation": {
+            "arcgis": ["snippet"]
+        }
+      }    
+    }
+  }
+  

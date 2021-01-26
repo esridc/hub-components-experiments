@@ -1,0 +1,28 @@
+:host {
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+}
+textarea {
+  height: 80px;
+}
+
+calcite-label.metadata-required::after {
+  content: '*';
+  color: red;
+}
+
+label {
+  margin-top: 5px;
+  display: block;
+  font-weight: 600;
+}
+
+.geography   {
+  height: 400px;
+}

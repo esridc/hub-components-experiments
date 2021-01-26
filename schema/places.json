@@ -1,0 +1,25 @@
+
+{
+    "id": "places.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Places of Interest",
+    "description": "Places of Interest",
+    "type": "object",
+    "example": "../examples/places.json",
+    "translation": {
+        "ISO 19115-2": ["MD_DataIdentification"],
+        "FGDC CSDGM": ["idinfo"]
+    },
+    "additionalProperties": true,
+    "properties": {
+      "places": {
+        "type": "string",
+        "subtype": "geography",
+        "description": "What places do you care about?",
+        "translation": {
+            "arcgis": ["metadata.places"]
+        }
+      }
+    }
+  }
+  

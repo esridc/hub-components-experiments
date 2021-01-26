@@ -1,0 +1,60 @@
+ [{
+   "contactId": "contactId",
+   "isOrganization": false,
+   "name": "name",
+   "positionName": "positionName",
+   "memberOfOrganization": [
+     "memberOfOrganization0",
+     "memberOfOrganization1"
+   ],
+   "logoGraphic": [{
+     "fileName": "fileName"
+   }, {
+     "fileName": "fileName"
+   }],
+   "phone": [{
+     "phoneName": "phoneName",
+     "phoneNumber": "111-111-1111",
+     "service": ["service0", "service1", "service2"]
+   }, {
+     "phoneName": "phoneName",
+     "phoneNumber": "111-111-1111",
+     "service": ["service0", "service1", "service2"]
+   }],
+   "address": [{
+     "addressType": ["mailing", "physical"]
+   }, {
+     "addressType": ["mailing", "physical"]
+   }],
+   "electronicMailAddress": [
+     "email0@example.com",
+     "email1@example.com"
+   ],
+   "onlineResource": [{
+     "uri": "urn:uri"
+   }, {
+     "uri": "http://foo.com"
+   }],
+   "hoursOfService": [
+     "hoursOfService0",
+     "hoursOfService1"
+   ],
+   "contactInstructions": "contactInstructions",
+   "contactType": "contactType"
+ }, {
+   "contactId": "contactId",
+   "isOrganization": true,
+   "name": "name",
+   "memberOfOrganization": [
+     "memberOfOrganization0",
+     "memberOfOrganization1"
+   ]
+ }, {
+   "contactId": "contactId",
+   "isOrganization": false,
+   "positionName": "positionName"
+ }, {
+   "contactId": "contactId",
+   "isOrganization": true,
+   "name": "name"
+ }]

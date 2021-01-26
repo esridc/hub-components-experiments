@@ -1,0 +1,136 @@
+:host {
+  display: block;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+calcite-card {
+  height: 100%;
+}
+
+hub-card {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: all 0.3s ease-in-out;
+  padding: 2px;
+  margin: 3px;
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+}
+hub-card::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease-in-out;
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+hub-card:hover {
+  transform: scale(1.2, 1.2);
+}
+/* Transition to showing the bigger shadow on hover */
+hub-card:hover::after {
+  opacity: 1;
+}
+.hub-content-footer {
+  grid-area: footer;
+  padding: 0 0 10px 60px;
+} 
+/* Make the entire card clickable */
+/* a.hub-content-link {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+.hub-content-card .hub-content-summary, .hub-content-card .hub-content-title, .hub-content-card .hub-content-metadata {
+  pointer-events: none; 
+  position: relative;
+  z-index: 10;
+}  */
+
+
+/* On mouse-over, add a deeper shadow */
+.hub-content-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
+}
+
+.hub-content-title {
+  font: #101f28 !important;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.hub-content-url {
+  text-decoration: none;
+  color: black;
+}
+.hub-content-url:hover {
+  text-decoration: underline;
+}
+.card-image {
+  height: 175px;
+}
+
+.hub-content-summary, .hub-content-type {
+  font-size: 0.9rem;
+  color: rgb(102, 102, 102);
+  /* margin: 0.5em 0 0 0; */
+}
+
+.layout-vertical.hub-content-card {
+  width: 250px;
+}
+/* .layout-vertical .content-container {
+  flex-direction: column;
+  width: 100%;  
+} */
+.layout-vertical .hub-content-image {
+  height: 150px;
+  flex: 0 0 auto;
+}
+.layout-vertical img.hub-content-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.hub-content-metadata {
+  margin: 0.5rem 0.8rem;
+}
+
+.layout-horizontal.hub-content-card {
+  display: flex;
+}
+.layout-horizontal .hub-content-image {
+  display: flex;
+  flex: 0 0 150px;
+  max-height: 115px;
+}
+.layout-horizontal .hub-content-metadata {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+.hub-content-details {
+  color: #4c4c4c;
+  font-size: 0.8em;
+  box-shadow: 0 -1px #ccc;
+  padding: 15px 15px 0;
+  grid-template-columns: repeat(2,50%);
+  grid-gap: 2px 5px;
+  align-items: center;
+  flex: 1 auto;
+  display: grid;
+}
+
+.card-description {
+  min-height: 100px;
+  overflow: hidden;
+}
+.card-title {
+  height: 44px;
+  overflow: hidden;
+}

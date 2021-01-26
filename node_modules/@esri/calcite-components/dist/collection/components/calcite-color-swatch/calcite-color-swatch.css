@@ -1,0 +1,99 @@
+/* mixins & extensions */
+
+@keyframes in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes in-down {
+  0% {
+    opacity: 0;
+    transform: translate3D(0, -5px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3D(0, 0, 0);
+  }
+}
+
+@keyframes in-up {
+  0% {
+    opacity: 0;
+    transform: translate3D(0, 5px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3D(0, 0, 0);
+  }
+}
+
+@keyframes in-scale {
+  0% {
+    opacity: 0;
+    transform: scale3D(0.95, 0.95, 1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale3D(1, 1, 1);
+  }
+}
+
+/**
+* Currently only used in Checkbox.
+*/
+
+:root {
+  --calcite-popper-transition: 150ms ease-in-out;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+:host {
+  display: inline-flex;
+  position: relative;
+}
+
+:host([scale=s]) {
+  height: 20px;
+  width: 20px;
+}
+
+:host([scale=m]) {
+  height: 24px;
+  width: 24px;
+}
+
+:host([scale=l]) {
+  height: 28px;
+  width: 28px;
+}
+
+.swatch {
+  height: inherit;
+  width: inherit;
+  overflow: visible;
+}
+
+.swatch rect {
+  transition: all 150ms ease-in-out;
+}
+
+.no-color-icon {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}

@@ -1,0 +1,29 @@
+[{
+  "contact": {
+    "role": "role",
+    "roleExtent": [{
+      "temporalExtent": [{        
+        "timePeriod": {
+          "startDateTime": "2016-10-24T11:10:15.2-10:00"
+        }
+      }]
+    }],
+    "party": [{
+      "contactId": "individualId0"
+    }]
+  },
+  "orderProcess": [{
+      "fees": "1.00USD"
+    },
+    {
+      "fees": "2.00USD"
+    }
+  ],
+  "transferOption": [{
+      "transferSize": 9.9
+    },
+    {
+      "transferSize": 10.9
+    }
+  ]
+}]

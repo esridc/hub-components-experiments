@@ -1,0 +1,12 @@
+[{
+  "addressType": ["mailing", "physical"],
+  "description": "description",
+  "deliveryPoint": [
+    "deliveryPoint0",
+    "deliveryPoint1"
+  ],
+  "city": "city",
+  "administrativeArea": "administrativeArea",
+  "postalCode": "postalCode",
+  "country": "country"
+}]

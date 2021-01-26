@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  border-top: 1px solid #444;
+}
+.metadata-section {
+  /* border-bottom: 1px solid #333; */
+  padding-bottom: 10px;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 20% auto;
+  grid-template-areas:
+      "metadata-section-help metadata-section-input";
+}

@@ -1,0 +1,76 @@
+
+{
+    "id": "user.json#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "User Info",
+    "description": "Hub Member Profile",
+    "type": "object",
+    "example": "../examples/user.json",
+    "translation": {
+        "ISO 19115-2": ["MD_DataIdentification"],
+        "FGDC CSDGM": ["idinfo"]
+    },
+    "required": ["firstName", "lastName", "tags", "description", "languages"],
+    "additionalProperties": true,
+    "properties": {
+      "firstName": {
+        "type": "string",
+        "description": "How would you like to be called?",
+        "translation": {
+            "arcgis": ["firstName"]
+        }
+      },
+      "lastName": {
+        "type": "string",
+        "description": "What is your lastname?",
+        "translation": {
+            "arcgis": ["lastName"]
+        }
+      },  
+      "email": {
+        "type": "string",
+        "description": "What is your email?",
+        "translation": {
+            "arcgis": ["email"]
+        }
+      },            
+      "description": {
+        "type": "string",
+        "description": "Why do you love your city?",
+        "translation": {
+            "arcgis": ["description"]
+        }
+      },     
+      "languages": {
+        "type": "array",
+        "subtype": "topics",
+        "description": "What languages do you speak fluently?",
+        "translation": {
+          "arcgis": ["culture"],
+          "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
+          "FGDC CSDGM": ["idinfo > keywords"]
+        },
+        "uniqueItems": true,
+        "items": {
+            "type": "string",
+            "enum": ["es-ES", "en-US", "zh"]
+        }
+      },
+      "interests": {
+        "type": "array",
+        "subtype": "topics",
+        "description": "What skills do you have?",
+        "translation": {
+          "arcgis": ["metadata.interests"],
+          "ISO 19115-2": ["MD_DataIdentification > descriptiveKeywords > MD_Keywords"],
+          "FGDC CSDGM": ["idinfo > keywords"]
+        },
+        "uniqueItems": true,
+        "items": {
+            "type": "string",
+            "enum": ["education", "history", "transportation", "bikes", "health"]
+        }
+      }
+    }
+  }
+  
