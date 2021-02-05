@@ -12,12 +12,11 @@ import { searchLocations, getLocation } from '../../../utils/arcgis-geoenrichmen
 })
 export class HubGeographyPicker {
 
-  /**
-   * Default location to search
-   */
-  @Prop({ mutable: true }) location: string;
+  @Prop({ mutable: true }) location: string = '';
 
-  @Prop({ mutable: true }) inputLocation: string = '';
+  // Testing UI
+  @Prop() uistepper: boolean = false;
+
   // For hub-input
   @State() locationSuggestions: Array<any> = [];
   
@@ -52,10 +51,10 @@ export class HubGeographyPicker {
   }
 
   async searchInputHandler(event): Promise<string> {
-    this.inputLocation = event.target.value;
+    this.location = event.target.value;
 
     if(!!this.auth) {
-      let results = await searchLocations(this.inputLocation, this.auth.token);
+      let results = await searchLocations(this.location, this.auth.token);
       console.log("Geography-Picker: SearchLocations Results", results);  
       
       this.locationSuggestions = [];
@@ -65,10 +64,9 @@ export class HubGeographyPicker {
         locationList.push(s['attributes'])
       })
       this.locationList = locationList;
-      console.log("Geography-Picker: locationList", this.locationList);
 
     } else {
-      console.log("Geography-Picker: Signin for geography picker")
+      console.error("Geography-Picker: Sign-in required for geography picker")
     }
     // suggestLocations(this.inputAddress, this.extent).then( suggestions => {      
     //   this.addressSuggestions = Array.from(suggestions.suggestions, s => s['text'])
@@ -80,7 +78,6 @@ export class HubGeographyPicker {
 
   async selectLocation(locationId:string, layerId:string) {
     let results = await getLocation(locationId, layerId, this.auth.token);  
-    console.log("Geography-Picker: Selected: ", results);  
     this.locations = [ results[0] ];
   }
 
@@ -102,13 +99,17 @@ export class HubGeographyPicker {
         {this.locationList.length > 0 ? <h3>Pick a Boundary</h3> : '' }
           {this.locationList.map((location) => 
             <div class="location-result">
-              <calcite-card dir="ltr" onClick={(_event) => this.selectLocation(location['AreaID'],location['DataLayerID'])}>
-                <h3 slot="title">{location['AreaName']}</h3>
-                <span slot="subtitle">
-                  {location['MajorSubdivisionName']}, {location['CountryAbbr']} <br/>
-                  {location['DataLayerID']}
-                </span>
-              </calcite-card>
+              <calcite-tile-select
+                onClick={(_event) => this.selectLocation(location['AreaID'],location['DataLayerID'])}
+                description={`${location['MajorSubdivisionName']}, ${location['CountryAbbr']} \n ${location['DataLayerID']}`}
+                heading={location['AreaName']}
+                icon="layer"
+                name="geography-demo"
+                show-input="left"
+                type="radio"
+                width="auto"
+              >
+              </calcite-tile-select>              
             </div>
           )}
         </div>
@@ -117,6 +118,7 @@ export class HubGeographyPicker {
             class="places-hub-map"
             center="[-77,38.8]"
             zoom={10}
+            drawing={true}
             geometry={this.locations.map((place) => {return place.geometry})}
           ></hub-map>
         </div>
@@ -141,7 +143,7 @@ export class HubGeographyPicker {
     </div>  
     )
   }
-  renderStepper() {
+  renderStepper(content: JSX.Element) {
     return (
       <calcite-stepper 
           numbered
@@ -150,13 +152,14 @@ export class HubGeographyPicker {
             item-title="Choose Boundary"
             item-subtitle="..."
           >
-            {this.renderMap()}
+            {content}
           </calcite-stepper-item>
           <calcite-stepper-item
           item-title="Edit & Confirm"
           item-subtitle="..."
         >
-          Edit...
+          maybe edit it now!
+          {content}
         </calcite-stepper-item>
       </calcite-stepper>   
     )
@@ -171,7 +174,7 @@ export class HubGeographyPicker {
           >
           <h3 slot="header" id="modal-title">Choose a Boundary</h3>
           <div slot="content">
-            {this.renderStepper()}
+            {this.renderStepper(this.renderMap())}
           </div>
           <calcite-button slot="secondary" width="full" appearance="outline">
             Cancel
@@ -186,10 +189,7 @@ export class HubGeographyPicker {
     return (
       <Host>
         <slot></slot>
-        { this.renderMap() }
-        {/* <calcite-button onClick={(_ev: Event) => this.showModal()}>
-          Choose a Boundary
-        </calcite-button>     */}
+        { this.uistepper ?  this.renderStepper(this.renderMap()) : this.renderMap() }
       </Host>
     );
   }

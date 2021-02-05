@@ -330,15 +330,12 @@ export namespace Components {
         "sort": "name" | "modified";
     }
     interface HubGeographyPicker {
-        "inputLocation": string;
-        /**
-          * Default location to search
-         */
         "location": string;
         /**
           * Serialized authentication information.
          */
         "session": string;
+        "uistepper": boolean;
         /**
           * Existing Hub places array of geography from metadata editor Property name `value` because re-used across editors
          */
@@ -1229,15 +1226,12 @@ declare namespace LocalJSX {
         "sort"?: "name" | "modified";
     }
     interface HubGeographyPicker {
-        "inputLocation"?: string;
-        /**
-          * Default location to search
-         */
         "location"?: string;
         /**
           * Serialized authentication information.
          */
         "session"?: string;
+        "uistepper"?: boolean;
         /**
           * Existing Hub places array of geography from metadata editor Property name `value` because re-used across editors
          */

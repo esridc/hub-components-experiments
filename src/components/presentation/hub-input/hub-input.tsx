@@ -11,7 +11,7 @@ export class HubInput {
   @Element() element: HTMLElement;
 
   /** Default address to search */
-  @Prop({ mutable: true }) address: string;
+@Prop({ mutable: true }) address: string;
 
   /** Geographic extent limit for geocoding */
   @Prop({ reflect: true }) extent: any;

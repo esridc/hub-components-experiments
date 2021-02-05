@@ -7,12 +7,12 @@
 
 ## Properties
 
-| Property        | Attribute        | Description                                                                                                      | Type              | Default     |
-| --------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------- | ----------- |
-| `inputLocation` | `input-location` |                                                                                                                  | `string`          | `''`        |
-| `location`      | `location`       | Default location to search                                                                                       | `string`          | `undefined` |
-| `session`       | `session`        | Serialized authentication information.                                                                           | `string`          | `undefined` |
-| `value`         | --               | Existing Hub places array of geography from metadata editor Property name `value` because re-used across editors | `IHubGeography[]` | `[]`        |
+| Property    | Attribute   | Description                                                                                                      | Type              | Default     |
+| ----------- | ----------- | ---------------------------------------------------------------------------------------------------------------- | ----------------- | ----------- |
+| `location`  | `location`  |                                                                                                                  | `string`          | `''`        |
+| `session`   | `session`   | Serialized authentication information.                                                                           | `string`          | `undefined` |
+| `uistepper` | `uistepper` |                                                                                                                  | `boolean`         | `false`     |
+| `value`     | --          | Existing Hub places array of geography from metadata editor Property name `value` because re-used across editors | `IHubGeography[]` | `[]`        |
 
 
 ## Dependencies
@@ -20,7 +20,7 @@
 ### Depends on
 
 - calcite-input
-- calcite-card
+- calcite-tile-select
 - [hub-map](../../blocks/hub-map)
 - calcite-stepper
 - calcite-stepper-item
@@ -31,7 +31,7 @@
 ```mermaid
 graph TD;
   hub-geography-picker --> calcite-input
-  hub-geography-picker --> calcite-card
+  hub-geography-picker --> calcite-tile-select
   hub-geography-picker --> hub-map
   hub-geography-picker --> calcite-stepper
   hub-geography-picker --> calcite-stepper-item
@@ -39,9 +39,10 @@ graph TD;
   hub-geography-picker --> calcite-button
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon
-  calcite-card --> calcite-loader
-  calcite-card --> calcite-checkbox
-  calcite-checkbox --> calcite-label
+  calcite-tile-select --> calcite-tile
+  calcite-tile --> calcite-icon
+  calcite-tile --> calcite-link
+  calcite-link --> calcite-icon
   hub-map --> calcite-button
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon

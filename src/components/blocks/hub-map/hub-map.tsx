@@ -285,10 +285,10 @@ export class HubMap {
         const sketch = new Sketch({
           layer: notesLayer,
           view: this.esriMapView,
-          availableCreateTools: ['point', 'polyline', 'polygon'],
+          availableCreateTools: ['rectangle', 'polygon'],
           creationMode: 'single',
           defaultCreateOptions: {
-            mode: 'freehand'
+            mode: 'hybrid'
           },
           defaultUpdateOptions: {
             enableRotation: false,
