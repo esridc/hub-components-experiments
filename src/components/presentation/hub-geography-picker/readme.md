@@ -20,6 +20,7 @@
 ### Depends on
 
 - calcite-input
+- calcite-checkbox
 - calcite-tile-select
 - [hub-map](../../blocks/hub-map)
 - calcite-stepper
@@ -31,6 +32,7 @@
 ```mermaid
 graph TD;
   hub-geography-picker --> calcite-input
+  hub-geography-picker --> calcite-checkbox
   hub-geography-picker --> calcite-tile-select
   hub-geography-picker --> hub-map
   hub-geography-picker --> calcite-stepper
@@ -39,6 +41,7 @@ graph TD;
   hub-geography-picker --> calcite-button
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon
+  calcite-checkbox --> calcite-label
   calcite-tile-select --> calcite-tile
   calcite-tile --> calcite-icon
   calcite-tile --> calcite-link

@@ -41,12 +41,19 @@ export class HubMap {
    */
   @Prop() geometry: Array<IGeometry> = [];
 
+  /**
+   * Current Map Extent
+   */
+  @Prop({reflect: true}) mapExtent: any = null;
+
   /** 
    * Sends event when drawing is complete
    */
   @Event() drawingComplete: EventEmitter;
 
   @State() mapCenter: [number, number] = [-107, 38.9];
+  
+  
   
   @Watch('center')
   centerDidChangeHandler(newCenter: string) {
@@ -153,8 +160,8 @@ export class HubMap {
    * Creates the mapview used in the application
    */
   createEsriMapView() {
-    return loadModules(["esri/WebMap", "esri/views/MapView"], this.esriMapOptions).then(
-      ([WebMap, MapView]: [__esri.WebMapConstructor, __esri.MapViewConstructor]) => {
+    return loadModules(["esri/WebMap", "esri/views/MapView", "esri/core/watchUtils"], this.esriMapOptions).then(
+      ([WebMap, MapView, watchUtils]: [__esri.WebMapConstructor, __esri.MapViewConstructor, __esri.watchUtils]) => {
 
         console.debug("Hub Map createEsriMapView", [this.mapCenter, this.zoom])
         const mapDiv = this.hostElement.querySelector("div");
@@ -178,6 +185,19 @@ export class HubMap {
         }
   
         this.esriMapView = new MapView( mapOptions );
+        let componentRef = this;
+        this.esriMapView.on("drag", function(_event) {
+          componentRef.mapExtent = componentRef.esriMapView.extent;
+          console.debug("Drag Map Extent: ", [componentRef.mapExtent, componentRef.esriMapView, componentRef.esriMapView.extent])
+        })
+
+        watchUtils.whenTrue(this.esriMapView, "stationary", function() {
+          // For sending back out to listening components
+          componentRef.mapExtent = componentRef.esriMapView.extent;
+          console.debug("Stationary Map Extent: ", [componentRef.mapExtent, componentRef.esriMapView, componentRef.esriMapView.extent])
+        });
+
+        
       }
     );
   }

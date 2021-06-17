@@ -4,10 +4,13 @@
 //   IRequestOptions
 // } from "@esri/arcgis-rest-request";
 
-const geoenrichmentUrl = 'https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver';
+import { Extent } from "esri/geometry";
+
+// Dev server
+const geoenrichmentUrl = 'https://geoenrichqa.arcgis.com/arcgis/rest/services/World/geoenrichmentserver';
 const queryPath = '/StandardGeographyQuery/execute?f=pjson&';
 
-export async function searchLocations(query:string, token: string): Promise<Array<any>> {
+export async function searchLocations(query:string, extent: Extent, token: string): Promise<Array<any>> {
 
   // TODO - add options for types: &geographylayers=["US.Counties, US.Places, cities"]
   const layers = ["US.States", "US.Counties", "US.Places", "cities"];
@@ -18,6 +21,10 @@ export async function searchLocations(query:string, token: string): Promise<Arra
     geographylayers: layers,
     geographyQuery: query,
     token
+  }
+  if(!!extent) {
+    params["spatialfilter"] = JSON.stringify({
+      "AnalysisExtent":{ extent }})
   }
   const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
 

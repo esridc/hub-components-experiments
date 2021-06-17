@@ -12,6 +12,12 @@ import { searchLocations, getLocation } from '../../../utils/arcgis-geoenrichmen
 })
 export class HubGeographyPicker {
 
+  // Hack Development 
+  QA_TOKEN="ch1usPMQ1CxwcpIB3ifSKChQEVOD6RWE0_fRBhvmjOV5dnfVHue-ieLhYxtic1iDw74DVXS2mdI2NcuLa7KwxkFGC26ojXHLDlHQQCqmK5VjLStGX8eJWH7LAy_zQpT4MApP4UDa3qeVNJIKYVIaECtogOHX5UrpLeWAF3OWaYk_UsyJKOROEAt2zRHUzrigFgpJkqsPWTU-Sh21CWwMgiEwGCmPCjkNYhslDdeeGzg.";
+  
+  mapElement!: HTMLHubMapElement;
+  checkMapSearch!: HTMLCalciteCheckboxElement; 
+
   @Prop({ mutable: true }) location: string = '';
 
   // Testing UI
@@ -54,7 +60,11 @@ export class HubGeographyPicker {
     this.location = event.target.value;
 
     if(!!this.auth) {
-      let results = await searchLocations(this.location, this.auth.token);
+      console.log("Geography-Picker: Searching...", [this.checkMapSearch.checked, this.mapElement.mapExtent]);  
+
+      let extent = this.checkMapSearch.checked ? this.mapElement.mapExtent : null;
+      let results = await searchLocations(this.location, extent, /*this.auth.token*/ this.QA_TOKEN);
+
       console.log("Geography-Picker: SearchLocations Results", results);  
       
       this.locationSuggestions = [];
@@ -77,7 +87,7 @@ export class HubGeographyPicker {
   }
 
   async selectLocation(locationId:string, layerId:string) {
-    let results = await getLocation(locationId, layerId, this.auth.token);  
+    let results = await getLocation(locationId, layerId, /*this.auth.token*/ this.QA_TOKEN);  
     this.locations = [ results[0] ];
   }
 
@@ -94,6 +104,9 @@ export class HubGeographyPicker {
             placeholder="Search for locations..."
             onInput={(event) => this.searchInputHandler(event)}
           ></calcite-input>
+          <calcite-checkbox 
+            ref={(el: HTMLCalciteCheckboxElement) => this.checkMapSearch = el} 
+            checked="true" scale="m">Search within map area</calcite-checkbox>
         </div>
         <div class="picker-list">
         {this.locationList.length > 0 ? <h3>Pick a Boundary</h3> : '' }
@@ -103,9 +116,9 @@ export class HubGeographyPicker {
                 onClick={(_event) => this.selectLocation(location['AreaID'],location['DataLayerID'])}
                 description={`${location['MajorSubdivisionName']}, ${location['CountryAbbr']} \n ${location['DataLayerID']}`}
                 heading={location['AreaName']}
-                icon="layer"
                 name="geography-demo"
                 show-input="left"
+                input-alignment="end"
                 type="radio"
                 width="auto"
               >
@@ -115,6 +128,7 @@ export class HubGeographyPicker {
         </div>
         <div class="picker-map places-map">
           <hub-map 
+            ref ={(el) => this.mapElement = el as HTMLHubMapElement}
             class="places-hub-map"
             center="[-77,38.8]"
             zoom={10}
@@ -133,6 +147,7 @@ export class HubGeographyPicker {
       </div>
       <div class="picker-map places-map">
         <hub-map 
+          ref ={(el) => this.mapElement = el as HTMLHubMapElement}
           class="places-hub-map"
           center="[-77,38.8]"
           zoom={10}

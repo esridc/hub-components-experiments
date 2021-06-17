@@ -393,6 +393,10 @@ export namespace Components {
           * Optional Geometry to display
          */
         "geometry": Array<IGeometry>;
+        /**
+          * Current Map Extent
+         */
+        "mapExtent": any;
         "showFullscreen": boolean;
         /**
           * Webmap Item configuration to load
@@ -1295,6 +1299,10 @@ declare namespace LocalJSX {
           * Optional Geometry to display
          */
         "geometry"?: Array<IGeometry>;
+        /**
+          * Current Map Extent
+         */
+        "mapExtent"?: any;
         /**
           * Sends event when drawing is complete
          */
