@@ -33,6 +33,8 @@ Within the `sendTelemetry()` a global event `hub-telemetry-event` is sent that i
 
 Another alternative to consider would be using [@stencil/store](https://stenciljs.com/docs/stencil-store) as an hub-component internal event bus that would not overlap with global window events.
 
+![image](https://user-images.githubusercontent.com/1218/122318828-b5f16800-ceed-11eb-9832-12b414ebe9c6.png)
+
 ```sequence
 User->hubComponent:click
 hubComponent->sendTelemetry():
