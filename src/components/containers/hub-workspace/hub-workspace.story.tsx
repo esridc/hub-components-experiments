@@ -12,4 +12,5 @@ export default function(stories, knobs) {
       <hub-identity clientid="${clientid}" message="${message}" orgurl="${orgurl}"></hub-identity>`
       return mainEl;
     }, { notes: readme });
+
 }

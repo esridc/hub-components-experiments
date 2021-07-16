@@ -373,6 +373,16 @@ export namespace Components {
     interface HubLicensePicker {
         "license": string;
     }
+    interface HubLink {
+        /**
+          * If true, links send events
+         */
+        "evented": boolean;
+        /**
+          * Link to display
+         */
+        "link": string;
+    }
     interface HubList {
         "collection": HubTypes.IHubResource[];
         "icon": string;
@@ -731,6 +741,12 @@ declare global {
         prototype: HTMLHubLicensePickerElement;
         new (): HTMLHubLicensePickerElement;
     };
+    interface HTMLHubLinkElement extends Components.HubLink, HTMLStencilElement {
+    }
+    var HTMLHubLinkElement: {
+        prototype: HTMLHubLinkElement;
+        new (): HTMLHubLinkElement;
+    };
     interface HTMLHubListElement extends Components.HubList, HTMLStencilElement {
     }
     var HTMLHubListElement: {
@@ -869,6 +885,7 @@ declare global {
         "hub-identity": HTMLHubIdentityElement;
         "hub-input": HTMLHubInputElement;
         "hub-license-picker": HTMLHubLicensePickerElement;
+        "hub-link": HTMLHubLinkElement;
         "hub-list": HTMLHubListElement;
         "hub-map": HTMLHubMapElement;
         "hub-metadata-editor": HTMLHubMetadataEditorElement;
@@ -1279,6 +1296,20 @@ declare namespace LocalJSX {
     interface HubLicensePicker {
         "license"?: string;
     }
+    interface HubLink {
+        /**
+          * If true, links send events
+         */
+        "evented"?: boolean;
+        /**
+          * Link to display
+         */
+        "link"?: string;
+        /**
+          * Event sent when relative=true and link clicked
+         */
+        "onLinkClicked"?: (event: CustomEvent<string>) => void;
+    }
     interface HubList {
         "collection"?: HubTypes.IHubResource[];
         "icon"?: string;
@@ -1542,6 +1573,7 @@ declare namespace LocalJSX {
         "hub-identity": HubIdentity;
         "hub-input": HubInput;
         "hub-license-picker": HubLicensePicker;
+        "hub-link": HubLink;
         "hub-list": HubList;
         "hub-map": HubMap;
         "hub-metadata-editor": HubMetadataEditor;
@@ -1590,6 +1622,7 @@ declare module "@stencil/core" {
             "hub-identity": LocalJSX.HubIdentity & JSXBase.HTMLAttributes<HTMLHubIdentityElement>;
             "hub-input": LocalJSX.HubInput & JSXBase.HTMLAttributes<HTMLHubInputElement>;
             "hub-license-picker": LocalJSX.HubLicensePicker & JSXBase.HTMLAttributes<HTMLHubLicensePickerElement>;
+            "hub-link": LocalJSX.HubLink & JSXBase.HTMLAttributes<HTMLHubLinkElement>;
             "hub-list": LocalJSX.HubList & JSXBase.HTMLAttributes<HTMLHubListElement>;
             "hub-map": LocalJSX.HubMap & JSXBase.HTMLAttributes<HTMLHubMapElement>;
             "hub-metadata-editor": LocalJSX.HubMetadataEditor & JSXBase.HTMLAttributes<HTMLHubMetadataEditorElement>;
