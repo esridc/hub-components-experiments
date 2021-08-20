@@ -14,10 +14,10 @@ jobs:
     if: ${{ github.event.label.name == 'stale' }}
     runs-on: ubuntu-latest
     steps:
-      # - name: Debug GitHub context
-      #   env:
-      #     GITHUB_CONTEXT: ${{ toJson(github) }}
-      #   run: echo "$GITHUB_CONTEXT"         
+      - name: Debug GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"         
       - uses: actions/checkout@v2
       - name: Notify dedicated teams channel
         uses: skitionek/notify-microsoft-teams@master
