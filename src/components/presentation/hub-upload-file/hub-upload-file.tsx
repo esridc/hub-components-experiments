@@ -47,6 +47,10 @@ export class HubUploadFile {
       }).then((partResponse) =>  {
         console.log("addItemPart", partResponse)
         Portal.commitItemUpload({
+          item: {
+            title: this.file.name,
+            type: this.itemType,
+          },
           id: response.id,
           authentication,
           params: {

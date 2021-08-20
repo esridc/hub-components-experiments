@@ -32,7 +32,7 @@ export class HubIdentity {
   /**
    * Serialized authentication information.
    */
-  @Prop({ mutable: true }) session: string;
+  @Prop({ mutable: true, reflect: true }) session: string;
 
   @Event({ 
     eventName: 'onSignin',
