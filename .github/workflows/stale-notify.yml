@@ -7,17 +7,17 @@ name: Notify Team on stale pull requests
 on: 
   pull_request:
     types: [labeled, unlabeled]
-
+  
 jobs:
   notify:
-    name: A job to send MS notifications stale prs/issues
+    name: Send MS notifications for stale prs
     if: ${{ github.event.label.name == 'stale' }}
     runs-on: ubuntu-latest
-    steps:  
-      - name: Debug GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"      
+    steps:
+      # - name: Debug GitHub context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: echo "$GITHUB_CONTEXT"         
       - uses: actions/checkout@v2
       - name: Notify dedicated teams channel
         uses: skitionek/notify-microsoft-teams@master
@@ -32,9 +32,9 @@ jobs:
                 "sections": [{
                     "activityTitle": "${{ github.event.pull_request.title }}",
                     "activitySubtitle": "${{ github.event.pull_request.head.repo.full_name }} from ${{ github.event.pull_request.user.login }}",
-                    "activityImage": "${{ github.event.pull_request.user.avatar_url }}",
+                    "activityImage": "${{ github.event.pull_request.use r.avatar_url }}",
                     "facts": [{
-                        "name": "Assigned to",
+                        "name": "Requested Reviewers",
                         "value": "${{ github.event.pull_request.requested_reviewers }}"
                     }, {
                         "name": "Updated",
