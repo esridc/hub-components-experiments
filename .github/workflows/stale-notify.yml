@@ -30,12 +30,15 @@ jobs:
                 "themeColor": "0076D7",
                 "summary": "Stale Pull Request",
                 "sections": [{
-                    "activityTitle": "${{ github.event.pull_request.title }}",
-                    "activitySubtitle": "${{ github.event.pull_request.head.repo.full_name }} from ${{ github.event.pull_request.user.login }}",
+                    "activityTitle": "**Stale Pull Request**",
+                    "activitySubtitle": "${{ github.event.pull_request.title }} from ${{ github.event.pull_request.user.login }}",
                     "activityImage": "${{ github.event.pull_request.user.avatar_url }}",
                     "facts": [{
+                        "name": "Repository",
+                        "value": "${{ github.event.pull_request.head.repo.full_name }}"
+                    },{
                         "name": "Requested Reviewers",
-                        "value": "${{ github.event.pull_request.requested_reviewers }}"
+                        "value": "${{ join( github.event.pull_request.requested_reviewers, ', ') }}"
                     }, {
                         "name": "Updated",
                         "value": "${{ github.event.pull_request.updated_at }}"
