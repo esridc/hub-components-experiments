@@ -12,9 +12,6 @@ import { searchLocations, getLocation } from '../../../utils/arcgis-geoenrichmen
 })
 export class HubGeographyPicker {
 
-  // Hack Development 
-  QA_TOKEN="ch1usPMQ1CxwcpIB3ifSKChQEVOD6RWE0_fRBhvmjOV5dnfVHue-ieLhYxtic1iDw74DVXS2mdI2NcuLa7KwxkFGC26ojXHLDlHQQCqmK5VjLStGX8eJWH7LAy_zQpT4MApP4UDa3qeVNJIKYVIaECtogOHX5UrpLeWAF3OWaYk_UsyJKOROEAt2zRHUzrigFgpJkqsPWTU-Sh21CWwMgiEwGCmPCjkNYhslDdeeGzg.";
-  
   mapElement!: HTMLHubMapElement;
   checkMapSearch!: HTMLCalciteCheckboxElement; 
 
@@ -63,7 +60,7 @@ export class HubGeographyPicker {
       console.log("Geography-Picker: Searching...", [this.checkMapSearch.checked, this.mapElement.mapExtent]);  
 
       let extent = this.checkMapSearch.checked ? this.mapElement.mapExtent : null;
-      let results = await searchLocations(this.location, extent, /*this.auth.token*/ this.QA_TOKEN);
+      let results = await searchLocations(this.location, extent, this.auth.token);
 
       console.log("Geography-Picker: SearchLocations Results", results);  
       
@@ -87,7 +84,7 @@ export class HubGeographyPicker {
   }
 
   async selectLocation(locationId:string, layerId:string) {
-    let results = await getLocation(locationId, layerId, /*this.auth.token*/ this.QA_TOKEN);  
+    let results = await getLocation(locationId, layerId, this.auth.token);  
     this.locations = [ results[0] ];
   }
 

@@ -45,7 +45,6 @@ graph TD;
   calcite-button --> calcite-icon
   calcite-card --> calcite-loader
   calcite-card --> calcite-checkbox
-  calcite-checkbox --> calcite-label
   hub-content-card --> hub-card
   hub-event --> hub-card
   hub-gallery --> hub-card

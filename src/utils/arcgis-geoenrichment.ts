@@ -7,7 +7,7 @@
 import { Extent } from "esri/geometry";
 
 // Dev server
-const geoenrichmentUrl = 'https://geoenrichqa.arcgis.com/arcgis/rest/services/World/geoenrichmentserver';
+const geoenrichmentUrl = 'https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver';
 const queryPath = '/StandardGeographyQuery/execute?f=pjson&';
 
 export async function searchLocations(query:string, extent: Extent, token: string): Promise<Array<any>> {

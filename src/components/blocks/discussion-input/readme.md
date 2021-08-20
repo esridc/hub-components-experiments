@@ -42,6 +42,8 @@ graph TD;
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
   calcite-alert --> calcite-icon
+  calcite-alert --> calcite-chip
+  calcite-chip --> calcite-icon
   hub-discussion --> discussion-input
   style discussion-input fill:#f9f,stroke:#333,stroke-width:4px
 ```

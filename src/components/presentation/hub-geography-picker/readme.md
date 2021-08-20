@@ -41,7 +41,6 @@ graph TD;
   hub-geography-picker --> calcite-button
   calcite-input --> calcite-progress
   calcite-input --> calcite-icon
-  calcite-checkbox --> calcite-label
   calcite-tile-select --> calcite-tile
   calcite-tile --> calcite-icon
   calcite-tile --> calcite-link
