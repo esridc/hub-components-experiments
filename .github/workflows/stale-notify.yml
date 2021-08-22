@@ -17,10 +17,10 @@ jobs:
     if: ${{ github.event.label.name == 'stale' }}
     runs-on: ubuntu-latest
     steps:
-      # - name: Debug GitHub context
-      #   env:
-      #     GITHUB_CONTEXT: ${{ toJson(github) }}
-      #   run: echo "$GITHUB_CONTEXT"         
+      - name: Debug GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"         
       - uses: actions/checkout@v2
       - name: Notify dedicated teams channel
         uses: skitionek/notify-microsoft-teams@master
@@ -36,20 +36,20 @@ jobs:
                 "summary": "Stale Pull Request",
                 "sections": [{
                     "activityTitle": "**Stale Pull Request / Issue**",
-                    "activitySubtitle": "${{ github.event.issue.title }}${{ github.event.pull_request_target.title }} from ${{ github.event.issue.user.login }}${{ github.event.pull_request_target.user.login }}",
-                    "activityImage": "${{ github.event.issue.user.avatar_url }}${{ github.event.pull_request_target.user.avatar_url }}",
+                    "activitySubtitle": "${{ github.event.issue.title }}${{ github.event.pull_request.title }} from ${{ github.event.issue.user.login }}${{ github.event.pull_request.user.login }}",
+                    "activityImage": "${{ github.event.issue.user.avatar_url }}${{ github.event.pull_request.user.avatar_url }}",
                     "facts": [{
                         "name": "Requested Reviewers",
-                        "value": "${{ join(github.event.issue.assignees.*.login, ', ') }}${{ join(github.event.pull_request_target.assignees.*.login, ', ') }}"
+                        "value": "${{ join(github.event.issue.assignees.*.login, ', ') }}${{ join(github.event.pull_request.assignees.*.login, ', ') }}"
                     }, {
                         "name": "Labels",
-                        "value": "${{ join(github.event.issue.labels.*.name, ', ') }}${{ join(github.event.pull_request_target.labels.*.name, ', ') }}"
+                        "value": "${{ join(github.event.issue.labels.*.name, ', ') }}${{ join(github.event.pull_request.labels.*.name, ', ') }}"
                     }, {
                         "name": "Updated",
-                        "value": "${{ github.event.issue.updated_at }}${{ github.event.pull_request_target.updated_at }}"
+                        "value": "${{ github.event.issue.updated_at }}${{ github.event.pull_request.updated_at }}"
                     }, {
                         "name": "Status",
-                        "value": "${{ github.event.issue.state }}${{ github.event.pull_request_target.state }}"
+                        "value": "${{ github.event.issue.state }}${{ github.event.pull_request.state }}"
                     }],
                     "markdown": true
                 }],
@@ -58,7 +58,7 @@ jobs:
                     "name": "View the Issue",
                     "targets": [{
                         "os": "default",
-                        "uri": "${{ github.event.issue.html_url }}${{ github.event.pull_request_target.html_url }}"
+                        "uri": "${{ github.event.issue.html_url }}${{ github.event.pull_request.html_url }}"
                     }]
                 }]
             }
