@@ -1,6 +1,6 @@
 # Sends an MS Teams notification if a PR is marked Stale
 # Currently uses MessageCard and not AdaptiveCard.
-# Changing to AdaptiveCard might require forking & changing the action
+# Changing to AdaptiveCard might require forking & changing the action b/c current action automatically add MessageCard syntax
 
 name: Notify Team on stale pull requests
 
@@ -9,7 +9,7 @@ on:
     types: [labeled]
   pull_request_target:
     types: [labeled]    
-    # Trying pull_request_target to handle PR with merge conflicts
+    # Use pull_request_target to handle PR with merge conflicts
   
 jobs:
   notify:
@@ -40,7 +40,10 @@ jobs:
                     "activityImage": "${{ github.event.issue.user.avatar_url }}${{ github.event.pull_request.user.avatar_url }}",
                     "facts": [{
                         "name": "Requested Reviewers",
-                        "value": "${{ join(github.event.issue.assignees.*.login, ', ') }}${{ join(github.event.pull_request.assignees.*.login, ', ') }}"
+                        "value": "${{ join(github.event.issue.assignees.*.login, ', ') }}${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}"
+                    }, {
+                        "name": "Mergeable",
+                        "value": "${{ github.event.pull_request.mergeable }}"
                     }, {
                         "name": "Labels",
                         "value": "${{ join(github.event.issue.labels.*.name, ', ') }}${{ join(github.event.pull_request.labels.*.name, ', ') }}"
