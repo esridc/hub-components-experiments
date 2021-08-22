@@ -7,8 +7,8 @@ name: Notify Team on stale pull requests
 on: 
   issues:
     types: [labeled]
-  pull_request:
-    types: [labeled]
+    # Use issues here b/c pull_request is only sent when merge doesn't have conflicts
+    # and we want to send notifications of all Stale PR, even if there is a merge conflict
   
 jobs:
   notify:
@@ -25,6 +25,8 @@ jobs:
         uses: skitionek/notify-microsoft-teams@master
         with:
           webhook_url: ${{ secrets.MS_TEAMS_HUB_NOTIFICATIONS_WEBHOOK_URI }}
+          # for possible github properties see
+          # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
           raw: >-
             {
                 "@type": "MessageCard",
@@ -33,17 +35,20 @@ jobs:
                 "summary": "Stale Pull Request",
                 "sections": [{
                     "activityTitle": "**Stale Pull Request / Issue**",
-                    "activitySubtitle": "${{ github.event.issue.title }}${{ github.event.pull_request.title }} from ${{ github.event.issue.user.login }}${{ github.event.pull_request.user.login }}",
-                    "activityImage": "${{ github.event.issue.user.avatar_url }}${{ github.event.pull_request.user.avatar_url }}",
+                    "activitySubtitle": "${{ github.event.issue.title }} from ${{ github.event.issue.user.login }}",
+                    "activityImage": "${{ github.event.issue.user.avatar_url }}",
                     "facts": [{
                         "name": "Requested Reviewers",
-                        "value": "${{ github.event.pull_request.requested_reviewers }}"
+                        "value": "${{ join(github.event.issue.assignees.*.login, ', ') }}"
+                    }, {
+                        "name": "Labels",
+                        "value": "${{ join(github.event.issue.labels.*.name, ', ') }}"
                     }, {
                         "name": "Updated",
-                        "value": "${{ github.event.issue.updated_at }}${{ github.event.pull_request.updated_at }}"
+                        "value": "${{ github.event.issue.updated_at }}"
                     }, {
                         "name": "Status",
-                        "value": "${{ github.event.pull_request.state }}"
+                        "value": "${{ github.event.issue.state }}"
                     }],
                     "markdown": true
                 }],
@@ -52,7 +57,7 @@ jobs:
                     "name": "View the Issue",
                     "targets": [{
                         "os": "default",
-                        "uri": "${{ github.event.issue.html_url }}${{ github.event.pull_request.html_url }}"
+                        "uri": "${{ github.event.issue.html_url }}"
                     }]
                 }]
             }
