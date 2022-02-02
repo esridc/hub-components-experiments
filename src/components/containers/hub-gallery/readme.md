@@ -53,6 +53,7 @@ graph TD;
   calcite-button --> calcite-loader
   calcite-button --> calcite-icon
   calcite-card --> calcite-loader
+  calcite-card --> calcite-label
   calcite-card --> calcite-checkbox
   hub-suggest-input --> calcite-button
   hub-workspace --> hub-gallery

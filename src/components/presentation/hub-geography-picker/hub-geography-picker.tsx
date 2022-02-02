@@ -103,7 +103,7 @@ export class HubGeographyPicker {
           ></calcite-input>
           <calcite-checkbox 
             ref={(el: HTMLCalciteCheckboxElement) => this.checkMapSearch = el} 
-            checked="true" scale="m">Search within map area</calcite-checkbox>
+            checked scale="m">Search within map area</calcite-checkbox>
         </div>
         <div class="picker-list">
         {this.locationList.length > 0 ? <h3>Pick a Boundary</h3> : '' }

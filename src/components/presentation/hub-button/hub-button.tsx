@@ -47,7 +47,6 @@ export class HubButton {
       color="blue" 
       scale="m" 
       round={false}
-      floating={true} 
       href="" >
       {this.text} 
     </calcite-button>

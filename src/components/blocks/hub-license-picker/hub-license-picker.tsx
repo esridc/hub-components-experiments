@@ -60,7 +60,7 @@ export class HubLicensePicker {
         >
         <h3 slot="title">{license.name}</h3>
         <span slot="subtitle"><img slot="" src={license.thumbnail} /> <br/>{license.summary}</span>
-        <calcite-link theme="dark" slot="footer-leading" href={license.url}>More info</calcite-link>
+        <calcite-link slot="footer-leading" href={license.url}>More info</calcite-link>
       </calcite-card>        
       </div>
     )

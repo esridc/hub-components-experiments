@@ -101,7 +101,7 @@ export class HubUploadFile {
       <Host>
         <slot></slot>
         {this.editors.length == 0 
-          ? <calcite-loader text="Fetching data..." is-active></calcite-loader>
+          ? <calcite-loader label="label" text="Fetching data..." is-active></calcite-loader>
           : this.editors 
         }
       </Host>

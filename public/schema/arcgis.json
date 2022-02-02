@@ -10,7 +10,7 @@
     "properties": {
       "title": {
         "type": "string",
-        "description": "Name of the content itme",
+        "description": "Name of the content item",
         "pattern": "^(.*){50}$",
         "translation": {
             "arcgis": ["title"]
@@ -18,7 +18,7 @@
       },
       "snippet": {
         "type": "string",
-        "description": "A short description of the content. Max of 300 characters.",
+        "description": "A short description of the content. Used in SEO metadata. Max of 300 characters.",
         "pattern": "^(.*){300}$",
         "translation": {
             "arcgis": ["snippet"]
@@ -26,7 +26,7 @@
       },
       "description": {
         "type": "string",
-        "description": "Full description",
+        "description": "Full description and how to use this content appropriately.",
         "pattern": "^(.*){2000}$",
         "translation": {
             "arcgis": ["description"]
@@ -35,7 +35,7 @@
       "boundary": {
         "type": "string",
         "subtype": "geography",
-        "description": "Boundary of content",
+        "description": "Boundary of content location.",
         "translation": {
             "arcgis": ["extent"]
         }
@@ -43,7 +43,7 @@
       "license": {
         "type": "string",
         "subtype": "license",
-        "description": "Content License for re-use",
+        "description": "Content license for re-use. Can be filtered in search.",
         "translation": {
             "arcgis": ["accessInfo"]
         }
@@ -51,7 +51,7 @@
       "tags": {
         "type": "array",
         "subtype": "topics",
-        "description": "Provides content tags.",
+        "description": "Provides content tags that help search, discovery, and related content.",
         "default" : "content",
         "translation": {
           "arcgis": ["tags"],

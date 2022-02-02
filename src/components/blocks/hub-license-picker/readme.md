@@ -39,6 +39,7 @@ graph TD;
   hub-license-picker --> metadata-form
   hub-license-picker --> calcite-button
   calcite-card --> calcite-loader
+  calcite-card --> calcite-label
   calcite-card --> calcite-checkbox
   calcite-link --> calcite-icon
   calcite-modal --> calcite-scrim

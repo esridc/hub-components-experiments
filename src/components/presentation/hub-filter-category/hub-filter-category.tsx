@@ -198,7 +198,7 @@ export class HubFilterCategory {
     let root = this.renderChildren(tree);
 
     output.push(
-    <calcite-tree selection-mode="multi-children" theme="light">
+    <calcite-tree selection-mode="multi-children">
       {root}
     </calcite-tree>)
     return output;

@@ -129,7 +129,7 @@ export class DiscussionInput {
             {this.submit}
           </calcite-button>
           
-          <calcite-alert ref={(el: HTMLCalciteAlertElement) => this.errorEl = el}
+          <calcite-alert label="alert" ref={(el: HTMLCalciteAlertElement) => this.errorEl = el}
             autoDismiss={true}
             color="red"
             scale="s"

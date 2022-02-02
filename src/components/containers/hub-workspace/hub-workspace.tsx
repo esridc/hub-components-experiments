@@ -27,10 +27,11 @@ export class HubWorkspace {
 
   async componentWillLoad() {
     this.session = readSessionFromCookie();
-    const auth = UserSession.deserialize(this.session);
 
+    
     console.log("Session", this.session)
     if(!!this.session) {
+      const auth = UserSession.deserialize(this.session);
       const username = JSON.parse(this.session).username;
       this.token = JSON.parse(this.session).token;
 
@@ -143,7 +144,7 @@ export class HubWorkspace {
         </div>
       )
     } else {
-      output.push(<calcite-loader text="Fetching workspace..." is-active></calcite-loader>)
+      output.push(<calcite-loader label="label" text="Fetching workspace..." is-active></calcite-loader>)
     }
     return (
       <Host>

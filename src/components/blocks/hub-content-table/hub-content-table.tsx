@@ -94,7 +94,7 @@ export class HubContentTable {
   render() {
     let output = []
     if(this.results.length == 0) {
-      output.push(<calcite-loader text="Fetching data..." is-active></calcite-loader>)
+      output.push(<calcite-loader label="label" text="Fetching data..." is-active></calcite-loader>)
     }
     this.results.map(item => {
       output.push(

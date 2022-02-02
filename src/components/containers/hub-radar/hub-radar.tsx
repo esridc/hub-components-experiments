@@ -73,7 +73,7 @@ export class HubRadar {
       output.push(<div class="radar-map"><hub-map center={this.mapCenter} zoom={this.mapZoom} webmap={this.webmap}></hub-map></div>)
     }
     if(this.isLoading) {
-      output.push(<calcite-loader text="Scanning radar..." is-active></calcite-loader>)
+      output.push(<calcite-loader label="label" text="Scanning radar..." is-active></calcite-loader>)
     } else {  
       // Get Results
       if(this.messages !== undefined && this.messages.length > 0) {
