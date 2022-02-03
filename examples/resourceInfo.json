@@ -1,0 +1,249 @@
+[{
+  "resourceType": [{
+    "type": "MD_ScopeCode",
+    "name": ""
+  }],
+  "citation": {
+    "title": "title"
+  },
+  "abstract": "abstract",
+  "shortAbstract": "shortAbstract",
+  "purpose": "purpose",
+  "credit": [
+    "credit0",
+    "credit1"
+  ],
+  "timePeriod": {
+    "startDateTime": "2016-11-01"
+  },
+  "status": [
+    "status0",
+    "status1"
+  ],
+  "topicCategory": [
+    "topicCategory0",
+    "topicCategory1"
+  ],
+  "pointOfContact": [{
+    "role": "role",
+    "roleExtent": [{
+      "temporalExtent": [{
+        "timePeriod": {
+          "startDateTime": "2016-10-24T11:10:15.2-10:00"
+        }
+      }]
+    }],
+    "party": [{
+      "contactId": "individualId0"
+    }]
+  }, {
+    "role": "role2",
+    "roleExtent": [{
+      "temporalExtent": [{
+        "timePeriod": {
+          "startDateTime": "2016-10-24T11:10:15.2-10:00"
+        }
+      }]
+    }],
+    "party": [{
+      "contactId": "individualId0"
+    }]
+  }],
+  "spatialReferenceSystem": [{
+    "referenceSystemType": "referenceSystemType0",
+    "referenceSystemIdentifier": {
+      "identifier": "identifier"
+    }
+  }, {
+    "referenceSystemType": "referenceSystemType1",
+    "referenceSystemIdentifier": {
+      "identifier": "identifier"
+    }
+  }],
+  "spatialRepresentationType": [
+    "spatialRepresentationType0",
+    "spatialRepresentationType1"
+  ],
+  "spatialRepresentation": [{
+    "type": "grid",
+    "gridRepresentation": {
+      "numberOfDimensions": 9,
+      "dimension": [{
+          "dimensionType": "dimensionType",
+          "dimensionSize": 9
+        },
+        {
+          "dimensionType": "dimensionType",
+          "dimensionSize": 9
+        }
+      ],
+      "cellGeometry": "cellGeometry",
+      "transformationParameterAvailable": true
+    }
+  }, {
+    "type": "grid",
+    "gridRepresentation": {
+      "numberOfDimensions": 9,
+      "dimension": [{
+        "dimensionType": "dimensionType",
+        "dimensionSize": 9
+      }],
+      "cellGeometry": "cellGeometry",
+      "transformationParameterAvailable": true
+    }
+  }],
+  "spatialResolution": [{
+    "scaleFactor": 99999
+  }, {
+    "measure": {
+      "type": "distance",
+      "value": 99.9,
+      "unitOfMeasure": "unitOfMeasure"
+    }
+  }, {
+    "levelOfDetail": "levelOfDetail"
+  }],
+  "temporalResolution": [{
+    "years": 1
+  }, {
+    "seconds": 1
+  }],
+  "extent": [{
+    "description": "description0"
+  }, {
+    "description": "description1"
+  }],
+  "coverageDescription": [{
+    "coverageName": "coverageName0",
+    "coverageDescription": "coverageDescription0"
+  }, {
+    "coverageName": "coverageName1",
+    "coverageDescription": "coverageDescription1"
+  }],
+  "taxonomy": [{
+    "taxonomicSystem": [{
+      "citation": {
+        "title": "title"
+      },
+      "modifications": "modification"
+    }],
+    "identificationReference": [{
+      "identifier": "identifier0",
+      "namespace": "namespace0",
+      "version": "version0",
+      "description": "description0",
+      "authority": {
+        "title": "title0"
+      }
+    }, {
+      "identifier": "identifier1",
+      "namespace": "namespace1",
+      "version": "version1",
+      "description": "description1",
+      "authority": {
+        "title": "title1"
+      }
+    }],
+    "identificationProcedure": "identificationProcedure",
+    "taxonomicClassification": {
+      "taxonomicLevel": "taxonomicLevel",
+      "taxonomicName": "taxonomicName"
+    }
+  }],
+  "graphicOverview": [{
+    "fileName": "fileName0"
+  }, {
+    "fileName": "fileName1"
+  }],
+  "resourceFormat": [{
+    "formatSpecification": {
+      "title": "title0"
+    }
+  }, {
+    "formatSpecification": {
+      "title": "title1"
+    }
+  }],
+  "keyword": [{
+    "keyword": [{
+      "keyword": "keyword00",
+      "keywordId": "keywordId00"
+    }, {
+      "keyword": "keyword01"
+    }],
+    "keywordType": "keywordType0",
+    "thesaurus": {
+      "title": "title"
+    }
+  }, {
+    "keyword": [{
+      "keyword": "keyword10",
+      "keywordId": "keywordId10"
+    }, {
+      "keyword": "keyword11"
+    }],
+    "keywordType": "keywordType1",
+    "thesaurus": {
+      "title": "title"
+    }
+  }],
+  "resourceUsage": [{
+    "specificUsage": "specificUsage",
+    "userDeterminedLimitation": "userDeterminedLimitation",
+    "limitationResponse": [
+      "limitationResponse0",
+      "limitationResponse1"
+    ]
+  }, {
+    "specificUsage": "specificUsage1",
+    "userDeterminedLimitation": "userDeterminedLimitation1",
+    "limitationResponse": [
+      "limitationResponse0",
+      "limitationResponse1"
+    ]
+  }],
+  "constraint": [{
+    "type": "use",
+    "useLimitation": [
+      "useLimitation0",
+      "useLimitation1"
+    ]
+  }, {
+    "type": "legal",
+    "legal": {
+      "useConstraint": [
+        "useConstraint0",
+        "useConstraint1"
+      ],
+      "accessConstraint": [
+        "accessConstraint0",
+        "accessConstraint1"
+      ],
+      "otherConstraint": [
+        "otherConstraint0",
+        "otherConstraint1"
+      ]
+    }
+  }],
+  "defaultResourceLocale": {
+    "language": "LanguageCode",
+    "country": "CountryCode",
+    "characterSet": "MD_CharacterSetCode"
+  },
+  "otherResourceLocale": [{
+    "language": "LanguageCode0",
+    "country": "CountryCode0",
+    "characterSet": "MD_CharacterSetCode0"
+  }, {
+    "language": "LanguageCode1",
+    "country": "CountryCode1",
+    "characterSet": "MD_CharacterSetCode1"
+  }],
+  "resourceMaintenance": [{
+    "frequency": "frequency0"
+  }, {
+    "frequency": "frequency1"
+  }],
+  "environmentDescription": "environmentDescription",
+  "supplementalInfo": "supplementalInfo"
+}]

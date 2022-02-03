@@ -1,0 +1,1 @@
+function n(n,r){return r.split(".").reduce((function(n,r){return n?n[r]:void 0}),n)}export{n as g}

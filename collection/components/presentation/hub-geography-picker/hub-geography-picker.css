@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+.picker-grid {
+  height: 500px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 50px 600px;
+
+  grid-template-areas:
+    "search map"
+    "list map";
+  column-gap: 10px;
+  row-gap: 10px;
+  padding: 0 1rem 0 3rem;  
+}
+.picker-search {
+  grid-area: search;
+}
+.picker-map {
+  grid-area: map;
+}
+.picker-list {
+  grid-area: list;
+  max-height: 400px;
+  overflow: auto;
+}
+hub-map, .places-map {
+  height: 600px;
+}
+.location-result {
+  /* height: 150px;
+  width: 100%; */
+  padding-left: 5px;
+  cursor: pointer;
+}
+calcite-tile-select {
+  width: 100%;
+}

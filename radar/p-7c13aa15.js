@@ -1,0 +1,1 @@
+import{r,_ as s}from"./p-ae8fd155.js";import{g as t}from"./p-a8ccf5d0.js";function o(o){var e,a={httpMethod:"GET"};if("string"==typeof o)e="https://www.arcgis.com/sharing/rest/community/users/"+o;else{var m=o.username||o.authentication.username;e=t(o)+"/community/users/"+encodeURIComponent(m),a=s(s({},o),a)}return r(e,a)}export{o as g}

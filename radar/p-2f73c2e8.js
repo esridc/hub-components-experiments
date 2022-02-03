@@ -1,0 +1,1 @@
+import{g as r}from"./p-a8ccf5d0.js";import{r as o}from"./p-ae8fd155.js";function a(a){var n=r(a)+"/community/groups/"+a.id+"/join";return o(n,a)}function n(a){var n=r(a)+"/community/groups/"+a.id+"/leave";return o(n,a)}export{a as j,n as l}

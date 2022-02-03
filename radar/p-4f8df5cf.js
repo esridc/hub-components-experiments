@@ -1,0 +1,5 @@
+import{i as n}from"./p-dd143ab9.js";
+/*!
+ * All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+ * See https://github.com/Esri/calcite-components/blob/master/LICENSE.md for details.
+ */const t=5;function r(t){if(!n(t))return null;const r=parseInt(t);return r>=0&&r<=11?"AM":"PM"}function u(t){if(!n(t))return null;const r=parseInt(t);return 0===r?"12":r>12?l(r-12):t}function s(n){const t=e(n),[r,u,s]=t?t.split(":"):[null,null,null];return{hour:r,minute:u,second:s||(r&&u?"00":null)}}function e(t){if(!t||t.endsWith(":")||t.startsWith(":"))return null;const r=t.split(":");if(r.length>1){const[t,u,s]=r,e=parseInt(r[0]),o=parseInt(r[1]),a=parseInt(r[2]),c=n(t)&&e>=0&&e<24,i=n(u)&&o>=0&&o<60,f=n(s)&&a>=0&&a<60;if(c&&i&&!s||c&&i&&f){let n=`${l(e)}:${l(o)}`;return f&&(n=`${n}:${l(a)}`),n}}return null}function l(n){const t=n.toString();return n>=0&&n<=9?t.padStart(2,"0"):t}export{r as a,l as b,e as f,u as g,t as m,s as p}

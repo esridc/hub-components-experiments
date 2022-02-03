@@ -1,0 +1,117 @@
+:host {
+  display: block;
+}
+.workspace-grid {
+  display: grid;
+  grid-template-columns: 15% 30% 30% 25%;
+  grid-template-rows: auto;
+
+  grid-template-areas:
+    "avatar bio map ."
+    "interests teams teams events";
+  column-gap: 10px;
+  row-gap: 20px;
+  padding: 0 1rem 0 3rem;  
+}
+
+.workspace-avatar {
+  grid-area: avatar;
+}
+img.avatar {
+  border-radius: 50%;
+}
+
+.workspace-bio {
+  grid-area: bio;
+}
+.workspace-map {
+  grid-area: map;
+  height: 200px;
+}
+.workspace-interests {
+  grid-area: interests;
+}
+.workspace-events {
+  grid-area: events;
+}
+.workspace-teams {
+  grid-area: teams;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; */
+}
+@media screen and (max-width: 530px) { 
+  /* .gallery-sm  */
+  .gallery-card {
+      width: calc((100% - (0 * 30px))/ 1);
+    }
+}
+@media screen and (min-width: 530px) and (max-width: 975px) { 
+  /* .gallery-md  */
+  .gallery-card {
+    width: calc((100% - (1 * 30px))/ 2);
+  }
+}
+@media screen and (min-width: 975px) and (max-width: 1200px) { 
+  /* .gallery-lg  */
+  .gallery-card{
+    width: calc((100% - (2 * 30px))/ 3);
+  }
+}
+
+@media screen and (min-width:1200px) { 
+/* .gallery-xl  */
+  .gallery-card {
+    width: calc((100% - (3 * 30px))/ 4);
+  }
+}
+.gallery { 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  justify-content: space-between;
+
+}
+.gallery-card {
+  /* border: 1px solid #888; */
+  /* padding: 1.5rem; */
+  /* flex-basis: 100%; */
+  /* margin: 10px; */
+  /* flex-basis: calc(33.333% - 20px); */
+  flex: 1;
+  width: 32%;
+  color: #4c4c4c;
+  box-shadow: 0 0 5px 0 rgba(76,76,76,.25);  
+  margin-right: 10px;
+  /* text-align: center; */
+}
+.gallery-header, h3, h4 {
+  border-bottom: 1px solid #888;
+  margin-bottom: 3px;
+  width: 100%;
+}
+.gallery-header a, .gallery-header h4, .gallery-header h2 {
+  display: inline;
+}
+
+.gallery-header a {
+  text-decoration: none;
+  color: #448;
+}
+a.explore {
+  float: right; 
+  font-size: 0.8em;  
+  margin-top: 5px;
+}
+.gallery-header a:hover {
+  text-decoration: underline;
+}
+.team-gallery {
+  padding: 24px;
+  margin: 16px 0; 
+
+  width: auto;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
+  transition: box-shadow 83ms;
+}
